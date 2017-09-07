@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +17,8 @@ import { RedactorPageComponent } from './redactor-page/redactor-page.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
