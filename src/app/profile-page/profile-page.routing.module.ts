@@ -11,7 +11,7 @@ import { MySettingsComponent } from './my-settings/my-settings.component';
 
 const profilePageRoutes: Routes = [
     {
-        path: '',
+        path: 'profile-page',
         component: ProfilePageComponent,
         children: [
             {

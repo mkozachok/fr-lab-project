@@ -7,13 +7,8 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: AppComponent
-    },
-    {
         path: 'profile-page',
         component: ProfilePageComponent,
-        //loadChildren: './profile-page/profile-page.module#ProfilePageModule'
     }
 ];
 
