@@ -5,6 +5,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { MyOrdersComponent } from './profile-page/my-orders/my-orders.component';
 import { MySettingsComponent } from './profile-page/my-settings/my-settings.component';
 import { MyGalleryComponent } from './profile-page/my-gallery/my-gallery.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 const routes: Routes = [
@@ -26,6 +28,16 @@ const routes: Routes = [
             }
         ]
     },
+    {
+        path: 'registration-page',
+        component: RegistrationPageComponent
+    },
+    {
+        path: 'login-page',
+        component: LoginPageComponent
+    }
+
+
 ];
 
 @NgModule({
@@ -37,4 +49,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent];
+export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent, RegistrationPageComponent, LoginPageComponent];
