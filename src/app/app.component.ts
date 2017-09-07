@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RedactorPageComponent} from './redactor-page/redactor-page.component'
 
 @Component({
   selector: 'app-root',
