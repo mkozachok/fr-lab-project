@@ -9,6 +9,8 @@ import { RegistrationPageComponent } from './registration-page/registration-page
 import { LoginPageComponent } from './login-page/login-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 
+import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+
 
 const routes: Routes = [
     {
@@ -28,6 +30,10 @@ const routes: Routes = [
                 component: MyGalleryComponent
             }
         ]
+    },
+    {
+        path: 'redactor-page',
+        component: RedactorPageComponent
     },
     {
         path: 'registration-page',
@@ -51,4 +57,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent];
+export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent, RedactorPageComponent];
