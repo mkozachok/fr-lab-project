@@ -6,6 +6,8 @@ import { MyOrdersComponent } from './profile-page/my-orders/my-orders.component'
 import { MySettingsComponent } from './profile-page/my-settings/my-settings.component';
 import { MyGalleryComponent } from './profile-page/my-gallery/my-gallery.component';
 
+import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+
 
 const routes: Routes = [
     {
@@ -26,6 +28,10 @@ const routes: Routes = [
             }
         ]
     },
+    {
+        path: 'redactor-page',
+        component: RedactorPageComponent
+    }
 ];
 
 @NgModule({
@@ -37,4 +43,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent];
+export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent,RedactorPageComponent];
