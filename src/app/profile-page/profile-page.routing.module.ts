@@ -41,3 +41,4 @@ const profilePageRoutes: Routes = [
 })
 export class ProfilePageRoutingModule { }
 export const profilePageRoutingComponents = [MyGalleryComponent, MyOrdersComponent, MySettingsComponent];
+
