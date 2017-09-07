@@ -7,6 +7,7 @@ import { MySettingsComponent } from './profile-page/my-settings/my-settings.comp
 import { MyGalleryComponent } from './profile-page/my-gallery/my-gallery.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
 
 
 const routes: Routes = [
@@ -35,9 +36,10 @@ const routes: Routes = [
     {
         path: 'login-page',
         component: LoginPageComponent
+    },
+        path: 'order-page',
+        component: OrderPageComponent
     }
-
-
 ];
 
 @NgModule({
@@ -49,4 +51,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent, RegistrationPageComponent, LoginPageComponent];
+export const routingComponents = [ProfilePageComponent, MyOrdersComponent, MySettingsComponent, MyGalleryComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent];
