@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { ProfilePageModule } from './profile-page/profile-page.module';
 import { HomepageComponent } from './homepage/homepage.component';
-
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+
+import { AppComponent } from './app.component';
 
 
 
@@ -20,9 +23,13 @@ import { RedactorPageComponent } from './redactor-page/redactor-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    [MdButtonModule, MdCheckboxModule],
+    AppRoutingModule,
+    ProfilePageModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
