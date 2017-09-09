@@ -1,5 +1,13 @@
-<h4> <a routerLink="my-gallery">gallery</a>
-    <a routerLink="my-orders">orders</a>
-    <a routerLink="my-settings">settings</a>
-</h4>
-<router-outlet></router-outlet>
+<div class="profile-page">
+    <div class="side-menu">
+        <img [src]="user.avatar" alt="avatar">
+        <nav>
+            <button md-raised-button class="side-menu-button" color="warn"><a routerLink="about-me">About me</a></button>
+            <button md-raised-button class="side-menu-button" color="warn"><a routerLink="my-orders">My orders</a></button>
+            <button md-raised-button class="side-menu-button" color="warn"><a routerLink="my-gallery">My gallery</a></button>
+        </nav>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

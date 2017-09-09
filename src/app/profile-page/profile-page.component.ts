@@ -12,7 +12,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this._profilePageService.getUser();
-
+    
   }
 
 }
