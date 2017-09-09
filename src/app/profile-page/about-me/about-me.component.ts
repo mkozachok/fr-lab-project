@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfilePageService } from '../profile-page.service';
 
 @Component({
   selector: 'app-about-me',
@@ -6,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-me.component.scss']
 })
 export class AboutMeComponent implements OnInit {
-  userData = ['Hello'];
+  user = {};
 
-  constructor() { }
+  constructor(private _profilePageService: ProfilePageService) { }
 
   ngOnInit() {
+    this.user = this._profilePageService.getUser();
   }
-
 }
