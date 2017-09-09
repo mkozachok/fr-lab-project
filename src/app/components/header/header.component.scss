@@ -1,0 +1,36 @@
+.header {
+    padding: 0 2em;
+  .spacer {
+        flex: 1 1 auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black; 
+
+        &:hover {
+            color: red;
+        }
+    }
+
+    .login {
+        margin-right: 5em;
+    }
+
+    .basket {
+        position: relative;
+    }
+
+    .data-badge{
+        position: absolute;
+        background-color: orange;
+        border-radius: 50%;
+        font-size: .8em;
+        text-align: center;
+        line-height: 1.3em;
+        width: 1.3em;
+        height: 1.3em;
+        top: -1em;
+        right: -0.8em;
+    }
+}
