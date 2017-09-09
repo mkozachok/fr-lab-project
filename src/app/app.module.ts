@@ -9,6 +9,7 @@ import { MdIconModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
+import {MdTabsModule} from '@angular/material';
 
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
@@ -35,7 +36,9 @@ import { FooterComponent } from './components/footer/footer.component'
     MdIconModule,
     MdGridListModule,
     MdSidenavModule,
-    MdButtonModule
+    MdButtonModule,
+    MdTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [

@@ -1,3 +1,42 @@
-<p>
-  redactor-page works!
-</p>
+<div id="container" color="primary">
+
+  <md-grid-list cols="6" class="blue" rowHeight="fit">
+    <md-grid-tile colspan="2">
+      <div id="tools">
+        <div class="product_bl bl_1">
+          <md-tab-group>
+            <md-tab label="Product Type">
+
+              <md-grid-list class="product_list" cols="3" rowHeight="100px">
+                <md-grid-tile
+                    *ngFor="let img of product_types">
+                      <img [src]="img.url" width="100"/>
+                </md-grid-tile>
+              </md-grid-list>
+
+
+            </md-tab>
+            <md-tab label="Category">Category</md-tab>
+          </md-tab-group>
+        </div>
+
+        <div class="product_bl bl_2">
+          <div class="type">Color</div>
+          <ul class="selected_color">
+            <li *ngFor="let bgcolor of products">
+              <span [style.background] = "bgcolor.color"></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="product_bl bl_4">
+          <div class="type">Load Image</div>
+        </div>
+     </div>
+    </md-grid-tile>
+
+
+
+  <md-grid-tile colspan="4">This is where canvas part will be!!</md-grid-tile>
+</md-grid-list>
+</div>
