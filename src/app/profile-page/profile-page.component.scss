@@ -1,0 +1,49 @@
+@import "../../variables.scss";
+
+.profile-page {
+    display: flex;
+    height: 100%;
+
+
+    .side-menu {
+        justify-content: center;
+        padding: 2%; 
+        background: $profileSideMenu;
+        width: 20%;
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            height: auto;
+        }
+
+    }
+
+    .content {
+        background: orange;
+        flex: 1;
+    }
+
+    .side-menu-button {
+        display: block;
+        width: 100%;
+        min-width: 60px;
+        margin-top: 5%;
+
+        &:hover {
+            a{
+                color: orange;
+            }
+            
+        }
+    }
+
+    a {
+        color: white;
+        display: block;
+        text-decoration: none;
+        width: 100%;
+        white-space: pre-wrap;
+    }
+}

@@ -1,0 +1,9 @@
+<md-toolbar color="primary" class="header">
+  <a routerLink="/"><img [src]="logoSrc" alt="Logo"></a>
+  <span class="spacer"></span>
+  <div><a routerLink="/" class="login">Please login</a>
+    <a routerLink="/" class="basket">
+      <md-icon class="mdl-badge">{{ basketIcon }}</md-icon>
+      <span class="data-badge">{{ ordersAmount }}</span></a>
+  </div>
+</md-toolbar>
