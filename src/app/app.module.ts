@@ -3,8 +3,13 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MdToolbarModule } from '@angular/material';
 import { MdIconModule } from '@angular/material';
+import {MdGridListModule} from '@angular/material';
+import {MdTabsModule} from '@angular/material';
+
 
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
@@ -27,7 +32,10 @@ import { FooterComponent } from './components/footer/footer.component'
     AppRoutingModule,
     ProfilePageModule,
     MdToolbarModule,
-    MdIconModule
+    MdIconModule,
+    MdGridListModule,
+    MdTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [
