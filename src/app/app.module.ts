@@ -11,6 +11,7 @@ import { ProfilePageModule } from './profile-page/profile-page.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component'
+import { FooterComponent } from './components/footer/footer.component'
 
 
 
@@ -18,7 +19,8 @@ import { HeaderComponent } from './components/header/header.component'
   declarations: [
     AppComponent,
     routingComponents,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
