@@ -9,7 +9,10 @@ import { ProfilePageModule } from './profile-page/profile-page.module';
 import { AppComponent } from './app.component';
 
 
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdGridListModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProfilePageModule
+    ProfilePageModule,
+    BrowserAnimationsModule,
+    MdGridListModule,
+    MdInputModule,
+    MdButtonModule
   ],
   providers: [],
   bootstrap: [

@@ -1,28 +1,36 @@
-<section>
-  <h1>Registration</h1>
-  <label>
-    Enter your name
-    <input type="text" name="name" value="">
-  </label>
-  <label>
-    Enter your surname
-    <input type="text" name="surname" value="">
-  </label>
-  <label>
-    Email address
-    <input type="text" name="email" value="">
-  </label>
-  <label>
-    Avatar
-    <input type="file" name="avatar" value="">
-  </label>
-  <label>
-    Address
-    <input type="text" name="login" value="">
-  </label>
-  <label>
-    New Post department
-    <input type="text" name="login" value="">
-  </label>
-  <input type="button" name="log-in" value="Sign in">
-</section>
+<md-grid-list  cols="3" rowHeight="2:1">
+  <h2>Registration</h2>
+  <form class="example-form" cols="1" colspan="1">
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="email" />
+      </md-form-field>
+    </p>
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="password" />
+      </md-form-field>
+    </p>
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="repeat password" />
+      </md-form-field>
+    </p>
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="first name" />
+      </md-form-field>
+    </p>
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="second name" />
+      </md-form-field>
+    </p>
+    <p>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="address" />
+      </md-form-field>
+    </p>
+    <button md-raised-button>registrate</button>
+  </form>
+</md-grid-list>
