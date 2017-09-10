@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
@@ -37,13 +38,10 @@ import { MdInputModule } from '@angular/material';
     MdIconModule,
     MdGridListModule,
     MdSidenavModule,
-    BrowserAnimationsModule,
-    MdGridListModule,
     MdInputModule,
-    MdButtonModule
     MdButtonModule,
     MdTabsModule,
-    BrowserAnimationsModule
+    HttpModule
   ],
   providers: [],
   bootstrap: [
