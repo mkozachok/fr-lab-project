@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import mergeImages from 'merge-images';
-
 
 
 
@@ -30,13 +28,6 @@ export class RedactorPageComponent{
   }
   setColor = function(product){
     this.selectedProductImage = product.url;
-  }
-  test = function(event){
-    mergeImages(['assets/images/body.png',
-     'assets/images/eyes.png',
-      'assets/images/mouth.png'])
-      .then(b64 => document.querySelector('img#ss').setAttribute('src', b64));
-      // document.querySelector('img#ss').setAttribute('src', b64)
   }
    product_types = [
       {
@@ -127,22 +118,6 @@ private  products = [
         color: "#fb4e81",
         type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/591?width=450&height=450&mediaType=webp"
-      },
-      {
-        color: "#008a47",
-        type: "mug",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/92?width=450&height=450&mediaType=webp"
-      },
-      {
-        color: "#0ac7df",
-        type: "mug",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/706?width=450&height=450&mediaType=webp"
-      },
-      {
-        color: "#fb4e81",
-        type: "mug",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/591?width=450&height=450&mediaType=webp"
       }
-
   ]
 }
