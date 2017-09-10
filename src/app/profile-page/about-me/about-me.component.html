@@ -1,23 +1,46 @@
-<div class="wrapper">
-  <h4>{{ user.firstName }} {{ user.lastName }}'s profile page</h4>
-  <form>
-    <md-form-field>
-      <input mdInput placeholder="First Name" [value]="user.firstName">
-    </md-form-field>
-    <md-form-field>
-      <input mdInput placeholder="Last Name" [value]="user.lastName">
-    </md-form-field>
-    <md-form-field>
-      <input mdInput placeholder="Email" [value]="user.email">
-    </md-form-field>
-    <md-form-field>
-      <input type="password" mdInput placeholder="Password" [value]="user.password">
-    </md-form-field>
-  </form>
-  <button md-raised-button color="warn" disabled>Change photo</button>
-</div>
+<md-tab-group>
+  <md-tab label="User info">
+    <div class="info-detail-wrapper">
 
-<div class="button-wrapper">
-  <button md-raised-button color="warn">Edit data</button>
-  <button md-raised-button disabled color="warn">Save changes</button>
-</div>
+      
+
+      <div class="info-group">
+        <span class="label">First Name</span>
+        <span>{{ user.firstName }}</span>
+      </div>
+      <div class="info-group">
+        <span class="label">Last Name</span>
+        <span>{{ user.lastName }}</span>
+      </div>
+      <div class="info-group">
+        <span class="label">Email</span>
+        <span>{{ user.email }}</span>
+      </div>
+    </div>
+
+
+  </md-tab>
+  <md-tab label="Edit user info">
+    <div class="edit-wrapper">
+      <form>
+        <md-form-field>
+          <input mdInput placeholder="First Name" [value]="user.firstName">
+        </md-form-field>
+        <md-form-field>
+          <input mdInput placeholder="Last Name" [value]="user.lastName">
+        </md-form-field>
+        <md-form-field>
+          <input mdInput placeholder="Email" [value]="user.email" #message>
+        </md-form-field>
+        <md-form-field>
+          <input type="password" mdInput placeholder="Password" [value]="user.password">
+        </md-form-field>
+      </form>
+      <button md-raised-button color="warn">Change photo</button>
+
+      <button md-raised-button (click)="openSnackBar()" color="primary">
+          Save changes
+      </button>
+    </div>
+  </md-tab>
+</md-tab-group>
