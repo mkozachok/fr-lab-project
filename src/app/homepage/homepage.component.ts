@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product-model'
 import { ProductsListService } from './products-list.service';
-import {MdGridListModule} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -23,5 +22,3 @@ export class HomepageComponent implements OnInit {
     this.getAll();
   };
 }
-
-

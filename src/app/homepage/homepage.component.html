@@ -1,29 +1,30 @@
-<md-grid-list cols="2">
+<md-grid-list cols="5">
   <md-grid-tile colspan = "1" class="mat-grid-tile">
-    <div class="createTemplate">
-      <button class="createTemplateBtn">create new template</button>
-    </div>
-    <div class="objectTypeFilter">
-        <i class="fa fa-caret-right" aria-hidden="true"></i>
-        <ul>
-          <li>pillow</li>
-          <li>bag</li>
-          <li>package</li>
-          <li>coffe cup</li>
-          <li>tshirt</li>
-          <li>cup</li>
-        </ul>
-    </div>
-    <div class="categoryFilter">
-        <i class="fa fa-caret-right" aria-hidden="true"></i>
-        <ul>
-          <li>children</li>
-          <li>business</li>
-          <li>just for fun</li>
-        </ul>
-    </div>
+    <md-expansion-panel class="objectTypeFilter" opened="ture" style="width: 100%;">
+      <md-expansion-panel-header>
+          <md-panel-title>
+            Sorting by type
+          </md-panel-title>
+      </md-expansion-panel-header>
+      <md-form-field>pillow</md-form-field>
+      <md-form-field>bag</md-form-field>
+      <md-form-field>package</md-form-field>
+      <md-form-field>coffe cup</md-form-field>
+      <md-form-field>tshirt</md-form-field>
+      <md-form-field>cup</md-form-field>
+    </md-expansion-panel>
+    <md-expansion-panel class="categoryFilter">
+      <md-expansion-panel-header>
+        <md-panel-title>
+          Sorting by category
+        </md-panel-title>
+      </md-expansion-panel-header>  
+      <md-form-field>children</md-form-field>
+      <md-form-field>business</md-form-field>
+      <md-form-field>just for fun</md-form-field>
+    </md-expansion-panel>
   </md-grid-tile>
-  <md-grid-tile class = "rightcol templates" colspan = "1">
+  <md-grid-tile class = "rightcol templates" colspan = "4">
     <div class = "oneObjet" *ngFor = "let product of products">
       <div class = "objectDescription">
         <h2>{{product.name}}</h2>
