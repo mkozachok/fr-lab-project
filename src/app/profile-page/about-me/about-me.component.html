@@ -1,3 +1,23 @@
-<p>
-  about-me works!
-</p>
+<div class="wrapper">
+  <h4>{{ user.firstName }} {{ user.lastName }}'s profile page</h4>
+  <form>
+    <md-form-field>
+      <input mdInput placeholder="First Name" [value]="user.firstName">
+    </md-form-field>
+    <md-form-field>
+      <input mdInput placeholder="Last Name" [value]="user.lastName">
+    </md-form-field>
+    <md-form-field>
+      <input mdInput placeholder="Email" [value]="user.email">
+    </md-form-field>
+    <md-form-field>
+      <input type="password" mdInput placeholder="Password" [value]="user.password">
+    </md-form-field>
+  </form>
+  <button md-raised-button color="warn" disabled>Change photo</button>
+</div>
+
+<div class="button-wrapper">
+  <button md-raised-button color="warn">Edit data</button>
+  <button md-raised-button disabled color="warn">Save changes</button>
+</div>

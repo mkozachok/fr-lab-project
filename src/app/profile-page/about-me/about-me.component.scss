@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    md-form-field{
+        display: block;
+        margin: 5% auto;       
+    }
+   
+    div {
+        margin: 5%;
+    }
+
+    button {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
+.button-wrapper {
+    margin: 5% auto;
+    width: 50%;
+
+    button {
+        display: inline-block;
+        width: 49%;
+
+    }
+}
