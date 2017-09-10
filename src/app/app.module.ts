@@ -12,8 +12,9 @@ import { MdIconModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
-import { MdExpansionModule } from '@angular/material';
 
+import { MdExpansionModule } from '@angular/material';
+import { MdTabsModule } from '@angular/material';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
@@ -43,7 +44,9 @@ import { FooterComponent } from './components/footer/footer.component'
     MdGridListModule,
     MdSidenavModule,
     MdButtonModule,
-    MdExpansionModule
+    MdExpansionModule,
+    MdTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [

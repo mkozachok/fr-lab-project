@@ -1,0 +1,51 @@
+@import "../../../variables.scss";
+
+/deep/ .mat-tab-label{
+	min-width: 50% !important;
+}
+
+.edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+.info-detail-wrapper { 
+    .info-group {
+        padding: 1%;
+        margin: 1% 0;
+        background: $profileAboutUserData;
+
+        span {
+            display: inline-block;
+            width: 10%;
+        }
+
+        .label {
+            margin-left: 40%;
+        }
+    }
+}
+
+.edit-wrapper {
+    form {
+        width: 50%;
+    }
+
+    md-form-field{
+        display: block;
+        margin: 5% auto;
+        width: 100%;       
+    }
+   
+    div {
+        margin: 5%;
+    }
+
+    button {
+        display: block;
+        margin: 1% auto;
+        width: 50%;
+    }
+}
