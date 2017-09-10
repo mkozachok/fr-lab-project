@@ -11,4 +11,8 @@ export class DesignService {
       return this._http.get(this._url)
           .map((response: Response) => response.json());
     }
+    getOne(id:number) {
+      // return this.getAll()
+      //     .map()
+    }
 }
