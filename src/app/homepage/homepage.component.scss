@@ -71,3 +71,10 @@
     background: #7b0041;
     color: #eee;
 }
+
+.poster {
+    background: url(../../assets/images/poster.png) no-repeat center center;
+    background-size: cover;
+    padding: 50px 10px;
+    max-height: 400px;
+}
