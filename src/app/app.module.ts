@@ -12,6 +12,8 @@ import { MdIconModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
+import {MdCardModule} from '@angular/material';
+import {MdListModule} from '@angular/material';
 
 import { MdExpansionModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
@@ -46,7 +48,9 @@ import { FooterComponent } from './components/footer/footer.component'
     MdButtonModule,
     MdExpansionModule,
     MdTabsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MdCardModule,
+    MdListModule
   ],
   providers: [],
   bootstrap: [

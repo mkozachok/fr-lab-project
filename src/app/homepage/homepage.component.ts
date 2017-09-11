@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product-model'
 import { ProductsListService } from './products-list.service';
+import { HomepagePosterComponent } from './homepagePoster/homepagePoster.component';
 
 @Component({
   moduleId: module.id,

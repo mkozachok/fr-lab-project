@@ -1,40 +1,34 @@
-<md-grid-list cols="5">
-  <md-grid-tile colspan = "1" class="mat-grid-tile">
-    <md-expansion-panel class="objectTypeFilter" opened="ture" style="width: 100%;">
-      <md-expansion-panel-header>
-          <md-panel-title>
-            Sorting by type
-          </md-panel-title>
-      </md-expansion-panel-header>
-      <md-form-field>pillow</md-form-field>
-      <md-form-field>bag</md-form-field>
-      <md-form-field>package</md-form-field>
-      <md-form-field>coffe cup</md-form-field>
-      <md-form-field>tshirt</md-form-field>
-      <md-form-field>cup</md-form-field>
-    </md-expansion-panel>
-    <md-expansion-panel class="categoryFilter">
-      <md-expansion-panel-header>
-        <md-panel-title>
-          Sorting by category
-        </md-panel-title>
-      </md-expansion-panel-header>  
-      <md-form-field>children</md-form-field>
-      <md-form-field>business</md-form-field>
-      <md-form-field>just for fun</md-form-field>
-    </md-expansion-panel>
+<md-grid-list cols="5" class="homepage" rowHeight="100%">
+  <md-grid-tile colspan = "1" class="mat-grid-tile" class="leftcol">
+    <md-list class="objectTypeFilter">
+      <h2 md-subheader>Sorting by type</h2>
+      <md-list-item>pillow</md-list-item>
+      <md-list-item>bag</md-list-item>
+      <md-list-item>package</md-list-item>
+      <md-list-item>coffe cup</md-list-item>
+      <md-list-item>tshirt</md-list-item>
+      <md-list-item>cup</md-list-item>
+      <md-divider></md-divider>
+      <h2 md-subheader>Sorting by category</h2>
+      <md-list-item>children</md-list-item>
+      <md-list-item>business</md-list-item>
+      <md-list-item>just for fun</md-list-item>
+    </md-list>
   </md-grid-tile>
   <md-grid-tile class = "rightcol templates" colspan = "4">
-    <div class = "oneObjet" *ngFor = "let product of products">
-      <div class = "objectDescription">
-        <h2>{{product.name}}</h2>
-        <ul>
-          <li>{{product.type}}</li>
-          <li>{{product.category}}</li>
-        </ul>
-      </div>
-      <div class = "objectPhoto">
-        <img src = "{{ product.svg }}" alt = "">
+    <div class="wrapper">
+      <div class="oneObjet" *ngFor = "let product of products">
+        <div>
+          <img src="{{ product.svg }}" alt="">
+        </div>
+        <div class="info">
+          <h3>{{product.name}}</h3>
+          <ul>
+            <li>type: {{product.type}}</li>
+            <li>category: {{product.category}}</li>
+          </ul>
+          <button>add to card</button>
+        </div>
       </div>
     </div>
   </md-grid-tile>
