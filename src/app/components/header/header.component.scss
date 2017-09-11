@@ -1,15 +1,20 @@
 .header {
+    background: rgba(250, 250, 250, 1);
+    color: #555;
     padding: 0 2em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    
   .spacer {
         flex: 1 1 auto;
     }
 
     a {
         text-decoration: none;
-        color: black; 
+        color: #555; 
 
         &:hover {
-            color: red;
+            color: #7b0041;
         }
     }
 
@@ -19,6 +24,8 @@
 
     .basket {
         position: relative;
+        right: 20px;
+        top: 5px;
     }
 
     .data-badge{
