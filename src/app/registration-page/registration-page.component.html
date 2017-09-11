@@ -1,28 +1,53 @@
-<section>
-  <h1>Registration</h1>
-  <label>
-    Enter your name
-    <input type="text" name="name" value="">
-  </label>
-  <label>
-    Enter your surname
-    <input type="text" name="surname" value="">
-  </label>
-  <label>
-    Email address
-    <input type="text" name="email" value="">
-  </label>
-  <label>
-    Avatar
-    <input type="file" name="avatar" value="">
-  </label>
-  <label>
-    Address
-    <input type="text" name="login" value="">
-  </label>
-  <label>
-    New Post department
-    <input type="text" name="login" value="">
-  </label>
-  <input type="button" name="log-in" value="Sign in">
-</section>
+<md-grid-list cols="3" rowHeight="100px">
+  <md-grid-tile colspan="2">
+    <h2>Registration</h2>
+  </md-grid-tile>
+
+  <form class="example-form">
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="email" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="password" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="repeat password" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="first name" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="second name" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="address" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <button md-raised-button>registrate</button>
+    </md-grid-tile>
+  </form>
+</md-grid-list>

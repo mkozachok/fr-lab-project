@@ -10,9 +10,25 @@ import { Component } from '@angular/core';
 })
 
 
+
 export class RedactorPageComponent{
  	title = 'redactor';
-
+  type = "tshirtm";
+  selectedProductImage = "";
+  selectProduct = function(product){
+    this.type = product.type;
+    this.selectedProductImage = product.url;
+  }
+  getColors = function(){
+    let type = this.type;
+    var typeArr = this.products.filter(function(item){
+      return type.length==0?true:item.type == type;
+    })
+    return typeArr;
+  }
+  setColor = function(product){
+    this.selectedProductImage = product.url;
+  }
    product_types = [
       {
         type: "tshirtm",
@@ -52,57 +68,56 @@ export class RedactorPageComponent{
       }
   ];
 
-  products = [
+private  products = [
       {
         color: "#ffffff",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/1?width=450&height=450&mediaType=webp"
       },
       {
         color: "#fff500",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/210/views/1/appearances/7?width=450&height=450&mediaType=webp"
       },
       {
         color: "#000000",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/812/views/1/appearances/2?width=450&height=450&mediaType=webp"
       },
       {
         color: "#2244aa",
-        type: "tshirt",
+        type: "tshirtm",
         url: "http://image.spreadshirtmedia.com/image-server/v1/productTypes/812/views/1/appearances/317?width=450&height=450&mediaType=webp"
       },
       {
         color: "#b91816",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/366?width=450&height=450&mediaType=webp"
       },
       {
         color: "#cccccc",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/231?width=450&height=450&mediaType=webp"
       },
       {
         color: "#664b2f",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/387?width=450&height=450&mediaType=webp"
       },
       {
         color: "#008a47",
-        type: "tshirt",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/92?width=400&height=400&mediaType=webp"
+        type: "tshirtm",
+        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/92?width=450&height=450&mediaType=webp"
       },
       {
         color: "#0ac7df",
-        type: "tshirt",
+        type: "tshirtm",
         url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/706?width=450&height=450&mediaType=webp"
       },
       {
         color: "#fb4e81",
-        type: "tshirt",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/591?width=400&height=400&mediaType=webp"
+        type: "tshirtm",
+        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/591?width=450&height=450&mediaType=webp"
       }
-
   ]
 }

@@ -1,9 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500&subset=latin-ext');
 
 * {
     margin: 0;
     padding: 0;
-    transition: 0.4s;
 }
 
 html {
@@ -14,4 +13,21 @@ body {
     height: 100%;
     min-height: 100%;
 }
+
+.homepage {
+    min-height: 500px;
+    height: 100%;
+}
+
+.cardImg {
+    width: 100%;
+    text-align: center;
+}
+
+.homepage img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
