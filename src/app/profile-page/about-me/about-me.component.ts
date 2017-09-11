@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilePageService } from '../profile-page.service';
+import { UserService } from '../../services/user.service';
 import { MdSnackBar } from '@angular/material';
 
 @Component({
@@ -10,10 +10,10 @@ import { MdSnackBar } from '@angular/material';
 export class AboutMeComponent implements OnInit {
   user = {};
 
-  constructor(private _profilePageService: ProfilePageService, public snackBar: MdSnackBar) { }
+  constructor(private _userService: UserService, public snackBar: MdSnackBar) { }
 
   ngOnInit() {
-    this.user = this._profilePageService.getUser();
+    this.user = this._userService.getUser();
   }
 
   openSnackBar(message: string, action: string) {

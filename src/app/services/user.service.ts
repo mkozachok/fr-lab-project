@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 
 @Injectable()
-export class ProfilePageService {
+export class UserService {
     getUser(){
         return {
             id: 1,
