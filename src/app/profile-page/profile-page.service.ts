@@ -8,6 +8,7 @@ export class ProfilePageService {
             firstName: 'Tom',
             lastName: 'Smith',
             email: 'tom.smith@gmail.com',
+            avatar: '/assets/images/avatars/myAvatar.png',
             products: ['T-shirt with label cat', 'Green cup with name']
         }    
     }

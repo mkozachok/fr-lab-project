@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProfilePageComponent } from './profile-page.component';
 import { MyGalleryComponent } from './my-gallery/my-gallery.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { MySettingsComponent } from './my-settings/my-settings.component';
+import { AboutMeComponent } from './about-me/about-me.component';
 
 
 const profilePageRoutes: Routes = [
@@ -23,8 +23,8 @@ const profilePageRoutes: Routes = [
                 component: MyOrdersComponent
             },
             {
-                path: 'my-settings',
-                component: MySettingsComponent
+                path: 'about-me',
+                component: AboutMeComponent
             }
         ]
     }
@@ -40,5 +40,5 @@ const profilePageRoutes: Routes = [
     ]
 })
 export class ProfilePageRoutingModule { }
-export const profilePageRoutingComponents = [MyGalleryComponent, MyOrdersComponent, MySettingsComponent];
+export const profilePageRoutingComponents = [MyGalleryComponent, MyOrdersComponent, AboutMeComponent];
 

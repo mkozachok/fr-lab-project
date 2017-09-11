@@ -1,1 +1,6 @@
-<p>order-page</p>
+  <h2>My orders</h2>
+  <ul>
+    <li *ngFor="let order of orders">
+      <span>id : {{order.id}}, </span>quantity : {{order.quantity}}
+    </li>
+  </ul>
