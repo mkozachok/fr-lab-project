@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { MdCheckboxModule } from '@angular/material';
 
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component'
 import { FooterComponent } from './components/footer/footer.component'
 
+import { MdInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import { FooterComponent } from './components/footer/footer.component'
     MdIconModule,
     MdGridListModule,
     MdSidenavModule,
+    MdInputModule,
     MdButtonModule,
     MdExpansionModule,
     MdTabsModule,
     BrowserAnimationsModule,
     MdCardModule,
-    MdListModule
+    MdListModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [

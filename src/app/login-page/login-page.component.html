@@ -1,13 +1,25 @@
-<section>
-  <h1>Log in</h1>
-  <label>
-    Email address
-    <input type="text" name="login" value="">
-  </label>
-  <label>
-    Password
-    <input type="password" name="password" value="">
-  </label>
-  <input type="button" name="log-in" value="Log in">
-  <input type="button" name="log-in-with-facebook" value="Log in with facebook">
-</section>
+<md-grid-list cols="2" rowHeight="100px">
+  <md-grid-tile colspan="2">
+    <h2>Logging in</h2>
+  </md-grid-tile>
+
+  <form class="example-form">
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="email" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="password" />
+        </md-form-field>
+      </p>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+      <button md-raised-button>log in</button>
+    </md-grid-tile>
+  </form>
+</md-grid-list>
