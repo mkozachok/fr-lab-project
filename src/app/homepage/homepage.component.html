@@ -1,23 +1,23 @@
 <md-grid-list cols="5" class="homepage" rowHeight="100%">
-  <md-grid-tile colspan = "1" class="mat-grid-tile" class="leftcol">
+  <md-grid-tile colspan = "1" class="mat-grid-tile leftcol">
     <md-list class="objectTypeFilter">
       <h2 md-subheader>Sorting by type</h2>
-      <md-list-item>pillow</md-list-item>
-      <md-list-item>bag</md-list-item>
-      <md-list-item>package</md-list-item>
-      <md-list-item>coffe cup</md-list-item>
-      <md-list-item>tshirt</md-list-item>
-      <md-list-item>cup</md-list-item>
-      <md-divider></md-divider>
+      <div *ngFor = "let procuctType of procuctsType">
+        <md-list-item (click) = "selectProducts('type', procuctType.type)">
+          {{procuctType.type}}
+        </md-list-item>
+      </div>
       <h2 md-subheader>Sorting by category</h2>
-      <md-list-item>children</md-list-item>
-      <md-list-item>business</md-list-item>
-      <md-list-item>just for fun</md-list-item>
+      <div *ngFor = "let productCategory of productsCategory">
+        <md-list-item (click) = "selectProducts('category', productCategory.category)">
+          {{productCategory.category}}
+        </md-list-item>
+      </div>
     </md-list>
   </md-grid-tile>
   <md-grid-tile class = "rightcol templates" colspan = "4">
     <div class="wrapper">
-      <div class="oneObjet" *ngFor = "let product of products">
+      <div class="oneObjet" *ngFor = "let product of selectedItems">
         <div>
           <img src="{{ product.svg }}" alt="">
         </div>
