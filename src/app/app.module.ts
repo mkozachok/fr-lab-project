@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { NgModel } from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 
 import { MdCheckboxModule } from '@angular/material';
 
@@ -60,7 +62,8 @@ import { MdInputModule } from '@angular/material';
     BrowserAnimationsModule,
     MdCardModule,
     MdListModule,
-    HttpModule
+    HttpModule,
+    FormsModule
 
   ],
   providers: [],

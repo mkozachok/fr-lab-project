@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../models/order-model';
 import { OrderService } from './order-page.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-order-page',
@@ -11,7 +12,9 @@ import { OrderService } from './order-page.service';
 
 export class OrderPageComponent implements OnInit {
 	orders: Order[];
+	orderHeaders: string[] = ['', 'Size', 'Quantity', 'Priсe', ''];
 	constructor(private orderService: OrderService) { }
+
 
 	getOrders(): void {
 		this.orderService.getOrders().then(orders => this.orders = orders);
@@ -19,5 +22,20 @@ export class OrderPageComponent implements OnInit {
 
 	ngOnInit() {
 		this.getOrders();
+	}
+
+	addButtonClick(order) {
+		++order.quantity;
+	}
+
+	subtractButtonClick(order) {
+		if (order.quantity > 1) {
+			--order.quantity;
+		}
+	}
+
+	removeItem(order) {
+		let elToRemove = document.getElementById(order.id);
+		document.getElementsByClassName('items')[0].removeChild(elToRemove);
 	}
 }

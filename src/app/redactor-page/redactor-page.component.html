@@ -6,7 +6,7 @@
           <md-tab-group>
             <md-tab label="Product Type">
 
-              <md-grid-list class="product_list" cols="3" rowHeight="100px">
+              <md-grid-list class="product_list" cols="3" rowHeight="fit">
                 <md-grid-tile
                     *ngFor="let type of product_types">
                       <img [src]="type.url" (click)="selectProduct(type)" width="100"/>
