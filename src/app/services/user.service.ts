@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { environment } from '../../environments/environment';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
+  user: Observable<firebase.User>;
 
-    constructor(private _http: Http){}
-/*     getUser(){
-        return {
-            id: 1,
-            firstName: 'Tom',
-            lastName: 'Smith',
-            email: 'tom.smith@gmail.com',
-            avatar: '/assets/images/avatars/myAvatar.png',
-            products: ['T-shirt with label cat', 'Green cup with name']
-        }    
-    } */
-    getUser(){
-        return this._http.get('https://kolibri-7dd6a.firebaseio.com/user.json')
-            .map(response => response.json());
-    }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
-    setUser(firstName: string, lastName:string){
-        const body = JSON.stringify({firstName: firstName, lastName: lastName});
-        return this._http.put('https://kolibri-7dd6a.firebaseio.com/user.json', body)
-            .map(response => response.json());
-    }
+  onLogginigIn(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email,password);
+    this.afAuth.authState.subscribe(response => console.log(response))
+  }
+  onLogOut() {
+    this.afAuth.auth.signOut();
+    this.afAuth.authState.subscribe(response => console.log(response))
+  }
+
 }

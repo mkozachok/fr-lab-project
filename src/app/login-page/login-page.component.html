@@ -1,28 +1,23 @@
-<md-grid-list cols="2" rowHeight="100px">
-  <md-grid-tile colspan="2">
-    <h2>Logging in</h2>
-  </md-grid-tile>
-  <div> {{ (user | async)?.uid }} </div>
-  <button (click)="login()">Login</button>
-  <button (click)="logout()">Logout</button>
-  <!-- <form class="example-form">
-    <md-grid-tile colspan="2">
-      <p>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="email" />
-        </md-form-field>
-      </p>
-    </md-grid-tile>
-    <md-grid-tile colspan="2">
-      <p>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="password" />
-        </md-form-field>
-      </p>
-    </md-grid-tile>
-    <md-grid-tile colspan="2">
-      <button md-raised-button>log in</button>
-    </md-grid-tile>
-  </form> -->
 
-</md-grid-list>
+    <h2>Logging in</h2>
+
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" class="example-form" >
+
+      <p>
+
+          <input mdInput placeholder="email" name="email" ngModel/>
+
+      </p>
+
+
+      <p>
+
+          <input mdInput placeholder="password" name="password" ngModel/>
+
+      </p>
+
+      <button md-raised-button type="submit" >log in</button>
+
+
+  </form>
+  <button md-raised-button (click)="logOut()" >log out</button>

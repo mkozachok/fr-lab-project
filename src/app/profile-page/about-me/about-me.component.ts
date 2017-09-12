@@ -13,7 +13,7 @@ export class AboutMeComponent implements OnInit {
   constructor(private _userService: UserService, public snackBar: MdSnackBar) { }
 
   ngOnInit() {
-    this.user = this._userService.getUser();
+
   }
 
   openSnackBar(message: string, action: string) {
