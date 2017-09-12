@@ -1,6 +1,38 @@
-  <h2>My orders</h2>
-  <ul>
-    <li *ngFor="let order of orders">
-      <span>id : {{order.id}}, </span>quantity : {{order.quantity}}
-    </li>
-  </ul>
+<md-grid-list class="container" cols="5" rowHeight="fit">
+  <md-grid-tile *ngFor="let header of orderHeaders">
+    {{header}}
+  </md-grid-tile>
+  <md-grid-tile colspan="5" rowspan="7">
+  <div class="items">
+    <md-grid-list class="item" id={{order.id}} *ngFor="let order of orders" cols="5" rowHeight="240px">
+      <md-grid-tile class="item-img">
+        <img src="https://image.freepik.com/free-vector/cup-mockup_1053-247.jpg" layout-fill>
+      </md-grid-tile>
+      <md-grid-tile>
+        
+      </md-grid-tile>
+      <md-grid-tile class="quantity">
+          <button md-mini-fab class="add" (click)="addButtonClick(order)">
+            +
+          </button>
+          <input mdInput [(ngModel)]="order.quantity" type="number" min="1">
+          <button md-mini-fab class="subtract" (click)="subtractButtonClick(order)">
+            -
+          </button>
+      </md-grid-tile>
+      <md-grid-tile>
+        {{order.price | currency:'UAH':false}}
+      </md-grid-tile>
+      <md-grid-tile>
+        <button button md-raised-button color="primary" class="delete" (click)="removeItem(order)">
+            <i class="material-icons md-18">delete</i>
+        </button> 
+      </md-grid-tile>      
+    </md-grid-list>
+    </div>
+  </md-grid-tile>
+
+  <md-grid-tile colspan="5" rowspan="1">
+    <button button md-raised-button class="checkout">CHECKOUT</button>  
+  </md-grid-tile>
+</md-grid-list>

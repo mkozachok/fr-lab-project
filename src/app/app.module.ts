@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { NgModel } from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
@@ -22,8 +24,11 @@ import { MdIconModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
+
 import { MdCardModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
+
+
 import { MdExpansionModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
 import { MdInputModule } from '@angular/material';
@@ -51,14 +56,19 @@ import { UserService } from './services/user.service';
     MdIconModule,
     MdGridListModule,
     MdSidenavModule,
-    MdInputModule,
     MdButtonModule,
+
+    MdCardModule,
+    MdInputModule,
+
     MdExpansionModule,
     MdTabsModule,
     BrowserAnimationsModule,
     MdCardModule,
     MdListModule,
-    HttpModule
+    HttpModule,
+    FormsModule
+
   ],
   providers: [UserService],
   bootstrap: [
