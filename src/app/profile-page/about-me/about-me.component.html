@@ -1,20 +1,25 @@
 <md-tab-group>
   <md-tab label="User info">
     <div class="info-detail-wrapper">
-
-      
-
-      <div class="info-group">
-        <span class="label">First Name</span>
-        <span>{{ user.firstName }}</span>
+      <div class="title">
+        <h2>Hello User</h2>
+        <p class="greeting">Have a nice day!</p>
       </div>
       <div class="info-group">
-        <span class="label">Last Name</span>
-        <span>{{ user.lastName }}</span>
+        <span class="info-group-label info-group-row">First Name</span>
+        <span class="info-group-data info-group-row">{{ user.firstName }} Name</span>
       </div>
       <div class="info-group">
-        <span class="label">Email</span>
-        <span>{{ user.email }}</span>
+        <span class="info-group-label info-group-row">Last Name</span>
+        <span class="info-group-data info-group-row">{{ user.lastName }} Last Name</span>
+      </div>
+      <div class="info-group">
+        <span class="info-group-label info-group-row">Email</span>
+        <span class="info-group-data info-group-row">{{ user.email }} Email</span>
+      </div>
+      <div class="info-group">
+        <span class="info-group-label info-group-row">Phone</span>
+        <span class="info-group-data info-group-row">{{ user.email }} Email</span>
       </div>
     </div>
 
@@ -36,11 +41,12 @@
           <input type="password" mdInput placeholder="Password" [value]="user.password">
         </md-form-field>
       </form>
-      <button md-raised-button color="warn">Change photo</button>
-
-      <button md-raised-button (click)="openSnackBar()" color="primary">
+      <div>
+        <button md-raised-button color="warn" class="edit-photo-button">Change photo</button>
+        <button md-raised-button (click)="openSnackBar()" color="primary" class="edit-save-button">
           Save changes
       </button>
+      </div>
     </div>
   </md-tab>
 </md-tab-group>

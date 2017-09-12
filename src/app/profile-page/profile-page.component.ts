@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '.././services/user.service';
 import { User } from '../models/user-model';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
@@ -10,12 +10,13 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  items: FirebaseListObservable<any[]>;
+  avatarSrc = '../../assets/images/avatars/myAvatar.png'
   user = {};
   
-  constructor(private _userService: UserService, bd: AngularFireDatabase) { 
-       
-  }
+  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {      
+       //this.afAuth.auth.signInWithEmailAndPassword('steve.neeson21@gmail.com', 'qq29630')
+       this._userService.getUser().subscribe(res => /* this.user = */ console.log(res));
+      }
 
   ngOnInit() {
 
