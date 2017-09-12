@@ -7,19 +7,23 @@
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">First Name</span>
-        <span class="info-group-data info-group-row">{{ user.firstName }} Name</span>
+        <span class="info-group-data info-group-row" *ngIf="user.firstName !==null">{{ user.firstName }}</span>
+        <span class="info-group-data info-group-row" *ngIf="user.firstName ===null">not specified</span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Last Name</span>
-        <span class="info-group-data info-group-row">{{ user.lastName }} Last Name</span>
+        <span class="info-group-data info-group-row" *ngIf="user.lastName !==null">{{ user.lastName }}</span>
+        <span class="info-group-data info-group-row" *ngIf="user.lastName ===null">not specified</span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Email</span>
-        <span class="info-group-data info-group-row">{{ user.email }} Email</span>
+        <span class="info-group-data info-group-row" *ngIf="user.email !==null">{{ user.email }}</span>
+        <span class="info-group-data info-group-row" *ngIf="user.email ===null">not specified</span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Phone</span>
-        <span class="info-group-data info-group-row">{{ user.email }} Email</span>
+        <span class="info-group-data info-group-row" *ngIf="user.phone !==null">{{ user.phone }}</span>
+        <span class="info-group-data info-group-row" *ngIf="user.phone ===null">not specified</span>
       </div>
     </div>
 

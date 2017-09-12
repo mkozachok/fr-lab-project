@@ -12,11 +12,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class ProfilePageComponent implements OnInit {
   avatarSrc = '../../assets/images/avatars/myAvatar.png'
   user = {};
-  
-  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {      
-       //this.afAuth.auth.signInWithEmailAndPassword('steve.neeson21@gmail.com', 'qq29630')
-       this._userService.getUser().subscribe(res => /* this.user = */ console.log(res));
-      }
+
+  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
+    let that = this;
+    this._userService.getUser().subscribe(res => this.user = res);
+  }
 
   ngOnInit() {
 
