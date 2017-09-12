@@ -2,7 +2,10 @@
   <md-grid-tile colspan="2">
     <h2>Logging in</h2>
   </md-grid-tile>
-
+  <ul *ngFor="let design of designs">
+    <li>{{design.name}}</li>
+  </ul>
+  <p>{{designTwo.name}}</p>
   <form class="example-form">
     <md-grid-tile colspan="2">
       <p>
