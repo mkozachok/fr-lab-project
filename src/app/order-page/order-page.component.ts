@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../models/order-model';
 import { OrderService } from './order-page.service';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-page',
@@ -13,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
 export class OrderPageComponent implements OnInit {
 	orders: Order[];
 	orderHeaders: string[] = ['', 'Size', 'Quantity', 'Priсe', ''];
-	constructor(private orderService: OrderService) { }
+	constructor(private orderService: OrderService, private router: Router) { }
 
 
 	getOrders(): void {
@@ -38,4 +39,8 @@ export class OrderPageComponent implements OnInit {
 		let elToRemove = document.getElementById(order.id);
 		document.getElementsByClassName('items')[0].removeChild(elToRemove);
 	}
+
+	navigate() {
+    	this.router.navigate(['/order-page/make-order']);
+  	}
 }

@@ -51,6 +51,7 @@ import { UserService } from './services/user.service';
     [MdButtonModule, MdCheckboxModule],
     AppRoutingModule,
     ProfilePageModule,
+
     BrowserAnimationsModule,
     MdToolbarModule,
     MdIconModule,

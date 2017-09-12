@@ -1,3 +1,4 @@
+<router-outlet><router-outlet>
 <md-grid-list class="container" cols="5" rowHeight="fit">
   <md-grid-tile *ngFor="let header of orderHeaders">
     {{header}}
@@ -33,6 +34,6 @@
   </md-grid-tile>
 
   <md-grid-tile colspan="5" rowspan="1">
-    <button button md-raised-button class="checkout">CHECKOUT</button>  
+    <button button md-raised-button class="checkout" (click)="navigate()">CHECKOUT</button>  
   </md-grid-tile>
 </md-grid-list>
