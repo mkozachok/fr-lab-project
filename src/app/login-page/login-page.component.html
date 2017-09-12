@@ -2,11 +2,10 @@
   <md-grid-tile colspan="2">
     <h2>Logging in</h2>
   </md-grid-tile>
-  <ul *ngFor="let design of designs">
-    <li>{{design.name}}</li>
-  </ul>
-  <p>{{designTwo.name}}</p>
-  <form class="example-form">
+  <div> {{ (user | async)?.uid }} </div>
+  <button (click)="login()">Login</button>
+  <button (click)="logout()">Logout</button>
+  <!-- <form class="example-form">
     <md-grid-tile colspan="2">
       <p>
         <md-form-field class="example-full-width">
@@ -24,5 +23,6 @@
     <md-grid-tile colspan="2">
       <button md-raised-button>log in</button>
     </md-grid-tile>
-  </form>
+  </form> -->
+
 </md-grid-list>

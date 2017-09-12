@@ -21,4 +21,6 @@ export class AboutMeComponent implements OnInit {
       duration: 2000,
     });
   }
+
+
 }
