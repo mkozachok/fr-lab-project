@@ -6,6 +6,12 @@ import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
 import { FormsModule }   from '@angular/forms';
 
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
@@ -37,6 +43,8 @@ import { MdInputModule } from '@angular/material';
 import { UserService } from './services/user.service';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,17 +65,18 @@ import { UserService } from './services/user.service';
     MdGridListModule,
     MdSidenavModule,
     MdButtonModule,
-
     MdCardModule,
     MdInputModule,
-
     MdExpansionModule,
     MdTabsModule,
     BrowserAnimationsModule,
     MdCardModule,
     MdListModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
 
   ],
   providers: [UserService],
