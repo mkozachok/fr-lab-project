@@ -23,4 +23,20 @@ export class UserService {
     this.afAuth.authState.subscribe(response => console.log(response))
   }
 
+  getUser() {
+      return this.afAuth.auth.currentUser;
+  }
+
+
+  registerUser(email: string, password: string) {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
+      (success) => {this.afAuth.auth.currentUser.sendEmailVerification();}
+    )
+
+  }
+
+  verifyEmail() {
+
+  }
+
 }

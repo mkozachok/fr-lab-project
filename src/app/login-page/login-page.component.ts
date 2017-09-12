@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-
 
 @Component({
   selector: 'app-login-page',
