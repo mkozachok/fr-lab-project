@@ -10,7 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  avatarSrc = '../../assets/images/avatars/myAvatar.png'
+  //avatarSrc = '../../assets/images/avatars/myAvatar.png'
   user = {};
 
   constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
