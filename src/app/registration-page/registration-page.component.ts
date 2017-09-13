@@ -13,6 +13,7 @@ export class RegistrationPageComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(value: any) {
+    this.error = null;
     this.userService.registerUser(value.email, value.password)
       .catch(err => this.error = err);
 
