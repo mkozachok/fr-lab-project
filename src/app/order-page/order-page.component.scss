@@ -2,9 +2,8 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 
 * {
@@ -17,57 +16,97 @@ input::-webkit-inner-spin-button {
 }
 
 .header {
-	height: 100%;
-	width: 100%;
+	text-align: center;
 }
 
 .items {
 	width: 100%;
-	height: 100%;
-/*	overflow-y: auto;*/
+	height: calc(100% - 6%);
+	overflow-y: auto;
+	margin: 1%;
+	margin-top: 3%;
+
+	.item {
+		height: 40%;
+		display: flex;
+		padding: 0;
+		border: 1px solid #ddd;
+
+		div {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 17%;
+
+				img {
+					height: auto;
+					width: auto;
+					max-height: 100%;
+					max-width: 100%;
+				}
+
+				.delete {
+					width: 50%;
+				}
+		}
+
+		.img-container {
+			justify-content: flex-start;
+		}
+	}
+
+	.items-header {
+		height: 10%;
+		display: flex;
+		background-color: #ddd;
+
+		div {
+			width: 17%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	.product {
+		width: 20%;
+	}
 }
 
-.item {
-	height: 100%;
-	width: 100%;
-	border-top: 1px solid #ddd;
-}
 
-.item:first-child {
-	border-width: 2px;
-}
-
-.item-img img{
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-	padding: 3% 10%;
+button {
+	min-width: 1%;
 }
 
 .quantity {
-
 	input {
-		text-align: center;
+		height: calc(20% - 4px);
 		width: 20%;
-		height: 13%;
-		margin: 0 1.5%;
+		text-align: center;
 	}
 
 	.add, .subtract {
-		width: 15%;
 		height: 20%;
-		font-size: 120%;
-		background-color: $grey2;
-		color: #555;
 	}
-
 }
 
-.delete {
-	background-color: $grey2;
-	color: #555;
+.info {
+	padding: 1%;
+	height: 100%;
+	width: 100%;
+
+	div {
+		height: 50%;
+		text-align: right;
+		margin-right: 15%;
+
+		.checkout {
+			margin-right: 2%;
+		}
+	}
 }
 
-.checkout {
-	background-color: $grey2;
+.show-info {
+    height: 100%;
 }
