@@ -38,6 +38,7 @@ import { MdListModule } from '@angular/material';
 import { MdExpansionModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
 import { MdInputModule } from '@angular/material';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 // Services goes here
 import { UserService } from './services/user.service';
@@ -78,7 +79,9 @@ import { UserService } from './services/user.service';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpModule,
+    AngularDraggableModule
 
   ],
   providers: [UserService],
