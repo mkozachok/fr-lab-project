@@ -14,9 +14,7 @@ export class RegistrationPageComponent implements OnInit {
   }
   onSubmit(value: any) {
     this.userService.registerUser(value.email, value.password);
-  
-  }
-  onCheck() {
 
   }
+
 }

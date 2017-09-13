@@ -15,10 +15,10 @@ import { UserService } from '../services/user.service';
     }
 
     onSubmit(value: any) {
-        this.userService.onLogginigIn(value.email, value.password);
+        this.userService.logIn(value.email, value.password);
     }
 
     logOut() {
-      this.userService.onLogOut();
+      this.userService.logOut();
     }
   }

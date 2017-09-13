@@ -14,11 +14,11 @@ export class UserService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
-  onLogginigIn(email: string, password: string) {
+  logIn(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email,password);
     this.afAuth.authState.subscribe(response => console.log(response))
   }
-  onLogOut() {
+  logOut() {
     this.afAuth.auth.signOut();
     this.afAuth.authState.subscribe(response => console.log(response))
   }
@@ -32,10 +32,6 @@ export class UserService {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
       (success) => {this.afAuth.auth.currentUser.sendEmailVerification();}
     )
-
-  }
-
-  verifyEmail() {
 
   }
 
