@@ -15,11 +15,9 @@ export class UserService {
 
   onLogginigIn(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email,password);
-    this.afAuth.authState.subscribe(response => console.log(response))
   }
   onLogOut() {
     this.afAuth.auth.signOut();
-    this.afAuth.authState.subscribe(response => console.log(response))
   }
 
   getUser() {
