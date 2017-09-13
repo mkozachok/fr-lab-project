@@ -28,6 +28,6 @@
     </span>
     <a routerLink="/order-page" class="basket">
       <md-icon class="mdl-badge">{{ basketIcon }}</md-icon>
-      <span class="data-badge">{{ ordersAmount }}</span></a>
+      <span *ngIf = "ordersAmount !== 0" class="data-badge">{{ ordersAmount }}</span></a>
   </div>
 </md-toolbar>
