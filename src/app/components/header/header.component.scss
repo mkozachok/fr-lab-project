@@ -11,6 +11,8 @@
 
     a {
         text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.7em;
         color: #555; 
 
         &:hover {
@@ -20,12 +22,30 @@
 
     .login {
         margin-right: 5em;
+        font-weight: bold;
+    }
+
+    .user-cabinet {
+        font-weight: bold;
+    }
+
+    .header-icon {
+        transform: translateY(6px);
+        margin-right: 5px;
+        margin-left: 20px;
+    }
+
+    .log-button {
+        @extend a;
+        cursor: pointer;
+        font-weight: bold;
     }
 
     .basket {
         position: relative;
         right: 20px;
         top: 5px;
+        padding-left: 5em;
     }
 
     .data-badge{

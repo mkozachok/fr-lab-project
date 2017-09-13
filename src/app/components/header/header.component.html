@@ -1,9 +1,33 @@
 <md-toolbar color="primary" class="header">
   <a routerLink="/"><img [src]="logoSrc" alt="Logo"></a>
   <span class="spacer"></span>
-  <div><a routerLink="/" class="login">Please login</a>
+  <div>
+    <span *ngIf="user===null">
+    <a routerLink="/registration-page" class="login">
+      <md-icon class="header-icon">
+        border_color
+      </md-icon>
+      register
+    </a>
+    <a routerLink="/login-page" class="login">
+      <md-icon class="header-icon">
+          exit_to_app        
+      </md-icon>
+      sign up
+    </a>
+  </span>
+    <span *ngIf="user">
+      <span>You entered as</span>
+    <a routerLink="/profile-page" class="user-cabinet">{{ user.displayName }}</a>
+    <span class="log-button" (click)="logOut()">
+    <md-icon class="header-icon">
+        border_color
+    </md-icon>
+    <span>Log Out</span>
+    </span>
+    </span>
     <a routerLink="/order-page" class="basket">
       <md-icon class="mdl-badge">{{ basketIcon }}</md-icon>
-      <span class="data-badge">{{ ordersAmount }}</span></a>
+      <span *ngIf = "ordersAmount !== 0" class="data-badge">{{ ordersAmount }}</span></a>
   </div>
 </md-toolbar>

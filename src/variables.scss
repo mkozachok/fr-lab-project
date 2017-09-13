@@ -4,9 +4,13 @@ $grey: rgba(0, 0, 0, 0.48);
 $black: #222;
 $grey2: #dddddd;
 
+/////////////////////////////////////////////////////////////
+// profile color configuration
 $profileSideMenu: $black;
 $profileAboutUserData : $orange;
 $profileUserFullName: $grey;
 $profileSideMenuButtons: lighten($black, 20%);
+$profileTitleDevider: $grey2;
+$profileUserData: darken($grey2, 20%);
 
 $orderPageButtons: $grey2;

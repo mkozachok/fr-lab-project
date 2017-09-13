@@ -10,7 +10,6 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-  user: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
@@ -24,7 +23,7 @@ export class UserService {
   }
 
   getUser() {
-      return this.afAuth.auth.currentUser;
+     return this.afAuth.authState;
   }
 
 
