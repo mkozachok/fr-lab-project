@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfilePageService } from './profile-page.service'
+import { UserService } from '.././services/user.service';
+import { User } from '../models/user-model';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Component({
   selector: 'app-profile-page',
@@ -7,12 +10,17 @@ import { ProfilePageService } from './profile-page.service'
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
+  avatarSrc = '../../assets/images/avatars/myAvatar.png'
   user = {};
-  constructor(private _profilePageService: ProfilePageService) { }
+
+  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
+    let that = this;
+    this._userService.getUser().subscribe(res => this.user = res);
+  }
 
   ngOnInit() {
-    this.user = this._profilePageService.getUser();
-    
+
   }
+
 
 }

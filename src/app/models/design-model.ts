@@ -1,6 +1,6 @@
 export class Design {
-  id: number;
-  name: string;
-  category: string;
-  svg: string;
+  public id: number;
+  public name: string;
+  public category: string;
+  public svg: string;
 }

@@ -53,9 +53,11 @@
 
 
     .side-menu {
+        position: fixed;
         justify-content: center;
-        background: $profileSideMenu;
-        width: 20%;
+        //background: $profileSideMenu;
+        width: 20vw;
+        height: 100%;
 
         .avatar-wrapper {
             position: relative;
@@ -74,7 +76,7 @@
             width: 95%;
             background-color: $profileUserFullName;
             line-height: 1.5em;
-            font-size: 2em;
+            font-size: 2vw;
             color: white;
             padding-left: 5%;
             text-shadow: 0 0 10px $profileUserFullName;
@@ -89,9 +91,10 @@
 
         .side-menu-button {
             display: block;
-            width: 100%;
-            height: 7%;
-            font-size: 1.2em;
+            width: 20vw;
+            height: 5vw;
+            font-size: 1.5vw;
+            line-height: 1.5vw;
             text-align: left;
             
         }
@@ -100,6 +103,7 @@
 
     .content {
         flex: 1;
+        padding-left: 20%;
     }
 
 

@@ -7,6 +7,7 @@ import { RegistrationPageComponent } from './registration-page/registration-page
 import { LoginPageComponent } from './login-page/login-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+import { MakeOrderComponent } from './order-page/make-order/make-order.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
     {
         path: 'order-page',
         component: OrderPageComponent
+    },
+    {
+        path: 'order-page/make-order',
+        component: MakeOrderComponent
     }
 ];
 
@@ -45,4 +50,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [HomepageComponent, ProfilePageComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent, RedactorPageComponent];
+export const routingComponents = [HomepageComponent, ProfilePageComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent, RedactorPageComponent, MakeOrderComponent];
