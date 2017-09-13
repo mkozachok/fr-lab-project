@@ -7,13 +7,14 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-
+  error: any;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
   onSubmit(value: any) {
-    this.userService.registerUser(value.email, value.password);
+    this.userService.registerUser(value.email, value.password)
+      .catch(err => this.error = err);
 
   }
 
