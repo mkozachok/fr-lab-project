@@ -14,8 +14,9 @@ export class ProfilePageComponent implements OnInit {
   user = {};
 
   constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
-    let that = this;
-    this._userService.getUser().subscribe(res => this.user = res);
+    this._userService.getUser().subscribe(res => this.user = res); 
+    
+    this.afAuth.authState.subscribe(res => console.log(res))
   }
 
   ngOnInit() {
