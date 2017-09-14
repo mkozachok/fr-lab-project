@@ -37,6 +37,7 @@ export class OrderService {
 
 	removeItem(item): void {
 		let index = this.getItemIndex(item);
+		quantity -= ORDERS[index].quantity;
 		ORDERS.splice(index, 1);
 	}
 
