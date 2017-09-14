@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Order } from '../models/order-model';
-import { ORDERS } from './orders';
+import { Product } from '../models/product-model';
 
 let quantity = 0;
 let amount = 0;
+let ORDERS = [];
 
 @Injectable()
 export class OrderService {
@@ -17,14 +18,13 @@ export class OrderService {
 	}
 
 	getQuantity(): number {
-		quantity = ORDERS.length;
 		return quantity;
 	}
 
 	getTotalAmount(): number {
 		amount = 0;
 		ORDERS.forEach(el => {
-			amount += el.quantity * el.price;
+			amount += el.quantity * el.product.price;
 		});
 		return amount;
 	}
@@ -43,12 +43,32 @@ export class OrderService {
 	incrementItemQuantity(item) {
 		let index = this.getItemIndex(item);
 		ORDERS[index].quantity++;
+		quantity++;
 	}
 
 	decrementItemQuantity(item) {
 		let index = this.getItemIndex(item);
 		if (ORDERS[index].quantity > 1) {
 			ORDERS[index].quantity--;
+			quantity--;
+		}
+	}
+
+	addItem(item: Product): void {
+		let productId = item.id;
+		let exists = false;
+		ORDERS.forEach(el => {
+			if (el.product.id == productId) {
+				el.quantity++;
+				quantity++;
+				exists = true;
+			}
+		});
+		if (!exists) {
+			let productId = ORDERS.length;
+			let newItem = new Order(productId, item, 1);
+			ORDERS.push(newItem);
+			quantity++;
 		}
 	}
 }

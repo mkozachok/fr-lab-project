@@ -13,93 +13,87 @@ input::-webkit-inner-spin-button {
 .container {
 	height: 100%;
 	box-sizing: border-box;
+	width: 100%;
+	padding: 0 2%;
+	display: flex;
+	flex-direction: column;
 }
 
 .header {
 	text-align: center;
+	padding-bottom: 2%;
 }
 
-.items {
-	width: 100%;
-	height: calc(100% - 6%);
-	overflow-y: auto;
-	margin: 1%;
-	margin-top: 3%;
+.item-headers {
+	display: flex;
+	padding: 2% 0;
+	background: #7b0041;
+	color: white;
+	font-size: 1.1em;
 
-	.item {
-		height: 40%;
+	div {
+		width: 16%;
+		height: 100%;
 		display: flex;
-		padding: 0;
-		border: 1px solid #ddd;
+		align-items: center;
+		justify-content: center;
+	}
+}
 
-		div {
-			height: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 17%;
+.product {
+	width: 20% !important;
+}
 
-				img {
-					height: auto;
-					width: auto;
-					max-height: 100%;
-					max-width: 100%;
-				}
+.item {
+	display: flex;
+	border: 1px solid #eee;
+	border-top: none;
 
-				.delete {
-					width: 50%;
-				}
-		}
-
-		.img-container {
-			justify-content: flex-start;
-		}
+	div {
+		width: 16%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.items-header {
-		height: 10%;
-		display: flex;
-		background-color: #ddd;
+	.img-container {
+		justify-content: flex-start;
 
-		div {
-			width: 17%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+		img {
+			max-height: 80%;
+			max-width: 80%;
 		}
 	}
+}
 
-	.product {
+.quantity {
+	input {
+		height: 20%;
 		width: 20%;
+		text-align: center;
+		border: 1px solid #BEBEBE;
+	}
+
+	.add, .subtract {
+		height: 20%;
+
+		.mat-button-wrapper {
+			line-height: 0 !important;
+		}
 	}
 }
-
 
 button {
 	min-width: 1%;
 }
 
-.quantity {
-	input {
-		height: calc(20% - 4px);
-		width: 20%;
-		text-align: center;
-	}
-
-	.add, .subtract {
-		height: 20%;
-	}
-}
-
 .info {
-	padding: 1%;
-	height: 100%;
-	width: 100%;
+	padding-top: 1%;
 
 	div {
-		height: 50%;
 		text-align: right;
 		margin-right: 15%;
+		margin-bottom: 1%;
 
 		.checkout {
 			margin-right: 2%;
@@ -107,6 +101,7 @@ button {
 	}
 }
 
-.show-info {
-    height: 100%;
+.empty-cart {
+	margin-top: 10%;
+	text-align: center;
 }

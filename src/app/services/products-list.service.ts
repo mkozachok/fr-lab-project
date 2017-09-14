@@ -35,4 +35,9 @@ export class ProductsListService {
 		console.log(arr);
 		return arr;
 	}
+
+	getItem(item):Product {
+		let index = PRODUCTS.indexOf(item);
+		return PRODUCTS[index];
+	}
 }
