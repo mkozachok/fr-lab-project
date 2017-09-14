@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -12,7 +11,8 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) { }
 
   logIn(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email,password);
+    return this.afAuth.auth.signInWithEmailAndPassword(email,password)
+    .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -33,8 +33,9 @@ export class UserService {
   }
 
 
-  registerUser(email: string, password: string) {
+  registerUser(email: string, password: string/*, address: string, phone: string*/) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((success) => console.log(this.afAuth.auth.currentUser))
     .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
 
   }

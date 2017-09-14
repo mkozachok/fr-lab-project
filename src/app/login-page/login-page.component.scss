@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,4 +13,8 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+input[mdInput] {
+  color: #7B0041 !important;
 }
