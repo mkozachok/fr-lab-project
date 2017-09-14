@@ -1,26 +1,15 @@
-<div id="container" color="primary">
-  <md-grid-list id="mainGrid" cols="6" class="blue" rowHeight="fit">
-    <md-grid-tile colspan="2">
-      <div id="tools">
-        <div class="product_bl bl_1">
-          <md-tab-group>
-            <md-tab label="Product Type">
-
-              <md-grid-list class="product_list" cols="3" rowHeight="fit">
-                <md-grid-tile
-                    *ngFor="let type of product_types">
-                      <img [src]="type.url" (click)="selectProduct(type)" width="100"/>
-                </md-grid-tile>
-              </md-grid-list>
-
-
-            </md-tab>
-            <md-tab label="Category">Category</md-tab>
-          </md-tab-group>
-        </div>
+<div id="container">
+  <div id="tools">
+    <md-tab-group>
+      <md-tab label="Product Type">
+          <div class="products">
+            <div class="products_img" *ngFor="let type of product_types">
+              <img [src]="type.url" (click)="selectProduct(type)" width="100"/>
+            </div>
+          </div>
 
         <div class="product_bl bl_2">
-          <div class="type">Color</div>
+          <div class="head">Color</div>
           <ul class="selected_color">
             <li *ngFor="let product of getColors()" (click)="setColor(product)">
               <span [style.background] = "product.color">
@@ -28,17 +17,29 @@
             </li>
           </ul>
         </div>
+      </md-tab>
 
-        <div class="product_bl bl_4">
-          <div class="type" >Load Image</div>
+      <md-tab label="Category">
+          <div class="gategory_images">
+            <div class="category_img"*ngFor="let image of category">
+                  <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
+            </div>
+          </div>
+        <div class="load">
+          <div class="head" >Load Image</div>
         </div>
-     </div>
-    </md-grid-tile>
+      </md-tab>
+    </md-tab-group>
+  </div>
 
-
-
-  <md-grid-tile colspan="4">
-  <img [src]="selectedProductImage" alt=""/>
-  </md-grid-tile>
-</md-grid-list>
+  <div id="canvas">
+    <div class="redactor_area">
+      <img id="img_product" [src]="selectedProductImage.src" alt=""/>
+      <img id="img_overall" ngDraggable (started)="onDragBegin($event)" (stopped)="onDragEnd($event)"
+       [src]="selectedCategory.src" alt=""/>
+    </div>
+  </div>
 </div>
+
+<button md-raised-button (click)="test()">Save and Buy</button>
+  <img id="result" [src]="resultImg" alt=""/>

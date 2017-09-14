@@ -61,9 +61,16 @@
 
         .avatar-wrapper {
             position: relative;
+            width: 100%;
+            background: url('../../assets/images/avatars/defaultAvatar.png') no-repeat center center;
+            background-size: cover; 
+            padding: 0 0 calc(200/200*100%);
         }
 
         img {
+            top: 0;
+            left: 0;
+            position: absolute;
             display: block;
             width: 100%;
             height: auto;
@@ -87,6 +94,9 @@
             color: $profileSideMenuButtons;
             display: block;
             text-decoration: none;
+            //background: red;
+            height: 100%;
+            padding: 1.5vw 1vw;
         }
 
         .side-menu-button {
@@ -96,7 +106,7 @@
             font-size: 1.5vw;
             line-height: 1.5vw;
             text-align: left;
-            
+            padding: 0;     
         }
 
     }
