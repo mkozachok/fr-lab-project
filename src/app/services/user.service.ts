@@ -10,22 +10,26 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private router: Router
+  ) { }
 
-  logIn(email: string, password: string):firebase.Promise<any> {
+  logIn(email: string, password: string): firebase.Promise<any> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
-  logOut():void {
+  logOut(): void {
     this.router.navigate(['/login-page'])
       .then(() => this.afAuth.auth.signOut());
   }
 
-  getUser():Observable<any> {
+  getUser(): Observable<any> {
     return this.afAuth.authState;
   }
 
-  updateUser(name, photoURL, /*email  password */):void {
-     this.afAuth.auth.currentUser.updateProfile({
+  updateUser(name, photoURL, /*email  password */): void {
+    this.afAuth.auth.currentUser.updateProfile({
       displayName: name,
       photoURL: photoURL
     })
@@ -34,14 +38,9 @@ export class UserService {
   }
 
 
-  registerUser(email: string, password: string):firebase.Promise<any> {
+  registerUser(email: string, password: string): firebase.Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
       (success) => { this.afAuth.auth.currentUser.sendEmailVerification(); }
     )
   }
-
-  authInfo():Observable<any> {
-    return this.afAuth.authState;
-  }
-
 }

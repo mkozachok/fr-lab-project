@@ -13,12 +13,8 @@ const profilePageRoutes: Routes = [
     {
         path: 'profile-page',
         component: ProfilePageComponent,
+        canActivateChild: [AuthGuard],
         children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'about-me'
-            },
             {
                 path: 'my-gallery',
                 component: MyGalleryComponent
@@ -32,6 +28,10 @@ const profilePageRoutes: Routes = [
                 component: AboutMeComponent
             }
         ]
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 
 ];

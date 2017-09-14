@@ -17,8 +17,9 @@ const routes: Routes = [
     },
     {
         path: 'profile-page',
-        component: ProfilePageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        redirectTo: 'profile-page/about-me'
+        
     },
     {
         path: 'redactor-page',

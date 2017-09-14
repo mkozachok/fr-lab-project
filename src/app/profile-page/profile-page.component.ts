@@ -13,10 +13,11 @@ export class ProfilePageComponent implements OnInit {
   //avatarSrc = '../../assets/images/avatars/myAvatar.png'
   user = {};
 
-  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
-    this._userService.getUser().subscribe(res => this.user = res); 
-    
-    this.afAuth.authState.subscribe(res => console.log(res))
+  constructor(
+    private _userService: UserService,
+    private afAuth: AngularFireAuth
+  ) {
+    this._userService.getUser().subscribe(res => this.user = res);
   }
 
   ngOnInit() {
