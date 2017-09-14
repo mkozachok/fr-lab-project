@@ -17,6 +17,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
+// App guards goes here
+import { AuthGuard } from './guards/auth.guard';
+
 // App components goes here
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
@@ -88,7 +91,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
     HttpModule,
     AngularDraggableModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry],
+  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard],
   bootstrap: [
     AppComponent
   ]
