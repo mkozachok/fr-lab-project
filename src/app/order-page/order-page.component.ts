@@ -15,6 +15,7 @@ export class OrderPageComponent implements OnInit {
 	orders: Order[];
 	totalAmount: number;
 	totalQuantity: number;
+	basketIcon = "shopping_cart";
 
 	constructor(private orderService: OrderService, private router: Router) { }
 

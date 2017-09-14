@@ -28,7 +28,7 @@ import { FooterComponent } from './components/footer/footer.component'
 import { MdCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MdIconModule, MdIconRegistry } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
@@ -88,7 +88,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
     HttpModule,
     AngularDraggableModule
   ],
-  providers: [UserService, ProductsListService],
+  providers: [UserService, ProductsListService, MdIconRegistry],
   bootstrap: [
     AppComponent
   ]
