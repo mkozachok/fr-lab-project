@@ -42,11 +42,19 @@
       </p>
     </div>
     <md-form-field>
-      <input required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
+      <input  required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
     </md-form-field>
     <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)">
       <p [hidden]="!phoneRef.errors.required">
         Please enter your phone
+      </p>
+    </div>
+    <md-form-field>
+      <input required #photoURLRef="ngModel" minlength="2" mdInput placeholder="photo URL" name="photoURL" ngModel/>
+    </md-form-field>
+    <div *ngIf="photoURLRef.errors && (photoURLRef.dirty || photoURLRef.touched)">
+      <p [hidden]="!photoURLRef.errors.required">
+        Please enter your photo URL
       </p>
     </div>
     <button [disabled]="!userForm.form.valid" md-raised-button type="submit">registrate</button>

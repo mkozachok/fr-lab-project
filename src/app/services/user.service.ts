@@ -8,11 +8,14 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) { }
+  users: FirebaseListObservable<any>;
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+    this.users = db.list('/users');
+  }
 
   logIn(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email,password)
-    .then((success) => console.log(this.afAuth.auth.currentUser));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -24,7 +27,7 @@ export class UserService {
   }
 
   updateUser(name, photoURL, /*email  password */) {
-     this.afAuth.auth.currentUser.updateProfile({
+    this.afAuth.auth.currentUser.updateProfile({
       displayName: name,
       photoURL: photoURL
     })
@@ -33,10 +36,24 @@ export class UserService {
   }
 
 
-  registerUser(email: string, password: string/*, address: string, phone: string*/) {
+  registerUser(email: string, password: string, name: string, surname: string, photoURL: string, address: string, phone: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then((success) => console.log(this.afAuth.auth.currentUser))
-    .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
+      .then((success) => this.afAuth.auth.currentUser.updateProfile({
+        displayName: `${name} ${surname}`,
+        photoURL: photoURL
+      }))
+      .then((success) => console.log(this.afAuth.auth.currentUser))
+      .then((success) => this.users.set(
+        this.afAuth.auth.currentUser.uid,
+        {
+          orders: [""],
+          gallery: [""],
+          additionalInfo: {
+            phone: phone,
+            address: address
+          }
+        }))
+      .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
 
   }
 

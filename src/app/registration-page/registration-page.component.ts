@@ -15,7 +15,7 @@ export class RegistrationPageComponent implements OnInit {
   }
   onSubmit(value: any) {
     this.error = null;
-    this._userService.registerUser(value.email, value.password)
+    this._userService.registerUser(value.email, value.password, value.name, value.surname, value.photoURL, value.phone, value.address)
       .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
 

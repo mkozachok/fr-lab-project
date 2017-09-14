@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
   onSubmit(value: any) {
     this.error = null;
     this._userService.logIn(value.email, value.password)
-      // .then((success) => this.router.navigate(['']))
+      .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
 
