@@ -31,25 +31,28 @@
   </md-tab>
   <md-tab label="Edit user info">
     <div class="edit-wrapper">
-      <form>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <md-form-field>
-          <input mdInput placeholder="First Name" [value]="user.firstName">
+          <input type="text" placeholder="First Name" mdInput  formControlName="firstName">
         </md-form-field>
         <md-form-field>
-          <input mdInput placeholder="Last Name" [value]="user.lastName">
+          <input type="text" placeholder="Last Name" mdInput  formControlName="lastName">
         </md-form-field>
+<!--         <md-form-field>
+          <input type="text" placeholder="email" mdInput  formControlName="email">
+        </md-form-field> -->
         <md-form-field>
-          <input mdInput placeholder="Email" [value]="user.email" #message>
+          <input type="text" placeholder="Photo URL" mdInput  formControlName="photoUrl">
         </md-form-field>
-        <md-form-field>
-          <input type="password" mdInput placeholder="Password" [value]="user.password">
-        </md-form-field>
-      </form>
-      <div>
-        <button md-raised-button color="warn" class="edit-photo-button">Change photo</button>
-        <button md-raised-button (click)="openSnackBar()" color="primary" class="edit-save-button">
+<!--         <md-form-field>
+          <input type="password" placeholder="Password" mdInput  formControlName="password">
+        </md-form-field> -->
+        <button type="submit" md-raised-button (click)="openSnackBar()" color="primary" class="edit-save-button">
           Save changes
       </button>
+      </form>
+      <div>
+        
       </div>
     </div>
   </md-tab>
