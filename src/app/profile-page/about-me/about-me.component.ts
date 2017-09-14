@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MdSnackBar } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
   styleUrls: ['./about-me.component.scss']
 })
-export class AboutMeComponent implements OnInit {
+export class AboutMeComponent implements OnInit, OnDestroy  {
   userForm: FormGroup;
   user = {
     firstName: '',
@@ -17,22 +18,16 @@ export class AboutMeComponent implements OnInit {
     email: '',
     photoUrl: ''
   };
-
+  subscribeToGetUser;
   constructor(private _userService: UserService, public snackBar: MdSnackBar, private afAuth: AngularFireAuth, private _formBuilder: FormBuilder) {
     let that = this;
     let test;
-    this._userService.getUser().subscribe(res => {
+    this.subscribeToGetUser = this._userService.getUser().subscribe(res => {
       this.user.firstName = res.displayName.split(' ')[0];
       this.user.lastName = res.displayName.split(' ')[1];
       this.user.email = res.email;
       this.user.photoUrl = res.photoURL;
-    });  
-    setTimeout(()=>{
-      test = that.afAuth.auth.currentUser.providerData[0];
-      //test.orders = ['Cup', 'Sirt'];
-     console.log(test)
-    },1000)
-    
+    });
   }
 
   ngOnInit() {
@@ -42,6 +37,10 @@ export class AboutMeComponent implements OnInit {
       email: ['Enter new email'],
       photoUrl: ['Put here URL to new photo']
     })
+  }
+
+  ngOnDestroy(){
+    this.subscribeToGetUser.unsubscribe();
   }
 
   onSubmit(){
