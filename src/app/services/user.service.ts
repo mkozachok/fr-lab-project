@@ -15,7 +15,6 @@ export class UserService {
 
   logIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email,password);
-    // this.afAuth.authState.subscribe(response => console.log(response))
   }
   logOut() {
     this.afAuth.auth.signOut();
@@ -28,9 +27,8 @@ export class UserService {
 
 
   registerUser(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
-      (success) => {this.afAuth.auth.currentUser.sendEmailVerification();}
-    )
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
 
   }
 

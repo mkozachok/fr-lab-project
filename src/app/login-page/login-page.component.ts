@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase/app';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -11,9 +9,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 
 export class LoginPageComponent implements OnInit {
-  user: Observable<firebase.User>;
   error: any;
-  constructor(private _userService: UserService, private afAuth: AngularFireAuth) {
+  constructor(private _userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -22,6 +19,7 @@ export class LoginPageComponent implements OnInit {
   onSubmit(value: any) {
     this.error = null;
     this._userService.logIn(value.email, value.password)
+      .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
 
