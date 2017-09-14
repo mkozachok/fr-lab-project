@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
 import { FormsModule }   from '@angular/forms';
 
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+
 // firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -42,6 +44,8 @@ import { AngularDraggableModule } from 'angular2-draggable';
 
 // Services goes here
 import { UserService } from './services/user.service';
+import { ProductsListService } from './services/products-list.service';
+import { PosterComponent } from './homepage/poster/poster.component';
 
 
 
@@ -53,7 +57,8 @@ import { UserService } from './services/user.service';
     RedactorPageComponent,
     routingComponents,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PosterComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,6 @@ import { UserService } from './services/user.service';
     [MdButtonModule, MdCheckboxModule],
     AppRoutingModule,
     ProfilePageModule,
-
     BrowserAnimationsModule,
     MdToolbarModule,
     MdIconModule,
@@ -80,11 +84,11 @@ import { UserService } from './services/user.service';
     AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    Ng2FilterPipeModule,
     HttpModule,
     AngularDraggableModule
-
   ],
-  providers: [UserService],
+  providers: [UserService, ProductsListService],
   bootstrap: [
     AppComponent
   ]
