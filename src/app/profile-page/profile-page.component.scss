@@ -1,0 +1,110 @@
+@import "../../variables.scss";
+
+/* .profile-page {
+    display: flex;
+    height: 100%;
+
+
+    .side-menu {
+        justify-content: center;
+        padding: 2%; 
+        background: $profileSideMenu;
+        width: 20%;
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            height: auto;
+        }
+
+    }
+
+    .content {
+        flex: 1;
+    }
+
+    .side-menu-button {
+        display: block;
+        width: 100%;
+        min-width: 60px;
+        margin-top: 5%;
+
+        &:hover {
+            a{
+                color: orange;
+            }
+            
+        }
+    }
+
+    a {
+        color: white;
+        display: block;
+        text-decoration: none;
+        width: 100%;
+        white-space: pre-wrap;
+    }
+} */
+
+ .profile-page {
+    display: flex;
+    height: 100%;
+
+
+    .side-menu {
+        position: fixed;
+        justify-content: center;
+        //background: $profileSideMenu;
+        width: 20vw;
+        height: 100%;
+
+        .avatar-wrapper {
+            position: relative;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .user-fullname {
+            position: absolute;
+            bottom: 0;
+            height: 15%;
+            width: 95%;
+            background-color: $profileUserFullName;
+            line-height: 1.5em;
+            font-size: 2vw;
+            color: white;
+            padding-left: 5%;
+            text-shadow: 0 0 10px $profileUserFullName;
+
+        }
+
+        a {
+            color: $profileSideMenuButtons;
+            display: block;
+            text-decoration: none;
+        }
+
+        .side-menu-button {
+            display: block;
+            width: 20vw;
+            height: 5vw;
+            font-size: 1.5vw;
+            line-height: 1.5vw;
+            text-align: left;
+            
+        }
+
+    }
+
+    .content {
+        flex: 1;
+        padding-left: 20%;
+    }
+
+
+}

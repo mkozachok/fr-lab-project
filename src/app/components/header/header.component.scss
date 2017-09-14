@@ -1,0 +1,66 @@
+.header {
+    background: rgba(250, 250, 250, 0.8);
+    color: #555;
+    padding: 0 2em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+
+  .spacer {
+        flex: 1 1 auto;
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.7em;
+        color: #555; 
+
+        &:hover {
+            color: #7b0041;
+        }
+    }
+
+    .login {
+        margin-right: 5em;
+        font-weight: bold;
+    }
+
+    .user-cabinet {
+        font-weight: bold;
+    }
+
+    .header-icon {
+        transform: translateY(6px);
+        margin-right: 5px;
+        margin-left: 20px;
+    }
+
+    .log-button {
+        @extend a;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .basket {
+        position: relative;
+        right: 20px;
+        top: 5px;
+        padding-left: 5em;
+    }
+
+    .data-badge{
+        position: absolute;
+        background-color: orange;
+        border-radius: 50%;
+        font-size: .8em;
+        text-align: center;
+        line-height: 1.3em;
+        width: 1.3em;
+        height: 1.3em;
+        top: -1em;
+        right: -0.8em;
+    }
+}

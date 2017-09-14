@@ -1,13 +1,28 @@
-<section>
-  <h1>Log in</h1>
-  <label>
-    Email address
-    <input type="text" name="login" value="">
-  </label>
-  <label>
-    Password
-    <input type="password" name="password" value="">
-  </label>
-  <input type="button" name="log-in" value="Log in">
-  <input type="button" name="log-in-with-facebook" value="Log in with facebook">
-</section>
+<div class="container">
+  <h2>Logging in</h2>
+  <form #userForm="ngForm" pattern="/\S+@\S+\.\S+/" (ngSubmit)="onSubmit(userForm.value)" novalidate >
+      <md-form-field>
+        <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
+      </md-form-field>
+      <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+        <p [hidden]="!emailRef.errors.required">
+          Please enter email
+        </p>
+        <p [hidden]="!emailRef.errors.pattern">
+          Please enter email
+        </p>
+      </div>
+
+      <!-- <p *ngIf="error.message">{{error.message}}</p> -->
+      <md-form-field>
+        <input required #passwordRef="ngModel" minlength="6" type="password" mdInput placeholder="password" name="password" ngModel/>
+      </md-form-field>
+      <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+        <p [hidden]="!passwordRef.errors.required">
+          Please enter password
+        </p>
+      </div>
+    <button [disabled]="!userForm.form.valid" md-raised-button type="submit">log in</button>
+    <p *ngIf="this.error">{{this.error.message}}</p>
+  </form>
+</div>

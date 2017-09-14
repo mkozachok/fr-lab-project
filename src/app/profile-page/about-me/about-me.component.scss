@@ -1,0 +1,71 @@
+@import "../../../variables.scss";
+
+/deep/ .mat-tab-label{
+	min-width: 50% !important;
+}
+
+.edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw;
+}
+
+.info-detail-wrapper { 
+    padding: 3vw;
+
+    .title {
+        border-bottom: 2px solid $profileTitleDevider;
+    }
+
+    .greeting {
+        padding: 2vw 0;
+    }
+
+    .info-group {
+        display: flex;
+        padding: 1vw 0;
+
+        
+        .info-group-row {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .info-group-label{
+            width: 2vw;
+            font-weight: bold;
+        }
+
+        .info-group-data{
+            padding-left: 12vw;
+            color: $profileUserData;        
+        }
+        
+    }
+
+}
+
+.edit-wrapper {
+    form {
+        width: 40vw;
+    }
+
+    md-form-field{
+        display: block;
+        margin: 5% auto;
+        width: 100%;       
+    }
+
+    .edit-photo-button {
+        text-align: center;
+        width: 10vw;
+        height: 2vw;
+        font-size: 1.2vw;
+        line-height: 1.2vw;
+    }
+
+    .edit-save-button{
+        @extend  .edit-photo-button;
+    }
+}

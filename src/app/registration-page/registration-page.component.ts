@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-
-  constructor() { }
+  error: any;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+  }
+  onSubmit(value: any) {
+    this.error = null;
+    this.userService.registerUser(value.email, value.password)
+      .catch(err => this.error = err);
+
   }
 
 }

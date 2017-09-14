@@ -1,0 +1,16 @@
+$blue: rgba(45, 45, 184, 0.88) !default;
+$orange: rgba(230, 67, 18, 0.67) !default;
+$grey: rgba(0, 0, 0, 0.48);
+$black: #222;
+$grey2: #dddddd;
+
+/////////////////////////////////////////////////////////////
+// profile color configuration
+$profileSideMenu: $black;
+$profileAboutUserData : $orange;
+$profileUserFullName: $grey;
+$profileSideMenuButtons: lighten($black, 20%);
+$profileTitleDevider: $grey2;
+$profileUserData: darken($grey2, 20%);
+
+$orderPageButtons: $grey2;

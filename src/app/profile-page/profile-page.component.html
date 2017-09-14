@@ -1,5 +1,21 @@
-<h4> <a routerLink="my-gallery">gallery</a>
-    <a routerLink="my-orders">orders</a>
-    <a routerLink="my-settings">settings</a>
-</h4>
-<router-outlet></router-outlet>
+<div class="profile-page">
+    <div class="side-menu">
+        <div class="avatar-wrapper">
+            <img [src]="avatarSrc" alt="avatar">
+            <h4 class="user-fullname">{{ user.displayName }}</h4>
+        </div>
+
+        <button md-button class="side-menu-button" color="warn">
+            <a routerLink="about-me">About me</a>
+        </button>
+        <button md-button class="side-menu-button" color="warn">
+            <a routerLink="my-orders">My orders</a>
+        </button>
+        <button md-button class="side-menu-button" color="warn">
+            <a routerLink="my-gallery">My gallery</a>
+        </button>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

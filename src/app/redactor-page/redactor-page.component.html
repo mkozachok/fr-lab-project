@@ -1,3 +1,45 @@
-<p>
-  redactor-page works!
-</p>
+<div id="container">
+  <div id="tools">
+    <md-tab-group>
+      <md-tab label="Product Type">
+          <div class="products">
+            <div class="products_img" *ngFor="let type of product_types">
+              <img [src]="type.url" (click)="selectProduct(type)" width="100"/>
+            </div>
+          </div>
+
+        <div class="product_bl bl_2">
+          <div class="head">Color</div>
+          <ul class="selected_color">
+            <li *ngFor="let product of getColors()" (click)="setColor(product)">
+              <span [style.background] = "product.color">
+              </span>
+            </li>
+          </ul>
+        </div>
+      </md-tab>
+
+      <md-tab label="Category">
+          <div class="gategory_images">
+            <div class="category_img"*ngFor="let image of category">
+                  <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
+            </div>
+          </div>
+        <div class="load">
+          <div class="head" >Load Image</div>
+        </div>
+      </md-tab>
+    </md-tab-group>
+  </div>
+
+  <div id="canvas">
+    <div class="redactor_area">
+      <img id="img_product" [src]="selectedProductImage.src" alt=""/>
+      <img id="img_overall" ngDraggable (started)="onDragBegin($event)" (stopped)="onDragEnd($event)"
+       [src]="selectedCategory.src" alt=""/>
+    </div>
+  </div>
+</div>
+
+<button md-raised-button (click)="test()">Save and Buy</button>
+  <img id="result" [src]="resultImg" alt=""/>
