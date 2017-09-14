@@ -3,7 +3,8 @@ import { UserService } from '../../services/user.service';
 import { MdSnackBar } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-
+import * as firebase from 'firebase/app';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-about-me',
@@ -34,8 +35,9 @@ export class AboutMeComponent implements OnInit, OnDestroy  {
      this.userForm = this._formBuilder.group({
       firstName: ['Enter new first name'],
       lastName: ['Enter new last name'],
-      email: ['Enter new email'],
-      photoUrl: ['Put here URL to new photo']
+      //email: ['Enter new email'],
+      photoUrl: ['Put here URL to new photo'],
+      //password: []
     })
   }
 
@@ -47,7 +49,8 @@ export class AboutMeComponent implements OnInit, OnDestroy  {
     let name = `${this.userForm.value.firstName} ${this.userForm.value.lastName}`;
     let photo = this.userForm.value.photoUrl;
     let email = this.userForm.value.email;
-    this._userService.updateUser(name, photo, email);
+    //let password = this.userForm.value.password;
+    this._userService.updateUser(name, photo, /*email  password */);
   }
 
   openSnackBar(message: string, action: string) {

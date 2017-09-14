@@ -12,30 +12,30 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) { }
 
   logIn(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email,password);
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   logOut() {
-    this.router.navigate(['/'])
-      .then(()=>this.afAuth.auth.signOut());
-    
+    this.router.navigate(['/login-page'])
+      .then(() => this.afAuth.auth.signOut());
   }
 
   getUser() {
-     return this.afAuth.authState;
+    return this.afAuth.authState;
   }
 
-  updateUser(name, photoURL, email){
-    this.afAuth.auth.currentUser.updateProfile({
+  updateUser(name, photoURL, /*email  password */) {
+     this.afAuth.auth.currentUser.updateProfile({
       displayName: name,
       photoURL: photoURL
     })
-    this.afAuth.auth.currentUser.updateEmail(email);
+    //this.afAuth.auth.currentUser.updateEmail(email);
+    //this.afAuth.auth.currentUser.updatePassword(password);
   }
 
 
   registerUser(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
-      (success) => {this.afAuth.auth.currentUser.sendEmailVerification();}
+      (success) => { this.afAuth.auth.currentUser.sendEmailVerification(); }
     )
 
   }
