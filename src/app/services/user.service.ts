@@ -38,16 +38,9 @@ export class UserService {
   }
 
 
-<<<<<<< HEAD
-  registerUser(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
-
-=======
   registerUser(email: string, password: string): firebase.Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
       (success) => { this.afAuth.auth.currentUser.sendEmailVerification(); }
     )
->>>>>>> profile-page-component
   }
 }

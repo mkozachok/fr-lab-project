@@ -1,61 +1,12 @@
 @import "../../variables.scss";
 
-/* .profile-page {
+.profile-page {
     display: flex;
     height: 100%;
-
-
-    .side-menu {
-        justify-content: center;
-        padding: 2%; 
-        background: $profileSideMenu;
-        width: 20%;
-
-        img {
-            display: block;
-            margin: 0 auto;
-            width: 80%;
-            height: auto;
-        }
-
-    }
-
-    .content {
-        flex: 1;
-    }
-
-    .side-menu-button {
-        display: block;
-        width: 100%;
-        min-width: 60px;
-        margin-top: 5%;
-
-        &:hover {
-            a{
-                color: orange;
-            }
-            
-        }
-    }
-
-    a {
-        color: white;
-        display: block;
-        text-decoration: none;
-        width: 100%;
-        white-space: pre-wrap;
-    }
-} */
-
- .profile-page {
-    display: flex;
-    height: 100%;
-
 
     .side-menu {
         position: fixed;
         justify-content: center;
-        //background: $profileSideMenu;
         width: 20vw;
         height: 100%;
 
@@ -94,7 +45,6 @@
             color: $profileSideMenuButtons;
             display: block;
             text-decoration: none;
-            //background: red;
             height: 100%;
             padding: 1.5vw 1vw;
         }
@@ -106,9 +56,17 @@
             font-size: 1.5vw;
             line-height: 1.5vw;
             text-align: left;
-            padding: 0;     
-        }
+            padding: 0;
+            transition: ease all .2s;
 
+            &:hover {
+                background-color: $profileSideMenuButtonsHoverBg;
+
+                a {
+                    color: $profileSideMenuButtonsHover;
+                }
+            }      
+        }
     }
 
     .content {
