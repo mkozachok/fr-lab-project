@@ -1,0 +1,18 @@
+.poster {
+    background: url(../../../assets/images/poster.png) no-repeat center center;
+    background-size: cover;
+    padding: 150px 10px;
+    text-align: center;
+    box-sizing: border-box;
+
+    button {
+        margin: 0 auto;
+        padding: 20px 30px;
+        font-size: 20px;
+        color: #eee;
+        background: #7b0041;
+        transition: ease all .2s;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 400;
+    }
+}

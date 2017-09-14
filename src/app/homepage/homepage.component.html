@@ -1,22 +1,29 @@
+<app-poster></app-poster>
 <div class="homepage">
   <div class="leftcol">
+    <form class="searching-form">
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="template searching" [(ngModel)]="userFilter.category" class="search" name="userFilter"> 
+      </md-form-field>
+    </form>
     <md-list class="objectTypeFilter">
       <h2 md-subheader>Sorting by type</h2>
-      <div *ngFor = "let procuctType of procuctsType">
-        <md-list-item (click) = "selectProducts('type', procuctType.type)">
+      <div *ngFor = "let procuctType of procuctsType" (click) = "sorting('type', procuctType.type, selectedItems, products)">
+        <md-list-item>
           {{procuctType.type}}
         </md-list-item>
       </div>
       <h2 md-subheader>Sorting by category</h2>
-      <div *ngFor = "let productCategory of productsCategory">
-        <md-list-item (click) = "selectProducts('category', productCategory.category)">
+      <div *ngFor = "let productCategory of productsCategory" (click) = "sorting('category', productCategory.category, selectedItems, products)">
+        <md-list-item>
           {{productCategory.category}}
         </md-list-item>
       </div>
     </md-list>
   </div>
+ 
   <div class = "rightcol wrapper">
-    <div class="oneObjet" *ngFor = "let product of selectedItems">
+    <div class="oneObjet" *ngFor = "let product of selectedItems | filterBy: userFilter">
       <div>
          <img src="{{ product.svg }}" alt="">
       </div>

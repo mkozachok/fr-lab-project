@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Product } from '../models/product-model'
-import { ProductsListService } from './products-list.service';
+import { ProductsListService } from '../services/products-list.service';
 import { PRODUCT_TYPE_FILTER, PRODUCT_CATEGORY_FILTER } from './filter';
+import { PosterComponent } from './poster/poster.component';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 @Component({
   moduleId: module.id,
@@ -12,20 +14,13 @@ import { PRODUCT_TYPE_FILTER, PRODUCT_CATEGORY_FILTER } from './filter';
 })
 
 export class HomepageComponent implements OnInit {
+  @Input()
+  @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
   procuctsType: any[] =  PRODUCT_TYPE_FILTER;
   products: Product[];
   selectedItems: Product[];
-  selectProducts(prop, propValue) {
-    this.selectedItems = this.products.filter(function(obj) {
-      if(prop === 'category')
-        return obj.category === propValue;
-      else 
-        return obj.type === propValue;
-    });
-    console.log(this.selectedItems);
-    return this.selectedItems;
-  };
+  userFilter: any = {name: '', type: '', category: ''};
   constructor(private productListService: ProductsListService) { };
 
   getAll():void {
@@ -35,5 +30,13 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit():void {
     this.getAll();
-  };
+   };
+
+  sorting(prop, propValue, arr, originalArr: Product[]) {
+    this.selectedItems = this.productListService.selectProducts(prop, propValue, arr, originalArr);
+  }
+  
+  search(field, arr, originalArr:Product[]) {
+    this.selectedItems = this.productListService.searchProduct(field, arr, originalArr);
+  }
 }
