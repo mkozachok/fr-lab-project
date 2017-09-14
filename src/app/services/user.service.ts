@@ -12,7 +12,7 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) { }
 
   logIn(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.auth.signInWithEmailAndPassword(email,password);
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -34,9 +34,8 @@ export class UserService {
 
 
   registerUser(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
-      (success) => { this.afAuth.auth.currentUser.sendEmailVerification(); }
-    )
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
 
   }
 

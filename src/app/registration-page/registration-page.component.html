@@ -44,8 +44,8 @@
     <md-form-field>
       <input required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
     </md-form-field>
-    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
-      <p [hidden]="!addressRef.errors.required">
+    <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)">
+      <p [hidden]="!phoneRef.errors.required">
         Please enter your phone
       </p>
     </div>
