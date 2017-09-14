@@ -40,6 +40,7 @@ import { MdListModule } from '@angular/material';
 import { MdExpansionModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
 import { MdInputModule } from '@angular/material';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 // Services goes here
 import { UserService } from './services/user.service';
@@ -61,6 +62,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     [MdButtonModule, MdCheckboxModule],
     AppRoutingModule,
     ProfilePageModule,
@@ -82,8 +84,9 @@ import { PosterComponent } from './homepage/poster/poster.component';
     AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    Ng2FilterPipeModule
-
+    Ng2FilterPipeModule,
+    HttpModule,
+    AngularDraggableModule
   ],
   providers: [UserService, ProductsListService],
   bootstrap: [

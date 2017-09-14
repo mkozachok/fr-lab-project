@@ -1,46 +1,55 @@
-
-    <h2>Registration</h2>
-
-
-  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" class="example-form">
-
-      <p>
-
-          <input mdInput placeholder="email" name="email" ngModel/>
-
+<div class="container">
+  <h2>Registration</h2>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <md-form-field>
+      <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
+    </md-form-field>
+    <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+      <p [hidden]="!emailRef.errors.required">
+        Please enter email
       </p>
-
-      <p>
-
-          <input mdInput placeholder="password" name="password" ngModel/>
-
+    </div>
+    <md-form-field>
+      <input required #passwordRef="ngModel" minlength="6" type="password" mdInput placeholder="password" name="password" novalidate ngModel/>
+    </md-form-field>
+    <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+      <p [hidden]="!passwordRef.errors.required">
+        Please enter password
       </p>
-
-      <p>
-
-          <input mdInput placeholder="repeat password" />
-
+    </div>
+    <md-form-field>
+      <input required #nameRef="ngModel" mdInput minlength="2" placeholder="name" name="name" ngModel/>
+    </md-form-field>
+    <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)">
+      <p [hidden]="!nameRef.errors.required">
+        Please enter your name
       </p>
-
-      <p>
-
-          <input mdInput placeholder="first name" />
-
+    </div>
+    <md-form-field>
+      <input required #surnameRef="ngModel" minlength="2" mdInput placeholder="surname" name="surname" ngModel/>
+    </md-form-field>
+    <div *ngIf="surnameRef.errors && (surnameRef.dirty || surnameRef.touched)">
+      <p [hidden]="!surnameRef.errors.required">
+        Please enter your surname
       </p>
-
-      <p>
-
-          <input mdInput placeholder="second name" />
-
+    </div>
+    <md-form-field>
+      <input required #addressRef="ngModel" minlength="2" mdInput placeholder="address" name="address" ngModel/>
+    </md-form-field>
+    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
+      <p [hidden]="!addressRef.errors.required">
+        Please enter your address
       </p>
-
-      <p>
-
-          <input mdInput placeholder="address" />
-
+    </div>
+    <md-form-field>
+      <input required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
+    </md-form-field>
+    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
+      <p [hidden]="!addressRef.errors.required">
+        Please enter your phone
       </p>
-
-      <button md-raised-button type="submit" >registrate</button>
-
+    </div>
+    <button [disabled]="!userForm.form.valid" md-raised-button type="submit">registrate</button>
+    <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
-  <button md-raised-button (click)="onCheck()" type="submit" >verfiy</button>
+</div>

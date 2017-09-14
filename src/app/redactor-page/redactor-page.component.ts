@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import mergeImages from 'merge-images';
+import $  from "jquery";
 
 
 @Component({
@@ -14,10 +15,14 @@ import { Component } from '@angular/core';
 export class RedactorPageComponent{
  	title = 'redactor';
   type = "tshirtm";
-  selectedProductImage = "";
+  selectedProductImage = {};
+  selectedCategory = {};
+
+  name = "";
+  resultImg = "";
   selectProduct = function(product){
     this.type = product.type;
-    this.selectedProductImage = product.url;
+    this.selectedProductImage.src = product.url;
   }
   getColors = function(){
     let type = this.type;
@@ -27,44 +32,62 @@ export class RedactorPageComponent{
     return typeArr;
   }
   setColor = function(product){
-    this.selectedProductImage = product.url;
+    this.selectedProductImage.src = product.url;
   }
+  selectCategory = function(category){
+    this.selectedCategory.src = category.url;
+    this.categoryName = category.name;
+  }
+  test = function(event){
+    mergeImages([this.selectedProductImage,
+     this.selectedCategory,])
+      .then(b64 => this.resultImg = b64);
+  }
+  onDragBegin = function($event){
+    //TODO
+  }
+  onDragEnd = function(element){
+    let coords = $(element).position();
+    this.selectedCategory.x =  coords.left;
+    this.selectedCategory.y = coords.top;
+  }
+
    product_types = [
       {
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/1?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm.png"
       },
       {
         type:"tankm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/916/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/tankm.png"
       },
       {
         type: "sleevem",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/875/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/sleevem.png"
       },
       {
         type: "cap",
-        url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/129/views/1/appearances/1?width=350&height=350&mediaType=webp"
+        url: "assets/images/products/cap.png"
       },
       {
         type: "mug",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/31/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/mug.png"
       },
       {
         type: "body",
-        url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/401/views/1/appearances/1?width=350&height=350&mediaType=webp"
+        url: "assets/images/products/body.png"
       },
       {
         type: "tshirtw",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/813/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/tshirtw.png"
       },
       {
         type: "tankw",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/917/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/tankw.png"
       },
       {
         type: "sleevew",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/876/views/1/appearances/1?width=400&height=400&mediaType=webp"
+        url: "assets/images/products/sleevew.png"
       }
   ];
 
@@ -72,52 +95,79 @@ private  products = [
       {
         color: "#ffffff",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/1?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm.png"
       },
       {
         color: "#fff500",
         type: "tshirtm",
-        url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/210/views/1/appearances/7?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_yellow.png"
       },
       {
         color: "#000000",
         type: "tshirtm",
-        url: "https://image.spreadshirtmedia.com/image-server/v1/productTypes/812/views/1/appearances/2?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_black.png"
       },
       {
         color: "#2244aa",
         type: "tshirtm",
-        url: "http://image.spreadshirtmedia.com/image-server/v1/productTypes/812/views/1/appearances/317?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_darkblue.png"
       },
       {
         color: "#b91816",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/366?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_red.png"
       },
       {
         color: "#cccccc",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/231?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_grey.png"
       },
       {
         color: "#664b2f",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/387?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_brown.png"
       },
       {
         color: "#008a47",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/812/views/1/appearances/92?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_green.png"
       },
       {
         color: "#0ac7df",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/706?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_blue.png"
       },
       {
         color: "#fb4e81",
         type: "tshirtm",
-        url: "https://www.spreadshirt.com/image-server/v1/productTypes/210/views/1/appearances/591?width=450&height=450&mediaType=webp"
+        url: "assets/images/products/tshirtm_pink.png"
       }
-  ]
+  ];
+
+  category = [
+    {
+      name:'animal1',
+      url: 'assets/images/categories/animal1.png'
+    },
+    {
+      name:'animal2',
+      url: 'assets/images/categories/animal2.png'
+    },
+    {
+      name:'animal3',
+      url: 'assets/images/categories/animal3.png'
+    },
+    {
+      name:'animal4',
+      url: 'assets/images/categories/animal4.png'
+    },
+    {
+      name:'animal5',
+      url: 'assets/images/categories/animal5.png'
+    },
+    {
+      name:'animal6',
+      url: 'assets/images/categories/animal6.png'
+    }
+  ];
 }
