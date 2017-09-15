@@ -10,8 +10,6 @@ import { ProductsListService } from '../../services/products-list.service';
 })
 export class AdminPageComponent implements OnInit {
   productForm: FormGroup;
-  message: string = '1';
-  action: string = '1';
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -31,11 +29,15 @@ export class AdminPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._productService.setProduct(this.productForm.value);
+    this._productService.setProduct(this.productForm.value).then(resolve=>{
+      this.openSnackBar('The produc has been saved', 'success');
+    }).catch(error=>{
+      this.openSnackBar(error.name,'error');
+    });
   }
 
   openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message = this.message, action= this.action, {
+    this.snackBar.open(message, action, {
       duration: 2000,
     });
   }

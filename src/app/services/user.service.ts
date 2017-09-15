@@ -28,7 +28,7 @@ export class UserService {
   }
 
   updateUser(name, photoURL, /*email  password */) {
-    this.afAuth.auth.currentUser.updateProfile({
+    return this.afAuth.auth.currentUser.updateProfile({
       displayName: name,
       photoURL: photoURL
     })
