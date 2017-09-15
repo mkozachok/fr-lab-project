@@ -37,8 +37,8 @@ export class HomepageComponent implements OnInit {
     this.selectedItems = this.productListService.selectProducts(prop, propValue, arr, originalArr);
   }
   
-  search(field, arr, originalArr:Product[]) {
-    this.selectedItems = this.productListService.searchProduct(field, arr, originalArr);
+  search(arr:Product[], originalArr:Product[], searchTerm) {
+    this.selectedItems = this.productListService.search(arr, originalArr, searchTerm);
   }
 
   addToCart(item) {

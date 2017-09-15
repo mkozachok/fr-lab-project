@@ -22,16 +22,11 @@ export class ProductsListService {
 		return arr;
 	};
 
-	searchProduct(field, arr, originalArr):Product[] {
-		let val = field.value
-		console.log(val);
-		let pattern = /^val/i;
-		console.log(pattern)
-		arr = originalArr.filter(function(obj) {
-				if(obj.type.search(pattern) !== -1) {
-					return obj;
-			}
-		})
+	search(arr, originalArr, searchTerm): Product[] {
+		let term = searchTerm;
+		arr = originalArr.filter(function(tag) {
+			return tag.name.indexOf(term) >= 0 ||  tag.category.indexOf(term) >= 0 || tag.type.indexOf(term) >= 0
+		}); 
 		console.log(arr);
 		return arr;
 	}
@@ -39,5 +34,10 @@ export class ProductsListService {
 	getItem(item):Product {
 		let index = PRODUCTS.indexOf(item);
 		return PRODUCTS[index];
+	};
+
+	getUserTemplates (currentUser, templates:any[]) {
+		templates = currentUser.gallery;
+		return templates;
 	}
 }
