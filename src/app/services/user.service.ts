@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../../environments/environment';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class UserService {
   users: FirebaseListObservable<any>;
+  url = "../../assets/images/avatars/defaultAvatar.png"
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-    this.users = db.list('/users');
+    this.users = db.list('/users');   
   }
 
   logIn(email: string, password: string) {

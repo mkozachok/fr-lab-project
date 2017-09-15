@@ -4,7 +4,7 @@ import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
@@ -49,7 +49,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { PosterComponent } from './homepage/poster/poster.component';
-
+import { ProductService } from './services/product.service';
 
 
 
@@ -89,9 +89,10 @@ import { PosterComponent } from './homepage/poster/poster.component';
     AngularFireAuthModule,
     Ng2FilterPipeModule,
     HttpModule,
-    AngularDraggableModule
+    AngularDraggableModule,
+    ReactiveFormsModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard],
+  providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
   bootstrap: [
     AppComponent
   ]

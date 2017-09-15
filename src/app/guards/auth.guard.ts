@@ -13,6 +13,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     constructor(
         private router: Router,
         private userService: UserService
+        
     ) { }
 
     canActivate(): Observable<boolean> {
