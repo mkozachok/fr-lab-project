@@ -3,10 +3,21 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product-model';
 import { PRODUCTS } from '../homepage/products';
 import { DOCUMENT } from '@angular/platform-browser';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 
 @Injectable()
 export class ProductsListService {
+	products: FirebaseListObservable<any>;
+	product: Product
 	@Input() selectedItems;
+
+	
+	constructor(
+	  private db: AngularFireDatabase,
+	) {
+	  this.products = db.list('/products');
+	}
 
 	getAll(): Promise<Product[]> {
 		return Promise.resolve(PRODUCTS);
@@ -40,4 +51,8 @@ export class ProductsListService {
 		templates = currentUser.gallery;
 		return templates;
 	}
+
+	setProduct(product: Product): firebase.Promise<void> {
+		return this.products.push(product);
+	  }
 }

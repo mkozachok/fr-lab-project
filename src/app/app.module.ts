@@ -48,7 +48,6 @@ import { AngularDraggableModule } from 'angular2-draggable';
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { PosterComponent } from './homepage/poster/poster.component';
-import { ProductService } from './services/product.service';
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination'; 
@@ -94,7 +93,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
+  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard],
   bootstrap: [
     AppComponent
   ]

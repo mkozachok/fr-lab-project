@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
-import { ProductService } from '../../services/product.service';
+import { ProductsListService } from '../../services/products-list.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -10,11 +10,13 @@ import { ProductService } from '../../services/product.service';
 })
 export class AdminPageComponent implements OnInit {
   productForm: FormGroup;
+  message: string = '1';
+  action: string = '1';
 
   constructor(
     private _formBuilder: FormBuilder,
     public snackBar: MdSnackBar,
-    private _productService: ProductService
+    private _productService: ProductsListService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message = "Changes are saved", action = "success", {
+    this.snackBar.open(message = this.message, action= this.action, {
       duration: 2000,
     });
   }
