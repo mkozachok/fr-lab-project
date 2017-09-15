@@ -34,5 +34,10 @@ export class ProductsListService {
 	getItem(item):Product {
 		let index = PRODUCTS.indexOf(item);
 		return PRODUCTS[index];
+	};
+
+	getUserTemplates (currentUser, templates:any[]) {
+		templates = currentUser.gallery;
+		return templates;
 	}
 }
