@@ -17,6 +17,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
+// App guards goes here
+import { AuthGuard } from './guards/auth.guard';
+
 // App components goes here
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
@@ -28,7 +31,7 @@ import { FooterComponent } from './components/footer/footer.component'
 import { MdCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MdIconModule, MdIconRegistry } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
@@ -89,7 +92,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AngularDraggableModule,
     NgxPaginationModule
   ],
-  providers: [UserService, ProductsListService],
+  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard],
   bootstrap: [
     AppComponent
   ]

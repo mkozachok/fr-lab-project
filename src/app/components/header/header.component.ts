@@ -16,9 +16,9 @@ export class HeaderComponent implements OnInit {
   constructor(private _userService: UserService, private orderService: OrderService) {
     this._userService.getUser().subscribe(res => this.user = res);
     this.ordersAmount = this.orderService.getQuantity();
-   }
+  }
 
-   ngAfterContentChecked() {
+  ngAfterContentChecked() {
     this.ordersAmount = this.orderService.getQuantity();
   }
 
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  logOut(){
+  logOut() {
     this._userService.logOut();
   }
 }

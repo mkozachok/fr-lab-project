@@ -4,13 +4,14 @@ import { ProductsListService } from '../services/products-list.service';
 import { PRODUCT_TYPE_FILTER, PRODUCT_CATEGORY_FILTER } from './filter';
 import { PosterComponent } from './poster/poster.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+import { OrderService } from '../order-page/order-page.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
-  providers: [ProductsListService]
+  providers: [ProductsListService, OrderService]
 })
 
 export class HomepageComponent implements OnInit {
@@ -21,7 +22,7 @@ export class HomepageComponent implements OnInit {
   products: Product[];
   selectedItems: Product[];
   userFilter: any = {name: '', type: '', category: ''};
-  constructor(private productListService: ProductsListService) { };
+  constructor(private productListService: ProductsListService, private orderService: OrderService) { };
 
   getAll():void {
     this.productListService.getAll().then(products => this.products = products);
@@ -38,5 +39,10 @@ export class HomepageComponent implements OnInit {
   
   search(arr:Product[], originalArr:Product[], searchTerm) {
     this.selectedItems = this.productListService.search(arr, originalArr, searchTerm);
+  }
+
+  addToCart(item) {
+    this.productListService.getItem(item);
+    this.orderService.addItem(item);
   }
 }

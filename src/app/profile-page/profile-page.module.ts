@@ -7,7 +7,7 @@ import { MdInputModule } from '@angular/material';
 import { MdTabsModule } from '@angular/material';
 import { MdSnackBarModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +15,14 @@ import { MdGridListModule } from '@angular/material';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ProfilePageRoutingModule,
     MdButtonModule,
     MdInputModule,
     MdTabsModule,
     MdSnackBarModule,
-    MdGridListModule
+    MdGridListModule,
+    
   ]
 })
 export class ProfilePageModule { }

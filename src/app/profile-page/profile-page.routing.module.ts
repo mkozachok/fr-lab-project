@@ -7,12 +7,13 @@ import { ProfilePageComponent } from './profile-page.component';
 import { MyGalleryComponent } from './my-gallery/my-gallery.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AboutMeComponent } from './about-me/about-me.component';
-
+import { AuthGuard } from '../guards/auth.guard';
 
 const profilePageRoutes: Routes = [
     {
         path: 'profile-page',
         component: ProfilePageComponent,
+        canActivateChild: [AuthGuard],
         children: [
             {
                 path: 'my-gallery',
@@ -27,6 +28,10 @@ const profilePageRoutes: Routes = [
                 component: AboutMeComponent
             }
         ]
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 
 ];

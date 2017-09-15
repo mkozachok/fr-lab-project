@@ -8,7 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
-
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -17,7 +17,9 @@ const routes: Routes = [
     },
     {
         path: 'profile-page',
-        component: ProfilePageComponent,
+        canActivate: [AuthGuard],
+        redirectTo: 'profile-page/about-me'
+        
     },
     {
         path: 'redactor-page',
@@ -49,5 +51,5 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class AppRoutingModule{}
+export class AppRoutingModule { }
 export const routingComponents = [HomepageComponent, ProfilePageComponent, RegistrationPageComponent, OrderPageComponent, LoginPageComponent, RedactorPageComponent, MakeOrderComponent];
