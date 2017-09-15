@@ -32,7 +32,6 @@ import { MdIconModule } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
-
 import { MdCardModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
 
@@ -47,7 +46,8 @@ import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { PosterComponent } from './homepage/poster/poster.component';
 
-
+//pagination
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -86,7 +86,8 @@ import { PosterComponent } from './homepage/poster/poster.component';
     AngularFireAuthModule,
     Ng2FilterPipeModule,
     HttpModule,
-    AngularDraggableModule
+    AngularDraggableModule,
+    NgxPaginationModule
   ],
   providers: [UserService, ProductsListService],
   bootstrap: [
