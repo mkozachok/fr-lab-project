@@ -19,6 +19,7 @@ import { ProfilePageModule } from './profile-page/profile-page.module';
 
 // App guards goes here
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 // App components goes here
 import { HomepageComponent } from './homepage/homepage.component';
@@ -93,7 +94,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard],
+  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard, AdminGuard],
   bootstrap: [
     AppComponent
   ]

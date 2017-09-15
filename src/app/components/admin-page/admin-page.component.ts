@@ -29,10 +29,10 @@ export class AdminPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._productService.setProduct(this.productForm.value).then(resolve=>{
+    this._productService.setProduct(this.productForm.value).then(resolve => {
       this.openSnackBar('The produc has been saved', 'success');
-    }).catch(error=>{
-      this.openSnackBar(error.name,'error');
+    }).catch(error => {
+      this.openSnackBar(error.name, 'error');
     });
   }
 

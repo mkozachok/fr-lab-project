@@ -27,6 +27,14 @@ export class UserService {
     return this.afAuth.authState;
   }
 
+  getUserId(){
+    return this.afAuth.auth.currentUser.uid;
+  }
+
+  isUserLogIn(){
+    return this.afAuth.auth.currentUser;
+  }
+
   updateUser(name, photoURL, /*email  password */) {
     return this.afAuth.auth.currentUser.updateProfile({
       displayName: name,

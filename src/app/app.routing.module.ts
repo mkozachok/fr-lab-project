@@ -10,6 +10,7 @@ import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
     {
@@ -45,7 +46,8 @@ const routes: Routes = [
     },
     {
         path: 'admin-page',
-        component: AdminPageComponent
+        component: AdminPageComponent,
+        canActivate: [AdminGuard]
     }
 ];
 
