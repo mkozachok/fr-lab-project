@@ -48,14 +48,10 @@ import { AngularDraggableModule } from 'angular2-draggable';
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { PosterComponent } from './homepage/poster/poster.component';
-<<<<<<< HEAD
 import { ProductService } from './services/product.service';
-
-=======
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination'; 
->>>>>>> 49dc86880aec831c18162d1865ce2cda1349c01b
 
 
 @NgModule({
@@ -95,11 +91,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     Ng2FilterPipeModule,
     HttpModule,
     AngularDraggableModule,
-<<<<<<< HEAD
-    ReactiveFormsModule
-=======
+    ReactiveFormsModule,
     NgxPaginationModule
->>>>>>> 49dc86880aec831c18162d1865ce2cda1349c01b
   ],
   providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
   bootstrap: [
