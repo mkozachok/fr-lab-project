@@ -98,4 +98,5 @@ export class UserService {
   // private saveProfilePicture(upload: Upload) {
   // this.users.set(this.afAuth.auth.currentUser.uid, {});
 // }
+
 }
