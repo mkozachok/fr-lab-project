@@ -10,4 +10,4 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
-import 'hammerjs';
+

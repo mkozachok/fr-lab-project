@@ -1,0 +1,28 @@
+<div class="add-product-wrapper">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <md-form-field>
+        <input type="text" placeholder="id" mdInput formControlName="id">
+      </md-form-field>
+      <md-form-field>
+        <input type="text" placeholder="category" mdInput formControlName="category">
+      </md-form-field>
+      <md-form-field>
+        <input type="text" placeholder="name" mdInput formControlName="name">
+      </md-form-field>
+      <md-form-field>
+        <input type="text" placeholder="price" mdInput formControlName="price">
+      </md-form-field>
+      <md-form-field>
+        <input type="text" placeholder="svg" mdInput formControlName="svg">
+      </md-form-field>
+      <md-form-field>
+        <input type="text" placeholder="type" mdInput formControlName="type">
+      </md-form-field>
+      <button type="submit" md-raised-button color="primary" class="edit-save-button">
+            Add product
+        </button>
+    </form>
+    <div>
+
+    </div>
+  </div>
