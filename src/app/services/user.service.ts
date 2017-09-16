@@ -58,4 +58,12 @@ export class UserService {
 
   }
 
+  getUserId() {
+    return this.afAuth.auth.currentUser.uid;
+  }
+
+  getCurrentUser() {
+    return this.afAuth.auth.currentUser;
+  }
+
 }
