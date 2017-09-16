@@ -25,13 +25,18 @@ import { AdminGuard } from './guards/admin.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
+
+
 import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
 import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
 
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
+
 // Materials modules goes here
-import { MdCheckboxModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
 import { MdIconModule, MdIconRegistry } from '@angular/material';
@@ -56,6 +61,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,38 +72,29 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FooterComponent,
     PosterComponent,
     AddDesignComponent,
-    AddProductComponent
+    AddProductComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    [MdButtonModule, MdCheckboxModule],
     AppRoutingModule,
     ProfilePageModule,
     BrowserAnimationsModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdGridListModule,
-    MdSidenavModule,
-    MdButtonModule,
-    MdCardModule,
-    MdInputModule,
-    MdExpansionModule,
-    MdTabsModule,
     BrowserAnimationsModule,
-    MdCardModule,
-    MdListModule,
     HttpModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     Ng2FilterPipeModule,
     HttpModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MaterialModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry, DesignService, AuthGuard, AdminGuard],
+  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
+  entryComponents: [ DialogComponent ],
   bootstrap: [
     AppComponent
   ]
