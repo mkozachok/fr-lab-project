@@ -16,18 +16,19 @@ import { fabric } from 'fabric';
 export class RedactorPageComponent{
  	title = 'redactor';
   type = "tshirtm";
-  selectedProductImage = {};
+  selectedTemplateImage = {};
   selectedCategory = {};
   name = "";
   resultImg = "";
-  selectProduct = function(product){
-    this.type = product.type;
-    this.selectedProductImage.src = product.url;
-    this.drawProduct();
+
+  selectTemplate = function(template){
+    this.type = template.type;
+    this.selectedTemplateImage.src = template.url;
+    this.drawTemplate();
 
   }
-  drawProduct = function(){
-    let canvas = this.getProductCanvas();
+  drawTemplate = function(){
+    let canvas = this.getTemplateCanvas();
     canvas.clear();
     let img = new Image();
 
@@ -41,24 +42,25 @@ export class RedactorPageComponent{
       });
       canvas.add(image);
     }
-    img.src = self.selectedProductImage.src;
+    img.src = self.selectedTemplateImage.src;
   }
-  getProductCanvas = function(){
-    if(!this.productCanvas){
-      this.productCanvas = new fabric.Canvas('img_product');
+  getTemplateCanvas = function(){
+    if(!this.templateCanvas){
+      this.templateCanvas = new fabric.Canvas('img_product');
     }
-    return this.productCanvas;
+    return this.templateCanvas;
   }
   getColors = function(){
     let type = this.type;
-    var typeArr = this.products.filter(function(item){
-      return type.length==0?true:item.type == type;
+    var templates = this.templates.filter(function(template){
+
+      return template.type == type;
     })
-    return typeArr;
+    return templates[0].goods;
   }
-  setColor = function(product){
-    this.selectedProductImage.src = product.url;
-    this.drawProduct();
+  setColor = function(goods){
+    this.selectedTemplateImage.src = goods.url;
+    this.drawTemplate();
   }
   selectCategory = function(category){
     this.selectedCategory.src = category.url;
@@ -78,7 +80,7 @@ export class RedactorPageComponent{
     img.src = self.selectedCategory.src;
   }
   merge = function(event){
-    mergeImages([this.getProductCanvas().toDataURL(),
+    mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 => this.resultImg = b64);
   }
@@ -124,97 +126,88 @@ removeImg = function(){
 	}
 	this.getCanvas().remove(object);
 }
-   product_types = [
+   templates = [
       {
         type: "tshirtm",
-        url: "assets/images/products/tshirtm.png"
+        url: "assets/images/templates/tshirtm.png",
+          goods:[
+          {
+            color: "#ffffff",
+            url: "assets/images/templates/tshirtm.png"
+          },
+          {
+            color: "#fff500",
+            url: "assets/images/templates/tshirtm_yellow.png"
+          },
+          {
+            color: "#000000",
+            url: "assets/images/templates/tshirtm_black.png"
+          },
+          {
+            color: "#2244aa",
+            type: "tshirtm",
+            url: "assets/images/templates/tshirtm_darkblue.png"
+          },
+          {
+            color: "#b91816",
+            url: "assets/images/templates/tshirtm_red.png"
+          },
+          {
+            color: "#cccccc",
+            url: "assets/images/templates/tshirtm_grey.png"
+          },
+          {
+            color: "#664b2f",
+            url: "assets/images/templates/tshirtm_brown.png"
+          },
+          {
+            color: "#008a47",
+            url: "assets/images/templates/tshirtm_green.png"
+          },
+          {
+            color: "#0ac7df",
+            url: "assets/images/templates/tshirtm_blue.png"
+          },
+          {
+            color: "#fb4e81",
+            url: "assets/images/templates/tshirtm_pink.png"
+          }
+        ]
       },
       {
         type:"tankm",
-        url: "assets/images/products/tankm.png"
+        url: "assets/images/templates/tankm.png"
       },
       {
         type: "sleevem",
-        url: "assets/images/products/sleevem.png"
+        url: "assets/images/templates/sleevem.png"
       },
       {
         type: "cap",
-        url: "assets/images/products/cap.png"
+        url: "assets/images/templates/cap.png"
       },
       {
         type: "mug",
-        url: "assets/images/products/mug.png"
+        url: "assets/images/templates/mug.png"
       },
       {
         type: "body",
-        url: "assets/images/products/body.png"
+        url: "assets/images/templates/body.png"
       },
       {
         type: "tshirtw",
-        url: "assets/images/products/tshirtw.png"
+        url: "assets/images/templates/tshirtw.png"
       },
       {
         type: "tankw",
-        url: "assets/images/products/tankw.png"
+        url: "assets/images/templates/tankw.png"
       },
       {
         type: "sleevew",
-        url: "assets/images/products/sleevew.png"
+        url: "assets/images/templates/sleevew.png"
       }
   ];
 
-private  products = [
-      {
-        color: "#ffffff",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm.png"
-      },
-      {
-        color: "#fff500",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_yellow.png"
-      },
-      {
-        color: "#000000",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_black.png"
-      },
-      {
-        color: "#2244aa",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_darkblue.png"
-      },
-      {
-        color: "#b91816",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_red.png"
-      },
-      {
-        color: "#cccccc",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_grey.png"
-      },
-      {
-        color: "#664b2f",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_brown.png"
-      },
-      {
-        color: "#008a47",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_green.png"
-      },
-      {
-        color: "#0ac7df",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_blue.png"
-      },
-      {
-        color: "#fb4e81",
-        type: "tshirtm",
-        url: "assets/images/products/tshirtm_pink.png"
-      }
-  ];
 
   category = [
     {

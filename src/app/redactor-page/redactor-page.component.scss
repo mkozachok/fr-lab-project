@@ -11,7 +11,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
-.products, .gategory_images{
+.templates, .gategory_images{
 	margin-top:20px;
 	flex-wrap: wrap;
 	display: flex;
@@ -22,7 +22,7 @@
 	font-size: 16px;
 
 }
-.products_img,.category_img{
+.template_img,.category_img{
 	width: 33%;
 }
 #canvas{

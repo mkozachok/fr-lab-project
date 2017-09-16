@@ -2,17 +2,17 @@
   <div id="tools">
     <md-tab-group>
       <md-tab label="Product Type">
-          <div class="products">
-            <div class="products_img" *ngFor="let type of product_types">
-              <img [src]="type.url" (click)="selectProduct(type)" width="80"/>
+          <div class="templates">
+            <div class="template_img" *ngFor="let template of templates">
+              <img [src]="template.url" (click)="selectTemplate(template)" width="80"/>
             </div>
           </div>
 
-        <div class="product_bl bl_2">
+        <div class="bl_2">
           <div class="head">Color <i class="material-icons">color_lens</i></div>
           <ul class="selected_color">
-            <li *ngFor="let product of getColors()" (click)="setColor(product)">
-              <span [style.background] = "product.color">
+            <li *ngFor="let goods of getColors()" (click)="setColor(goods)">
+              <span [style.background] = "goods.color">
               </span>
             </li>
           </ul>
