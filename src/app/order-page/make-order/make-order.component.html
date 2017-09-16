@@ -1,5 +1,5 @@
 <div class="container">
-	<form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value);">
+	<form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value)">
 		<md-form-field class="example-full-width">
     	<input #nameRef="ngModel" required mdInput placeholder="First name" name="firstName" minlength="3" ngModel>
   	</md-form-field>

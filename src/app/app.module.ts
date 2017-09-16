@@ -24,8 +24,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 // Materials modules goes here
 import { MdCheckboxModule } from '@angular/material';
@@ -37,6 +38,7 @@ import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
+import { MdDialogModule } from '@angular/material';
 
 
 import { MdExpansionModule } from '@angular/material';
@@ -62,7 +64,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    PosterComponent
+    PosterComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,8 +95,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpModule,
     AngularDraggableModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MdDialogModule
   ],
+  entryComponents: [ DialogComponent ],
   providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
   bootstrap: [
     AppComponent
