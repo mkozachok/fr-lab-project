@@ -27,6 +27,8 @@ import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component'
 import { FooterComponent } from './components/footer/footer.component'
+import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
+import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
 
 // Materials modules goes here
 import { MdCheckboxModule } from '@angular/material';
@@ -48,6 +50,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 // Services goes here
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
+import { DesignService } from './services/design.service';
 import { PosterComponent } from './homepage/poster/poster.component';
 
 //pagination
@@ -62,7 +65,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    PosterComponent
+    PosterComponent,
+    AddDesignComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +99,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [UserService, ProductsListService, MdIconRegistry, AuthGuard, AdminGuard],
+  providers: [UserService, ProductsListService, MdIconRegistry, DesignService, AuthGuard, AdminGuard],
   bootstrap: [
     AppComponent
   ]

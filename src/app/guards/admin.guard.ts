@@ -11,7 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AdminGuard implements CanActivate {
   adminsArr = [
-    '6uLaXQMblATpeeq3Ol2BZh4klA82'
+    "6uLaXQMblATpeeq3Ol2BZh4klA82"
   ];
 
   constructor(
@@ -24,12 +24,13 @@ export class AdminGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> | boolean {
-    let access: boolean;
+    let access: boolean;  
 
     if (this._userService.isUserLogIn()) {
       access = this.adminsArr.some(id => {
         return id === this._userService.getUserId();
       });
+      console.log(access)
 
       if (!access) {
         this._router.navigate(['/'])
@@ -37,7 +38,7 @@ export class AdminGuard implements CanActivate {
       return access;
     } else {
       this._router.navigate(['/login-page']);
-      return false
+      return false;
     }
 
 
