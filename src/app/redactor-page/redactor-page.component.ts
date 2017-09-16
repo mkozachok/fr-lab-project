@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import mergeImages from 'merge-images';
 import $  from "jquery";
+import { fabric } from 'fabric';
 
 
 @Component({
@@ -17,12 +18,36 @@ export class RedactorPageComponent{
   type = "tshirtm";
   selectedProductImage = {};
   selectedCategory = {};
-
   name = "";
   resultImg = "";
   selectProduct = function(product){
     this.type = product.type;
     this.selectedProductImage.src = product.url;
+    this.drawProduct();
+
+  }
+  drawProduct = function(){
+    let canvas = this.getProductCanvas();
+    canvas.clear();
+    let img = new Image();
+
+    let self = this;
+
+    img.onload = function(){
+      var image = new fabric.Image(img);
+      image.set({
+        // width:700,
+        // height:700
+      });
+      canvas.add(image);
+    }
+    img.src = self.selectedProductImage.src;
+  }
+  getProductCanvas = function(){
+    if(!this.productCanvas){
+      this.productCanvas = new fabric.Canvas('img_product');
+    }
+    return this.productCanvas;
   }
   getColors = function(){
     let type = this.type;
@@ -33,25 +58,72 @@ export class RedactorPageComponent{
   }
   setColor = function(product){
     this.selectedProductImage.src = product.url;
+    this.drawProduct();
   }
   selectCategory = function(category){
     this.selectedCategory.src = category.url;
     this.categoryName = category.name;
+    let img = new Image();
+    let self = this;
+    img.onload = function(){
+
+      var image = new fabric.Image(img);
+      image.set({
+          left: 215,
+          top: 200
+      });
+      self.drawImg(image);
+
+    }
+    img.src = self.selectedCategory.src;
   }
-  test = function(event){
-    mergeImages([this.selectedProductImage,
-     this.selectedCategory,])
+  merge = function(event){
+    mergeImages([this.getProductCanvas().toDataURL(),
+     this.getCanvas().toDataURL()])
       .then(b64 => this.resultImg = b64);
   }
-  onDragBegin = function($event){
-    //TODO
-  }
-  onDragEnd = function(element){
-    let coords = $(element).position();
-    this.selectedCategory.x =  coords.left;
-    this.selectedCategory.y = coords.top;
+
+  drawImg = function(image){
+    let canvas = this.getCanvas();
+    canvas.add(image);
   }
 
+  handleImage = function(e){
+    let canvas = this.getCanvas();
+    var reader:any,
+    target: EventTarget;
+    reader = new FileReader();
+    reader.onload = function (event) {
+        var imgObj = new Image();
+        imgObj.src = event.target.result;
+        imgObj.onload = function () {
+            var image = new fabric.Image(imgObj);
+            image.set({
+                left: 215,
+                top: 200
+            });
+            canvas.add(image);
+  }
+}
+reader.readAsDataURL(e.target.files[0]);
+}
+
+getCanvas = function(){
+  if(!this.viewPortCanvas){
+    this.viewPortCanvas = new fabric.Canvas('viewport');
+  }
+  return this.viewPortCanvas;
+}
+
+removeImg = function(){
+  console.log("remove");
+  let object = this.getCanvas().getActiveObject();
+	if (!object){
+		alert('Please select the element to remove');
+		return '';
+	}
+	this.getCanvas().remove(object);
+}
    product_types = [
       {
         type: "tshirtm",

@@ -4,12 +4,12 @@
       <md-tab label="Product Type">
           <div class="products">
             <div class="products_img" *ngFor="let type of product_types">
-              <img [src]="type.url" (click)="selectProduct(type)" width="100"/>
+              <img [src]="type.url" (click)="selectProduct(type)" width="80"/>
             </div>
           </div>
 
         <div class="product_bl bl_2">
-          <div class="head">Color</div>
+          <div class="head">Color <i class="material-icons">color_lens</i></div>
           <ul class="selected_color">
             <li *ngFor="let product of getColors()" (click)="setColor(product)">
               <span [style.background] = "product.color">
@@ -17,6 +17,7 @@
             </li>
           </ul>
         </div>
+        <div class="head">Add Text <i class="material-icons">text_fields</i></div>
       </md-tab>
 
       <md-tab label="Category">
@@ -26,7 +27,8 @@
             </div>
           </div>
         <div class="load">
-          <div class="head" >Load Image</div>
+          <div class="head" >Load Image <i class="material-icons">file_download</i></div>
+          <input type="file" id="imgLoader" (change)="handleImage($event)">
         </div>
       </md-tab>
     </md-tab-group>
@@ -34,12 +36,14 @@
 
   <div id="canvas">
     <div class="redactor_area">
-      <img id="img_product" [src]="selectedProductImage.src" alt=""/>
-      <img id="img_overall" ngDraggable (started)="onDragBegin($event)" (stopped)="onDragEnd($event)"
-       [src]="selectedCategory.src" alt=""/>
+      <!-- <img width="700px" id="img_product" [src]="selectedProductImage.src" alt=""/> -->
+      <canvas width="700px" height="700px" id="img_product"></canvas>
+      <!-- <img id="img_overall" ngDraggable (started)="onDragBegin($event)" (stopped)="onDragEnd($event)"
+       [src]="selectedCategory.src" alt=""/> -->
+       <canvas width="700px" height="700px" id="viewport"></canvas>
     </div>
+    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
+    <button md-raised-button (click)="merge()">Save and Buy</button>
+      <img width="700px" id="result" [src]="resultImg" alt=""/>
   </div>
 </div>
-
-<button md-raised-button (click)="test()">Save and Buy</button>
-  <img id="result" [src]="resultImg" alt=""/>
