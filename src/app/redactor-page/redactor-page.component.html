@@ -36,14 +36,11 @@
 
   <div id="canvas">
     <div class="redactor_area">
-      <!-- <img width="700px" id="img_product" [src]="selectedProductImage.src" alt=""/> -->
-      <canvas width="700px" height="700px" id="img_product"></canvas>
-      <!-- <img id="img_overall" ngDraggable (started)="onDragBegin($event)" (stopped)="onDragEnd($event)"
-       [src]="selectedCategory.src" alt=""/> -->
-       <canvas width="700px" height="700px" id="viewport"></canvas>
+      <canvas width="700px" height="600px" id="img_product"></canvas>
+       <canvas width="700px" height="600px" id="viewport"></canvas>
     </div>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="merge()">Save and Buy</button>
-      <img width="700px" id="result" [src]="resultImg" alt=""/>
+    <img width="700px" id="result" [src]="resultImg" alt=""/>
   </div>
 </div>

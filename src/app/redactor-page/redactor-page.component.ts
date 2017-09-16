@@ -36,8 +36,8 @@ export class RedactorPageComponent{
     img.onload = function(){
       var image = new fabric.Image(img);
       image.set({
-        // width:700,
-        // height:700
+        width:600,
+        height:600
       });
       canvas.add(image);
     }
@@ -69,7 +69,7 @@ export class RedactorPageComponent{
 
       var image = new fabric.Image(img);
       image.set({
-          left: 215,
+          left: 170,
           top: 200
       });
       self.drawImg(image);
