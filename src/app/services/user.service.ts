@@ -54,16 +54,8 @@ export class UserService {
 
   }
 
-  createUserInformation(name: string, surname: string, address: string, phone: string, profilePicture: string) {
-    firebase.storage().ref().child(`${this.basePath}/myAvatar.png`).getDownloadURL()
-      .then((url) => this.URL = url)
-      .catch((err) => console.log(err))
-    return this.afAuth.auth.currentUser.updateProfile({
-      displayName: `${name} ${surname}`,
-      photoURL: `${this.URL}`
-    })
-    .then((success) => console.log(this.afAuth.auth.currentUser))
-    .then((success) => this.users.set(
+  createUserAdditionalInformation(address: string, phone: string) {
+    return this.users.set(
       this.afAuth.auth.currentUser.uid,
       {
         orders: [""],
@@ -72,31 +64,27 @@ export class UserService {
           phone: phone,
           address: address
         }
-      }))
+      })
+          .then((success) => console.log(this.afAuth.auth.currentUser))
   }
 
 
-  pushUpload(upload: Upload) {
+  createPrimaryInformation(upload: Upload, name: string, surname: string) {
     console.log();
     let storageRef = firebase.storage().ref();
     let uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (error) => {
-        // upload failed
-        console.log(error)
-      },
       () => {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        console.log(upload.url);
-        console.log(upload.name);
-        // this.saveProfilePicture(upload)
+        console.log(upload.url)
+        this.afAuth.auth.currentUser.updateProfile({
+          displayName: `${name} ${surname}`,
+          photoURL: upload.url
+        })
       }
     );
   }
-  // private saveProfilePicture(upload: Upload) {
-  // this.users.set(this.afAuth.auth.currentUser.uid, {});
-// }
 
 }

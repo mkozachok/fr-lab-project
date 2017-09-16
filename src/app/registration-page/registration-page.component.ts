@@ -12,8 +12,7 @@ export class RegistrationPageComponent implements OnInit {
   error: any;
   selectedFiles: FileList;
   currentUpload: Upload;
-  profilePicture: string;
-  profilePictureURL: string;
+
 
   constructor(private _userService: UserService, private router: Router) { }
 
@@ -22,22 +21,19 @@ export class RegistrationPageComponent implements OnInit {
   onSubmit(value: any) {
     this.error = null;
     this._userService.registerUser(value.email, value.password )
-      .then((succes) => this.upload())
-      .then((succes) => this._userService.createUserInformation(value.name, value.surname, value.phone, value.address, this.profilePicture))
+      .then((succes) => this.upload(value))
+      .then((succes) => this._userService.createUserAdditionalInformation(value.phone, value.address))
       .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
-
   }
-
 
   detectFiles(event) {
       this.selectedFiles = event.target.files;
   }
 
-  upload() {
+  upload(value: any) {
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    this._userService.pushUpload(this.currentUpload);
-    this.profilePicture = this.currentUpload.file.name;
+    this._userService.createPrimaryInformation(this.currentUpload, value.name, value.surname);
   }
 }
