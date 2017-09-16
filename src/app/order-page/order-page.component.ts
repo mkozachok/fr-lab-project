@@ -20,7 +20,7 @@ export class OrderPageComponent implements OnInit {
 	constructor(private orderService: OrderService, private router: Router) { }
 
 	ngOnInit() {
-		this.getOrders();
+		this.orders = this.orderService.getAll();
 		this.totalQuantity = this.orderService.getQuantity();
 		this.totalAmount = this.orderService.getTotalAmount();
 	}
@@ -43,7 +43,7 @@ export class OrderPageComponent implements OnInit {
   	}
 
 	getOrders(): void {
-		this.orderService.getAll().then(orders => this.orders = orders);
+		this.orderService.getAll();
 	}
 
 	empty(): void {

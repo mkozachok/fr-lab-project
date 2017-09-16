@@ -25,14 +25,21 @@ import { AdminGuard } from './guards/admin.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
+
 import { HeaderComponent } from './components/header/header.component'
 import { FooterComponent } from './components/footer/footer.component'
 import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
 import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
 
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
+
 // Materials modules goes here
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AngularDraggableModule } from 'angular2-draggable';
 
 // Services goes here
@@ -56,7 +63,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FooterComponent,
     PosterComponent,
     AddDesignComponent,
-    AddProductComponent
+    AddProductComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +85,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule,
     MaterialModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
+  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard, MdDialogModule],
+  entryComponents: [ DialogComponent ],
+  providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
   bootstrap: [
     AppComponent
   ]
