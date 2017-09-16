@@ -4,7 +4,7 @@ import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
@@ -17,22 +17,27 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
+// App guards goes here
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+
 // App components goes here
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component'
 import { FooterComponent } from './components/footer/footer.component'
+import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
+import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
 
 // Materials modules goes here
 import { MdCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
+import { MdIconModule, MdIconRegistry } from '@angular/material';
 import { MdGridListModule } from '@angular/material';
 import { MdSidenavModule } from '@angular/material';
 import { MdButtonModule } from '@angular/material';
-
 import { MdCardModule } from '@angular/material';
 import { MdListModule } from '@angular/material';
 
@@ -44,9 +49,11 @@ import { MdInputModule } from '@angular/material';
 // Services goes here
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
+import { DesignService } from './services/design.service';
 import { PosterComponent } from './homepage/poster/poster.component';
 
-
+//pagination
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -57,7 +64,9 @@ import { PosterComponent } from './homepage/poster/poster.component';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    PosterComponent
+    PosterComponent,
+    AddDesignComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +92,12 @@ import { PosterComponent } from './homepage/poster/poster.component';
     AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    Ng2FilterPipeModule
+    Ng2FilterPipeModule,
+    HttpModule,
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
-  providers: [UserService, ProductsListService],
+  providers: [UserService, ProductsListService, MdIconRegistry, DesignService, AuthGuard, AdminGuard],
   bootstrap: [
     AppComponent
   ]

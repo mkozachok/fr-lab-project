@@ -1,29 +1,26 @@
 <router-outlet><router-outlet>
-<md-grid-list class="container" cols="5" rowHeight="fit">
-  <md-grid-tile colspan="5" class="header">
+<div class="container">
+  <div class="header">
     <h2>Shopping cart</h2>
-  </md-grid-tile>
-  <!-- IF CART NOT EMPTY -->
+  </div>
   <div *ngIf = "totalQuantity !== 0">
-  <md-grid-tile colspan="5" rowspan="8">
-    <div class="items">
-      <div class="items-header">
-        <div class="product"></div>
-        <div class="type">Type</div>
-        <div class="size">Size</div>
-        <div class="quantity">Quantity</div>
-        <div class="price">Price</div>
-        <div class="remove"></div>
-      </div>
-      <div class="item" id="{{order.id}}" *ngFor="let order of orders">
-        <div class="product img-container">
-          <img src="https://image.freepik.com/free-vector/cup-mockup_1053-247.jpg">
+    <div class="item-headers">
+      <div class="product"></div>
+      <div></div>
+      <div>Type</div>
+      <div>Quantity</div>
+      <div>Price</div>
+      <div></div>
+    </div>
+    <div class="item" *ngFor="let order of orders">
+      <div class="product img-container">
+          <img src="{{order.product.svg}}">
+        </div>
+        <div>
+          {{order.product.name}}
         </div>
         <div class="type">
-          cup
-        </div>
-        <div class="size">
-          size
+          {{order.product.type}}
         </div>
         <div class="quantity">
           <button button md-raised-button class="add" (click)="addButtonClick(order)">
@@ -35,30 +32,26 @@
           </button> 
         </div>
         <div class="price">
-          {{order.price}}
+          {{order.product.price}} UAH
         </div>
         <div class="remove">
           <button button md-raised-button class="delete" (click)="removeOrder(order)">
             Delete
           </button> 
         </div>
-      </div>
     </div>
-  </md-grid-tile>
-  <md-grid-tile colspan="5" rowspan="2">
     <div class="info">
       <div class="total">
-        Total amount: <span class="amount">{{totalAmount}}</span>
+        Total amount: <span class="amount">{{totalAmount}} UAH</span>
       </div>
       <div>
         <button button md-raised-button class="checkout" (click)="navigate()">CHECKOUT</button> 
         <button button md-raised-button class="delete-all" (click)="empty()">CLEAR</button> 
       </div>
     </div>
-  </md-grid-tile>
   </div>
   <!-- IF CART IS EMPTY -->
-  <md-grid-tile colspan="5" rowspan="10" *ngIf = "totalQuantity === 0">
+  <div *ngIf = "totalQuantity === 0" class="empty-cart">
     <h4>There are no items</h4>
-  </md-grid-tile>
-</md-grid-list>
+  </div>
+</div>

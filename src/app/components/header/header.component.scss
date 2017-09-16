@@ -4,11 +4,8 @@
     padding: 0 2em;
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
-    position: fixed;
-    top: 0;
-    z-index: 999;
 
-  .spacer {
+    .spacer {
         flex: 1 1 auto;
     }
 
@@ -34,8 +31,7 @@
 
     .header-icon {
         transform: translateY(6px);
-        margin-right: 5px;
-        margin-left: 20px;
+        margin-right: 5px;    
     }
 
     .log-button {
@@ -44,11 +40,20 @@
         font-weight: bold;
     }
 
+    .greeting {
+        display: inline-block;
+        transform: translateX(-2em);
+    }
+
+    .log-out{
+        @extend .greeting;
+    }
+
     .basket {
         position: relative;
         right: 20px;
         top: 5px;
-        padding-left: 5em;
+        margin-left: 5em;
     }
 
     .data-badge{
