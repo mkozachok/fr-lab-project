@@ -84,7 +84,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
     MdListModule,
     HttpModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     Ng2FilterPipeModule,
