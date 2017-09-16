@@ -25,15 +25,31 @@ import { AdminGuard } from './guards/admin.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
+
+
 import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
 import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
+
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
 
 // Materials modules goes here
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularDraggableModule } from 'angular2-draggable';
+import { MdToolbarModule } from '@angular/material';
+import { MdIconModule, MdIconRegistry } from '@angular/material';
+import { MdGridListModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import { MdListModule } from '@angular/material';
+
+
+import { MdExpansionModule } from '@angular/material';
+import { MdTabsModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
 
 // Services goes here
 import { UserService } from './services/user.service';
@@ -42,7 +58,7 @@ import { DesignService } from './services/design.service';
 import { PosterComponent } from './homepage/poster/poster.component';
 
 //pagination
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -56,7 +72,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FooterComponent,
     PosterComponent,
     AddDesignComponent,
-    AddProductComponent
+    AddProductComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,12 +89,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AngularFireAuthModule,
     Ng2FilterPipeModule,
     HttpModule,
-    AngularDraggableModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     MaterialModule
   ],
   providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
+  entryComponents: [ DialogComponent ],
   bootstrap: [
     AppComponent
   ]

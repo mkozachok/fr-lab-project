@@ -9,8 +9,8 @@ let ORDERS = [];
 @Injectable()
 export class OrderService {
 
-	getAll(): Promise<Order[]> {
-		return Promise.resolve(ORDERS);
+	getAll(): Order[] {
+		return ORDERS;
 	}
 
 	getItemIndex(item): number {
