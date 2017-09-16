@@ -28,7 +28,7 @@ export class MakeOrderComponent implements OnInit {
 		this.userService.getUser().subscribe(res => {
 			if (res) {
 				this.autorised = true;
-				this.autorisedUser = this.userService.getCurrentUser();
+				this.autorisedUser = this.userService.getUser();
 				console.log(this.autorisedUser);
 			}
 		});
@@ -45,7 +45,6 @@ export class MakeOrderComponent implements OnInit {
 			this.makeOrderService.setOrder(this.userService.getUserId(), this.orderService.getAll(), {});
 		}
 		this.openDialog();
-		this.orderService.removeAll();
 	}
 
 	openDialog() {
@@ -55,6 +54,7 @@ export class MakeOrderComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe(result => {
 			this.router.navigate(['']);
+			this.orderService.removeAll();
    		});
 	}
 }

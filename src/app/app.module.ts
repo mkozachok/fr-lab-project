@@ -26,8 +26,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
+
 import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
 import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
 
@@ -85,9 +84,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule,
     MaterialModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard, MdDialogModule],
+  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],
-  providers: [UserService, ProductsListService, MdIconRegistry, ProductService, AuthGuard],
   bootstrap: [
     AppComponent
   ]
