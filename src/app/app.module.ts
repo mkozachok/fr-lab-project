@@ -84,7 +84,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MdListModule,
     HttpModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'kolibri'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     Ng2FilterPipeModule,

@@ -28,7 +28,7 @@
   </div>
  
   <div class = "rightcol wrapper">
-    <div class="oneObjet" *ngFor = "let product of selectedItems | paginate: { itemsPerPage: 3, currentPage: p }">
+    <div class="oneObjet" *ngFor = "let product of selectedItems | async | paginate: { itemsPerPage: 3, currentPage: p }">
       <div>
          <img src="{{ product.svg }}" alt="">
       </div>

@@ -3,13 +3,24 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product-model';
 import { PRODUCTS } from '../homepage/products';
 import { DOCUMENT } from '@angular/platform-browser';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 
 @Injectable()
+
 export class ProductsListService {
+	products: FirebaseListObservable<any>;
+	product: Product
 	@Input() selectedItems;
 
-	getAll(): Promise<Product[]> {
-		return Promise.resolve(PRODUCTS);
+	
+	constructor(private db: AngularFireDatabase) {
+	  this.products = db.list('/products');
+	}
+
+	getAll(): Promise<FirebaseListObservable<any>>{
+		console.log(this.products)
+		return Promise.resolve(this.products);
 	}
 
 	selectProducts(prop, propValue, arr, originalArr):Product[] {

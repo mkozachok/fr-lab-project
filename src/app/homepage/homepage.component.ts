@@ -5,6 +5,8 @@ import { PRODUCT_TYPE_FILTER, PRODUCT_CATEGORY_FILTER } from './filter';
 import { PosterComponent } from './poster/poster.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { OrderService } from '../order-page/order-page.service';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -19,14 +21,16 @@ export class HomepageComponent implements OnInit {
   @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
   procuctsType: any[] =  PRODUCT_TYPE_FILTER;
-  products: Product[];
   selectedItems: Product[];
   userFilter: any = {name: '', type: '', category: ''};
-  constructor(private productListService: ProductsListService, private orderService: OrderService) { };
+  items: FirebaseListObservable<any[]>;
+
+  constructor(private productListService: ProductsListService, private orderService: OrderService, private db: AngularFireDatabase) { 
+  };
 
   getAll():void {
-    this.productListService.getAll().then(products => this.products = products);
-    this.productListService.getAll().then(selectedItems => this.selectedItems = selectedItems);
+    this.productListService.getAll();
+    /*this.productListService.getAll().then(selectedItems => this.selectedItems = selectedItems);*/
   };
 
   ngOnInit():void {
