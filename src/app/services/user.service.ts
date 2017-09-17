@@ -34,7 +34,8 @@ export class UserService {
     return user;
   }
 
-  getUserId() {
+
+  getUserId(){
     return this.afAuth.auth.currentUser.uid;
   }
 
@@ -63,7 +64,7 @@ export class UserService {
 
   }
 
-  createUserAdditionalInformation(address: string, phone: string) {
+  createUserAdditionalInformation( phone: string, address: string) {
     return this.users.set(
       this.afAuth.auth.currentUser.uid,
       {
@@ -75,6 +76,10 @@ export class UserService {
         }
       })
       .then((success) => console.log(this.afAuth.auth.currentUser))
+  }
+
+  getUserInformation() {
+
   }
 
 
