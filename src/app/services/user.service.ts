@@ -54,7 +54,7 @@ export class UserService {
 
   }
 
-  createUserAdditionalInformation(address: string, phone: string) {
+  createUserAdditionalInformation( phone: string, address: string) {
     return this.users.set(
       this.afAuth.auth.currentUser.uid,
       {
