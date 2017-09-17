@@ -9,6 +9,10 @@
 
 form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .example-full-width, .error {
@@ -18,6 +22,11 @@ form {
 .error {
     font-size: 0.8em;
     font-style: italic;
+}
+
+button {
+    width: 25%;
+    margin-top: 2%;
 }
 
 input::-webkit-outer-spin-button,

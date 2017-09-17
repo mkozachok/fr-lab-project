@@ -30,6 +30,7 @@ export class UserService {
     return this.afAuth.authState;
   }
 
+
   getUserId(){
     return this.afAuth.auth.currentUser.uid;
   }
@@ -66,6 +67,10 @@ export class UserService {
         }
       })
           .then((success) => console.log(this.afAuth.auth.currentUser))
+  }
+
+  getUserInformation() {
+
   }
 
 
