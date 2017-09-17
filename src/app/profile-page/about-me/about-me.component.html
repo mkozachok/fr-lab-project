@@ -7,37 +7,53 @@
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">First Name</span>
-        <span class="info-group-data info-group-row">{{ user.firstName }}</span>
+        <span class="info-group-data info-group-row">
+            <app-loader *ngIf="showLoader"></app-loader>
+           {{ user.firstName }}
+        </span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Last Name</span>
-        <span class="info-group-data info-group-row">{{ user.lastName }}</span>
+        <span class="info-group-data info-group-row">
+            <app-loader *ngIf="showLoader"></app-loader>
+          {{ user.lastName }}
+        </span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Email</span>
-        <span class="info-group-data info-group-row">{{ user.email }}</span>
+        <span class="info-group-data info-group-row">
+            <app-loader *ngIf="showLoader"></app-loader>
+          {{ user.email }}
+        </span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Phone</span>
-        <span class="info-group-data info-group-row">{{ userAdditionalInfo.phone }}</span>
+        <span class="info-group-data info-group-row">
+            <app-loader *ngIf="showLoaderAddInfo"></app-loader>
+          {{ userAdditionalInfo.phone }}
+        </span>
       </div>
       <div class="info-group">
         <span class="info-group-label info-group-row">Address</span>
-        <span class="info-group-data info-group-row">{{ userAdditionalInfo.address }}</span>
+        <span class="info-group-data info-group-row">
+            <app-loader *ngIf="showLoaderAddInfo"></app-loader>
+          {{ userAdditionalInfo.address }}
+        </span>
       </div>
     </div>
-
-
   </md-tab>
+
+
   <md-tab label="Edit user info">
     <div class="edit-wrapper">
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <md-form-field>
+          <app-loader *ngIf="showLoader"></app-loader>
           <input mdInput required type="text" placeholder="First Name" formControlName="firstName" [(ngModel)]="user.firstName">
           <md-error *ngIf="userForm.controls['firstName'].hasError('required')">
             First name <strong>cannot be blank</strong>
           </md-error>
-          <md-error  *ngIf="userForm.controls['firstName'].hasError('pattern')">
+          <md-error *ngIf="userForm.controls['firstName'].hasError('pattern')">
             First name <strong>should be capitalized and cannot contains numbers and whitespaces</strong>
           </md-error>
           <md-error *ngIf="userForm.controls['firstName'].hasError('maxlength')">
@@ -45,6 +61,7 @@
           </md-error>
         </md-form-field>
         <md-form-field>
+          <app-loader *ngIf="showLoader"></app-loader>
           <input mdInput required type="text" placeholder="Last Name" formControlName="lastName" [(ngModel)]="user.lastName">
           <md-error *ngIf="userForm.controls['lastName'].hasError('required')">
             Last name <strong>cannot be blank</strong>
@@ -57,9 +74,11 @@
           </md-error>
         </md-form-field>
         <md-form-field>
+          <app-loader *ngIf="showLoader"></app-loader>
           <input mdInput type="text" placeholder="Photo URL" formControlName="photoUrl" [(ngModel)]="user.photoUrl">
         </md-form-field>
         <md-form-field>
+          <app-loader *ngIf="showLoaderAddInfo"></app-loader>
           <input mdInput required type="text" placeholder="Phone" formControlName="phone" [(ngModel)]="userAdditionalInfo.phone">
           <md-error *ngIf="userForm.controls['phone'].hasError('required')">
             Phone <strong>cannot be blank</strong>
@@ -75,6 +94,7 @@
           </md-error>
         </md-form-field>
         <md-form-field>
+          <app-loader *ngIf="showLoaderAddInfo"></app-loader>
           <input mdInput required type="text" placeholder="Address" formControlName="address" [(ngModel)]="userAdditionalInfo.address">
           <md-error *ngIf="userForm.controls['address'].hasError('required')">
             Address <strong>cannot be blank</strong>

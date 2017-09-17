@@ -1,7 +1,8 @@
 <div class="profile-page">
     <div class="side-menu">
         <div class="avatar-wrapper">
-            <img [src]="user.photoURL">
+            <app-loader *ngIf="showSpinner"></app-loader>
+             <img [src]="user.photoURL">
             <h4 class="user-fullname">{{ user.displayName }}</h4>
         </div>
 

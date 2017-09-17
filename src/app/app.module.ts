@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
+import { SharedModule } from './shared/shared.module';
 
 // App guards goes here
 import { AuthGuard } from './guards/auth.guard';
@@ -80,7 +81,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],
