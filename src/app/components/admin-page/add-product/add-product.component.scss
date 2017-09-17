@@ -1,0 +1,14 @@
+.add-product-wrapper{
+    padding: 2vw;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        md-form-field {
+            width: 50vw;
+        }
+    }
+}

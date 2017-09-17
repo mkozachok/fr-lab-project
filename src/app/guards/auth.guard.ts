@@ -13,6 +13,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     constructor(
         private router: Router,
         private userService: UserService
+        
     ) { }
 
     canActivate(): Observable<boolean> {
@@ -23,9 +24,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     canActivateChild(): Observable<boolean> {
-        return this.userService.getUser()
-            .take(1)
-            .map(authState => !!authState)
-            .do(auth => !auth ? this.router.navigate(['/login-page']) : true);
+        return this.canActivate();
     }
 }

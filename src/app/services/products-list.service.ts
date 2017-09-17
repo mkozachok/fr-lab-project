@@ -51,4 +51,8 @@ export class ProductsListService {
 		templates = currentUser.gallery;
 		return templates;
 	}
+
+	setProduct(product: Product): firebase.Promise<void> {
+		return this.products.push(product);
+	  }
 }

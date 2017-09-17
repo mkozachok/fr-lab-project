@@ -55,11 +55,16 @@ export class AboutMeComponent implements OnInit, OnDestroy {
     let photo = this.userForm.value.photoUrl;
     let email = this.userForm.value.email;
     //let password = this.userForm.value.password;
-    this._userService.updateUser(name, photo, /*email  password */);
+    this._userService.updateUser(name, photo, /*email  password */).then(resolve=>{
+      this.openSnackBar('User has been saved', 'success');
+    }).catch(error=>{
+      this.openSnackBar(error.name,'error');
+    });
   }
 
+
   openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message = "Changes are saved", action = "success", {
+    this.snackBar.open(message, action, {
       duration: 2000,
     });
   }
