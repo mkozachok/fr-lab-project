@@ -38,18 +38,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
 // Materials modules goes here
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdToolbarModule } from '@angular/material';
-import { MdIconModule, MdIconRegistry } from '@angular/material';
-import { MdGridListModule } from '@angular/material';
-import { MdSidenavModule } from '@angular/material';
-import { MdButtonModule } from '@angular/material';
-import { MdCardModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
 
 
-import { MdExpansionModule } from '@angular/material';
-import { MdTabsModule } from '@angular/material';
-import { MdInputModule } from '@angular/material';
 
 // Services goes here
 import { UserService } from './services/user.service';
@@ -59,7 +49,6 @@ import { PosterComponent } from './homepage/poster/poster.component';
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
-
 
 
 @NgModule({
@@ -97,6 +86,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
   entryComponents: [ DialogComponent ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  exports: [MaterialModule]
 })
 export class AppModule { }
