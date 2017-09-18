@@ -10,4 +10,15 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  md-icon {
+    font-size: 60px;
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+  }
+
+  button {
+    margin: 10px;
+  }
 }

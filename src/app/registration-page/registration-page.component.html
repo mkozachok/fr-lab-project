@@ -49,8 +49,9 @@
         Please enter your phone
       </p>
     </div>
-      <input type="file" (change)="detectFiles($event)" #photoURLRef="ngModel" accept="image/*"  name="photo" ngModel/>
-    <button [disabled]="!userForm.form.valid" md-raised-button type="submit">registrate</button>
+    <input #fileInput type="file" (change)="detectFiles($event)" #photoURLRef="ngModel" accept="image/*"  name="photo" [hidden]="true" ngModel/>
+    <md-icon (click)="fileInput.click()" class="mdl-badge">{{ addPhoto }}</md-icon>
+    <button [disabled]="!userForm.form.valid || !this.downloadedPhoto"  md-raised-button type="submit">registrate</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
 </div>
