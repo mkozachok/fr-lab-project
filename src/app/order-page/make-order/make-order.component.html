@@ -34,7 +34,7 @@
       </div>
     </div>
   	<md-form-field class="example-full-width">
-    	<input #phoneRef="ngModel" required mdInput pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\ ]?[0-9]{3}[-\s\ ]?[0-9]{4,6}$" placeholder="Phone number" name="phoneNumber" ngModel>
+    	<input #phoneRef="ngModel" required mdInput pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\ ]?[0-9]{3}[-\s\ ]?[0-9]{3,6}$" placeholder="Phone number" name="phoneNumber" ngModel={{user.phone}}>
   	</md-form-field>
     <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)" class="error">
       <div [hidden]="!phoneRef.errors.required">
@@ -45,7 +45,7 @@
       </div>
     </div>
   	<md-form-field class="example-full-width">
-    	<input #addressRef="ngModel" required mdInput placeholder="Address" minlength="4" name="address" ngModel>
+    	<input #addressRef="ngModel" required mdInput placeholder="Address" minlength="4" name="address" ngModel={{user.address}}>
     </md-form-field>
     <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)" class="error">
       <div [hidden]="!addressRef.errors.required">

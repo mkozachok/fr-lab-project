@@ -11,6 +11,8 @@ import { MakeOrderService } from '../../services/make-order.service';
 
 import { DialogComponent } from '../../components/dialog/dialog.component';
 
+import { Subscription } from "rxjs";
+
 @Component({
   selector: 'app-make-order',
   templateUrl: './make-order.component.html',
@@ -26,34 +28,33 @@ export class MakeOrderComponent implements OnInit {
 		phone: '',
 		address: ''
 	}
+	userSubscribe: Subscription;
+  	additionalUserInfoSubscribe: Subscription;
 
 	constructor(private userService: UserService, private afAuth: AngularFireAuth, 
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
 		public dialog: MdDialog, private router: Router) {
-		this.userService.getUser().subscribe(res => {
-			this.autorised = res ? true : false;
-			if (this.autorised) {
-				this.getLoggedUserData();
-			}
-		});
+
 	}
 
 	ngOnInit() {
-		// this.getLoggedUserData();
+		this.userSubscribe = this.userService.getUser().subscribe(res => {
+			this.autorised = res ? true : false;
+			this.user.firstName = res.displayName.split(' ')[0];
+			this.user.lastName = res.displayName.split(' ')[1],
+			this.user.email = res.email;
+
+			this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
+				this.user.address = res.additionalInfo.phone;
+				this.user.phone = res.additionalInfo.address;
+			})
+		});
 	}
 
 	onSubmit(data: any) {
 		let userId = !this.autorised ? '0' : this.userService.getUserId();
 		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data);
 		this.openDialog();
-	}
-
-	getLoggedUserData() {
-		let fullNameString = this.userService.isUserLogIn().displayName;
-		let fullNameArray = fullNameString.split(' ');
-		this.user.firstName = fullNameArray[0];
-		this.user.lastName = fullNameArray[1];
-		this.user.email = this.userService.isUserLogIn().email;
 	}
 
 	openDialog() {
