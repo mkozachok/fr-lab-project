@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AdminService } from '../services/admin.service';
 import { UserService } from '../services/user.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
@@ -17,32 +18,28 @@ export class AdminGuard implements CanActivate {
   constructor(
     private _router: Router,
     private _userService: UserService,
-    private _authGuard: AuthGuard,
+    private _adminService: AdminService,
     private _afAuth: AngularFireAuth
   ) {
 
   }
 
   canActivate(): Observable<boolean> | boolean {
-    let access: boolean;  
+    let access: boolean;
+    let id: string;
 
     if (this._userService.isUserLogIn()) {
-      access = this.adminsArr.some(id => {
-        return id === this._userService.getUserId();
-      });
-      console.log(access)
+      id = this._userService.isUserLogIn().uid;
 
-      if (!access) {
-        this._router.navigate(['/'])
-      }
-      return access;
-    } else {
+      return this._adminService.getAdmin(id).map(res => {
+        if (res[0]) {
+          return true;
+        } else {
+          this._router.navigate(['/']);
+        }
+      })
+    }else{
       this._router.navigate(['/login-page']);
-      return false;
     }
-
-
-
-
   }
 }

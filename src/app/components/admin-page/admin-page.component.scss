@@ -1,1 +1,18 @@
+/deep/ .mat-tab-label{
+	min-width: calc(100%/3) !important;
+}
 
+/deep/ .add-wrapper{
+    padding: 2vw;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        md-form-field {
+            width: 50vw;
+        }
+    }
+}

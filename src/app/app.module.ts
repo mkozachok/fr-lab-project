@@ -26,10 +26,11 @@ import { AdminGuard } from './guards/admin.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-
+import { PosterComponent } from './homepage/poster/poster.component';
 
 import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
 import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
+import { AddAdminComponent } from './components/admin-page/add-admin/add-admin.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -46,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { DesignService } from './services/design.service';
-import { PosterComponent } from './homepage/poster/poster.component';
+import { AdminService } from './services/admin.service';
+
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -63,6 +65,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     PosterComponent,
     AddDesignComponent,
     AddProductComponent,
+    AddAdminComponent,
     DialogComponent
   ],
   imports: [
@@ -84,7 +87,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MaterialModule,
     SharedModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
+  providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],
   bootstrap: [
     AppComponent
