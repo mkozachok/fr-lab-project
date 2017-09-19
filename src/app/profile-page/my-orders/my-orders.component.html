@@ -1,3 +1,27 @@
-<p>
-  my-orders works!
-</p>
+<!-- <div class="head">
+	<div>
+		Date
+	</div>
+</div> -->
+<div class="container">
+	<md-accordion>
+		<md-expansion-panel *ngFor="let order of usersOrders">
+		  <md-expansion-panel-header>
+		    <md-panel-description>
+		    	<p>{{order.date | date :'medium'}}</p>
+		      	<p>{{order.totalSum}} UAH</p>
+		    </md-panel-description>
+		  </md-expansion-panel-header>
+		  <div class="items">
+		  	<div class="item" *ngFor="let item of order.orders">
+		  		<div class="img-container">
+		  			<img src="{{item.product.svg}}">
+		  		</div>
+		  		<p>{{item.product.name}}</p>
+		  		<p>quantity: {{item.quantity}}</p>
+		  		<p>price: {{item.product.price}} UAH</p>
+		  	</div>
+		  </div>
+		</md-expansion-panel>
+	</md-accordion>
+</div>

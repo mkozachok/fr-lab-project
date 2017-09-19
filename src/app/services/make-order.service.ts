@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Order } from '../models/order-model';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class MakeOrderService {
@@ -11,7 +12,19 @@ export class MakeOrderService {
 		this.orders = db.list('/orders');
 	}
 
-	setOrder(userid: string, order: Order[], user: any) {
-		return this.orders.push({ userId:userid, orders: order, userInfo: user }).then(res=>console.log(res));
+	setOrder(userid: string, order: Order[], user: any, totalSum: number) {
+		let currentDate = firebase.database.ServerValue.TIMESTAMP;
+		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum }).then(res=>console.log(res));
+	}
+
+	getUsersOrder(userId: string) {
+		let usersOrders= [];
+		let items = this.orders.map(i=>{return i});
+		items.forEach(i=>i.forEach(e=>{
+			if (e.userId == userId) {
+				usersOrders.push(e);
+			}
+		}));
+		return usersOrders;
 	}
 }
