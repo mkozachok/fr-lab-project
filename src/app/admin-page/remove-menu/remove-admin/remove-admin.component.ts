@@ -30,22 +30,17 @@ export class RemoveAdminComponent implements OnInit {
       )
   }
 
-  deleteAdmin(e:MouseEvent){
-    let id: string;  
-    if(e.srcElement.textContent==='delete'){
+  deleteAdmin(e: MouseEvent) {
+    let id: string;
+    if (e.srcElement.textContent === 'delete') {
       id = e.srcElement.parentNode.childNodes.item(3).textContent;
-      this._adminService.deleteAdmin(id);  
+      this._adminService.deleteAdmin(id);
     }
-  }  
+  }
 
-  filterItem(value){ 
-    let phrase = value.toLowerCase();
+  filterItem(phrase) {
     this.ngOnInit();
-    return this.admins = this.admins.filter(x => {
-      return x['name'].toLowerCase()
-        .indexOf(phrase) >= 0 || x['$key'].toLowerCase().indexOf(phrase) >= 0;
-    });
-    
+    this.admins = this._adminService.findAdmin(phrase, this.admins);
+
   }
 }
-

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsListService } from '../../../services/products-list.service';
 
 @Component({
   selector: 'app-remove-product',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _productService: ProductsListService
+  ) { }
 
   ngOnInit() {
   }
