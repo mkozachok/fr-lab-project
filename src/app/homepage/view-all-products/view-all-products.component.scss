@@ -1,33 +1,11 @@
-.homepage {
-    display: flex;
-    width: 100%;
-    max-width: 1170px;
-    margin: 40px auto 20px;
-
-    * {    
-        font-family: 'Quicksand', sans-serif;
-        font-weight: 400;
-        list-style: none;
-        box-sizing: border-box;
-    }
-
-    h2 {
-        color: #7b0041;
-        font-weight: 300;      
-    }
-
     .rightcol {
         /*margin-left: 21%; */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        align-content: flex-start;
         width: 79%;
-
-        app-view-all-products {
-            min-width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-            justify-content: flex-start;
-            align-content: flex-start;
-        }
     }
     .oneObjet {
         display: flex;
@@ -42,10 +20,6 @@
         > * {
             width: 100%;
             text-align: center;
-        }
-
-        ul, li {
-            list-style-type: none;
         }
 
         img{
@@ -88,6 +62,10 @@
         .aboutTheProduct {
             padding: 20px;
             box-sizing: border-box;
+
+            ul, li {
+                list-style: none;
+            }
         }
     }
 
@@ -99,6 +77,6 @@
         margin-top: 100px;
         color: #7b0041;
     }
-}
+
 
 
