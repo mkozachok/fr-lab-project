@@ -40,20 +40,22 @@ export class MakeOrderComponent implements OnInit {
 	ngOnInit() {
 		this.userSubscribe = this.userService.getUser().subscribe(res => {
 			this.autorised = res ? true : false;
-			this.user.firstName = res.displayName.split(' ')[0];
-			this.user.lastName = res.displayName.split(' ')[1],
-			this.user.email = res.email;
+			if (this.autorised) {
+				this.user.firstName = res.displayName.split(' ')[0];
+				this.user.lastName = res.displayName.split(' ')[1],
+				this.user.email = res.email;
 
-			this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
-				this.user.address = res.additionalInfo.phone;
-				this.user.phone = res.additionalInfo.address;
-			})
+				this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
+					this.user.address = res.additionalInfo.phone;
+					this.user.phone = res.additionalInfo.address;
+				});
+			}
 		});
 	}
 
 	onSubmit(data: any) {
 		let userId = !this.autorised ? '0' : this.userService.getUserId();
-		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data);
+		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount());
 		this.openDialog();
 	}
 
@@ -67,4 +69,11 @@ export class MakeOrderComponent implements OnInit {
 			this.orderService.removeAll();
    		});
 	}
+
+	ngOnDestroy(): void {
+		if (this.autorised) {
+			this.userSubscribe.unsubscribe();
+	    	this.additionalUserInfoSubscribe.unsubscribe();
+		}
+  	}
 }

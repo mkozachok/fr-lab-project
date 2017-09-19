@@ -1,0 +1,21 @@
+/deep/ .mat-tab-label{
+	min-width: calc(100%/3) !important;
+}
+
+/deep/ .remove-wrapper{
+    padding: 2vw;
+    display: flex;
+    justify-content: center;
+
+    .table-wrapper {
+        width: 100%;
+    }
+
+    .table-row {
+        border-bottom: 1px solid black;
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+}
