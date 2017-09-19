@@ -4,17 +4,20 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 
 @Injectable()
 export class DesignService {
-  //design: Design
   designs:FirebaseListObservable<any>;
-  constructor(
-	  private db: AngularFireDatabase,
-	) {
+
+  constructor(private db: AngularFireDatabase) {
+    this.db = db;
     this.designs = db.list('/redactor/design');
-    
   }
-  
+
   setDesign(design): firebase.Promise<void>  {
     return this.designs.push(design);
+  }
+
+  getDesigns(): FirebaseListObservable<any[]>{
+    let content = this.db.list('/redactor/design');
+    return content;
   }
 
 }
