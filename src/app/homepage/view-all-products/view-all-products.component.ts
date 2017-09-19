@@ -25,6 +25,7 @@ export class ViewAllProductsComponent implements OnInit {
   getAll():void {
     this.productListService.getAll().subscribe(res=> {
       this.selectedItems = res;
+      //console.log(this.selectedItems);
     });
     //this.productListService.getAll().then(selectedItems => this.selectedItems = selectedItems);
     

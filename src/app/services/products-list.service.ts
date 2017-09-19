@@ -10,10 +10,10 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 
 export class ProductsListService {
 	products: FirebaseListObservable<any>;
-	product: Product;
-	products2: Product[];
 	selectedItems: FirebaseListObservable<any>;
-	selectedItems2: Product[];
+	product: Product;
+	productsArray: Product[];
+	selectedItemsArray: Product[];
 
 	
 	constructor(private db: AngularFireDatabase) {
@@ -22,24 +22,20 @@ export class ProductsListService {
 	}
 
 	getAll(): FirebaseListObservable<any[]>{
-		//this.products2 = PRODUCTS;
-		//return Promise.resolve(this.products2);
-		//let content = this.db.list('/products');
-		//this.products.subscribe(res=> console.log(res));
 		this.selectedItems = this.products;
 		return this.selectedItems;
 	}
 
-	selectProducts(prop, propValue):Product[] {
-		this.products2 = PRODUCTS;
-		this.selectedItems2 = this.products2.filter(function(obj) {
+	selectProducts(prop, propValue) {
+		let productsArray = JSON.parse(JSON.stringify(this.products));
+		let selectedItemsArray = JSON.parse(JSON.stringify(this.selectedItems));
+		selectedItemsArray = productsArray.filter(function(obj) {
 		  if(prop === 'category')
 				return obj.category === propValue;
 			else if (prop === 'type')
 				return obj.type === propValue;
 			});
-		console.log(this.selectedItems);
-		return this.selectedItems2;
+		return selectedItemsArray;
 	};
 
 	search(arr, originalArr, searchTerm): Product[] {
@@ -60,7 +56,6 @@ export class ProductsListService {
 		templates = currentUser.gallery;
 		return templates;
 	}
-
 	
 	setProduct(product: Product): firebase.Promise<void> {
 		return this.products.push(product);

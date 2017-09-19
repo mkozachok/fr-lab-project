@@ -18,8 +18,10 @@ export class FiltersComponent implements OnInit {
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
   procuctsType: any[] =  PRODUCT_TYPE_FILTER;
   selected :any;
-  @Input() products2:Product[];
-  @Input() selectedItems:Product[];
+  @Input() products: FirebaseListObservable<any>;
+  @Input() selectedItems: FirebaseListObservable<any>;
+  @Input() productsArray;
+  @Input() selectedItemsArray;
 
   constructor(private productListService: ProductsListService) { 
   };
@@ -28,7 +30,7 @@ export class FiltersComponent implements OnInit {
    };
 
   sorting(prop, propValue) {
-    this.selectedItems = this.productListService.selectProducts(prop, propValue);
-    console.log(this.selectedItems);
+    this.selectedItemsArray = this.productListService.selectProducts(prop, propValue);
+    console.log(this.selectedItemsArray);
   }
 }
