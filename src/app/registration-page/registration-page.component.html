@@ -51,6 +51,9 @@
     </div>
     <input #fileInput type="file" (change)="detectFiles($event)" #photoURLRef="ngModel" accept="image/*"  name="photo" [hidden]="true" ngModel/>
     <md-icon (click)="fileInput.click()" class="mdl-badge">{{ addPhoto }}</md-icon>
+    <p *ngIf="this.downloadedPhoto">
+      Photo has been downloaded
+    </p>
     <button [disabled]="!userForm.form.valid || !this.downloadedPhoto"  md-raised-button type="submit">registrate</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>

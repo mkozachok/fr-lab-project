@@ -1,0 +1,2 @@
+<input #fileInput type="file" (change)="detectFiles($event)" accept="image/*"  name="photo" [hidden]="true"/>
+<md-icon (click)="fileInput.click()" class="mdl-badge">{{ addPhoto }}</md-icon>
