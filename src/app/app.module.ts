@@ -14,6 +14,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
+import { SharedModule } from './shared/shared.module';
+import { AdminPageModule } from './admin-page/admin-page.module';
 
 // App guards goes here
 import { AuthGuard } from './guards/auth.guard';
@@ -22,8 +24,8 @@ import { AdminGuard } from './guards/admin.guard';
 // App components goes here
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
-import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
+//import { AddDesignComponent } from './admin-page/add-menu/add-design/add-design.component';
+//import { AddProductComponent } from './admin-page/add-menu/add-product/add-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -49,6 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { DesignService } from './services/design.service';
+import { AdminService } from './services/admin.service';
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -61,8 +64,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    AddDesignComponent,
-    AddProductComponent,
+    //AddDesignComponent,
+    //AddProductComponent,
     DialogComponent,
     HomepageComponent,
     PosterComponent,
@@ -70,7 +73,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     SearchComponent,
     AddToBasketBtnComponent,
     ViewOneProductComponent,
-    ViewAllProductsComponent
+    ViewAllProductsComponent,
+    PosterComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,9 +92,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule,
+    AdminPageModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AuthGuard, AdminGuard],
+  providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],
   bootstrap: [
     AppComponent

@@ -52,9 +52,16 @@
     }
 
     md-form-field{
+        position: relative;
         display: block;
         margin: 5% auto;
         width: 100%;       
+    }
+
+    /deep/ .spinner-component {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
     }
 
     .edit-photo-button {

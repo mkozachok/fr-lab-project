@@ -14,12 +14,11 @@ export class UserService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
     this.users = db.list('/users');
   }
-  private basePath:string = '/avatars';
+  private basePath: string = '/avatars';
   uploads: FirebaseListObservable<Upload[]>;
 
   logIn(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((success) => console.log(this.afAuth.auth.currentUser));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -29,22 +28,33 @@ export class UserService {
   getUser() {
     return this.afAuth.authState;
   }
+  // PAUi0aWuH5T062teCexxtByBHTB3
+  getUserFromDataBase(userId) {
+    let user = this.db.object('/users/' + userId);
+    return user;
+  }
+
 
   getUserId(){
     return this.afAuth.auth.currentUser.uid;
   }
 
-  isUserLogIn(){
+  isUserLogIn() {
     return this.afAuth.auth.currentUser;
   }
 
-  updateUser(name, photoURL, /*email  password */) {
-    return this.afAuth.auth.currentUser.updateProfile({
+  updateUser(id, name, photoURL, phone, address) {
+     return this.afAuth.auth.currentUser.updateProfile({
       displayName: name,
       photoURL: photoURL
+    }).then(res => {
+      this.getUserFromDataBase(id).set({
+        additionalInfo: {
+          phone: phone,
+          address: address
+        }
+      })
     })
-    //this.afAuth.auth.currentUser.updateEmail(email);
-    //this.afAuth.auth.currentUser.updatePassword(password);
   }
 
 
@@ -54,7 +64,7 @@ export class UserService {
 
   }
 
-  createUserAdditionalInformation(address: string, phone: string) {
+  createUserAdditionalInformation( phone: string, address: string) {
     return this.users.set(
       this.afAuth.auth.currentUser.uid,
       {
@@ -65,7 +75,11 @@ export class UserService {
           address: address
         }
       })
-          .then((success) => console.log(this.afAuth.auth.currentUser))
+      .then((success) => console.log(this.afAuth.auth.currentUser))
+  }
+
+  getUserInformation() {
+
   }
 
 

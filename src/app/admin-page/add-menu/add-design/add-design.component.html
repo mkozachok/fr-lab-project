@@ -1,0 +1,16 @@
+<div class="add-wrapper">
+  <form [formGroup]="designForm" (ngSubmit)="onSubmit()">
+    <md-form-field>
+      <input type="text" placeholder="name" mdInput formControlName="name">
+    </md-form-field>
+    <md-form-field>
+      <input type="text" placeholder="url" mdInput formControlName="url">
+    </md-form-field>
+    <button type="submit" md-raised-button color="primary" class="edit-save-button">
+          Add design
+      </button>
+  </form>
+  <div>
+
+  </div>
+</div>

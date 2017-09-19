@@ -28,5 +28,6 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this._userService.logOut();
+    this.orderService.removeAll();
   }
 }

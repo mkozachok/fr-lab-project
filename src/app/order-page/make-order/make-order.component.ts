@@ -11,6 +11,8 @@ import { MakeOrderService } from '../../services/make-order.service';
 
 import { DialogComponent } from '../../components/dialog/dialog.component';
 
+import { Subscription } from "rxjs";
+
 @Component({
   selector: 'app-make-order',
   templateUrl: './make-order.component.html',
@@ -18,32 +20,42 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
   providers: [MakeOrderService, OrderService]
 })
 export class MakeOrderComponent implements OnInit {
-
-	autorised = false;
-	autorisedUser = {};
+	autorised: boolean;
+	user = {
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		address: ''
+	}
+	userSubscribe: Subscription;
+  	additionalUserInfoSubscribe: Subscription;
 
 	constructor(private userService: UserService, private afAuth: AngularFireAuth, 
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
 		public dialog: MdDialog, private router: Router) {
-		this.userService.getUser().subscribe(res => {
-			if (res) {
-				this.autorised = true;
-				this.autorisedUser = this.userService.getUser();
-				console.log(this.autorisedUser);
+
+	}
+
+	ngOnInit() {
+		this.userSubscribe = this.userService.getUser().subscribe(res => {
+			this.autorised = res ? true : false;
+			if (this.autorised) {
+				this.user.firstName = res.displayName.split(' ')[0];
+				this.user.lastName = res.displayName.split(' ')[1],
+				this.user.email = res.email;
+
+				this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
+					this.user.address = res.additionalInfo.phone;
+					this.user.phone = res.additionalInfo.address;
+				});
 			}
 		});
 	}
 
-	ngOnInit() {
-		
-	}
-
 	onSubmit(data: any) {
-		if (!this.autorised) {
-			this.makeOrderService.setOrder("0", this.orderService.getAll(), data);
-		} else {
-			this.makeOrderService.setOrder(this.userService.getUserId(), this.orderService.getAll(), {});
-		}
+		let userId = !this.autorised ? '0' : this.userService.getUserId();
+		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount());
 		this.openDialog();
 	}
 
@@ -57,4 +69,11 @@ export class MakeOrderComponent implements OnInit {
 			this.orderService.removeAll();
    		});
 	}
+
+	ngOnDestroy(): void {
+		if (this.autorised) {
+			this.userSubscribe.unsubscribe();
+	    	this.additionalUserInfoSubscribe.unsubscribe();
+		}
+  	}
 }

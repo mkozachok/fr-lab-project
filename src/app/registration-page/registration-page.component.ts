@@ -12,7 +12,8 @@ export class RegistrationPageComponent implements OnInit {
   error: any;
   selectedFiles: FileList;
   currentUpload: Upload;
-
+  downloadedPhoto: boolean = false;
+  addPhoto = "add_a_photo";
 
   constructor(private _userService: UserService, private router: Router) { }
 
@@ -29,6 +30,7 @@ export class RegistrationPageComponent implements OnInit {
 
   detectFiles(event) {
       this.selectedFiles = event.target.files;
+      this.downloadedPhoto = true;
   }
 
   upload(value: any) {
@@ -36,4 +38,6 @@ export class RegistrationPageComponent implements OnInit {
     this.currentUpload = new Upload(file);
     this._userService.createPrimaryInformation(this.currentUpload, value.name, value.surname);
   }
+
+
 }

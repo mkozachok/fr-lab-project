@@ -1,4 +1,8 @@
-.add-design-wrapper{
+/deep/ .mat-tab-label{
+	min-width: calc(100%/3) !important;
+}
+
+/deep/ .add-wrapper{
     padding: 2vw;
     form {
         display: flex;

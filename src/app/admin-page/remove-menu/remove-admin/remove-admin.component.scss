@@ -1,0 +1,20 @@
+@import '../../../../variables.scss';
+
+
+
+app-loader {
+    display: block;
+    margin: 0 auto;
+}
+
+.name {
+    padding-right: 2vw;
+}
+
+.delete {
+    &:hover {
+        cursor: pointer;
+        color: $darkRead;
+        transition: ease all .2s;
+    }
+}

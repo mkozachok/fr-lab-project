@@ -22,7 +22,7 @@
 
       <md-tab label="Category">
           <div class="gategory_images">
-            <div class="category_img"*ngFor="let image of category">
+            <div class="category_img"*ngFor="let image of items | async">
                   <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
             </div>
           </div>
