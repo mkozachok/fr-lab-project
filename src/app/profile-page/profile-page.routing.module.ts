@@ -26,13 +26,14 @@ const profilePageRoutes: Routes = [
             {
                 path: 'about-me',
                 component: AboutMeComponent
-            }
+            },
+/*             {
+                path: '**',
+                redirectTo: ''
+            } */
         ]
     },
-    {
-        path: '**',
-        redirectTo: ''
-    }
+
 
 ];
 
