@@ -25,4 +25,8 @@ export class AdminService {
     return this.admins;
   }
 
+  deleteAdmin(id){
+    this.db.database.ref('/admins').child(id).remove();
+  }
+
 }

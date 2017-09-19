@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { SharedModule } from './shared/shared.module';
+import { AdminPageModule } from './admin-page/admin-page.module';
 
 // App guards goes here
 import { AuthGuard } from './guards/auth.guard';
@@ -27,10 +28,6 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
 import { PosterComponent } from './homepage/poster/poster.component';
-
-import { AddDesignComponent } from './components/admin-page/add-design/add-design.component';
-import { AddProductComponent } from './components/admin-page/add-product/add-product.component';
-import { AddAdminComponent } from './components/admin-page/add-admin/add-admin.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -63,9 +60,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HeaderComponent,
     FooterComponent,
     PosterComponent,
-    AddDesignComponent,
-    AddProductComponent,
-    AddAdminComponent,
     DialogComponent
   ],
   imports: [
@@ -85,7 +79,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ReactiveFormsModule,
     NgxPaginationModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    AdminPageModule
   ],
   providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],

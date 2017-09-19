@@ -8,7 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 
@@ -16,6 +16,11 @@ const routes: Routes = [
     {
         path: '',
         component: HomepageComponent
+    },
+    {
+        path: 'admin-page',
+        component: AdminPageComponent,
+        //canActivate: [AdminGuard]
     },
     {
         path: 'profile-page',
@@ -44,11 +49,7 @@ const routes: Routes = [
         path: 'order-page/make-order',
         component: MakeOrderComponent
     },
-    {
-        path: 'admin-page',
-        component: AdminPageComponent,
-        //canActivate: [AdminGuard]
-    }
+
 ];
 
 @NgModule({

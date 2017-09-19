@@ -1,0 +1,47 @@
+@import "../../variables.scss";
+
+.admin-page {
+    display: flex;
+    height: 100%;
+
+    .side-menu {
+        position: fixed;
+        justify-content: center;
+        width: 20vw;
+        height: 100%;
+
+        a {
+            color: $profileSideMenuButtons;
+            display: block;
+            text-decoration: none;
+            height: 100%;
+            padding: 1.5vw 1vw;
+        }
+
+        .side-menu-button {
+            display: block;
+            width: 20vw;
+            height: 5vw;
+            font-size: 1.5vw;
+            line-height: 1.5vw;
+            text-align: left;
+            padding: 0;
+            transition: ease all .2s;
+
+            &:hover {
+                background-color: $profileSideMenuButtonsHoverBg;
+
+                a {
+                    color: $profileSideMenuButtonsHover;
+                }
+            }      
+        }
+    }
+
+    .content {
+        flex: 1;
+        padding-left: 20%;
+    }
+
+
+}
