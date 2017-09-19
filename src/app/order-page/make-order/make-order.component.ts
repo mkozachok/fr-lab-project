@@ -53,7 +53,7 @@ export class MakeOrderComponent implements OnInit {
 
 	onSubmit(data: any) {
 		let userId = !this.autorised ? '0' : this.userService.getUserId();
-		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data);
+		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount());
 		this.openDialog();
 	}
 
@@ -67,4 +67,9 @@ export class MakeOrderComponent implements OnInit {
 			this.orderService.removeAll();
    		});
 	}
+
+	ngOnDestroy(): void {
+	    this.userSubscribe.unsubscribe();
+	    this.additionalUserInfoSubscribe.unsubscribe();
+  	}
 }
