@@ -1,19 +1,24 @@
 <div class="remove-wrapper">
-<!--     <app-loader *ngIf="showSpinner"></app-loader>
-    <div class="table-wrapper" *ngIf="!showSpinner">
-            <md-form-field>
-                <input mdInput
-                        placeholder="Admin searching" 
-                        [(ngModel)] = "searchPhrase" 
-                        (ngModelChange) = "filterItem(searchPhrase)" 
-                        class="search" 
-                        name="userFilter"> 
-              </md-form-field>
-        <md-toolbar class="table-row" *ngFor="let admin of admins" (click)="deleteAdmin($event)"> 
-              <span mdTooltipPosition="right" class="name">{{ admin.name }}</span>
-              <span>{{ admin.$key }}</span>
-              <span class="spacer"></span>
-              <md-icon class="delete">delete</md-icon>
-      </md-toolbar>  
-    </div> -->
+  <app-loader *ngIf="showSpinner"></app-loader>
+  <div class="table-wrapper" *ngIf="!showSpinner">
+    <md-form-field>
+      <input mdInput placeholder="Admin searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
+        name="userFilter">
+    </md-form-field>
+    <md-toolbar class="table-row">
+      <span>Name</span>
+      <span>Category</span>
+      <span>Owner</span>
+    </md-toolbar>
+    <md-toolbar class="table-row" *ngFor="let product of productList" (click)="deleteAdmin($event)" on-mouseover="onHover($event)">
+      <span hidden>{{ product.$key}}</span>
+      <!-- <img src="{{ product.svg }}" alt="productImg"> -->
+      <span mdTooltipPosition="right" class="name">{{ product.name }}</span>
+      <span>{{ product.category }}</span>
+      <span>{{ product.owner }}</span>
+      <img class="img hidden" src="{{ product.svg }}">
+      <span class="spacer"></span>
+      <md-icon class="delete">delete</md-icon>
+    </md-toolbar>
   </div>
+</div>
