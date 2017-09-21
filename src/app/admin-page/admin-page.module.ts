@@ -14,6 +14,9 @@ import { RemoveDesignComponent } from './remove-menu/remove-design/remove-design
 import { SharedModule } from '../shared/shared.module';
 import { AdminService } from '../services/admin.service';
 import { SearchFilterPipe } from '../pipes/searchingFileterPipe';
+import { ProductComponent } from './remove-menu/remove-product/product/product.component';
+import { AdminComponent } from './remove-menu/remove-admin/admin/admin.component';
+import { DesignComponent } from './remove-menu/remove-design/design/design.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,10 @@ import { SearchFilterPipe } from '../pipes/searchingFileterPipe';
     RemoveAdminComponent,
     RemoveProductComponent,
     RemoveDesignComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    ProductComponent,
+    AdminComponent,
+    DesignComponent
   ],
   providers: [AdminService]
 })
