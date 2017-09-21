@@ -130,6 +130,7 @@ export class RedactorPageComponent{
 
   handleImage = function(e){
     let canvas = this.getCanvas();
+    this.categoryName = "custom design";
     var reader:any,
     target: EventTarget;
     reader = new FileReader();
