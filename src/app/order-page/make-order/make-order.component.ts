@@ -55,8 +55,9 @@ export class MakeOrderComponent implements OnInit {
 
 	onSubmit(data: any) {
 		let userId = !this.autorised ? '0' : this.userService.getUserId();
-		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount());
-		this.openDialog();
+		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount()).then(resolve => {
+			this.openDialog();
+		});
 	}
 
 	openDialog() {

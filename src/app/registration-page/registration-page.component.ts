@@ -18,6 +18,7 @@ export class RegistrationPageComponent implements OnInit {
   constructor(private _userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    console.log(this.selectedFiles)
   }
   onSubmit(value: any) {
     this.error = null;
@@ -29,8 +30,12 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   detectFiles(event) {
-      this.selectedFiles = event.target.files;
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles.length === 0) {
+      this.downloadedPhoto = false;
+    } else {
       this.downloadedPhoto = true;
+    }
   }
 
   upload(value: any) {

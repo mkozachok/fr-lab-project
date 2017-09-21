@@ -5,6 +5,7 @@ import { ProductsListService } from '../../services/products-list.service';
 import { OrderService } from '../../order-page/order-page.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-view-all-products',
@@ -18,24 +19,28 @@ export class ViewAllProductsComponent implements OnInit {
   @Output() click = new EventEmitter();
   @Input() products: FirebaseListObservable<any>;
   @Input() selectedItems;
+  
 
-  constructor(private productListService: ProductsListService, private orderService: OrderService) { 
+  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) { 
   };
 
   getAll():void {
     this.productListService.getAll().subscribe(res=> {
       this.selectedItems = res;
-      //console.log(this.selectedItems);
     });
-    //this.productListService.getAll().then(selectedItems => this.selectedItems = selectedItems);
-    
+    return this.selectedItems;
   };
 
   addToCart(product):void {
     this.orderService.addItem(product);
+    let config = new MdSnackBarConfig();
+    config.extraClasses = ['success-snackbar'];
+    config.duration = 1300;
+    this.snackBar.open('This product has been added to your shoping cart', '', config);
   }
 
   ngOnInit():void {
     this.getAll();
+    console.log(this.selectedItems);
    };
 }

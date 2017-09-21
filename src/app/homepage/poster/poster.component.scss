@@ -4,6 +4,9 @@
     padding: 150px 10px;
     text-align: center;
     box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    color: #555;
 
     button {
         margin: 0 auto;
@@ -14,5 +17,10 @@
         transition: ease all .2s;
         font-family: 'Quicksand', sans-serif;
         font-weight: 400;
+    }
+
+    .or {
+        padding: 20px 30px;
+        font-size: 30px;
     }
 }

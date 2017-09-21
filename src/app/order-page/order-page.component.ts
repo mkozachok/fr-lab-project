@@ -39,7 +39,7 @@ export class OrderPageComponent implements OnInit {
 	}
 
 	navigate() {
-    	this.router.navigate(['/order-page/make-order']);
+    	this.router.navigate(['make-order']);
   	}
 
 	getOrders(): void {

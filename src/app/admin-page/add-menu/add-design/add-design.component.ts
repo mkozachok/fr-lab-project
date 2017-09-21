@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { DesignService } from '../../../services/design.service';
 
@@ -10,32 +10,46 @@ import { DesignService } from '../../../services/design.service';
 })
 export class AddDesignComponent implements OnInit {
   designForm: FormGroup
+  name: string;
+  ReferenceToDesigns: string = 'designs';
 
   constructor(
     private _formBuilder: FormBuilder,
     public snackBar: MdSnackBar,
     private _designService: DesignService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.designForm = this._formBuilder.group({
-      name: [],
-      url: []
+      name: [null,
+        [
+          Validators.required
+        ]
+      ]
     })
   }
 
   onSubmit(): void {
-    
-    this._designService.setDesign(this.designForm.value).then(resolve => {
-      this.openSnackBar('The produc has been saved', 'success');
-    }).catch(error => {
-      this.openSnackBar(error.name, 'error');
-    });
+    this.name = this.designForm.value.name;
+
   }
 
   openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 2000,
+    });
+  }
+
+  onNotify(url) {
+    this._designService.setDesign({
+      name: this.name,
+      photoUrl: url
+    }).then(resolve => {
+      this.openSnackBar('The produc has been saved', 'success');
+    }).catch(error => {
+      this.openSnackBar(error.name, 'error');
     });
   }
 }
