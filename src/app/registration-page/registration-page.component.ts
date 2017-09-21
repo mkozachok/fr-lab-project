@@ -19,7 +19,6 @@ export class RegistrationPageComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.selectedFiles)
-
   }
   onSubmit(value: any) {
     this.error = null;

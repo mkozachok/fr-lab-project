@@ -3,9 +3,6 @@
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate >
       <md-form-field>
         <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
-        <!-- <md-error *ngIf="userForm.controls['firstName'].hasError('required')">
-          First name <strong>cannot be blank</strong>
-        </md-error> -->
       </md-form-field>
       <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
         <p [hidden]="!emailRef.errors.required">
@@ -26,6 +23,4 @@
     <button [disabled]="!userForm.form.valid" md-raised-button type="submit">log in</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
-  <!-- <app-file-upload></app-file-upload>
-  <button md-raised-button (click)="upload()">send picture</button> -->
 </div>

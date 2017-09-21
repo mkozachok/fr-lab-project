@@ -1,25 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Upload } from '../../models/upload-model';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
+
+
 export class FileUploadComponent implements OnInit {
   selectedFiles: FileList;
   currentUpload: Upload;
   downloadedPhoto: boolean = false;
   addPhoto = "insert_photo";
-  constructor() { }
+  // @Output() uploadEvent = new EventEmitter();
+  constructor(private _uploadService: UploadService) {
+    // this.uploadEvent = () => {
+    //
+    // }
+}
 
   ngOnInit() {
   }
-  detectFiles(event) {
-      this.selectedFiles = event.target.files;
-      this.downloadedPhoto = true;
-  }
 
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles.length === 0) {
+      this.downloadedPhoto = false;
+    } else {
+      this.downloadedPhoto = true;
+    }
+      console.log(this.downloadedPhoto)
+    }
+
+    upload() {
+      let file = this.selectedFiles.item(0);
+      this.currentUpload = new Upload(file);
+      this._uploadService.pushUpload(this.currentUpload, 'avatars');
+    }
 
 
 }

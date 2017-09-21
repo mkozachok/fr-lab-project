@@ -3,6 +3,7 @@ import { LoaderComponent } from '../components/loader/loader.component';
 import { FileUploadComponent } from '../components/file-upload/file-upload.component';
 import { MaterialModule } from '@angular/material';
 import * as firebase from 'firebase';
+import { UploadService } from '../services/upload.service';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import * as firebase from 'firebase';
     MaterialModule
   ],
   declarations: [LoaderComponent, FileUploadComponent],
-  exports: [LoaderComponent, FileUploadComponent]
+  exports: [LoaderComponent, FileUploadComponent],
+  providers: [UploadService]
 })
 export class SharedModule { }

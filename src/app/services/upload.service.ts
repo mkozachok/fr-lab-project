@@ -7,22 +7,23 @@ import * as firebase from 'firebase';
 export class UploadService {
   private basePath: string = '/avatars';
   constructor(private db: AngularFireDatabase) { }
-  pushUpload(upload: Upload) {
+  pushUpload(upload: Upload, path: string) {
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    const uploadTask = storageRef.child(`${path}/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      null,
+      null,
       () => {
         // upload success
-        upload.url = uploadTask.snapshot.downloadURL
-        upload.name = upload.file.name
-        this.saveFileData(upload)
-        return undefined
+        upload.url = uploadTask.snapshot.downloadURL;
+        upload.name = upload.file.name;
+        this.saveFileData(upload, path);
       }
     );
   }
-  saveFileData(upload: Upload) {
-    this.db.list(`${this.basePath}/`).push(upload);
+  saveFileData(upload: Upload, path: string) {
+    this.db.list(`${path}/`).set('photoURL', upload.url);
   }
 
   // Writes the file details to the realtime db
