@@ -1,0 +1,8 @@
+<md-toolbar class="table-row">
+  <span mdTooltipPosition="right" class="name">{{ name }}</span>
+  <span>{{ category }}</span>
+  <span>{{ owner }}</span>
+ <!--  <img [class.showImg]="show" class="img" src="{{ svg }}"> -->
+  <span class="spacer"></span>
+  <md-icon class="delete" (click)="onDelete()" >delete</md-icon>
+</md-toolbar>

@@ -13,7 +13,6 @@ import { Subscription } from "rxjs";
   styleUrls: ['./about-me.component.scss'],
 })
 export class AboutMeComponent implements OnInit, OnDestroy {
-  showLoaderAddInfo = true;
   showLoader = true;
   userForm: FormGroup;
   user = {
@@ -78,7 +77,6 @@ export class AboutMeComponent implements OnInit, OnDestroy {
 
     return this.subscribeToGetUser = this._userService.getUser()
     .subscribe(res => {
-      this.showLoader = false;
       this.user = {
         firstName: res.displayName.split(' ')[0],
         lastName: res.displayName.split(' ')[1],
@@ -92,7 +90,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
       this.subscribeToGetUserFromDataBase = this._userService
         .getUserFromDataBase(this.user.id)
         .subscribe(res => {
-          this.showLoaderAddInfo = false;
+          this.showLoader = false;
           this.userAdditionalInfo = {
             address: res.additionalInfo.address,
             phone: res.additionalInfo.phone

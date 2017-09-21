@@ -15,9 +15,20 @@ export class DesignService {
     return this.designs.push(design);
   }
 
-  getDesigns(): FirebaseListObservable<any[]>{
-    let content = this.db.list('/redactor/design');
-    return content;
+  getDesigns() {
+    return this.db.list('/redactor/design');
+  }
+
+  deleteDesign(id):firebase.Promise<any>{
+      return this.db.database.ref('/redactor/design').child(id).remove();
+    
+  }
+
+  findDesign(phrase, arrayOfDesigns) {
+    let transformedPhrase = phrase.toLowerCase();
+    return arrayOfDesigns.filter(x => {
+      return x['name'].toLowerCase().indexOf(transformedPhrase) >= 0;
+    });
   }
 
 }

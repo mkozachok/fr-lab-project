@@ -21,12 +21,12 @@ export class AdminService {
     return this.db.list('/admins/' + id);
   }
 
-  getAdminsList() {
+  getAdminsList(): any {
     return this.admins;
   }
 
-  deleteAdmin(id) {
-    this.db.database.ref('/admins').child(id).remove();
+  deleteAdmin(id): firebase.Promise<any> {
+    return this.db.database.ref('/admins').child(id).remove();
   }
 
   findAdmin(phrase, arrayOfAdmins) {
@@ -35,7 +35,6 @@ export class AdminService {
       return x['name'].toLowerCase()
         .indexOf(transformedPhrase) >= 0 || x['$key'].toLowerCase().indexOf(transformedPhrase) >= 0;
     });
-
   }
 }
 

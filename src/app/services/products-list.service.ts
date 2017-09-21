@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product-model';
 import { PRODUCTS } from '../homepage/products';
@@ -19,7 +19,7 @@ export class ProductsListService {
 		this.selectedItems = this.products;
 	}
 
-	getAll(): Observable<Array<any>>{
+	getAll(): FirebaseListObservable<any[]> {
 		return this.selectedItems;
 	}
 
@@ -43,18 +43,34 @@ export class ProductsListService {
 		return this.selectedItems;
 	}
 
-	getItem(item):Product {
+	getItem(item): Product {
 		let index = PRODUCTS.indexOf(item);
 		return PRODUCTS[index];
 	};
 
-	getUserTemplates (currentUser, templates:any[]) {
+	getUserTemplates(currentUser, templates: any[]) {
 		templates = currentUser.gallery;
 		return templates;
 	}
-	
+
 	setProduct(product: Product): firebase.Promise<void> {
 		return this.products.push(product);
-	  }
-	  
+	}
+
+	getProducts() {
+		return this.products;
+	}
+
+	deleteProduct(id) {
+		this.db.database.ref('/products').child(id).remove();
+	}
+
+	findProduct(phrase, arrayOfProducts) {
+		let transformedPhrase = phrase.toLowerCase();
+		return arrayOfProducts.filter(x => {
+			return x['category'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+				x['name'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+				x['owner'].toLowerCase().indexOf(transformedPhrase) >= 0;
+		});
+	}
 }
