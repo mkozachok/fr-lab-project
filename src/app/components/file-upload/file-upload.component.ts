@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Upload } from '../../models/upload-model';
 import { UploadService } from '../../services/upload.service';
 
@@ -15,12 +15,14 @@ export class FileUploadComponent implements OnInit {
   downloadedPhoto: boolean = false;
   addPhoto = "insert_photo";
   photoUrl: string;
+  @Input() saveUrl: string;
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
   // @Output() uploadEvent = new EventEmitter();
   constructor(private _uploadService: UploadService) {
     // this.uploadEvent = () => {
     //
     // }
+    
   }
 
   ngOnInit() {
@@ -40,7 +42,8 @@ export class FileUploadComponent implements OnInit {
     let counter: number = 0;
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    this._uploadService.pushUpload(this.currentUpload, 'productsPhoto');
+    console.log(this.saveUrl)
+    this._uploadService.pushUpload(this.currentUpload, this.saveUrl);
     let timer = setInterval(() => {
       counter++;
       this.photoUrl = this._uploadService.getUrl();

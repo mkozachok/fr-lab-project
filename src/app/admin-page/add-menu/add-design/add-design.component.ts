@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { DesignService } from '../../../services/design.service';
 
@@ -11,6 +11,7 @@ import { DesignService } from '../../../services/design.service';
 export class AddDesignComponent implements OnInit {
   designForm: FormGroup
   name: string;
+  ReferenceToDesigns: string = 'designs';
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -18,11 +19,15 @@ export class AddDesignComponent implements OnInit {
     private _designService: DesignService
   ) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.designForm = this._formBuilder.group({
-      name: []
+      name: [null,
+        [
+          Validators.required
+        ]
+      ]
     })
   }
 
