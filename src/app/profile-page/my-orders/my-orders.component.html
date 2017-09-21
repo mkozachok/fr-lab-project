@@ -1,15 +1,12 @@
-<!-- <div class="head">
-	<div>
-		Date
-	</div>
-</div> -->
 <div class="container">
 	<md-accordion>
 		<md-expansion-panel *ngFor="let order of usersOrders">
 		  <md-expansion-panel-header>
+		  	<md-panel-title>
+      			{{order.date | date :'medium'}}
+    		</md-panel-title>
 		    <md-panel-description>
-		    	<p>{{order.date | date :'medium'}}</p>
-		      	<p>{{order.totalSum}} UAH</p>
+		    	Amount: {{order.totalSum}} UAH
 		    </md-panel-description>
 		  </md-expansion-panel-header>
 		  <div class="items">

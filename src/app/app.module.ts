@@ -6,8 +6,6 @@ import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
-import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
-
 // firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -24,14 +22,23 @@ import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 
 // App components goes here
-import { HomepageComponent } from './homepage/homepage.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { AppComponent } from './app.component';
-import { PosterComponent } from './homepage/poster/poster.component';
-
+//import { AddDesignComponent } from './admin-page/add-menu/add-design/add-design.component';
+//import { AddProductComponent } from './admin-page/add-menu/add-product/add-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+
+// homepage components
+import { HomepageComponent } from './homepage/homepage.component';
+import { PosterComponent } from './homepage/poster/poster.component';
+import { SearchComponent } from './homepage/search/search.component';
+import { FiltersComponent } from './homepage/filters/filters.component';
+import { AddToBasketBtnComponent } from './homepage/add-to-basket-btn/add-to-basket-btn.component';
+import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
+import { ViewAllProductsComponent } from './homepage/view-all-products/view-all-products.component';
+
 
 
 // Materials modules goes here
@@ -46,7 +53,6 @@ import { ProductsListService } from './services/products-list.service';
 import { DesignService } from './services/design.service';
 import { AdminService } from './services/admin.service';
 
-
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -54,11 +60,20 @@ import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent,
     RedactorPageComponent,
     routingComponents,
     HeaderComponent,
     FooterComponent,
+    //AddDesignComponent,
+    //AddProductComponent,
+    DialogComponent,
+    HomepageComponent,
+    PosterComponent,
+    FiltersComponent,
+    SearchComponent,
+    AddToBasketBtnComponent,
+    ViewOneProductComponent,
+    ViewAllProductsComponent,
     PosterComponent,
     DialogComponent
   ],
@@ -74,7 +89,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    Ng2FilterPipeModule,
     HttpModule,
     ReactiveFormsModule,
     NgxPaginationModule,

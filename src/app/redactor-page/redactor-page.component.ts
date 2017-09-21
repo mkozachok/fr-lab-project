@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import mergeImages from 'merge-images';
 import $  from "jquery";
 import { fabric } from 'fabric';
-
+import { Design } from '../models/design-model';
+import { DesignService } from '../services/design.service';
+import {FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +22,12 @@ export class RedactorPageComponent{
   selectedCategory = {};
   name = "";
   resultImg = "";
+  items: FirebaseListObservable<any>;
 
+  constructor(private designService: DesignService){}
+  ngOnInit() {
+   this.items = this.designService.getDesigns();
+ }
   selectTemplate = function(template){
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
@@ -72,7 +79,7 @@ export class RedactorPageComponent{
       var image = new fabric.Image(img);
       image.set({
           left: 170,
-          top: 200
+          top: 200,
       });
       self.drawImg(image);
 
@@ -126,6 +133,11 @@ removeImg = function(){
 	}
 	this.getCanvas().remove(object);
 }
+// getDesignList = function(){
+//   this.designService.getDesigns().forEach(tt => console.log(tt));
+//   return this.designService.getDesigns();
+//   // return [];
+// }
    templates = [
       {
         type: "tshirtm",

@@ -1,0 +1,21 @@
+.leftcol {
+    width: 17%;
+    margin-right: 1%;
+    
+}
+
+md-list-item {
+    transition: ease all .2s;
+    cursor: pointer;
+}
+
+md-list-item:hover {
+    background: #7b0041;
+    color: #eee;
+}
+
+md-divider {
+    margin: 20px 0;
+}
+
+.active {background:red;}
