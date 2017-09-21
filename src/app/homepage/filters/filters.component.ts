@@ -13,15 +13,12 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class FiltersComponent implements OnInit {
-  @Input()
   @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
   procuctsType: any[] =  PRODUCT_TYPE_FILTER;
-  selected :any;
   @Input() products: FirebaseListObservable<any>;
-  @Input() selectedItems: FirebaseListObservable<any>;
-  @Input() productsArray;
-  @Input() selectedItemsArray;
+  @Input() selectedItems;
+  public selected: string = '';
 
   constructor(private productListService: ProductsListService) { 
   };
@@ -30,7 +27,14 @@ export class FiltersComponent implements OnInit {
    };
 
   sorting(prop, propValue) {
-    this.selectedItemsArray = this.productListService.selectProducts(prop, propValue);
-    console.log(this.selectedItemsArray);
+    this.productListService.selectProducts(prop, propValue).subscribe(res=> {
+      this.selectedItems = res;
+    });
+    console.log(this.selectedItems);
+    return this.selectedItems;
   }
+
+  navChanged (child: string){
+    this.selected = child
+  } 
 }

@@ -18,6 +18,7 @@ export class ViewAllProductsComponent implements OnInit {
   @Output() click = new EventEmitter();
   @Input() products: FirebaseListObservable<any>;
   @Input() selectedItems;
+  
 
   constructor(private productListService: ProductsListService, private orderService: OrderService) { 
   };
@@ -25,13 +26,12 @@ export class ViewAllProductsComponent implements OnInit {
   getAll():void {
     this.productListService.getAll().subscribe(res=> {
       this.selectedItems = res;
-      //console.log(this.selectedItems);
     });
-    //this.productListService.getAll().then(selectedItems => this.selectedItems = selectedItems);
-    
+    return this.selectedItems;
   };
 
   ngOnInit():void {
     this.getAll();
+    console.log(this.selectedItems);
    };
 }
