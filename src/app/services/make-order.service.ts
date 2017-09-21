@@ -17,14 +17,12 @@ export class MakeOrderService {
 		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum });
 	}
 
-	getUsersOrder(userId: string) {
-		let usersOrders= [];
-		let items = this.orders.map(i=>{return i});
-		items.forEach(i=>i.forEach(e=>{
-			if (e.userId == userId) {
-				usersOrders.push(e);
-			}
-		}));
-		return usersOrders;
+	getAll() {
+		return this.orders;
+	}
+
+	getUsersOrder(userId: string, allOrders: FirebaseListObservable<any> ) {
+		let items = allOrders.map(i => {return i});
+		return items.filter(el => el.userId == userId);
 	}
 }
