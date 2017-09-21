@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class UploadService {
+  url: string;
   private basePath: string = '/avatars';
   constructor(private db: AngularFireDatabase) { }
   pushUpload(upload: Upload, path: string) {
@@ -18,10 +19,15 @@ export class UploadService {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        this.saveFileData(upload, path);
+        this.url = upload.url;
       }
     );
   }
+
+  getUrl(){
+    return this.url;
+  }
+
   saveFileData(upload: Upload, path: string) {
     this.db.list(`${path}/`).set('photoURL', upload.url);
   }
@@ -37,4 +43,5 @@ export class UploadService {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${this.basePath}/${name}`).delete()
   }
+
 }
