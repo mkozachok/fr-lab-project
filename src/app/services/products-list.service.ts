@@ -1,64 +1,76 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product-model';
 import { PRODUCTS } from '../homepage/products';
 import { DOCUMENT } from '@angular/platform-browser';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable()
 
 export class ProductsListService {
 	products: FirebaseListObservable<any>;
-	selectedItems: FirebaseListObservable<any>;
+	selectedItems;
 	product: Product;
-	productsArray: Product[];
-	selectedItemsArray: Product[];
-
 	
 	constructor(private db: AngularFireDatabase) {
 		this.db = db;
-	  	this.products = db.list('/products');
+		this.products = db.list('/products');  
+		this.selectedItems = this.products;
 	}
 
-	getAll(): FirebaseListObservable<any[]>{
-		this.selectedItems = this.products;
+	getAll(): FirebaseListObservable<any[]> {
 		return this.selectedItems;
 	}
 
 	selectProducts(prop, propValue) {
-		let productsArray = JSON.parse(JSON.stringify(this.products));
-		let selectedItemsArray = JSON.parse(JSON.stringify(this.selectedItems));
-		selectedItemsArray = productsArray.filter(function(obj) {
-		  if(prop === 'category')
-				return obj.category === propValue;
-			else if (prop === 'type')
-				return obj.type === propValue;
-			});
-		return selectedItemsArray;
+		this.selectedItems = this.products.map(items => {
+			const filtered = items.filter(item => item.category === propValue || item.type === propValue);
+			return filtered;
+		});
+		return this.selectedItems;
 	};
 
-	search(arr, originalArr, searchTerm): Product[] {
+	search(searchTerm) {
 		let term = searchTerm;
-		arr = originalArr.filter(function(tag) {
-			return tag.name.indexOf(term) >= 0 ||  tag.category.indexOf(term) >= 0 || tag.type.indexOf(term) >= 0
-		}); 
-		console.log(arr);
-		return arr;
+		this.selectedItems = this.products.map(items => {
+			const filtered = items.filter(function(tag) {
+				return tag.name.indexOf(term) >= 0 ||  tag.category.indexOf(term) >= 0 || tag.type.indexOf(term) >= 0
+			}); 
+			return filtered;
+		});
+		console.log(this.selectedItems);
+		return this.selectedItems;
 	}
 
-	getItem(item):Product {
+	getItem(item): Product {
 		let index = PRODUCTS.indexOf(item);
 		return PRODUCTS[index];
 	};
 
-	getUserTemplates (currentUser, templates:any[]) {
+	getUserTemplates(currentUser, templates: any[]) {
 		templates = currentUser.gallery;
 		return templates;
 	}
-	
+
 	setProduct(product: Product): firebase.Promise<void> {
 		return this.products.push(product);
 	}
-	  
+
+	getProducts() {
+		return this.products;
+	}
+
+	deleteProduct(id) {
+		this.db.database.ref('/products').child(id).remove();
+	}
+
+	findProduct(phrase, arrayOfProducts) {
+		let transformedPhrase = phrase.toLowerCase();
+		return arrayOfProducts.filter(x => {
+			return x['category'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+				x['name'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+				x['owner'].toLowerCase().indexOf(transformedPhrase) >= 0;
+		});
+	}
 }

@@ -1,19 +1,23 @@
 <div class="remove-wrapper">
-<!--     <app-loader *ngIf="showSpinner"></app-loader>
-    <div class="table-wrapper" *ngIf="!showSpinner">
-            <md-form-field>
-                <input mdInput
-                        placeholder="Admin searching" 
-                        [(ngModel)] = "searchPhrase" 
-                        (ngModelChange) = "filterItem(searchPhrase)" 
-                        class="search" 
-                        name="userFilter"> 
-              </md-form-field>
-        <md-toolbar class="table-row" *ngFor="let admin of admins" (click)="deleteAdmin($event)"> 
-              <span mdTooltipPosition="right" class="name">{{ admin.name }}</span>
-              <span>{{ admin.$key }}</span>
-              <span class="spacer"></span>
-              <md-icon class="delete">delete</md-icon>
-      </md-toolbar>  
-    </div> -->
+  <app-loader *ngIf="showSpinner"></app-loader>
+  <div class="table-wrapper" *ngIf="!showSpinner">
+    <md-form-field>
+        <input mdInput placeholder="Product searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
+          name="productFilter">
+      </md-form-field>
+    <md-toolbar class="table-row">
+      <span>Name</span>
+      <span>Category</span>
+      <span>Owner</span>
+    </md-toolbar>
+    <app-product
+    [class.showImg] = "onHover"
+     *ngFor="let product of productList"
+      [name]="product.name"
+      [$key]="product.$key"
+      [svg]="product.svg"
+      [category]="product.category"
+      [owner]="product.owner"
+      ></app-product>
   </div>
+</div>

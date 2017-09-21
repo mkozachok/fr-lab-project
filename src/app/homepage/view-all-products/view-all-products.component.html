@@ -13,5 +13,5 @@
    <button (click)="addToCart(product)">add to my card</button>
   </div>  
 </div>
-<pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+<pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination"></pagination-controls>
 <div *ngIf = " selectedItems?.length === 0" class="noResults">No results</div>

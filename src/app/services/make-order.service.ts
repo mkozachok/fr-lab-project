@@ -12,9 +12,9 @@ export class MakeOrderService {
 		this.orders = db.list('/orders');
 	}
 
-	setOrder(userid: string, order: Order[], user: any, totalSum: number) {
+	setOrder(userid: string, order: Order[], user: any, totalSum: number): firebase.Promise<void> {
 		let currentDate = firebase.database.ServerValue.TIMESTAMP;
-		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum }).then(res=>console.log(res));
+		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum });
 	}
 
 	getUsersOrder(userId: string) {

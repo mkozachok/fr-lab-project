@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
 
 @Component({
   selector: 'app-poster',

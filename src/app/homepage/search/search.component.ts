@@ -13,7 +13,8 @@ import { Observable } from 'rxjs/Observable';
 export class SearchComponent implements OnInit {
   @Input()
   @Output() click = new EventEmitter();
-  selectedItems: Product[];
+  @Input() products: FirebaseListObservable<any>;
+  @Input() selectedItems;
 
   constructor(private productListService: ProductsListService) { 
   };
@@ -21,7 +22,10 @@ export class SearchComponent implements OnInit {
   ngOnInit():void {
    };
 
-  search(arr:Product[], originalArr:Product[], searchTerm) {
-    this.selectedItems = this.productListService.search(arr, originalArr, searchTerm);
+  search(arr, originalArr, searchTerm) {
+    this.productListService.search(searchTerm).subscribe(res=> {
+      this.selectedItems = res;
+    });
+    return this.selectedItems;
   }
 }

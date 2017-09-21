@@ -3,6 +3,7 @@ import { PosterComponent } from './poster/poster.component';
 import { ViewAllProductsComponent } from './view-all-products/view-all-products.component';
 import { SearchComponent } from './search/search.component';
 import { FiltersComponent } from './filters/filters.component';
+import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
 
 @Component({
   moduleId: module.id,

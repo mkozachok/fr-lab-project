@@ -1,0 +1,25 @@
+@import '../../../../variables.scss';
+
+/deep/ .table-row{
+    span {
+        width: 10vw;
+        padding-right: 5vw;
+    }
+
+    .img {
+        height: 10vw;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .delete {
+        &:hover {
+            cursor: pointer;
+            color: $darkRead;
+            transition: ease all .2s;
+        }
+    }
+}
+
