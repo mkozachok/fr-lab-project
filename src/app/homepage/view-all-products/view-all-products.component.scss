@@ -78,5 +78,8 @@
         color: #7b0041;
     }
 
-
-
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+}

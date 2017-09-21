@@ -46,7 +46,7 @@ const routes: Routes = [
         component: OrderPageComponent
     },
     {
-        path: 'order-page/make-order',
+        path: 'make-order',
         component: MakeOrderComponent
     },
 
