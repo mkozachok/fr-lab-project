@@ -2,12 +2,19 @@ import { Component } from '@angular/core';
 import mergeImages from 'merge-images';
 import $  from "jquery";
 import { fabric } from 'fabric';
+import { User } from '../models/user-model';
 import { Design } from '../models/design-model';
+import { Order } from '../models/order-model';
+import { Product } from '../models/product-model';
 import { DesignService } from '../services/design.service';
+import { MakeOrderService } from '../services/make-order.service';
+import { UserService } from '../services/user.service';
+import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   moduleId: module.id,
+  providers: [MakeOrderService],
   selector: 'app-redactor-page',
   templateUrl: './redactor-page.component.html',
   styleUrls: ['./redactor-page.component.scss']
@@ -23,10 +30,12 @@ export class RedactorPageComponent{
   name = "";
   resultImg = "";
   items: FirebaseListObservable<any>;
+  user = {};
 
-  constructor(private designService: DesignService){}
+  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
   ngOnInit() {
    this.items = this.designService.getDesigns();
+   this.userService.getUser().subscribe(res => this.user = res);
  }
   selectTemplate = function(template){
     this.type = template.type;
@@ -86,10 +95,26 @@ export class RedactorPageComponent{
     }
     img.src = self.selectedCategory.src;
   }
-  merge = function(event){
+  saveProduct = function(event){
+    let self = this;
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
-      .then(b64 => this.resultImg = b64);
+      .then(b64 =>{
+        // this.resultImg = b64
+        let newProduct = new Product();
+        newProduct.svg = b64;
+
+        newProduct.category = self.categoryName;
+        newProduct.type = self.type;
+        newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
+        console.log(newProduct);
+        this.productService.setProduct(newProduct);
+        // let order = new Order(null, newProduct, 1);
+        // self.orderService.setOrder(self.userService.getUserId(), [order], null, Math.floor(Math.random() * (20 - 5) + 5));
+
+
+      } );
+
   }
 
   drawImg = function(image){
