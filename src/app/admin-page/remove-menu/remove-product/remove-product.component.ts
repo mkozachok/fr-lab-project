@@ -10,11 +10,12 @@ import { Observable } from 'rxjs';
 export class RemoveProductComponent implements OnInit {
   productList: Observable<Array<any>>
   showSpinner: boolean = true;
+  onHover: boolean = false;
   constructor(
     private _productService: ProductsListService
   ) { }
 
-  ngOnInit() {
+  getProductsArr(){
     this._productService.getProducts().subscribe(res => {
       console.log(res)
       this.showSpinner = false; 
@@ -22,8 +23,14 @@ export class RemoveProductComponent implements OnInit {
     });
   }
 
-  onHover(e:MouseEvent){
-    e.BUBBLING_PHASE
+  ngOnInit() {
+    this.getProductsArr();
   }
+  
+  filterItem(phrase) {
+  this.getProductsArr();
+    this.productList = this._productService.findProduct(phrase, this.productList);
+  }
+  
 
 }

@@ -1,3 +1,5 @@
+@import '../../../../variables.scss';
+
 /deep/ .table-row{
     span {
         width: 10vw;
@@ -11,4 +13,13 @@
             display: none;
         }
     }
+
+    .delete {
+        &:hover {
+            cursor: pointer;
+            color: $darkRead;
+            transition: ease all .2s;
+        }
+    }
 }
+

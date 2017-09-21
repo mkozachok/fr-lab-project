@@ -35,7 +35,6 @@ export class AdminService {
       return x['name'].toLowerCase()
         .indexOf(transformedPhrase) >= 0 || x['$key'].toLowerCase().indexOf(transformedPhrase) >= 0;
     });
-
   }
 }
 
