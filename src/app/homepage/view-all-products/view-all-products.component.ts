@@ -31,6 +31,10 @@ export class ViewAllProductsComponent implements OnInit {
     
   };
 
+  addToCart(product):void {
+    this.orderService.addItem(product);
+  }
+
   ngOnInit():void {
     this.getAll();
    };

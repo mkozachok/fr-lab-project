@@ -59,6 +59,6 @@ export class ProductsListService {
 	
 	setProduct(product: Product): firebase.Promise<void> {
 		return this.products.push(product);
-	  }
+	}
 	  
 }
