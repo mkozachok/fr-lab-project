@@ -5,6 +5,10 @@
       <input mdInput placeholder="Admin searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
         name="userFilter">
     </md-form-field>
+    <md-toolbar class="table-row">
+        <span>Name</span>
+        <span>Id</span>
+      </md-toolbar>
     <app-admin *ngFor="let admin of admins" [name]="admin.name" [$key]="admin.$key"></app-admin>
   </div>
 </div>

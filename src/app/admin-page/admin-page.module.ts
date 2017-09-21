@@ -16,6 +16,7 @@ import { AdminService } from '../services/admin.service';
 import { SearchFilterPipe } from '../pipes/searchingFileterPipe';
 import { ProductComponent } from './remove-menu/remove-product/product/product.component';
 import { AdminComponent } from './remove-menu/remove-admin/admin/admin.component';
+import { DesignComponent } from './remove-menu/remove-design/design/design.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { AdminComponent } from './remove-menu/remove-admin/admin/admin.component
     RemoveDesignComponent,
     SearchFilterPipe,
     ProductComponent,
-    AdminComponent
+    AdminComponent,
+    DesignComponent
   ],
   providers: [AdminService]
 })

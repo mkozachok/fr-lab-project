@@ -17,7 +17,6 @@ export class RemoveProductComponent implements OnInit {
 
   getProductsArr(){
     this._productService.getProducts().subscribe(res => {
-      console.log(res)
       this.showSpinner = false; 
       this.productList = res;
     });
