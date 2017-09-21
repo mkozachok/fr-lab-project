@@ -1,8 +1,11 @@
 <div class="container">
   <h2>Logging in</h2>
-  <form #userForm="ngForm" pattern="/\S+@\S+\.\S+/" (ngSubmit)="onSubmit(userForm.value)" novalidate >
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate >
       <md-form-field>
         <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
+        <!-- <md-error *ngIf="userForm.controls['firstName'].hasError('required')">
+          First name <strong>cannot be blank</strong>
+        </md-error> -->
       </md-form-field>
       <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
         <p [hidden]="!emailRef.errors.required">

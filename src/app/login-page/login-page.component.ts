@@ -21,7 +21,6 @@ export class LoginPageComponent implements OnInit {
   constructor(private _userService: UserService, private router: Router) {
   }
   ngOnInit() {
-
   }
 
   onSubmit(value: any) {
@@ -30,7 +29,6 @@ export class LoginPageComponent implements OnInit {
       .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
-
   // upload(value: any) {
   //   let file = this.selectedFiles.item(0);
   //   this.currentUpload = new Upload(file);
