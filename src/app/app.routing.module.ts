@@ -9,6 +9,7 @@ import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 
@@ -49,6 +50,10 @@ const routes: Routes = [
         path: 'make-order',
         component: MakeOrderComponent
     },
+    { 
+        path: '**',
+        component: NotFoundComponent
+    }
 
 ];
 
@@ -69,5 +74,6 @@ export const routingComponents = [
     LoginPageComponent,
     RedactorPageComponent,
     MakeOrderComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    NotFoundComponent
 ];
