@@ -31,7 +31,7 @@ export class MakeOrderComponent implements OnInit {
 	userSubscribe: Subscription;
   	additionalUserInfoSubscribe: Subscription;
 
-	constructor(private userService: UserService, private afAuth: AngularFireAuth, 
+	constructor(private userService: UserService, private afAuth: AngularFireAuth,
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
 		public dialog: MdDialog, private router: Router) {
 

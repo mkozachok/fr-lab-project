@@ -1,16 +1,17 @@
 <div class="add-wrapper">
   <form [formGroup]="designForm" (ngSubmit)="onSubmit()">
     <md-form-field>
-      <input type="text" placeholder="name" mdInput formControlName="name">
+      <input required required type="text" placeholder="name" mdInput formControlName="name">
+      <md-error *ngIf="designForm.controls['name'].hasError('required')">
+        First name <strong>cannot be blank</strong>
+      </md-error>
     </md-form-field>
-    <md-form-field>
-      <input type="text" placeholder="url" mdInput formControlName="url">
-    </md-form-field>
-    <button type="submit" md-raised-button color="primary" class="edit-save-button">
+    <app-file-upload #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToDesigns"></app-file-upload>
+    <button [disabled]="!fileUp.downloadedPhoto || !designForm.valid" (click)="fileUp.upload()" type="submit" md-raised-button
+      color="primary" class="edit-save-button">
           Add design
       </button>
   </form>
   <div>
-
   </div>
 </div>

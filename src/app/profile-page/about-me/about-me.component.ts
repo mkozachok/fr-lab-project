@@ -46,7 +46,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.maxLength(10),
-          Validators.pattern('^[A-Z][a-z]{2,19}$')
+          Validators.pattern('^[A-Z][a-z]{1,19}$')
         ]
       ],
       lastName: [
@@ -54,7 +54,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.maxLength(10),
-          Validators.pattern('^[A-Z][a-z]{2,19}$')
+          Validators.pattern('^[A-Z][a-z]{1,19}$')
         ]
       ],
       photoUrl: [],

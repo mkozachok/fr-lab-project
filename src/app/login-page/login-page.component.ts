@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
+
+
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,6 @@ export class LoginPageComponent implements OnInit {
   constructor(private _userService: UserService, private router: Router) {
   }
   ngOnInit() {
-
   }
 
   onSubmit(value: any) {
