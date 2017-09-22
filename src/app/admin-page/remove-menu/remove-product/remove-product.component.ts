@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./remove-product.component.scss']
 })
 export class RemoveProductComponent implements OnInit {
+  photoUrl:string;
+  name: string;
   productList: Observable<Array<any>>
   showSpinner: boolean = true;
   onHover: boolean = false;
@@ -29,6 +31,11 @@ export class RemoveProductComponent implements OnInit {
   filterItem(phrase) {
   this.getProductsArr();
     this.productList = this._productService.findProduct(phrase, this.productList);
+  }
+
+  onNotify(obj){
+    this.photoUrl = obj.url;
+    this.name = obj.name;
   }
   
 

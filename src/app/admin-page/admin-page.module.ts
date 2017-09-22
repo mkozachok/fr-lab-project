@@ -17,6 +17,7 @@ import { SearchFilterPipe } from '../pipes/searchingFileterPipe';
 import { ProductComponent } from './remove-menu/remove-product/product/product.component';
 import { AdminComponent } from './remove-menu/remove-admin/admin/admin.component';
 import { DesignComponent } from './remove-menu/remove-design/design/design.component';
+import { ImgWindowComponent } from '../components/img-window/img-window.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { DesignComponent } from './remove-menu/remove-design/design/design.compo
     SearchFilterPipe,
     ProductComponent,
     AdminComponent,
-    DesignComponent
+    DesignComponent,
+    ImgWindowComponent
   ],
   providers: [AdminService]
 })

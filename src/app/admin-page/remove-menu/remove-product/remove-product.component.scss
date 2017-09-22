@@ -1,6 +1,11 @@
 @import '../../../../variables.scss';
 
+.table-row{
+    width: 75%;
+}
+
 /deep/ .table-row{
+
     span {
         width: 10vw;
         padding-right: 5vw;
@@ -21,5 +26,6 @@
             transition: ease all .2s;
         }
     }
+
 }
 

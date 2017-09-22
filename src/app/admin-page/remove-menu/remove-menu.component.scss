@@ -2,10 +2,12 @@
 	min-width: calc(100%/3) !important;
 }
 
+
 /deep/ .remove-wrapper{
     padding: 2vw;
     display: flex;
     justify-content: center;
+    min-height: 75vh;
 
     .table-wrapper {
         width: 100%;
@@ -17,5 +19,17 @@
 
     .spacer {
         flex: 1 1 auto;
+    }
+}
+
+/deep/ .container-img{
+    padding: 5%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    text-align: center;
+
+    .name {
+        padding: 2vw;
     }
 }

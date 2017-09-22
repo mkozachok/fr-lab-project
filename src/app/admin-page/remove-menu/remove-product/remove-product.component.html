@@ -11,6 +11,7 @@
       <span>Owner</span>
     </md-toolbar>
     <app-product
+    (notify)="onNotify($event)"
     [class.showImg] = "onHover"
      *ngFor="let product of productList"
       [name]="product.name"
@@ -19,5 +20,9 @@
       [category]="product.category"
       [owner]="product.owner"
       ></app-product>
+      <app-img-window class="img-window"
+       [photoUrl]="this.photoUrl"
+      [name]="this.name">
+      </app-img-window>
   </div>
 </div>
