@@ -48,7 +48,15 @@ const routes: Routes = [
     {
         path: 'make-order',
         component: MakeOrderComponent
+<<<<<<< HEAD
     }
+=======
+    },
+    // { 
+    //     path: '**',
+    //     component: NotFoundComponent
+    // }
+>>>>>>> d205b342075ea5631bde13b340f02ceeeb4cf54b
 
 ];
 

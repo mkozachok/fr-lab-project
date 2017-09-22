@@ -1,5 +1,6 @@
 div {
 	width: 70%;
+	cursor: default;
 	margin: 5% auto;
 	text-align: center;
 }
