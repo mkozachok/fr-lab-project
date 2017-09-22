@@ -2,12 +2,24 @@
     <app-loader *ngIf="showSpinner"></app-loader>
     <div class="table-wrapper" *ngIf="!showSpinner">
       <md-form-field>
-        <input mdInput placeholder="Admin searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
+        <input mdInput placeholder="Admin searching"
+         [(ngModel)]="searchPhrase"
+          (ngModelChange)="filterItem(searchPhrase)"
+          class="search"
           name="designFilter">
       </md-form-field>
       <md-toolbar class="table-row">
           <span>Name</span>
         </md-toolbar>
-       <app-design *ngFor="let design of designs" [name]="design.name" [$key]="design.$key" [svg]="design.svg"></app-design>
+       <app-design (notify)="onNotify($event)"
+        *ngFor="let design of designs"
+        [name]="design.name"
+        [$key]="design.$key"
+        [url]="design.url">
+        </app-design>
+       <app-img-window class="img-window"
+        [photoUrl]="this.photoUrl"
+        [name]="this.name">
+      </app-img-window>
     </div>
   </div>
