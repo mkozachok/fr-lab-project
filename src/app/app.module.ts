@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { SharedModule } from './shared/shared.module';
 import { AdminPageModule } from './admin-page/admin-page.module';
+import { WildcardRoutingModule } from './wildcard-routing/wildcard-routing.module';
 
 // App guards goes here
 import { AuthGuard } from './guards/auth.guard';
@@ -86,6 +87,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     FormsModule,
     AppRoutingModule,
     ProfilePageModule,
+    AdminPageModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
     HttpModule,
@@ -98,7 +100,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     NgxPaginationModule,
     MaterialModule,
     SharedModule,
-    AdminPageModule
+    WildcardRoutingModule
   ],
   providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
   entryComponents: [ DialogComponent ],

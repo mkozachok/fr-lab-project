@@ -22,13 +22,10 @@ const adminPageRoutes: Routes = [
             {
                 path: 'remove-menu',
                 component: RemoveMenuComponent
-            }
-/*             {
-                path: '**',
-                redirectTo: ''
-            } */
+            },
         ]
     },
+
 
 
 ];
@@ -42,5 +39,5 @@ const adminPageRoutes: Routes = [
     ]
 })
 export class AdminPageRoutingModule { }
-export const adminPageRoutingComponents = [AddMenuComponent];
+export const adminPageRoutingComponents = [AddMenuComponent, RemoveMenuComponent];
 

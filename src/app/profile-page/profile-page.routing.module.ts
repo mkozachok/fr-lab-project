@@ -9,12 +9,17 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { AuthGuard } from '../guards/auth.guard';
 
+
 const profilePageRoutes: Routes = [
     {
         path: 'profile-page',
         component: ProfilePageComponent,
         canActivateChild: [AuthGuard],
         children: [
+            {
+                path: 'about-me',
+                component: AboutMeComponent
+            },
             {
                 path: 'my-gallery',
                 component: MyGalleryComponent
@@ -23,14 +28,7 @@ const profilePageRoutes: Routes = [
                 path: 'my-orders',
                 component: MyOrdersComponent
             },
-            {
-                path: 'about-me',
-                component: AboutMeComponent
-            },
-/*             {
-                path: '**',
-                redirectTo: ''
-            } */
+
         ]
     },
 
