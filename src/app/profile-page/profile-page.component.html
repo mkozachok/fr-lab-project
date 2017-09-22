@@ -7,16 +7,16 @@
         </div>
 
         <button md-button class="side-menu-button" color="warn">
-            <a routerLink="about-me">About me</a>
+            <a routerLink="about-me" [routerLinkActive]="['is-active']">About me</a>
         </button>
         <button md-button class="side-menu-button" color="warn">
-            <a routerLink="my-orders">My orders</a>
+            <a routerLink="my-orders" [routerLinkActive]="['is-active']">My orders</a>
         </button>
         <button md-button class="side-menu-button" color="warn">
-            <a routerLink="my-gallery">My gallery</a>
+            <a routerLink="my-gallery" [routerLinkActive]="['is-active']">My gallery</a>
         </button>
         <button md-button class="side-menu-button" color="warn">
-                <a routerLink="/admin-page">Admin-page</a>
+                <a routerLink="/admin-page" [routerLinkActive]="['is-active']">Admin-page</a>
         </button>
     </div>
     <div class="content">

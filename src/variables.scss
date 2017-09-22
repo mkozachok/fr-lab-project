@@ -4,6 +4,7 @@ $grey: rgba(0, 0, 0, 0.48);
 $black: #222;
 $grey2: #dddddd;
 $darkRead: #7b0041;
+$lightGrey: #eee;
 
 /////////////////////////////////////////////////////////////
 // profile color configuration
@@ -15,5 +16,6 @@ $profileSideMenuButtonsHoverBg: $darkRead;
 $profileSideMenuButtonsHover: $grey2;
 $profileTitleDevider: $grey2;
 $profileUserData: darken($grey2, 20%);
+$activeRoute: $lightGrey;
 
 $orderPageButtons: $grey2;
