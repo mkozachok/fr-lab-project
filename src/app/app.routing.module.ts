@@ -50,10 +50,10 @@ const routes: Routes = [
         path: 'make-order',
         component: MakeOrderComponent
     },
-    { 
-        path: '**',
-        component: NotFoundComponent
-    }
+    // { 
+    //     path: '**',
+    //     component: NotFoundComponent
+    // }
 
 ];
 
