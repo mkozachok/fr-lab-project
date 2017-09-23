@@ -37,7 +37,7 @@
       </md-error>
     </md-form-field>
     <app-file-upload #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToProducts"></app-file-upload>
-    <button [disabled]="!fileUp.downloadedPhoto || !productForm.valid" (click)="fileUp.upload()" type="submit" md-raised-button
+    <button [disabled]="!fileUp.downloadedPhoto || !productForm.valid || waitForDelivery" (click)="fileUp.upload()" type="submit" md-raised-button
       color="primary" class="edit-save-button">
           Add product
       </button>

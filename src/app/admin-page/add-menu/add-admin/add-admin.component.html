@@ -12,7 +12,7 @@
         id <strong>cannot be blank</strong>
       </md-error>
     </md-form-field>
-    <button [disabled]="!adminForm.valid" type="submit" md-raised-button color="primary" class="edit-save-button">
+    <button [disabled]="!adminForm.valid || waitForDelivery" type="submit" md-raised-button color="primary" class="edit-save-button">
             Add new admin
         </button>
   </form>

@@ -11,6 +11,7 @@ import { MakeOrderComponent } from './order-page/make-order/make-order.component
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { AboutMeComponent } from './profile-page/about-me/about-me.component';
 
 const routes: Routes = [
     {
@@ -25,7 +26,18 @@ const routes: Routes = [
     {
         path: 'profile-page',
         canActivate: [AuthGuard],
-        component: ProfilePageComponent
+        component: ProfilePageComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'about-me',
+                pathMatch: 'prefix'
+            },
+            {
+                path: 'about-me',
+                component: AboutMeComponent
+            }
+        ]
 
     },
     {
@@ -48,15 +60,7 @@ const routes: Routes = [
     {
         path: 'make-order',
         component: MakeOrderComponent
-<<<<<<< HEAD
     }
-=======
-    },
-    // { 
-    //     path: '**',
-    //     component: NotFoundComponent
-    // }
->>>>>>> d205b342075ea5631bde13b340f02ceeeb4cf54b
 
 ];
 
@@ -71,11 +75,11 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [
     HomepageComponent,
+    AdminPageComponent,
     ProfilePageComponent,
     RegistrationPageComponent,
     OrderPageComponent,
     LoginPageComponent,
     RedactorPageComponent,
     MakeOrderComponent,
-    AdminPageComponent
 ];

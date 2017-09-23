@@ -10,6 +10,7 @@ import { Product } from '../../../models/product-model';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
+  waitForDelivery: boolean;
   productForm: FormGroup
   ReferenceToProducts: string = 'products';
   product:Product = {
@@ -64,6 +65,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.waitForDelivery = true;
     this.product.id = this.productForm.value.id;
     this.product.name = this.productForm.value.name;
     this.product.category = this.productForm.value.category;
@@ -73,6 +75,7 @@ export class AddProductComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string): void {
+    this.waitForDelivery = false;
     this.snackBar.open(message, action, {
       duration: 2000,
     });

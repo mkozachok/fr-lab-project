@@ -9,6 +9,7 @@ import { DesignService } from '../../../services/design.service';
   styleUrls: ['./add-design.component.scss']
 })
 export class AddDesignComponent implements OnInit {
+  waitForDelivery: boolean;
   designForm: FormGroup
   name: string;
   ReferenceToDesigns: string = 'designs';
@@ -32,11 +33,12 @@ export class AddDesignComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.waitForDelivery = true;
     this.name = this.designForm.value.name;
-
   }
 
   openSnackBar(message: string, action: string): void {
+    this.waitForDelivery = false;
     this.snackBar.open(message, action, {
       duration: 2000,
     });

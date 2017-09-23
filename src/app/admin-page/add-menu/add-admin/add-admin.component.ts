@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class AddAdminComponent implements OnInit {
   adminForm: FormGroup;
   adminList: Observable<Array<any>>;
+  waitForDelivery: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -35,6 +36,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.waitForDelivery = true;
     this._adminService.setNewAdmin(this.adminForm.value).then(resolve => {
       this.openSnackBar('The produc has been saved', 'success');
     }).catch(error => {
@@ -43,6 +45,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string): void {
+    this.waitForDelivery = false;
     this.snackBar.open(message, action, {
       duration: 2000,
     });

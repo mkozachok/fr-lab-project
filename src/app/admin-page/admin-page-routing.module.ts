@@ -22,7 +22,7 @@ const adminPageRoutes: Routes = [
             {
                 path: 'remove-menu',
                 component: RemoveMenuComponent
-            },
+            }
         ]
     },
 
