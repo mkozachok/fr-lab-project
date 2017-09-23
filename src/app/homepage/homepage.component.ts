@@ -4,6 +4,7 @@ import { ViewAllProductsComponent } from './view-all-products/view-all-products.
 import { SearchComponent } from './search/search.component';
 import { FiltersComponent } from './filters/filters.component';
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
+import { Product } from '../models/product-model'
 
 @Component({
   moduleId: module.id,
@@ -13,6 +14,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
 })
 
 export class HomepageComponent implements OnInit {
+  @Input() prods: Product[];
+  @Input() filtered: Product[];
 
   constructor() { 
   };

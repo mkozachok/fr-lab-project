@@ -3,6 +3,7 @@ import { Product } from '../../models/product-model'
 import { ProductsListService } from '../../services/products-list.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-search',
@@ -13,8 +14,7 @@ import { Observable } from 'rxjs/Observable';
 export class SearchComponent implements OnInit {
   @Input()
   @Output() click = new EventEmitter();
-  @Input() products: FirebaseListObservable<any>;
-  @Input() selectedItems;
+  @Input() prods: FirebaseListObservable<any>;
 
   constructor(private productListService: ProductsListService) { 
   };
@@ -22,10 +22,11 @@ export class SearchComponent implements OnInit {
   ngOnInit():void {
    };
 
-  search(arr, originalArr, searchTerm) {
-    this.productListService.search(searchTerm).subscribe(res=> {
-      this.selectedItems = res;
-    });
-    return this.selectedItems;
+  search(search: string) {
+    console.log(search)
+    this.productListService.search(search).subscribe((res=> { 
+      this.prods = res;
+      console.log(this.prods)
+    }))
   }
 }

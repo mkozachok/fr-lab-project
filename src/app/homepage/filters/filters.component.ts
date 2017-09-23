@@ -16,22 +16,20 @@ export class FiltersComponent implements OnInit {
   @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
   procuctsType: any[] =  PRODUCT_TYPE_FILTER;
-  @Input() products: FirebaseListObservable<any>;
-  @Input() selectedItems;
+  @Input() prods: FirebaseListObservable<any>;
   public selected: string = '';
 
-  constructor(private productListService: ProductsListService) { 
+  constructor(private productListService: ProductsListService, private db: AngularFireDatabase) { 
   };
 
   ngOnInit():void {
-   };
+  };
 
   sorting(prop, propValue) {
-    this.productListService.selectProducts(prop, propValue).subscribe(res=> {
-      this.selectedItems = res;
-    });
-    console.log(this.selectedItems);
-    return this.selectedItems;
+    this.productListService.selectProducts(prop, propValue).subscribe((res=> { 
+      this.prods = res;
+    }));
+    console.log(this.prods)
   }
 
   navChanged (child: string){

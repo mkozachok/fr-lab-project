@@ -12,35 +12,31 @@ export class ProductsListService {
 	products: FirebaseListObservable<any>;
 	selectedItems;
 	product: Product;
+	prods: FirebaseListObservable<any>;
+	filtered: FirebaseListObservable<any>;
 	
 	constructor(private db: AngularFireDatabase) {
 		this.db = db;
 		this.products = db.list('/products');  
-		this.selectedItems = this.products;
+		this.prods = db.list('/products');
 	}
 
-	getAll(): FirebaseListObservable<any[]> {
-		return this.selectedItems;
+	getAll(){
+		return this.prods
 	}
 
 	selectProducts(prop, propValue) {
-		this.selectedItems = this.products.map(items => {
+		return this.prods.map(items => {
 			const filtered = items.filter(item => item.category === propValue || item.type === propValue);
 			return filtered;
 		});
-		return this.selectedItems;
 	};
 
-	search(searchTerm) {
-		let term = searchTerm;
-		this.selectedItems = this.products.map(items => {
-			const filtered = items.filter(function(tag) {
-				return tag.name.indexOf(term) >= 0 ||  tag.category.indexOf(term) >= 0 || tag.type.indexOf(term) >= 0
-			}); 
+	search(search) {
+		return this.prods.map(items => {
+			const filtered = items.filter(item => item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0);
 			return filtered;
 		});
-		console.log(this.selectedItems);
-		return this.selectedItems;
 	}
 
 	getItem(item): Product {

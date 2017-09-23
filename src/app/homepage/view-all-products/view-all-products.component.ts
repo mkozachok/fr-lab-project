@@ -16,26 +16,24 @@ import { Observable } from 'rxjs/Observable';
 export class ViewAllProductsComponent implements OnInit {
   @Input()
   @Output() click = new EventEmitter();
-  @Input() products: FirebaseListObservable<any>;
-  @Input() selectedItems;
   
+  @Input() prods: FirebaseListObservable<any>;
 
   constructor(private productListService: ProductsListService, private orderService: OrderService) { 
-  };
-
-  getAll():void {
-    this.productListService.getAll().subscribe(res=> {
-      this.selectedItems = res;
-    });
-    return this.selectedItems;
   };
 
   addToCart(product):void {
     this.orderService.addItem(product);
   }
 
-  ngOnInit():void {
+  getAll() {
+    this.productListService.getAll().subscribe((res=> {
+      this.prods = res;
+      console.log(this.prods);
+    }));
+  }
+
+  ngOnInit() {
     this.getAll();
-    console.log(this.selectedItems);
-   };
+  };
 }

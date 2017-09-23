@@ -3,7 +3,8 @@
     <input mdInput 
             placeholder="template searching" 
             [(ngModel)] = "searchTerm" 
-            (ngModelChange) = "search(searchTerm)" 
+            #input 
+            (ngModelChange) = "search(input.value)" 
             class="search" 
             name="userFilter"> 
   </md-form-field>
