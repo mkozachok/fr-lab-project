@@ -1,13 +1,13 @@
 <div class="admin-page">
   <div class="side-menu">
       <button md-button class="side-menu-button" color="warn">
-          <a routerLink="add-menu">Add menu</a>
+          <a routerLink="add-menu" [routerLinkActive]="['is-active']">Add content</a>
       </button>
       <button md-button class="side-menu-button" color="warn">
-          <a routerLink="remove-menu">Remove menu</a>
+          <a routerLink="remove-menu" [routerLinkActive]="['is-active']">Content menu</a>
       </button>
       <button md-button class="side-menu-button" color="warn">
-          <a routerLink="new-orders">New orders</a>
+          <a routerLink="new-orders" [routerLinkActive]="['is-active']">New orders</a>
       </button>
   </div>
   <div class="content">

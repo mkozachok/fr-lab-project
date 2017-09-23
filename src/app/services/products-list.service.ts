@@ -5,6 +5,7 @@ import { PRODUCTS } from '../homepage/products';
 import { DOCUMENT } from '@angular/platform-browser';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable, Subscription } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Injectable()
 
@@ -49,7 +50,7 @@ export class ProductsListService {
 		return templates;
 	}
 
-	setProduct(product: Product): firebase.Promise<void> {
+	setProduct(product): firebase.Promise<void> {
 		return this.products.push(product);
 	}
 
@@ -59,6 +60,10 @@ export class ProductsListService {
 
 	deleteProduct(id) {
 		this.db.database.ref('/products').child(id).remove();
+	}
+
+	deleteProductImg(url){
+		firebase.storage().refFromURL(url).delete();
 	}
 
 	findProduct(phrase, arrayOfProducts) {

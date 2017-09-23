@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import mergeImages from 'merge-images';
-import $  from "jquery";
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
 import { Design } from '../models/design-model';
@@ -30,12 +29,18 @@ export class RedactorPageComponent{
   name = "";
   resultImg = "";
   items: FirebaseListObservable<any>;
-  user = {};
+  user: User;
+
 
   constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
   ngOnInit() {
+   let self = this;
    this.items = this.designService.getDesigns();
-   this.userService.getUser().subscribe(res => this.user = res);
+   this.userService.getUser().subscribe(res => {
+     this.user = new User();
+     this.user.firstName = res.displayName.split(' ')[0];
+     this.user.lastName = res.displayName.split(' ')[1];
+   });
  }
   selectTemplate = function(template){
     this.type = template.type;
@@ -102,10 +107,11 @@ export class RedactorPageComponent{
       .then(b64 =>{
         // this.resultImg = b64
         let newProduct = new Product();
-        newProduct.svg = b64;
-
-        newProduct.category = self.categoryName;
+        newProduct.name = self.type;
         newProduct.type = self.type;
+        newProduct.category = self.categoryName;
+        newProduct.svg = b64;
+        newProduct.owner = self.user.firstName + " " + self.user.lastName;
         newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
         console.log(newProduct);
         this.productService.setProduct(newProduct);
@@ -124,6 +130,7 @@ export class RedactorPageComponent{
 
   handleImage = function(e){
     let canvas = this.getCanvas();
+    this.categoryName = "custom design";
     var reader:any,
     target: EventTarget;
     reader = new FileReader();
@@ -150,19 +157,55 @@ getCanvas = function(){
 }
 
 removeImg = function(){
-  console.log("remove");
   let object = this.getCanvas().getActiveObject();
-	if (!object){
-		alert('Please select the element to remove');
-		return '';
-	}
 	this.getCanvas().remove(object);
 }
-// getDesignList = function(){
-//   this.designService.getDesigns().forEach(tt => console.log(tt));
-//   return this.designService.getDesigns();
-//   // return [];
-// }
+
+addText = function(){
+  let canvas = this.getCanvas();
+  this.categoryName = "custom design";
+  canvas.add(new fabric.IText('Your text', {
+      left: 205,
+      top: 220,
+      fontFamily: 'arial',
+      fill: '#333',
+	    fontSize: 40
+    }));
+}
+changeColor = function(element){
+  let object = this.getCanvas().getActiveObject();
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFill(element.target.value);
+  canvas.renderAll();
+}
+setFont = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontFamily(element.value);
+  canvas.renderAll();
+}
+changeFontSize = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontSize(element.value);
+  canvas.renderAll();
+}
+setFontOptions = function(element){
+  let canvas = this.getCanvas();
+  let value = element.source.value;
+  let checked = element.checked;
+  switch(value){
+    case "bold" :
+      canvas.getActiveObject().set("fontWeight", checked?900:200);
+    break;
+    case "italic" :
+      canvas.getActiveObject().set("fontStyle", checked?value:"");
+    break;
+    case "linethrough" :
+      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
+    break;
+  }
+  canvas.renderAll();
+  console.log(value);
+}
    templates = [
       {
         type: "tshirtm",
@@ -243,33 +286,5 @@ removeImg = function(){
         type: "sleevew",
         url: "assets/images/templates/sleevew.png"
       }
-  ];
-
-
-  category = [
-    {
-      name:'animal1',
-      url: 'assets/images/categories/animal1.png'
-    },
-    {
-      name:'animal2',
-      url: 'assets/images/categories/animal2.png'
-    },
-    {
-      name:'animal3',
-      url: 'assets/images/categories/animal3.png'
-    },
-    {
-      name:'animal4',
-      url: 'assets/images/categories/animal4.png'
-    },
-    {
-      name:'animal5',
-      url: 'assets/images/categories/animal5.png'
-    },
-    {
-      name:'animal6',
-      url: 'assets/images/categories/animal6.png'
-    }
   ];
 }

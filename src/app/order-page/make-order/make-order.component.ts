@@ -31,7 +31,7 @@ export class MakeOrderComponent implements OnInit {
 	userSubscribe: Subscription;
   	additionalUserInfoSubscribe: Subscription;
 
-	constructor(private userService: UserService, private afAuth: AngularFireAuth, 
+	constructor(private userService: UserService, private afAuth: AngularFireAuth,
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
 		public dialog: MdDialog, private router: Router) {
 
@@ -55,8 +55,9 @@ export class MakeOrderComponent implements OnInit {
 
 	onSubmit(data: any) {
 		let userId = !this.autorised ? '0' : this.userService.getUserId();
-		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount());
-		this.openDialog();
+		this.makeOrderService.setOrder(userId, this.orderService.getAll(), data, this.orderService.getTotalAmount()).then(resolve => {
+			this.openDialog();
+		});
 	}
 
 	openDialog() {

@@ -12,19 +12,17 @@ export class MakeOrderService {
 		this.orders = db.list('/orders');
 	}
 
-	setOrder(userid: string, order: Order[], user: any, totalSum: number) {
+	setOrder(userid: string, order: Order[], user: any, totalSum: number): firebase.Promise<void> {
 		let currentDate = firebase.database.ServerValue.TIMESTAMP;
-		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum }).then(res=>console.log(res));
+		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum });
 	}
 
-	getUsersOrder(userId: string) {
-		let usersOrders= [];
-		let items = this.orders.map(i=>{return i});
-		items.forEach(i=>i.forEach(e=>{
-			if (e.userId == userId) {
-				usersOrders.push(e);
-			}
-		}));
-		return usersOrders;
+	getAll() {
+		return this.orders;
+	}
+
+	getUsersOrder(userId: string, allOrders: FirebaseListObservable<any> ) {
+		let items = allOrders.map(i => {return i});
+		return items.filter(el => el.userId == userId);
 	}
 }

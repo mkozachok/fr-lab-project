@@ -3,6 +3,7 @@ import {MdExpansionModule} from '@angular/material';
 import { MakeOrderService } from '../../services/make-order.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from "rxjs";
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-my-orders',
@@ -11,13 +12,13 @@ import { Subscription } from "rxjs";
   providers: [MakeOrderService]
 })
 export class MyOrdersComponent implements OnInit {
-	usersOrders = [];
+	usersOrders;
 
 	constructor(private makeOrderService: MakeOrderService, private userService: UserService) { }
 
 	ngOnInit() {
-  		this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId());
+  		this.makeOrderService.getAll().subscribe(res => {
+  			this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res);
+  		});
 	}
-
-
 }

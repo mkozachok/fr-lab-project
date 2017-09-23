@@ -12,8 +12,7 @@ export class ProductComponent implements OnInit {
 @Input() category: string;
 @Input() owner: string;
 @Input() svg: string;
-/* @Input() show: boolean = false;
-@Output() showChanged: EventEmitter<boolean> = new EventEmitter<boolean>(); */
+@Output() notify: EventEmitter<object> = new EventEmitter<object>();
 
   constructor(
     private _productService: ProductsListService
@@ -24,7 +23,11 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(){
+    this._productService.deleteProductImg(this.svg);
     this._productService.deleteProduct(this.$key)
   }
 
+  onClick() {
+    return this.notify.emit({ url: this.svg, name: this.name });
+  }
 }

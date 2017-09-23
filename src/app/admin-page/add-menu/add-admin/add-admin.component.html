@@ -1,12 +1,18 @@
 <div class="add-wrapper">
   <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
     <md-form-field>
-      <input type="text" placeholder="name" mdInput formControlName="name">
+      <input required type="text" placeholder="name" mdInput formControlName="name">
+      <md-error *ngIf="adminForm.controls['name'].hasError('required')">
+        Name <strong>cannot be blank</strong>
+      </md-error>
     </md-form-field>
     <md-form-field>
-      <input type="text" placeholder="id" mdInput formControlName="id">
+      <input required type="text" placeholder="id" mdInput formControlName="id">
+      <md-error *ngIf="adminForm.controls['id'].hasError('required')">
+        id <strong>cannot be blank</strong>
+      </md-error>
     </md-form-field>
-    <button type="submit" md-raised-button color="primary" class="edit-save-button">
+    <button [disabled]="!adminForm.valid || waitForDelivery" type="submit" md-raised-button color="primary" class="edit-save-button">
             Add new admin
         </button>
   </form>
