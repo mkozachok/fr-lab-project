@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(){
+    this._productService.deleteProductImg(this.svg);
     this._productService.deleteProduct(this.$key)
   }
 

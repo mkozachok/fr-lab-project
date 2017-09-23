@@ -13,8 +13,7 @@ export class AddProductComponent implements OnInit {
   waitForDelivery: boolean;
   productForm: FormGroup
   ReferenceToProducts: string = 'products';
-  product:Product = {
-    id: 0,
+  product = {
     name: '',
     type: '',
     category: '',
@@ -31,11 +30,6 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this._formBuilder.group({
-      id: [null, 
-        [
-          Validators.required
-      ]
-    ],
       category: [null, 
         [
           Validators.required
@@ -66,7 +60,6 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(): void {
     this.waitForDelivery = true;
-    this.product.id = this.productForm.value.id;
     this.product.name = this.productForm.value.name;
     this.product.category = this.productForm.value.category;
     this.product.price = this.productForm.value.price;
@@ -83,7 +76,6 @@ export class AddProductComponent implements OnInit {
 
   onNotify(url) {
     this._productService.setProduct({
-      id: this.product.id,
       name: this.product.name,
       type: this.product.type,
       category: this.product.category,

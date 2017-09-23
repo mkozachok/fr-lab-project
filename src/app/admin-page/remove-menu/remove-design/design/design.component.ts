@@ -25,6 +25,7 @@ export class DesignComponent implements OnInit {
   }
 
   deleteDesign() {
+    this._designService.deleteDesignImg(this.url);
     this._designService.deleteDesign(this.$key);
   }
 }

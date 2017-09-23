@@ -1,12 +1,6 @@
 <div class="add-wrapper">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <md-form-field>
-      <input required type="text" placeholder="id" mdInput formControlName="id">
-      <md-error *ngIf="productForm.controls['id'].hasError('required')">
-        Id <strong>cannot be blank</strong>
-      </md-error>
-    </md-form-field>
-    <md-form-field>
       <input required type="text" placeholder="category" mdInput formControlName="category">
       <md-error *ngIf="productForm.controls['category'].hasError('required')">
         Category <strong>cannot be blank</strong>

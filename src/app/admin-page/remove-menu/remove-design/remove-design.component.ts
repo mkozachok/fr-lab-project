@@ -27,7 +27,6 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
     .subscribe(res => {
       this.showSpinner = false;
       this.designs = res;
-      console.log(this.designs)
     })
   }
 
