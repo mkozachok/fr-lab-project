@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import mergeImages from 'merge-images';
-import $  from "jquery";
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
 import { Design } from '../models/design-model';
@@ -31,6 +30,7 @@ export class RedactorPageComponent{
   resultImg = "";
   items: FirebaseListObservable<any>;
   user: User;
+
 
   constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
   ngOnInit() {
@@ -157,19 +157,55 @@ getCanvas = function(){
 }
 
 removeImg = function(){
-  console.log("remove");
   let object = this.getCanvas().getActiveObject();
-	if (!object){
-		alert('Please select the element to remove');
-		return '';
-	}
 	this.getCanvas().remove(object);
 }
-// getDesignList = function(){
-//   this.designService.getDesigns().forEach(tt => console.log(tt));
-//   return this.designService.getDesigns();
-//   // return [];
-// }
+
+addText = function(){
+  let canvas = this.getCanvas();
+  this.categoryName = "custom design";
+  canvas.add(new fabric.IText('Your text', {
+      left: 205,
+      top: 220,
+      fontFamily: 'arial',
+      fill: '#333',
+	    fontSize: 40
+    }));
+}
+changeColor = function(element){
+  let object = this.getCanvas().getActiveObject();
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFill(element.target.value);
+  canvas.renderAll();
+}
+setFont = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontFamily(element.value);
+  canvas.renderAll();
+}
+changeFontSize = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontSize(element.value);
+  canvas.renderAll();
+}
+setFontOptions = function(element){
+  let canvas = this.getCanvas();
+  let value = element.source.value;
+  let checked = element.checked;
+  switch(value){
+    case "bold" :
+      canvas.getActiveObject().set("fontWeight", checked?900:200);
+    break;
+    case "italic" :
+      canvas.getActiveObject().set("fontStyle", checked?value:"");
+    break;
+    case "linethrough" :
+      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
+    break;
+  }
+  canvas.renderAll();
+  console.log(value);
+}
    templates = [
       {
         type: "tshirtm",
