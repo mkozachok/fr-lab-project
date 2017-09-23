@@ -12,6 +12,7 @@ export class AddDesignComponent implements OnInit {
   waitForDelivery: boolean;
   designForm: FormGroup
   name: string;
+  price: string;
   ReferenceToDesigns: string = 'designs';
 
   constructor(
@@ -28,13 +29,19 @@ export class AddDesignComponent implements OnInit {
         [
           Validators.required
         ]
+      ],
+      price: [null, 
+        [
+          Validators.required
       ]
+    ],
     })
   }
 
   onSubmit(): void {
     this.waitForDelivery = true;
     this.name = this.designForm.value.name;
+    this.price = this.designForm.value.price;
   }
 
   openSnackBar(message: string, action: string): void {
@@ -47,7 +54,8 @@ export class AddDesignComponent implements OnInit {
   onNotify(url) {
     this._designService.setDesign({
       name: this.name,
-      photoUrl: url
+      price: this.price,
+      url: url
     }).then(resolve => {
       this.openSnackBar('The produc has been saved', 'success');
     }).catch(error => {
