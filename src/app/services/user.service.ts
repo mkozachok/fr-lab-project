@@ -68,9 +68,14 @@ export class UserService {
     return this.db.list('/users/' + userId + '/gallery');
   }
 
+  deleteProductFromGallery(key: string, userId: string) {
+    console.log(key);
+    return this.db.database.ref('/users').child(userId).child('gallery').child(key).remove();
+  }
+
   registerUser(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
+      .then((success) => this.afAuth.auth.currentUser.sendEmailVerification());
 
   }
 
