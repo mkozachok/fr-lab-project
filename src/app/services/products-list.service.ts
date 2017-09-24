@@ -33,10 +33,9 @@ export class ProductsListService {
 		});
 	};
 
-	search(search) {
-		return this.prods.map(items => {
-			const filtered = items.filter(item => item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0);
-			return filtered;
+	search(search, arr) {
+		return arr.filter(function(item) {
+			return item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0;
 		});
 	}
 

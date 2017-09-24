@@ -20,9 +20,9 @@ export class ViewAllProductsComponent implements OnInit {
   
   @Input() prods: FirebaseListObservable<any>;
 
-  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) { 
+  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) {
   };
-
+  
   addToCart(product):void {
     this.orderService.addItem(product);
     let config = new MdSnackBarConfig();
