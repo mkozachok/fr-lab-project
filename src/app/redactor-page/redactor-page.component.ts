@@ -1,7 +1,9 @@
 import { Component} from '@angular/core';
 import mergeImages from 'merge-images';
+import {UploadService} from '../services/upload.service';
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
+import { Upload } from '../models/upload-model';
 import { Design } from '../models/design-model';
 import { Order } from '../models/order-model';
 import { Product } from '../models/product-model';
@@ -22,7 +24,6 @@ import { Router } from '@angular/router';
 })
 
 
-
 export class RedactorPageComponent{
  	title = 'redactor';
   type = "tshirtm";
@@ -34,11 +35,15 @@ export class RedactorPageComponent{
   user: User;
 
 
-  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService, private router: Router){}
-
-
-
+  constructor(private designService: DesignService,
+     private userService: UserService,
+     private orderService: MakeOrderService,
+     private productService: ProductsListService,
+     private uploadService: UploadService,
+     private router: Router
+   ){}
   ngOnInit() {
+
    let self = this;
    this.items = this.designService.getDesigns();
    this.userService.getUser().subscribe(res => {
@@ -113,8 +118,6 @@ export class RedactorPageComponent{
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
-        // this.resultImg = b64
-        console.log(this);
         let newProduct = new Product();
         newProduct.name = self.type;
         newProduct.type = self.type;
@@ -131,8 +134,6 @@ export class RedactorPageComponent{
         });
       });
   }
-
-
 
   drawImg = function(image){
     let canvas = this.getCanvas();
