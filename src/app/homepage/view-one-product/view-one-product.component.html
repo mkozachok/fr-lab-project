@@ -9,5 +9,6 @@
      <li><span>category:</span> {{product.category}}</li>
    </ul>
  </div>
- <button (click)="addToCart(product)">add to my card</button>
+ <button md-raised-button (click)="addToCart(product)">add to my card</button>
+ <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
 </div>

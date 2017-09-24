@@ -5,11 +5,13 @@ import { ViewOneProductComponent } from '../homepage/view-one-product/view-one-p
 import { MaterialModule } from '@angular/material';
 import * as firebase from 'firebase';
 import { UploadService } from '../services/upload.service';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   imports: [
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   declarations: [LoaderComponent, FileUploadComponent, ViewOneProductComponent],
   exports: [LoaderComponent, FileUploadComponent, ViewOneProductComponent],
