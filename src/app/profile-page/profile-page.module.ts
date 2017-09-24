@@ -6,9 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
 
+import { MyGalleryComponent } from './my-gallery/my-gallery.component';
+import { ViewOneProductComponent } from '../homepage/view-one-product/view-one-product.component';
+
 @NgModule({
   declarations: [
     profilePageRoutingComponents,
+    MyGalleryComponent,
+    ViewOneProductComponent
   ],
   imports: [
     CommonModule,

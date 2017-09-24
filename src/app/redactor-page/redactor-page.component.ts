@@ -11,6 +11,8 @@ import { MakeOrderService } from '../services/make-order.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';
+import { Subscription } from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -32,7 +34,7 @@ export class RedactorPageComponent{
   items: FirebaseListObservable<any>;
   user: User;
 
-  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
+  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService, private router: Router){}
   ngOnInit() {
    let self = this;
    this.items = this.designService.getDesigns();
@@ -101,6 +103,7 @@ export class RedactorPageComponent{
     img.src = self.selectedCategory.src;
   }
   saveProduct = function(event){
+    let productKey: string;
     let self = this;
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
@@ -114,13 +117,13 @@ export class RedactorPageComponent{
         newProduct.owner = self.user.firstName + " " + self.user.lastName;
         newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
         console.log(newProduct);
-        this.productService.setProduct(newProduct);
-        // let order = new Order(null, newProduct, 1);
-        // self.orderService.setOrder(self.userService.getUserId(), [order], null, Math.floor(Math.random() * (20 - 5) + 5));
-
-
-      } );
-
+        this.productService.setProduct(newProduct).then(resolve => {
+          productKey = resolve.key;
+          this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
+            this.router.navigate(['profile-page/my-gallery']);
+          });
+        });
+      });
   }
 
   drawImg = function(image){

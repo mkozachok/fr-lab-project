@@ -34,6 +34,9 @@ export class UserService {
     return user;
   }
 
+  // getUsersGallery(userId: string) {
+  //   return this.db.object('/users/' + userId + '/gallery');
+  // }
 
   getUserId(){
     return this.afAuth.auth.currentUser.uid;
@@ -57,6 +60,13 @@ export class UserService {
     })
   }
 
+  addToUsersGallery(userId: string, productId: string) {
+    return this.db.database.ref('/users').child(userId).child('gallery').push({ productKey: productId});
+  }
+
+  getUsersGallery(userId: string) {
+    return this.db.list('/users/' + userId + '/gallery');
+  }
 
   registerUser(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
