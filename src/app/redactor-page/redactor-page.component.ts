@@ -105,6 +105,8 @@ export class RedactorPageComponent{
     }
     img.src = self.selectedCategory.src;
   }
+
+
   saveProduct = function(event){
     let productKey: string;
     let self = this;
@@ -112,6 +114,7 @@ export class RedactorPageComponent{
      this.getCanvas().toDataURL()])
       .then(b64 =>{
         // this.resultImg = b64
+        console.log(this);
         let newProduct = new Product();
         newProduct.name = self.type;
         newProduct.type = self.type;
@@ -128,6 +131,8 @@ export class RedactorPageComponent{
         });
       });
   }
+
+
 
   drawImg = function(image){
     let canvas = this.getCanvas();

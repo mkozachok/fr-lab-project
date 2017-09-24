@@ -56,10 +56,10 @@ export class OrderService {
 	}
 
 	addItem(item: Product): void {
-		let productId = item.id;
+		let productName = item.name;
 		let exists = false;
 		ORDERS.forEach(el => {
-			if (el.product.id == productId) {
+			if (el.product.name == productName) {
 				el.quantity++;
 				quantity++;
 				exists = true;
@@ -67,7 +67,7 @@ export class OrderService {
 		});
 		if (!exists) {
 			let productId = ORDERS.length;
-			let newItem = new Order(productId, item, 1);
+			let newItem = new Order(item, 1);
 			ORDERS.push(newItem);
 			quantity++;
 		}

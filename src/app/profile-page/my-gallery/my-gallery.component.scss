@@ -1,0 +1,10 @@
+.container {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 2% 1%;
+	display: flex;
+}
+
+app-view-one-product {
+	width: calc(100% / 4);
+}

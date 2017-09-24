@@ -37,7 +37,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
 import { SearchComponent } from './homepage/search/search.component';
 import { FiltersComponent } from './homepage/filters/filters.component';
 import { AddToBasketBtnComponent } from './homepage/add-to-basket-btn/add-to-basket-btn.component';
-import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
+// import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
 import { ViewAllProductsComponent } from './homepage/view-all-products/view-all-products.component';
 
 
@@ -75,7 +75,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     FiltersComponent,
     SearchComponent,
     AddToBasketBtnComponent,
-    ViewOneProductComponent,
+    // ViewOneProductComponent,
     ViewAllProductsComponent,
     PosterComponent,
     DialogComponent,
