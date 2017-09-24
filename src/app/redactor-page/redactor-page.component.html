@@ -80,14 +80,16 @@
     </md-tab-group>
   </div>
 
-  <div id="canvas">
+  <div id="canvas" (window:resize)="resize()">
     <div class="redactor_area">
-      <canvas width="700px" height="600px" id="img_product"></canvas>
-       <canvas width="700px" height="600px" id="viewport"></canvas>
+      <canvas width="700px" height="550px" id="img_product"></canvas>
+       <canvas width="700px" height="550px" id="viewport"></canvas>
     </div>
+    <div id="btns">
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
     <button md-raised-button (click)="buy()">Buy</button>
     <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
+  </div>
   </div>
 </div>
