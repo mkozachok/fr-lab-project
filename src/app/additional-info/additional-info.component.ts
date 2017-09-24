@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-additional-info',
   templateUrl: './additional-info.component.html',
-  styleUrls: ['./additional-info.component.css']
+  styleUrls: ['./additional-info.component.scss']
 })
 export class AdditionalInfoComponent implements OnInit {
-  error: any;
+  error: Error;
   constructor(private _userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -16,7 +16,7 @@ export class AdditionalInfoComponent implements OnInit {
   onSubmit(value: any) {
     this.error = null;
     this._userService.createUserAdditionalInformation(value.phone, value.address)
-      // .then((success) => this.router.navigate(['']))
+      .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
 }

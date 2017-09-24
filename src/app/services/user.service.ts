@@ -22,9 +22,7 @@ export class UserService {
   }
   loginInGoogle() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .then((success) => console.log(this.afAuth.auth.currentUser))
-            .then((success) => this.getUserFromDataBase(this.getUserId())
-              .subscribe);
+            .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -85,7 +83,6 @@ export class UserService {
       this.afAuth.auth.currentUser.uid,
       {
         orders: [""],
-        gallery: [""],
         additionalInfo: {
           phone: phone,
           address: address

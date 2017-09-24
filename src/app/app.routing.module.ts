@@ -87,4 +87,5 @@ export const routingComponents = [
     LoginPageComponent,
     RedactorPageComponent,
     MakeOrderComponent,
+    AdditionalInfoComponent
 ];
