@@ -75,7 +75,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     FiltersComponent,
     SearchComponent,
     AddToBasketBtnComponent,
-    // ViewOneProductComponent,
+    ViewOneProductComponent,
     ViewAllProductsComponent,
     PosterComponent,
     DialogComponent,
