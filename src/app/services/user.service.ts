@@ -20,6 +20,10 @@ export class UserService {
   logIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
+  loginInGoogle() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            .then((success) => console.log(this.afAuth.auth.currentUser));
+  }
   logOut() {
     this.router.navigate(['/login-page'])
       .then(() => this.afAuth.auth.signOut());
@@ -90,7 +94,6 @@ export class UserService {
       this.afAuth.auth.currentUser.uid,
       {
         orders: [""],
-        gallery: [""],
         additionalInfo: {
           phone: phone,
           address: address
@@ -106,18 +109,18 @@ export class UserService {
 
   createPrimaryInformation(upload: Upload, name: string, surname: string) {
     console.log();
-    let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       () => {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        console.log(upload.url)
+        console.log(upload.url);
         this.afAuth.auth.currentUser.updateProfile({
           displayName: `${name} ${surname}`,
           photoURL: upload.url
-        })
+        });
       }
     );
   }

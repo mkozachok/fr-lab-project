@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 
 export class LoginPageComponent implements OnInit {
-  error: any;
+  error: Error;
+  userValue: boolean;
   constructor(private _userService: UserService, private router: Router) {
   }
   ngOnInit() {
@@ -23,5 +24,23 @@ export class LoginPageComponent implements OnInit {
       .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
-
+  onSubmitGoogle(value: any) {
+    this.error = null;
+    this._userService.loginInGoogle()
+      .then((success) => this.googleAutorizationCheck())
+      .then((success) => this.googeAutarizationRouting())
+      .catch(err => this.error = err);
+  }
+  googleAutorizationCheck() {
+  this._userService.getUserFromDataBase(this._userService.getUserId())
+    .subscribe(res => console.log(this.userValue = res.$exists())
+    );
+  }
+  googeAutarizationRouting() {
+    if (!this.userValue) {
+      this.router.navigate(['additional-info']);
+    } else {
+      this.router.navigate(['']);
+    }
+  }
 }

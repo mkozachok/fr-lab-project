@@ -4,7 +4,7 @@ import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // firebase
 import { AngularFireModule } from 'angularfire2';
@@ -30,6 +30,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 // homepage components
 import { HomepageComponent } from './homepage/homepage.component';
@@ -80,7 +81,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     PosterComponent,
     DialogComponent,
     SmoothScrollToDirective,
-    SmoothScrollDirective
+    SmoothScrollDirective,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
