@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
 @Input() category: string;
 @Input() owner: string;
 @Input() svg: string;
-@Output() notify: EventEmitter<object> = new EventEmitter<object>();
+@Input() price: string;
 
   constructor(
     private _productService: ProductsListService
@@ -27,7 +27,4 @@ export class ProductComponent implements OnInit {
     this._productService.deleteProduct(this.$key)
   }
 
-  onClick() {
-    return this.notify.emit({ url: this.svg, name: this.name });
-  }
 }

@@ -1,7 +1,13 @@
 @import "../../variables.scss";
 
+/deep/ .mat-button {
+    min-width: 1% !important;
+    line-height: normal !important;
+}
+
 .admin-page {
     display: flex;
+    position: relative;
     height: 100%;
 
     .side-menu {
@@ -42,4 +48,19 @@
     }
 
 
+}
+
+/deep/ .mat-toolbar-row {
+    height: auto;
+    padding: 10px;
+}
+
+.img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+/deep/.mat-toolbar {
+    background: transparent;
 }

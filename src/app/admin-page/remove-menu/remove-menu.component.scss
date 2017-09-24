@@ -15,21 +15,15 @@
 
     .table-row {
         border-bottom: 1px solid black;
+        font-size: 1.2vw;
+
+        span {
+            width: 10vw;
+            margin-right: 1vw;
+        }
     }
 
     .spacer {
         flex: 1 1 auto;
-    }
-}
-
-/deep/ .container-img{
-    padding: 5%;
-    position: fixed;
-    right: 0;
-    top: 0;
-    text-align: center;
-
-    .name {
-        padding: 2vw;
     }
 }
