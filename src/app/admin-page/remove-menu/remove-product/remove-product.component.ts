@@ -21,6 +21,7 @@ export class RemoveProductComponent implements OnInit {
     this._productService.getProducts().subscribe(res => {
       this.showSpinner = false; 
       this.productList = res;
+      console.log(res)
     });
   }
 
