@@ -68,9 +68,15 @@ export class UserService {
     return this.db.list('/users/' + userId + '/gallery');
   }
 
-  deleteProductFromGallery(key: string, userId: string) {
-    console.log(key);
-    return this.db.database.ref('/users').child(userId).child('gallery').child(key).remove();
+  deleteProductFromGallery(key: string, userId: string, gallery) {
+    let id: string;
+    let items = gallery.map(i => {return i});
+    items.forEach(el => {
+      if (el.productKey === key) {
+        id = el.$key;
+      }
+    });
+    return this.db.database.ref('/users').child(userId).child('gallery').child(id).remove();
   }
 
   registerUser(email: string, password: string) {
