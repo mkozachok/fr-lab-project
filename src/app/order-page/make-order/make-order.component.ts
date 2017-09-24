@@ -30,6 +30,7 @@ export class MakeOrderComponent implements OnInit {
 	}
 	userSubscribe: Subscription;
   	additionalUserInfoSubscribe: Subscription;
+  	public showSpinner = true;
 
 	constructor(private userService: UserService, private afAuth: AngularFireAuth,
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
@@ -46,6 +47,7 @@ export class MakeOrderComponent implements OnInit {
 				this.user.email = res.email;
 
 				this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
+					this.showSpinner = false;
 					this.user.phone = res.additionalInfo.phone;
 					this.user.address = res.additionalInfo.address;
 				});

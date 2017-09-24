@@ -38,7 +38,15 @@ md-expansion-panel {
 
 md-expansion-panel-header {
 	padding: 0 2%;
+
 	md-panel-title {
 		width: 30%;
 	}
+}
+
+ .loader{
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
 }

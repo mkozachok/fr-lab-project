@@ -74,6 +74,7 @@
   </div>
 
   <div id="canvas">
+    <app-loader *ngIf="showSpinner"></app-loader>
     <div class="redactor_area">
       <canvas width="700px" height="600px" id="img_product"></canvas>
        <canvas width="700px" height="600px" id="viewport"></canvas>

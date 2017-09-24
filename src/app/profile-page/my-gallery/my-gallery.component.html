@@ -1,3 +1,4 @@
-<div class="container">
+<app-loader *ngIf="showSpinner" class="loader"></app-loader>
+<div class="container" *ngIf="!showSpinner">
 	<app-view-one-product *ngFor="let product of usersProducts" [product]="product"></app-view-one-product>
 </div>

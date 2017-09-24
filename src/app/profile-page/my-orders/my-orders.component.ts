@@ -13,11 +13,13 @@ import { Observable } from 'rxjs/Observable';
 })
 export class MyOrdersComponent implements OnInit {
 	usersOrders: Observable<Array<any>>;
+  showLoader = true;
 
 	constructor(private makeOrderService: MakeOrderService, private userService: UserService) { }
 
 	ngOnInit() {
   		this.makeOrderService.getAll().subscribe(res => {
+        this.showLoader = false;
   			this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res);
   		});
 	}
