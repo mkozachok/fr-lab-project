@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .header {
     position: fixed;
     top: 0;
@@ -7,15 +9,24 @@
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
 
+    @media screen and (max-width: $break-middle){
+        font-size: 0.7em;
+    }
+
     .spacer {
         flex: 1 1 auto;
     }
 
+     /deep/ .material-icons {
+        @media screen and (max-width: $break-middle){
+            font-size: 2em;
+        }
+    } 
     a {
         text-decoration: none;
         text-transform: uppercase;
         font-size: 0.7em;
-        color: #555; 
+        color: #555;  
 
         &:hover {
             color: #7b0041;
@@ -33,7 +44,11 @@
 
     .header-icon {
         transform: translateY(6px);
-        margin-right: 5px;    
+        margin-right: 5px;
+        
+        @media screen and (max-width: $break-middle){
+            transform: translateY(5px);
+        }
     }
 
     .log-button {
