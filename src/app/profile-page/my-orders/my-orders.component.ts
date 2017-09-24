@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
   providers: [MakeOrderService]
 })
 export class MyOrdersComponent implements OnInit {
-	usersOrders;
+	usersOrders: Observable<Array<any>>;
 
 	constructor(private makeOrderService: MakeOrderService, private userService: UserService) { }
 

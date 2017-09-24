@@ -78,4 +78,10 @@ export class ProductsListService {
 				x['owner'].toLowerCase().indexOf(transformedPhrase) >= 0;
 		});
 	}
+
+	getProductsByIds(productKeys: Array<string>, products: FirebaseListObservable<any>) {
+		return products.filter(product => {
+			return productKeys.includes(product.$key);
+		});
+	}
 }

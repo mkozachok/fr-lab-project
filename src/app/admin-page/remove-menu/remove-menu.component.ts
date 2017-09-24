@@ -6,16 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./remove-menu.component.scss']
 })
 export class RemoveMenuComponent implements OnInit {
-  designPhotoUrl: string;
-  designName: string;
   constructor() { }
 
   ngOnInit() {
   }
 
-  onNotify(obj){
-    this.designName = obj.name;
-    this.designPhotoUrl = obj.url;
-    console.log('from r-m', obj)
-  }
 }

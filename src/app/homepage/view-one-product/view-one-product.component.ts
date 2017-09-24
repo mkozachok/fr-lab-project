@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./view-one-product.component.scss']
 })
 export class ViewOneProductComponent implements OnInit {
-  @Input()
+  @Input() product;
   @Output() click = new EventEmitter();
   selectedItems: Product[];
 
@@ -19,10 +19,10 @@ export class ViewOneProductComponent implements OnInit {
   };
 
   ngOnInit():void {
+
    };
 
   addToCart(item) {
-    this.productListService.getItem(item);
     this.orderService.addItem(item);
   }
 }

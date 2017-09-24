@@ -1,0 +1,14 @@
+.container {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 2% 1% 0 1%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+app-view-one-product {
+	width: calc((100% / 4) - 1%);
+	border: 1px solid #eee;
+	box-sizing: border-box;
+	margin: 0 0.5% 1% 0.5%;
+}

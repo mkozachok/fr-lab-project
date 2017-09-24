@@ -4,6 +4,7 @@
 	flex-wrap: wrap;
 	min-height: 500px;
   height: 100%;
+	font-family: 'Quicksand', sans-serif;
 }
 #tools{
 	width: 25%;
@@ -18,7 +19,6 @@
 	flex-direction: row;
 	justify-content: space-between;
 	text-align: center;
-	font-family:monospace;
 	font-size: 16px;
 
 }
@@ -42,6 +42,11 @@
 	text-align: center;
 	color:#fff;
 	font-size: 20px;
+	font-family: 'Quicksand', sans-serif;
+}
+#loadImg{
+	cursor: pointer;
+	margin: 20px 0;
 }
 .selected_color{
 	display: flex;
@@ -67,15 +72,47 @@
 	position: relative;
 	min-height: 600px;
 }
-
+canvas{
+	min-width: 700px;
+}
 /deep/ .canvas-container{
 	height: 600px !important;
 	position: absolute !important;
   top: 0 !important;
   left: 20% !important;
 }
-#result{
-	position: absolute;
-	top:100%;
-	left: 20%;
+/deep/ .mat-expansion-panel-header{
+	background-color: #7b0041 !important;
+}
+/deep/ .mat-expansion-panel-body{
+	text-align: center;
+}
+/deep/ .mat-expansion-panel-content{
+	visibility: hidden;
+}
+/deep/ .mat-slider{
+	width: 100%;
+}
+#text_btn{
+	margin:20px 0;
+	width: 100%;
+}
+input[type="color"]{
+	width: 50%;
+	margin: 0 20px;
+}
+#font{
+	display: block;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.54);
+	margin-top:20px;
+}
+#fontWeight{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.54);
 }

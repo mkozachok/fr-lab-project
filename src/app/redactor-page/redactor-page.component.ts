@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import mergeImages from 'merge-images';
-import $  from "jquery";
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
 import { Design } from '../models/design-model';
@@ -11,6 +10,8 @@ import { MakeOrderService } from '../services/make-order.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';
+import { Subscription } from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -32,7 +33,11 @@ export class RedactorPageComponent{
   items: FirebaseListObservable<any>;
   user: User;
 
-  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
+
+  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService, private router: Router){}
+
+
+
   ngOnInit() {
    let self = this;
    this.items = this.designService.getDesigns();
@@ -100,12 +105,16 @@ export class RedactorPageComponent{
     }
     img.src = self.selectedCategory.src;
   }
+
+
   saveProduct = function(event){
+    let productKey: string;
     let self = this;
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
         // this.resultImg = b64
+        console.log(this);
         let newProduct = new Product();
         newProduct.name = self.type;
         newProduct.type = self.type;
@@ -114,14 +123,16 @@ export class RedactorPageComponent{
         newProduct.owner = self.user.firstName + " " + self.user.lastName;
         newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
         console.log(newProduct);
-        this.productService.setProduct(newProduct);
-        // let order = new Order(null, newProduct, 1);
-        // self.orderService.setOrder(self.userService.getUserId(), [order], null, Math.floor(Math.random() * (20 - 5) + 5));
-
-
-      } );
-
+        this.productService.setProduct(newProduct).then(resolve => {
+          productKey = resolve.key;
+          this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
+            this.router.navigate(['profile-page/my-gallery']);
+          });
+        });
+      });
   }
+
+
 
   drawImg = function(image){
     let canvas = this.getCanvas();
@@ -157,19 +168,55 @@ getCanvas = function(){
 }
 
 removeImg = function(){
-  console.log("remove");
   let object = this.getCanvas().getActiveObject();
-	if (!object){
-		alert('Please select the element to remove');
-		return '';
-	}
 	this.getCanvas().remove(object);
 }
-// getDesignList = function(){
-//   this.designService.getDesigns().forEach(tt => console.log(tt));
-//   return this.designService.getDesigns();
-//   // return [];
-// }
+
+addText = function(){
+  let canvas = this.getCanvas();
+  this.categoryName = "custom design";
+  canvas.add(new fabric.IText('Your text', {
+      left: 205,
+      top: 220,
+      fontFamily: 'arial',
+      fill: '#333',
+	    fontSize: 40
+    }));
+}
+changeColor = function(element){
+  let object = this.getCanvas().getActiveObject();
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFill(element.target.value);
+  canvas.renderAll();
+}
+setFont = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontFamily(element.value);
+  canvas.renderAll();
+}
+changeFontSize = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontSize(element.value);
+  canvas.renderAll();
+}
+setFontOptions = function(element){
+  let canvas = this.getCanvas();
+  let value = element.source.value;
+  let checked = element.checked;
+  switch(value){
+    case "bold" :
+      canvas.getActiveObject().set("fontWeight", checked?900:200);
+    break;
+    case "italic" :
+      canvas.getActiveObject().set("fontStyle", checked?value:"");
+    break;
+    case "linethrough" :
+      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
+    break;
+  }
+  canvas.renderAll();
+  console.log(value);
+}
    templates = [
       {
         type: "tshirtm",

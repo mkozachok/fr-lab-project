@@ -46,8 +46,8 @@ export class MakeOrderComponent implements OnInit {
 				this.user.email = res.email;
 
 				this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
-					this.user.address = res.additionalInfo.phone;
-					this.user.phone = res.additionalInfo.address;
+					this.user.phone = res.additionalInfo.phone;
+					this.user.address = res.additionalInfo.address;
 				});
 			}
 		});

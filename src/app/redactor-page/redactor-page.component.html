@@ -8,16 +8,22 @@
             </div>
           </div>
 
-        <div class="bl_2">
-          <div class="head">Color <i class="material-icons">color_lens</i></div>
-          <ul class="selected_color">
-            <li *ngFor="let goods of getColors()" (click)="setColor(goods)">
-              <span [style.background] = "goods.color">
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div class="head">Add Text <i class="material-icons">text_fields</i></div>
+          <md-expansion-panel>
+              <md-expansion-panel-header>
+                <md-panel-title>
+                  <div class="head">Color <i class="material-icons">color_lens</i></div>
+                </md-panel-title>
+              </md-expansion-panel-header>
+
+
+                <ul class="selected_color">
+                  <li *ngFor="let goods of getColors()" (click)="setColor(goods)">
+                    <span [style.background] = "goods.color">
+                    </span>
+                  </li>
+                </ul>
+
+            </md-expansion-panel>
       </md-tab>
 
       <md-tab label="Category">
@@ -26,10 +32,43 @@
                   <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
             </div>
           </div>
-        <div class="load">
+        <div id="loadImg" (click)="imgLoader.click()">
           <div class="head" >Load Image <i class="material-icons">file_download</i></div>
-          <input type="file" id="imgLoader" (change)="handleImage($event)">
+          <input type="file" #imgLoader accept="image/*" (change)="handleImage($event)" [hidden]="true">
         </div>
+        <md-expansion-panel>
+            <md-expansion-panel-header>
+              <md-panel-title>
+                <div class="head">Add Text <i class="material-icons">text_fields</i></div>
+              </md-panel-title>
+            </md-expansion-panel-header>
+
+              <button id="text_btn" md-raised-button (click)="addText()">Add Your Text</button>
+              <span mdTooltip="Select text!">
+              <input type="color" value="#f8bbd0" [disabled]="!this.getCanvas().getActiveObject()" size="10" (change)="changeColor($event)">
+              </span>
+              <md-select style="display:block" placeholder="Font Family" [disabled]="!this.getCanvas().getActiveObject()"
+               (change)="setFont($event)">
+                  <md-option value="arial">Arial</md-option>
+                  <md-option value="monaco">Monaco</md-option>
+                  <md-option value="optima">Optima</md-option>
+                  <md-option value="comic sans ms">Comic Sans MS</md-option>
+                  <md-option value="verdana">Verdana</md-option>
+                  <md-option value="georgia">Georgia</md-option>
+                  <md-option value="impact">Impact</md-option>
+              </md-select>
+
+              <span id="font">Font size</span>
+              <md-slider min="1" max="120" step="0.5" value="40" [disabled]="!this.getCanvas().getActiveObject()" (input)="changeFontSize($event)"> </md-slider>
+              <div id="fontWeight">
+                <md-checkbox value="bold" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Bold</md-checkbox>
+                <md-checkbox value="italic" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Italic</md-checkbox>
+                <md-checkbox value="linethrough" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Linethrough</md-checkbox>
+              </div>
+
+
+
+          </md-expansion-panel>
       </md-tab>
     </md-tab-group>
   </div>
@@ -41,7 +80,7 @@
     </div>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
-    <button md-raised-button >Buy</button>
+    <button md-raised-button (click)="buy()">Buy</button>
     <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
   </div>
 </div>

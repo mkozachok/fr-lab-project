@@ -10,6 +10,7 @@ export class DesignComponent implements OnInit {
   @Input() name: string;
   @Input() url: string;
   @Input() $key: string;
+  @Input() price: string;
   @Output() notify: EventEmitter<object> = new EventEmitter<object>();
 
   constructor(
@@ -18,10 +19,6 @@ export class DesignComponent implements OnInit {
 
   ngOnInit() {
 
-  }
-
-  onClick() {
-    return this.notify.emit({ url: this.url, name: this.name });
   }
 
   deleteDesign() {
