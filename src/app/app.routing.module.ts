@@ -5,6 +5,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
@@ -60,6 +61,10 @@ const routes: Routes = [
     {
         path: 'make-order',
         component: MakeOrderComponent
+    },
+    {
+        path: 'additional-info',
+        component: AdditionalInfoComponent
     }
 
 ];

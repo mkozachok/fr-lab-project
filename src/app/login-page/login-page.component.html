@@ -23,4 +23,5 @@
     <button [disabled]="!userForm.form.valid" md-raised-button type="submit">log in</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
+  <button  md-raised-button (click)="onSubmitGoogle()" >log in with google</button>
 </div>

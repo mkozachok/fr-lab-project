@@ -59,6 +59,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 //scrolling
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     PosterComponent,
     DialogComponent,
     SmoothScrollToDirective,
-    SmoothScrollDirective
+    SmoothScrollDirective,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
