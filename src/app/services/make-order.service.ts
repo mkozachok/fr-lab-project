@@ -14,15 +14,19 @@ export class MakeOrderService {
 
 	setOrder(userid: string, order: Order[], user: any, totalSum: number): firebase.Promise<void> {
 		let currentDate = firebase.database.ServerValue.TIMESTAMP;
-		return this.orders.push({ userId:userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum, new: true });
+		return this.orders.push({ userId: userid, orders: order, userInfo: user, date: currentDate, totalSum: totalSum, new: true });
 	}
 
 	getAll() {
 		return this.orders;
 	}
 
-	getUsersOrder(userId: string, allOrders: FirebaseListObservable<any> ) {
-		let items = allOrders.map(i => {return i});
+	getUsersOrder(userId: string, allOrders: FirebaseListObservable<any>) {
+		let items = allOrders.map(i => { return i });
 		return items.filter(el => el.userId == userId);
+	}
+
+	updateOrder() {
+		return this.db.list('/orders')
 	}
 }
