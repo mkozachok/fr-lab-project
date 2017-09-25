@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit {
       .then((success) => this.router.navigate(['']))
       .catch(err => this.error = err);
   }
-  onSubmitGoogle(value: any) {
+  onSubmitGoogle() {
     this.error = null;
     this._userService.loginInGoogle()
       .then((success) => this.googleAutorizationCheck())
