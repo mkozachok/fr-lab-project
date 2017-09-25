@@ -18,6 +18,9 @@ import { ProductComponent } from './remove-menu/remove-product/product/product.c
 import { AdminComponent } from './remove-menu/remove-admin/admin/admin.component';
 import { DesignComponent } from './remove-menu/remove-design/design/design.component';
 import { ImgWindowComponent } from '../components/img-window/img-window.component';
+import { NewOrdersComponent } from './new-orders/new-orders.component';
+import { OrderComponent } from './new-orders/order/order.component';
+import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.component';
 
 @NgModule({
   imports: [
@@ -41,7 +44,10 @@ import { ImgWindowComponent } from '../components/img-window/img-window.componen
     ProductComponent,
     AdminComponent,
     DesignComponent,
-    ImgWindowComponent
+    ImgWindowComponent,
+    NewOrdersComponent,
+    OrderComponent,
+    SubOrderComponent
   ],
   providers: [AdminService]
 })

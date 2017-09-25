@@ -1,0 +1,19 @@
+<div class="order-wrapper">
+  <app-loader *ngIf="showSpinner"></app-loader>
+  <div class="table-wrapper" *ngIf="!showSpinner">
+    <md-form-field>
+      <input mdInput placeholder="New order searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
+        name="userFilter">
+    </md-form-field>
+    <md-accordion>
+      <app-order class="table-row"
+       *ngFor="let order of orders"
+        [date]="order.date"
+        [totalSum]="order.totalSum"
+        [orders]="order.orders"
+        [userInfo]="order.userInfo"
+        [$key]="order.$key">
+      </app-order>
+    </md-accordion>
+  </div>
+</div>

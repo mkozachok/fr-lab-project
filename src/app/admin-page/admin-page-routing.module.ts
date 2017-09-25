@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AdminPageComponent } from './admin-page.component';
 import { AddMenuComponent } from './add-menu/add-menu.component';
 import { RemoveMenuComponent } from './remove-menu/remove-menu.component'
+import { NewOrdersComponent } from './new-orders/new-orders.component';
 
 import { AuthGuard } from '../guards/auth.guard';
 
@@ -22,7 +23,13 @@ const adminPageRoutes: Routes = [
             {
                 path: 'remove-menu',
                 component: RemoveMenuComponent
+            },
+            {
+                path: 'new-orders',
+                component: NewOrdersComponent
             }
+            
+
         ]
     },
 
@@ -39,5 +46,5 @@ const adminPageRoutes: Routes = [
     ]
 })
 export class AdminPageRoutingModule { }
-export const adminPageRoutingComponents = [AddMenuComponent, RemoveMenuComponent];
+export const adminPageRoutingComponents = [AddMenuComponent, RemoveMenuComponent, NewOrdersComponent];
 

@@ -1,0 +1,31 @@
+/deep/ .order-wrapper{
+    padding: 2vw;
+    display: flex;
+    justify-content: center;
+    min-height: 70vh;
+
+    .table-wrapper {
+        width: 100%;
+    }
+
+    .table-row {
+        font-size: 1.2vw;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .mat-toolbar {
+        .mat-toolbar-row {
+            flex-wrap: wrap;
+        }
+    }
+
+    .mat-expansion-panel-header-title,
+    .mat-expansion-panel-header-description {
+        width: 15%;
+    }
+
+    .mat-content {
+        align-items: center;
+    }
+}

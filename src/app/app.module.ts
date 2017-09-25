@@ -54,9 +54,10 @@ import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { DesignService } from './services/design.service';
 import { AdminService } from './services/admin.service';
+import { MakeOrderService } from './services/make-order.service';
 
 //pagination
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 //scrolling
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
@@ -104,8 +105,16 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     SharedModule,
     WildcardRoutingModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
-  entryComponents: [ DialogComponent ],
+  providers: [
+    UserService,
+    ProductsListService,
+    DesignService,
+    AdminService,
+    AuthGuard,
+    AdminGuard,
+    MakeOrderService
+  ],
+  entryComponents: [DialogComponent],
   bootstrap: [
     AppComponent
   ],
