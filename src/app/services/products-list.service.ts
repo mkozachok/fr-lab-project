@@ -13,17 +13,16 @@ export class ProductsListService {
 	products: FirebaseListObservable<any>;
 	selectedItems;
 	product: Product;
-	prods: FirebaseListObservable<any>;
+	public prods: FirebaseListObservable<any>;
 	filtered: FirebaseListObservable<any>;
 	
 	constructor(private db: AngularFireDatabase) {
 		this.db = db;
-		this.products = db.list('/products');  
 		this.prods = db.list('/products');
 	}
 
 	getAll(){
-		return this.prods
+		return this.prods;
 	}
 
 	selectProducts(prop, propValue) {
@@ -34,8 +33,10 @@ export class ProductsListService {
 	};
 
 	search(search, arr) {
-		return arr.filter(function(item) {
+		return arr.map(items => {
+			const filtered = items.filter(function(item) {
 			return item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0;
+			})
 		});
 	}
 

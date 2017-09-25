@@ -18,7 +18,7 @@ export class ViewAllProductsComponent implements OnInit {
   @Input()
   @Output() click = new EventEmitter();
   
-  @Input() prods: FirebaseListObservable<any>;
+  @Input() prods:Observable<Array<any>>;
 
   constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) {
   };
@@ -30,15 +30,15 @@ export class ViewAllProductsComponent implements OnInit {
     config.duration = 1300;
     this.snackBar.open('This product has been added to your shoping cart', '', config);
   }
-
+  /*
   getAll() {
     this.productListService.getAll().subscribe((res=> {
       this.prods = res;
       console.log(this.prods);
     }));
   }
-
+*/
   ngOnInit() {
-    this.getAll();
+    this.productListService.getAll().subscribe((items) => {this.prods = items});
   };
 }
