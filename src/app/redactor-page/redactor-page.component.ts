@@ -15,6 +15,7 @@ import {FirebaseListObservable } from 'angularfire2/database';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import * as firebase from 'firebase';
 
 @Component({
   moduleId: module.id,
@@ -36,7 +37,6 @@ export class RedactorPageComponent{
   categories: FirebaseListObservable<any>;
   price: FirebaseListObservable<any>;
   user: User;
-
 
   constructor(private designService: DesignService,
      private userService: UserService,
@@ -72,6 +72,31 @@ export class RedactorPageComponent{
    console.log(myType);
  }
 
+resize = function(){
+  let baseCanvas = this.getTemplateCanvas();
+  let categoryCanvas = this.getCanvas();
+  this.resizeCanvas(baseCanvas);
+  this.resizeCanvas(categoryCanvas);
+}
+ resizeCanvas = function(canvas) {
+
+ var canvasSizer = document.getElementById("canvas");
+ var canvasScaleFactor = canvasSizer.offsetWidth/700;
+ var width = canvasSizer.offsetWidth;
+ var height = canvasSizer.offsetHeight;
+ var ratio = canvas.getWidth() /canvas.getHeight();
+    if((width/height)>ratio){
+      width = height*ratio;
+    } else {
+      height = width / ratio;
+    }
+ var scale = width / canvas.getWidth();
+ var zoom = canvas.getZoom();
+ zoom *= scale;
+ canvas.setDimensions({ width: width, height: height });
+ canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
+};
+
   selectTemplate = function(template){
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
@@ -86,14 +111,17 @@ export class RedactorPageComponent{
     let self = this;
 
     img.onload = function(){
-      var image = new fabric.Image(img);
+      let image = new fabric.Image(img);
       image.set({
-        width:600,
-        height:600
+        // width:img.width,
+        // height:img.height
+        width: 580,
+        height:580
       });
       canvas.add(image);
     }
     img.src = self.selectedTemplateImage.src;
+    this.resizeCanvas(canvas);
   }
   getTemplateCanvas = function(){
     if(!this.templateCanvas){
@@ -122,8 +150,8 @@ export class RedactorPageComponent{
 
       var image = new fabric.Image(img);
       image.set({
-          left: 170,
-          top: 200,
+          left: 155,
+          top: 180,
       });
       self.drawImg(image);
 
@@ -148,11 +176,15 @@ export class RedactorPageComponent{
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
+
+        // Upload b64 as image
+        /// firebase.storage().ref('products/').child('/* name of img goes here */').putString(b64, 'data_url')
+        //////////////////////
         let newProduct = this.createProduct(self, b64);
         this.productService.setProduct(newProduct).then(resolve => {
           productKey = resolve.key;
           this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-            this.router.navigate(['profile-page/my-gallery']);
+           // this.router.navigate(['profile-page/my-gallery']);
           });
         });
       });
@@ -172,6 +204,7 @@ export class RedactorPageComponent{
 
   drawImg = function(image){
     let canvas = this.getCanvas();
+    this.resizeCanvas(canvas);
     canvas.add(image);
   }
 

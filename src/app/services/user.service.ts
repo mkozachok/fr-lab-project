@@ -102,11 +102,6 @@ export class UserService {
       .then((success) => console.log(this.afAuth.auth.currentUser))
   }
 
-  getUserInformation() {
-
-  }
-
-
   createPrimaryInformation(upload: Upload, name: string, surname: string) {
     console.log();
     const storageRef = firebase.storage().ref();
@@ -125,5 +120,8 @@ export class UserService {
     );
   }
 
+  deleteUserOldAvatar(url){
+    return firebase.storage().refFromURL(url).delete();
+  }
 
 }

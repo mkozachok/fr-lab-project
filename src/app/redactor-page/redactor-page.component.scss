@@ -4,8 +4,9 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	min-height: 500px;
+	min-height: 580px;
   height: 100%;
+	position: relative;
 	font-family: 'Quicksand', sans-serif;
 }
 #tools{
@@ -106,13 +107,18 @@
 }
 .redactor_area{
 	position: relative;
-	min-height: 600px;
+	min-height: 550px;
+}
+#btns{
+	text-align: right;
+	position: absolute;
+	bottom: 10px;
 }
 canvas{
-	min-width: 700px;
+	// min-width: 700px;
 }
 /deep/ .canvas-container{
-	height: 600px !important;
+	// height: 600px !important;
 	position: absolute !important;
   top: 0 !important;
   left: 20% !important;
