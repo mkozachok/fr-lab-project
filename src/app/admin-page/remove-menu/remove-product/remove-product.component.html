@@ -13,8 +13,6 @@
       <span  class="img-title">Product image</span>
     </md-toolbar>
     <app-product
-    (notify)="onNotify($event)"
-    [class.showImg] = "onHover"
      *ngFor="let product of productList"
       [name]="product.name"
       [$key]="product.$key"

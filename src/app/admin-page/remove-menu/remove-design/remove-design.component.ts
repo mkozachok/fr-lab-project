@@ -12,7 +12,7 @@ import { Design } from '../../../models/design-model';
 export class RemoveDesignComponent implements OnInit, OnDestroy {
   subscriptionToDesignList: Subscription;
   designs;
-  filteredArr: Observable<Array<any>>;
+  arrOfDesigns: Observable<Array<any>>;
   showSpinner: boolean = true;
   constructor(
     private _designService: DesignService
@@ -25,6 +25,7 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
     .subscribe(res => {
       this.showSpinner = false;
       this.designs = res;
+      this.arrOfDesigns = this.designs;
     })
   }
 
@@ -37,7 +38,7 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
   }
 
    filterItem(phrase) {
-    this.getAdminsArr();
+    this.designs = this.arrOfDesigns;
     this.designs = this._designService.findDesign(phrase, this.designs);
   } 
 
