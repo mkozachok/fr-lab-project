@@ -10,16 +10,15 @@
       </md-form-field>
       <md-toolbar class="table-row">
           <span>Name</span>
+          <span>Price</span>
+          <span class="img-title">Design image</span>
         </md-toolbar>
-       <app-design (notify)="onNotify($event)"
+       <app-design
         *ngFor="let design of designs"
         [name]="design.name"
         [$key]="design.$key"
-        [url]="design.url">
+        [url]="design.url"
+        [price]="design.price">
         </app-design>
-       <app-img-window class="img-window"
-        [photoUrl]="this.photoUrl"
-        [name]="this.name">
-      </app-img-window>
     </div>
   </div>

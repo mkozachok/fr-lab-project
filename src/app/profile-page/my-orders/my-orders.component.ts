@@ -8,11 +8,10 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
-  styleUrls: ['./my-orders.component.scss'],
-  providers: [MakeOrderService]
+  styleUrls: ['./my-orders.component.scss']
 })
 export class MyOrdersComponent implements OnInit {
-	usersOrders;
+	usersOrders: Observable<Array<any>>;
 
 	constructor(private makeOrderService: MakeOrderService, private userService: UserService) { }
 

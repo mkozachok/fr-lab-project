@@ -4,7 +4,7 @@ import { AppRoutingModule, routingComponents } from './app.routing.module';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgModel } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // firebase
 import { AngularFireModule } from 'angularfire2';
@@ -30,6 +30,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 // homepage components
 import { HomepageComponent } from './homepage/homepage.component';
@@ -37,7 +38,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
 import { SearchComponent } from './homepage/search/search.component';
 import { FiltersComponent } from './homepage/filters/filters.component';
 import { AddToBasketBtnComponent } from './homepage/add-to-basket-btn/add-to-basket-btn.component';
-import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
+// import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
 import { ViewAllProductsComponent } from './homepage/view-all-products/view-all-products.component';
 
 
@@ -53,9 +54,10 @@ import { UserService } from './services/user.service';
 import { ProductsListService } from './services/products-list.service';
 import { DesignService } from './services/design.service';
 import { AdminService } from './services/admin.service';
+import { MakeOrderService } from './services/make-order.service';
 
 //pagination
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 //scrolling
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
@@ -75,12 +77,13 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     FiltersComponent,
     SearchComponent,
     AddToBasketBtnComponent,
-    ViewOneProductComponent,
+    // ViewOneProductComponent,
     ViewAllProductsComponent,
     PosterComponent,
     DialogComponent,
     SmoothScrollToDirective,
-    SmoothScrollDirective
+    SmoothScrollDirective,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -102,8 +105,16 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     SharedModule,
     WildcardRoutingModule
   ],
-  providers: [UserService, ProductsListService, DesignService, AdminService, AuthGuard, AdminGuard],
-  entryComponents: [ DialogComponent ],
+  providers: [
+    UserService,
+    ProductsListService,
+    DesignService,
+    AdminService,
+    AuthGuard,
+    AdminGuard,
+    MakeOrderService
+  ],
+  entryComponents: [DialogComponent],
   bootstrap: [
     AppComponent
   ],

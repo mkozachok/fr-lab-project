@@ -20,6 +20,10 @@ export class UserService {
   logIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
+  loginInGoogle() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            .then((success) => console.log(this.afAuth.auth.currentUser));
+  }
   logOut() {
     this.router.navigate(['/login-page'])
       .then(() => this.afAuth.auth.signOut());
@@ -34,6 +38,9 @@ export class UserService {
     return user;
   }
 
+  // getUsersGallery(userId: string) {
+  //   return this.db.object('/users/' + userId + '/gallery');
+  // }
 
   getUserId(){
     return this.afAuth.auth.currentUser.uid;
@@ -57,10 +64,28 @@ export class UserService {
     })
   }
 
+  addToUsersGallery(userId: string, productId: string) {
+    return this.db.database.ref('/users').child(userId).child('gallery').push({ productKey: productId});
+  }
+
+  getUsersGallery(userId: string) {
+    return this.db.list('/users/' + userId + '/gallery');
+  }
+
+  deleteProductFromGallery(key: string, userId: string, gallery) {
+    let id: string;
+    let items = gallery.map(i => {return i});
+    items.forEach(el => {
+      if (el.productKey === key) {
+        id = el.$key;
+      }
+    });
+    return this.db.database.ref('/users').child(userId).child('gallery').child(id).remove();
+  }
 
   registerUser(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((success) => this.afAuth.auth.currentUser.sendEmailVerification())
+      .then((success) => this.afAuth.auth.currentUser.sendEmailVerification());
 
   }
 
@@ -69,7 +94,6 @@ export class UserService {
       this.afAuth.auth.currentUser.uid,
       {
         orders: [""],
-        gallery: [""],
         additionalInfo: {
           phone: phone,
           address: address
@@ -85,18 +109,18 @@ export class UserService {
 
   createPrimaryInformation(upload: Upload, name: string, surname: string) {
     console.log();
-    let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       () => {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        console.log(upload.url)
+        console.log(upload.url);
         this.afAuth.auth.currentUser.updateProfile({
           displayName: `${name} ${surname}`,
           photoURL: upload.url
-        })
+        });
       }
     );
   }

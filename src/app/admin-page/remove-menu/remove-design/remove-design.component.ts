@@ -10,8 +10,6 @@ import { Design } from '../../../models/design-model';
   styleUrls: ['./remove-design.component.scss']
 })
 export class RemoveDesignComponent implements OnInit, OnDestroy {
-  photoUrl:string;
-  name: string;
   subscriptionToDesignList: Subscription;
   designs;
   filteredArr: Observable<Array<any>>;
@@ -42,11 +40,6 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
     this.getAdminsArr();
     this.designs = this._designService.findDesign(phrase, this.designs);
   } 
-
-  onNotify(obj){
-    this.photoUrl = obj.url;
-    this.name = obj.name;
-  }
 
 }
 

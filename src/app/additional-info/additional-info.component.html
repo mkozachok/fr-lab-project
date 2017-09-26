@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Please, enter some additional information</h2>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate >
+    <md-form-field>
+      <input required #addressRef="ngModel" minlength="2" mdInput placeholder="address" name="address" ngModel/>
+    </md-form-field>
+    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
+      <p [hidden]="!addressRef.errors.required">
+        Please enter your address
+      </p>
+    </div>
+    <md-form-field>
+      <input  required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
+    </md-form-field>
+    <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)">
+      <p [hidden]="!phoneRef.errors.required">
+        Please enter your phone
+      </p>
+    </div>
+    <button [disabled]="!userForm.form.valid"  md-raised-button type="submit">finish registration</button>
+    <p *ngIf="this.error">{{this.error.message}}</p>
+  </form>
+</div>

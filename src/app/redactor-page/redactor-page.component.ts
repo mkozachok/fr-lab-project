@@ -1,25 +1,27 @@
 import { Component} from '@angular/core';
 import mergeImages from 'merge-images';
+import {UploadService} from '../services/upload.service';
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
+import { Upload } from '../models/upload-model';
 import { Design } from '../models/design-model';
 import { Order } from '../models/order-model';
 import { Product } from '../models/product-model';
 import { DesignService } from '../services/design.service';
-import { MakeOrderService } from '../services/make-order.service';
+import { OrderService } from '../order-page/order-page.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
-import {FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import {MdSelectModule} from '@angular/material';
+import {FirebaseListObservable } from 'angularfire2/database';
+import { Subscription } from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  providers: [MakeOrderService],
+  providers: [OrderService],
   selector: 'app-redactor-page',
   templateUrl: './redactor-page.component.html',
   styleUrls: ['./redactor-page.component.scss']
 })
-
 
 
 export class RedactorPageComponent{
@@ -34,8 +36,15 @@ export class RedactorPageComponent{
   user: User;
 
 
-  constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
+  constructor(private designService: DesignService,
+     private userService: UserService,
+     private orderService: OrderService,
+     private productService: ProductsListService,
+     private uploadService: UploadService,
+     private router: Router
+   ){}
   ngOnInit() {
+
    let self = this;
    this.designService.getDesigns().subscribe(res => {this.items = res});
    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
@@ -111,27 +120,44 @@ export class RedactorPageComponent{
     }
     img.src = self.selectedCategory.src;
   }
+
+  createProduct(redactor, b64) {
+    let newProduct = new Product();
+    newProduct.name = redactor.type;
+    newProduct.type = redactor.type;
+    newProduct.category = redactor.categoryName;
+    newProduct.svg = b64;
+    newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
+    newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
+    return newProduct;
+  }
+
   saveProduct = function(event){
+    let productKey: string;
     let self = this;
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
-        // this.resultImg = b64
-        let newProduct = new Product();
-        newProduct.name = self.type;
-        newProduct.type = self.type;
-        newProduct.category = self.categoryName;
-        newProduct.svg = b64;
-        newProduct.owner = self.user.firstName + " " + self.user.lastName;
-        newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
-        console.log(newProduct);
-        this.productService.setProduct(newProduct);
-        // let order = new Order(null, newProduct, 1);
-        // self.orderService.setOrder(self.userService.getUserId(), [order], null, Math.floor(Math.random() * (20 - 5) + 5));
+        let newProduct = this.createProduct(self, b64);
+        this.productService.setProduct(newProduct).then(resolve => {
+          productKey = resolve.key;
+          this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
+            this.router.navigate(['profile-page/my-gallery']);
+          });
+        });
+      });
+  }
 
-
-      } );
-
+  buy() {
+    let productKey: string;
+    let self = this;
+    mergeImages([this.getTemplateCanvas().toDataURL(),
+     this.getCanvas().toDataURL()])
+      .then(b64 =>{
+        let newProduct = this.createProduct(self, b64);
+        this.orderService.addItem(newProduct);
+        this.router.navigate(['order-page']);
+      });
   }
 
   drawImg = function(image){

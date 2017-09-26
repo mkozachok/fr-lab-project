@@ -1,0 +1,28 @@
+<md-expansion-panel class="table-row">
+  <md-expansion-panel-header>
+    <md-panel-title>
+      {{ date | date :'medium' }}
+    </md-panel-title>
+    <md-panel-description>
+      {{ userInfo.firstName }} {{ userInfo.lastName }}
+    </md-panel-description>
+    <md-panel-description>
+      {{ userInfo.phoneNumber }} {{ userInfo.email }}
+    </md-panel-description>
+    <md-panel-description>
+      Amount: {{ totalSum }} UAH
+    </md-panel-description>
+  </md-expansion-panel-header>
+  <div class="sub-order-wrapper">
+    <app-sub-order class="sub-order"
+     *ngFor="let order of orders"
+      [quantity]="order.quantity"
+      [name]="order.product.name"
+      [svg]="order.product.svg"
+      [price]="order.product.price">
+    </app-sub-order>
+  </div>
+  <md-action-row>
+    <button md-button color="primary" (click)="accept()">Mark as accepted</button>
+  </md-action-row>
+</md-expansion-panel>

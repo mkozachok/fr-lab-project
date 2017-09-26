@@ -87,7 +87,7 @@
     </div>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
-    <button md-raised-button >Buy</button>
+    <button md-raised-button (click)="buy()">Buy</button>
     <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
   </div>
 </div>

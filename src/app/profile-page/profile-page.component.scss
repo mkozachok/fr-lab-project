@@ -1,5 +1,10 @@
 @import "../../variables.scss";
 
+/deep/ .mat-button {
+    min-width: 1% !important;
+    line-height: normal !important;
+}
+
 .profile-page {
     display: flex;
     height: 100%;
@@ -61,16 +66,19 @@
             text-align: left;
             padding: 0;
             transition: ease all .2s;
-
-            &:hover {
-                background-color: $profileSideMenuButtonsHoverBg;
+            
+             
+                
 
                 a {
-                    color: $profileSideMenuButtonsHover;
+                    &:hover{
+                        color: $profileSideMenuButtonsHover;
+                        background-color: $profileSideMenuButtonsHoverBg;
+                    }
                 }
             }      
         }
-    }
+    
 
     .content {
         flex: 1;

@@ -31,7 +31,6 @@
     "hammerjs": "^2.0.8",
     "heimdalljs": "^0.2.5",
     "heimdalljs-logger": "^0.1.9",
-    "jquery": "^3.2.1",
     "merge-images": "^1.0.5",
     "ng2-filter-pipe": "^0.1.10",
     "ng2-smooth-scroll": "^1.0.1",

@@ -13,7 +13,7 @@ export class FileUploadComponent implements OnInit {
   selectedFiles: FileList;
   currentUpload: Upload;
   downloadedPhoto: boolean = false;
-  addPhoto = "insert_photo";
+  addPhoto: string = "insert_photo";
   photoUrl: string;
   @Input() saveUrl: string;
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();

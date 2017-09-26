@@ -1,15 +1,9 @@
 @import '../../../../variables.scss';
-
-.table-row{
-    width: 75%;
+/deep/ .mat-tab-body{
+    width: 50vw;
 }
 
 /deep/ .table-row{
-
-    span {
-        width: 10vw;
-        padding-right: 2vw;
-    }
 
     .img {
         height: 10vw;
@@ -27,5 +21,9 @@
         }
     }
 
+}
+
+.img-title {
+    margin-left: 10px;
 }
 
