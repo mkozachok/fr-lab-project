@@ -1,9 +1,12 @@
+@import "../../variables.scss";
+
 #container{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	min-height: 500px;
+	min-height: 580px;
   height: 100%;
+	position: relative;
 	font-family: 'Quicksand', sans-serif;
 }
 #tools{
@@ -11,7 +14,18 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
 }
+
+.categories {
+	width: 100%;
+	text-align: center;
+}
+
+.categories span {
+	padding: 0 5%;
+}
+
 .templates, .gategory_images{
 	margin-top:20px;
 	flex-wrap: wrap;
@@ -22,9 +36,32 @@
 	font-size: 16px;
 
 }
+
+.gategory_images {
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
 .template_img,.category_img{
 	width: 33%;
 }
+
+.category_img {
+	position: relative;
+}
+
+.price {
+	position: absolute;
+	top: 15px;
+	right: 0;
+	background: #fff;
+	color:$darkRead;
+	font-size: 12px;
+	padding: 3px 5px;
+	border-radius: 10px;
+	border: 1px solid $darkRead;
+}
+
 #canvas{
 	width: 75%;
 	text-align: center;
@@ -70,13 +107,18 @@
 }
 .redactor_area{
 	position: relative;
-	min-height: 600px;
+	min-height: 550px;
+}
+#btns{
+	text-align: right;
+	position: absolute;
+	bottom: 10px;
 }
 canvas{
-	min-width: 700px;
+	// min-width: 700px;
 }
 /deep/ .canvas-container{
-	height: 600px !important;
+	// height: 600px !important;
 	position: absolute !important;
   top: 0 !important;
   left: 20% !important;

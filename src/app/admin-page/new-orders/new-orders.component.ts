@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class NewOrdersComponent implements OnInit {
   showSpinner: boolean = true;
   orders: Observable<Array<any>>;
-
+  originalArray: Observable<Array<any>>;
   constructor(
     private _makeOrderService: MakeOrderService
   ) { }
@@ -19,11 +19,18 @@ export class NewOrdersComponent implements OnInit {
     this._makeOrderService.getAll().subscribe(res=>{
       this.showSpinner = false;
       this.orders = res.filter(order => order.new);
+      this.originalArray = this.orders;
+      console.log(this.orders)
     })
   }
 
   ngOnInit() {
-    this.getOrders()
+    this.getOrders();
+  }
+
+  filterItem(phrase){
+    this.orders = this.originalArray;
+    this.orders = this._makeOrderService.searachOrder(phrase, this.orders);
   }
 
 }

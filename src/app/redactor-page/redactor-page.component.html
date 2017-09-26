@@ -27,9 +27,23 @@
       </md-tab>
 
       <md-tab label="Category">
+          <div class="categories">
+            <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category">
+              <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
+                {{category.category}}
+              </md-option>
+            </md-select>
+            <span> or </span>
+            <md-select [(ngModel)]="myType" (change) = "typeChoose(myType)" placeholder="choose type">
+              <md-option class="category"  *ngFor="let type of price" [value]="type.filter">
+                {{type.filter}}
+              </md-option>
+            </md-select>
+          </div>
           <div class="gategory_images">
-            <div class="category_img"*ngFor="let image of items | async">
+            <div class="category_img" *ngFor="let image of items">
                   <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
+                  <div class="price">{{image.price !== "free" ? (image.price | currency:'USD':true) : (image.price)}}</div>
             </div>
           </div>
         <div id="loadImg" (click)="imgLoader.click()">
@@ -73,14 +87,16 @@
     </md-tab-group>
   </div>
 
-  <div id="canvas">
+  <div id="canvas" (window:resize)="resize()">
     <div class="redactor_area">
-      <canvas width="700px" height="600px" id="img_product"></canvas>
-       <canvas width="700px" height="600px" id="viewport"></canvas>
+      <canvas width="700px" height="550px" id="img_product"></canvas>
+       <canvas width="700px" height="550px" id="viewport"></canvas>
     </div>
+    <div id="btns">
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
     <button md-raised-button (click)="buy()">Buy</button>
     <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
+  </div>
   </div>
 </div>

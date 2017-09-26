@@ -29,4 +29,15 @@ export class MakeOrderService {
 	updateOrder() {
 		return this.db.list('/orders')
 	}
+
+	searachOrder(phrase, arrayOfOrders){
+		let transformedPhrase = phrase.toLowerCase();
+		return arrayOfOrders.filter(x => {
+		  return x['userInfo']['address'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+		  x['userInfo']['email'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+		  x['userInfo']['firstName'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+		  x['userInfo']['lastName'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
+		  x['userInfo']['phoneNumber'].toLowerCase().indexOf(transformedPhrase) >= 0;
+		});
+	}
 }

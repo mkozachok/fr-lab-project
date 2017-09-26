@@ -56,12 +56,15 @@
 .edit-wrapper {
     form {
         width: 40vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     md-form-field{
         position: relative;
         display: block;
-        margin: 5% auto;
+        margin: 1% auto;
         width: 100%;       
     }
 
