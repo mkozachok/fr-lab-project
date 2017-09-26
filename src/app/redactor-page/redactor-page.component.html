@@ -33,10 +33,17 @@
                 {{category.category}}
               </md-option>
             </md-select>
+            <span> or </span>
+            <md-select [(ngModel)]="myType" (change) = "typeChoose(myType)" placeholder="choose type">
+              <md-option class="category"  *ngFor="let type of price" [value]="type.filter">
+                {{type.filter}}
+              </md-option>
+            </md-select>
           </div>
           <div class="gategory_images">
             <div class="category_img" *ngFor="let image of items">
                   <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
+                  <div class="price">{{image.price !== "free" ? (image.price | currency:'USD':true) : (image.price)}}</div>
             </div>
           </div>
         <div id="loadImg" (click)="imgLoader.click()">

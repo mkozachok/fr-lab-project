@@ -7,11 +7,13 @@ import * as firebase from "firebase";
 export class DesignService {
   designs:FirebaseListObservable<any>;
   designCategories: FirebaseListObservable<any>;
+  designFilter: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.db = db;
     this.designs = db.list('/redactor/design');
     this.designCategories = db.list('/redactor/designCategories');
+    this.designFilter = db.list('/redactor/priceFilter');
   }
 
   setDesign(design): firebase.Promise<void>  {
@@ -26,6 +28,10 @@ export class DesignService {
     return this.designCategories;
   }
 
+  getPrice() {
+    return this.designFilter;
+  }
+
   categoryChoose(propValue) {
     if(propValue === 'all') {
       return this.designs;
@@ -35,7 +41,23 @@ export class DesignService {
         return filtered;
       });
     }
-	};
+  };
+  
+  typeChoose(myType) {
+    if(myType === 'all') {
+      return this.designs;
+    } else if (myType === 'free'){
+      return this.designs.map(items => {
+        const filtered = items.filter(item => item.price === myType);
+        return filtered;
+      });
+    } else if (myType !== 'free' && myType !== 'all'){
+      return this.designs.map(items => {
+        const filtered = items.filter(item => !isNaN(item.price));
+        return filtered;      
+      })     
+    }
+  }
 
   deleteDesign(id):firebase.Promise<boolean>{
       return this.db.database.ref('/redactor/design').child(id).remove();

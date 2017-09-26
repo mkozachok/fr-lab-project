@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 #container{
 	display: flex;
 	flex-direction: row;
@@ -16,9 +18,11 @@
 
 .categories {
 	width: 100%;
+	text-align: center;
 }
-md-select {
-	width: 100%;
+
+.categories span {
+	padding: 0 5%;
 }
 
 .templates, .gategory_images{
@@ -40,6 +44,23 @@ md-select {
 .template_img,.category_img{
 	width: 33%;
 }
+
+.category_img {
+	position: relative;
+}
+
+.price {
+	position: absolute;
+	top: 15px;
+	right: 0;
+	background: #fff;
+	color:$darkRead;
+	font-size: 12px;
+	padding: 3px 5px;
+	border-radius: 10px;
+	border: 1px solid $darkRead;
+}
+
 #canvas{
 	width: 75%;
 	text-align: center;

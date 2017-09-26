@@ -14,6 +14,7 @@ import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -33,6 +34,7 @@ export class RedactorPageComponent{
   resultImg = "";
   items: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
+  price: FirebaseListObservable<any>;
   user: User;
 
 
@@ -48,6 +50,7 @@ export class RedactorPageComponent{
    let self = this;
    this.designService.getDesigns().subscribe(res => {this.items = res});
    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
+   this.designService.getPrice().subscribe(res => {this.price = res});
    this.userService.getUser().subscribe(res => {
      this.user = new User();
      this.user.firstName = res.displayName.split(' ')[0];
@@ -60,6 +63,13 @@ export class RedactorPageComponent{
     this.items = res;
    });
    console.log(cat);
+ }
+
+ typeChoose(myType) {
+  this.designService.typeChoose(myType).subscribe(res => {
+    this.items = res;
+   });
+   console.log(myType);
  }
 
   selectTemplate = function(template){
