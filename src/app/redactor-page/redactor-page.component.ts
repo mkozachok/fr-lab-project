@@ -145,7 +145,9 @@ resize = function(){
     this.selectedCategory.src = category.url;
     this.categoryName = category.name;
     let img = new Image();
+    img.crossOrigin = "Anonymous";
     let self = this;
+    img.src = self.selectedCategory.src;
     img.onload = function(){
 
       var image = new fabric.Image(img);
@@ -156,7 +158,7 @@ resize = function(){
       self.drawImg(image);
 
     }
-    img.src = self.selectedCategory.src;
+    
   }
 
   createProduct(redactor, b64) {
@@ -173,7 +175,8 @@ resize = function(){
   saveProduct = function(event){
     let productKey: string;
     let self = this;
-    mergeImages([this.getTemplateCanvas().toDataURL(),
+    
+     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
 
