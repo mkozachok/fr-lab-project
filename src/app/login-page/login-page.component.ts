@@ -33,12 +33,12 @@ export class LoginPageComponent implements OnInit {
   }
   googleAutorizationCheck() {
   this._userService.getUserFromDataBase(this._userService.getUserId())
-    .subscribe(res => console.log(this.userValue = res.$exists())
-    );
+    .subscribe(res => this.userValue = res.$exists());
   }
   googeAutarizationRouting() {
     if (!this.userValue) {
-      this.router.navigate(['additional-info']);
+      this._userService.createUserAdditionalInformation('', '')
+      .then((success) => this.router.navigate(['']));
     } else {
       this.router.navigate(['']);
     }
