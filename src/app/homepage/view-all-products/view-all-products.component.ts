@@ -17,20 +17,12 @@ import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 export class ViewAllProductsComponent implements OnInit {
   @Input()
   @Output() click = new EventEmitter();
-  @Input() products: FirebaseListObservable<any>;
-  @Input() selectedItems;
   
+  @Input() prods:Observable<Array<any>>;
 
-  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) { 
+  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar) {
   };
-
-  getAll():void {
-    this.productListService.getAll().subscribe(res=> {
-      this.selectedItems = res;
-    });
-    return this.selectedItems;
-  };
-
+  
   addToCart(product):void {
     this.orderService.addItem(product);
     let config = new MdSnackBarConfig();
@@ -38,9 +30,15 @@ export class ViewAllProductsComponent implements OnInit {
     config.duration = 1300;
     this.snackBar.open('This product has been added to your shoping cart', '', config);
   }
-
-  ngOnInit():void {
-    this.getAll();
-    console.log(this.selectedItems);
-   };
+  /*
+  getAll() {
+    this.productListService.getAll().subscribe((res=> {
+      this.prods = res;
+      console.log(this.prods);
+    }));
+  }
+*/
+  ngOnInit() {
+    this.productListService.getAll().subscribe((items) => {this.prods = items});
+  };
 }

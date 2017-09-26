@@ -32,6 +32,7 @@ export class RedactorPageComponent{
   name = "";
   resultImg = "";
   items: FirebaseListObservable<any>;
+  categories: FirebaseListObservable<any>;
   user: User;
 
 
@@ -45,13 +46,22 @@ export class RedactorPageComponent{
   ngOnInit() {
 
    let self = this;
-   this.items = this.designService.getDesigns();
+   this.designService.getDesigns().subscribe(res => {this.items = res});
+   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
    this.userService.getUser().subscribe(res => {
      this.user = new User();
      this.user.firstName = res.displayName.split(' ')[0];
      this.user.lastName = res.displayName.split(' ')[1];
    });
  }
+
+ categoryChoose(cat) {
+   this.designService.categoryChoose(cat).subscribe(res => {
+    this.items = res;
+   });
+   console.log(cat);
+ }
+
   selectTemplate = function(template){
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
