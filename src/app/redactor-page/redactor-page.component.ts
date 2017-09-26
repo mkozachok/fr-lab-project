@@ -10,6 +10,7 @@ import { MakeOrderService } from '../services/make-order.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import {MdSelectModule} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -36,7 +37,6 @@ export class RedactorPageComponent{
   constructor(private designService: DesignService, private userService: UserService, private orderService: MakeOrderService, private productService: ProductsListService){}
   ngOnInit() {
    let self = this;
-   /*this.items = this.designService.getDesigns();*/
    this.designService.getDesigns().subscribe(res => {this.items = res});
    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
    this.userService.getUser().subscribe(res => {

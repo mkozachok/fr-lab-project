@@ -23,10 +23,12 @@ export class FiltersComponent implements OnInit {
   };
 
   ngOnInit():void {
+    
   };
 
-  sorting(prop, propValue) {
-    this.productListService.selectProducts(prop, propValue).subscribe((res=> { 
+  sorting(propValue) {
+    this.productListService.getAll().subscribe(items => {this.prods = items});
+    this.productListService.selectProducts(this.prods, propValue).subscribe((res=> { 
       this.prods = res;
     }));
     console.log(this.prods)

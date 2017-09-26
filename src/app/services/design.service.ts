@@ -19,7 +19,6 @@ export class DesignService {
   }
 
   getDesigns() {
-    /*return this.db.list('/redactor/design');*/
     return this.designs;
   }
 

@@ -13,20 +13,19 @@ export class ProductsListService {
 	products: FirebaseListObservable<any>;
 	selectedItems;
 	product: Product;
-	public prods: FirebaseListObservable<any>;
 	filtered: FirebaseListObservable<any>;
 	
 	constructor(private db: AngularFireDatabase) {
 		this.db = db;
-		this.prods = db.list('/products');
+		this.products = db.list('/products');
 	}
 
 	getAll(){
-		return this.prods;
+		return this.products;
 	}
 
 	selectProducts(prop, propValue) {
-		return this.prods.map(items => {
+		return this.products.map(items => {
 			const filtered = items.filter(item => item.category === propValue || item.type === propValue);
 			return filtered;
 		});

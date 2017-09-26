@@ -17,13 +17,13 @@ import { Observable, Subscription } from 'rxjs';
 })
 
 export class HomepageComponent implements OnInit {
-  @Input() prods: FirebaseListObservable<any>;
+  prods: FirebaseListObservable<any>;
   @Input() filtered: Product[];
 
   constructor(private productListService: ProductsListService) { 
   };
 
   ngOnInit():void {
-    this.productListService.getAll().subscribe((items) => {this.prods = items});
+    this.productListService.getAll().subscribe(items => {this.prods = items});
    };
 }

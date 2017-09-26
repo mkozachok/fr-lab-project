@@ -28,10 +28,11 @@
 
       <md-tab label="Category">
           <div class="categories">
-            <div class="category"  *ngFor="let category of categories" 
-                  (click) = "categoryChoose(category.category)">
-              {{category.category}}
-            </div>
+            <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category">
+              <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
+                {{category.category}}
+              </md-option>
+            </md-select>
           </div>
           <div class="gategory_images">
             <div class="category_img" *ngFor="let image of items">
