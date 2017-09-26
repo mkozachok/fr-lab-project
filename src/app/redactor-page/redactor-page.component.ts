@@ -14,6 +14,7 @@ import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   moduleId: module.id,
@@ -138,11 +139,15 @@ export class RedactorPageComponent{
     mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
+        
+        // Upload b64 as image
+        /// firebase.storage().ref('products/').child('/* name of img goes here */').putString(b64, 'data_url')
+        //////////////////////
         let newProduct = this.createProduct(self, b64);
         this.productService.setProduct(newProduct).then(resolve => {
           productKey = resolve.key;
           this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-            this.router.navigate(['profile-page/my-gallery']);
+           // this.router.navigate(['profile-page/my-gallery']);
           });
         });
       });
