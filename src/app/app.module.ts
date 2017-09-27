@@ -35,11 +35,11 @@ import { AdditionalInfoComponent } from './additional-info/additional-info.compo
 // homepage components
 import { HomepageComponent } from './homepage/homepage.component';
 import { PosterComponent } from './homepage/poster/poster.component';
-import { SearchComponent } from './homepage/search/search.component';
-import { FiltersComponent } from './homepage/filters/filters.component';
-import { AddToBasketBtnComponent } from './homepage/add-to-basket-btn/add-to-basket-btn.component';
+//import { SearchComponent } from './homepage/search/search.component';
+//import { FiltersComponent } from './homepage/filters/filters.component';
+//import { AddToBasketBtnComponent } from './homepage/add-to-basket-btn/add-to-basket-btn.component';
 // import { ViewOneProductComponent } from './homepage/view-one-product/view-one-product.component';
-import { ViewAllProductsComponent } from './homepage/view-all-products/view-all-products.component';
+//import { ViewAllProductsComponent } from './homepage/view-all-products/view-all-products.component';
 
 
 
@@ -74,11 +74,11 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     DialogComponent,
     HomepageComponent,
     PosterComponent,
-    FiltersComponent,
-    SearchComponent,
-    AddToBasketBtnComponent,
+    //FiltersComponent,
+    //SearchComponent,
+    //AddToBasketBtnComponent,
     // ViewOneProductComponent,
-    ViewAllProductsComponent,
+    //ViewAllProductsComponent,
     PosterComponent,
     DialogComponent,
     SmoothScrollToDirective,

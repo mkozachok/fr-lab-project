@@ -11,28 +11,35 @@ import * as firebase from 'firebase';
 
 export class ProductsListService {
 	products: FirebaseListObservable<any>;
-	selectedItems;
-	product: Product;
-	filtered: FirebaseListObservable<any>;
+	templateTypes: FirebaseListObservable<any>;
 	
 	constructor(private db: AngularFireDatabase) {
 		this.db = db;
 		this.products = db.list('/products');
+		this.templateTypes = db.list('/templateTypes');
 	}
-
-	getAll(){
+	
+	getProducts() {
 		return this.products;
 	}
 
-	selectProducts(prop, propValue) {
-		return this.products.map(items => {
-			const filtered = items.filter(item => item.category === propValue || item.type === propValue);
-			return filtered;
-		});
-	};
+	getTemplateTypes() {
+		return this.templateTypes;
+	}
 
-	search(search, arr) {
-		return arr.map(items => {
+	selectProducts(propValue) {
+		if(propValue == 'all') {
+			return this.products;
+		} else {
+			return this.products.map(items => {
+			  const filtered = items.filter(item => item.category == propValue || item.type == propValue);
+			  return filtered;
+			});
+		}
+	}
+
+	search(search) {
+		return this.products.map(items => {
 			const filtered = items.filter(function(item) {
 			return item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0;
 			})
@@ -51,10 +58,6 @@ export class ProductsListService {
 
 	setProduct(product): firebase.Promise<void> {
 		return this.products.push(product);
-	}
-
-	getProducts() {
-		return this.products;
 	}
 
 	deleteProduct(id) {
