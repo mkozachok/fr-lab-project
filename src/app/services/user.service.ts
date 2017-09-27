@@ -93,7 +93,7 @@ export class UserService {
     return this.users.set(
       this.afAuth.auth.currentUser.uid,
       {
-        orders: [""],
+        gallery: [""],
         additionalInfo: {
           phone: phone,
           address: address
