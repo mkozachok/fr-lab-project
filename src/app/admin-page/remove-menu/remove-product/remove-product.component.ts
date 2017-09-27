@@ -8,35 +8,31 @@ import { Observable } from 'rxjs';
   styleUrls: ['./remove-product.component.scss']
 })
 export class RemoveProductComponent implements OnInit {
-  photoUrl:string;
+  photoUrl: string;
   name: string;
-  productList: Observable<Array<any>>
+  productList: Observable<Array<any>>;
+  arrOfProducts: Observable<Array<any>>;
   showSpinner: boolean = true;
   onHover: boolean = false;
   constructor(
     private _productService: ProductsListService
   ) { }
 
-  getProductsArr(){
+  getProductsArr() {
     this._productService.getProducts().subscribe(res => {
-      this.showSpinner = false; 
+      this.showSpinner = false;
       this.productList = res;
+      this.arrOfProducts = this.productList;
     });
   }
 
   ngOnInit() {
     this.getProductsArr();
   }
-  
+
   filterItem(phrase) {
-  this.getProductsArr();
+    this.productList = this.arrOfProducts;
     this.productList = this._productService.findProduct(phrase, this.productList);
   }
-
-  onNotify(obj){
-    this.photoUrl = obj.url;
-    this.name = obj.name;
-  }
-  
 
 }

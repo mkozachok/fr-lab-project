@@ -13,6 +13,7 @@ import { Admin } from '../../../models/admin-model';
 export class RemoveAdminComponent implements OnInit, OnDestroy {
   subscriptionToAdminsList: Subscription;
   admins: Observable<Array<any>>;
+  arrOfAdmins: Observable<Array<any>>;
   filteredArr: Observable<Array<any>>;
   showSpinner: boolean = true;
   constructor(
@@ -26,6 +27,7 @@ export class RemoveAdminComponent implements OnInit, OnDestroy {
     .subscribe(res => {
       this.showSpinner = false;
       this.admins = res;
+      this.arrOfAdmins = this.admins;
     })
   }
 
@@ -38,7 +40,7 @@ export class RemoveAdminComponent implements OnInit, OnDestroy {
   }
 
   filterItem(phrase) {
-    this.getAdminsArr();
+    this.admins = this.arrOfAdmins;
     this.admins = this._adminService.findAdmin(phrase, this.admins);
   }
 }

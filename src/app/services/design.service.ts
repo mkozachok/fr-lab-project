@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Design } from '../models/design-model';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from "firebase";
 
 @Injectable()
 export class DesignService {
   designs:FirebaseListObservable<any>;
+  designCategories: FirebaseListObservable<any>;
+  designFilter: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.db = db;
     this.designs = db.list('/redactor/design');
+    this.designCategories = db.list('/redactor/designCategories');
+    this.designFilter = db.list('/redactor/priceFilter');
   }
 
   setDesign(design): firebase.Promise<void>  {
@@ -17,7 +21,42 @@ export class DesignService {
   }
 
   getDesigns() {
-    return this.db.list('/redactor/design');
+    return this.designs;
+  }
+
+  getDesignCategory() {
+    return this.designCategories;
+  }
+
+  getPrice() {
+    return this.designFilter;
+  }
+
+  categoryChoose(propValue) {
+    if(propValue === 'all') {
+      return this.designs;
+    } else {
+      return this.designs.map(items => {
+        const filtered = items.filter(item => item.category === propValue);
+        return filtered;
+      });
+    }
+  };
+  
+  typeChoose(myType) {
+    if(myType === 'all') {
+      return this.designs;
+    } else if (myType === 'free'){
+      return this.designs.map(items => {
+        const filtered = items.filter(item => item.price === myType);
+        return filtered;
+      });
+    } else if (myType !== 'free' && myType !== 'all'){
+      return this.designs.map(items => {
+        const filtered = items.filter(item => !isNaN(item.price));
+        return filtered;      
+      })     
+    }
   }
 
   deleteDesign(id):firebase.Promise<boolean>{
