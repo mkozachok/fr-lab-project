@@ -257,6 +257,8 @@ removeImg = function(){
 }
 
 addText = function(){
+  this.selectedDesignsPrices.push(2);
+  let self = this;
   let canvas = this.getCanvas();
   this.categoryName = "custom design";
   canvas.add(new fabric.IText('Your text', {
@@ -264,7 +266,8 @@ addText = function(){
       top: 220,
       fontFamily: 'arial',
       fill: '#333',
-	    fontSize: 40
+      fontSize: 40,
+      id: self.selectedDesignsPrices.length
     }));
 }
 changeColor = function(element){
