@@ -56,20 +56,20 @@ export class OrderService {
 	}
 
 	addItem(item: Product): void {
-		// let productId = item.id;
-		// let exists = false;
-		// ORDERS.forEach(el => {
-		// 	if (el.product.id == productId) {
-		// 		el.quantity++;
-		// 		quantity++;
-		// 		exists = true;
-		// 	}
-		// });
-		// if (!exists) {
-		// 	let productId = ORDERS.length;
-		// 	let newItem = new Order(productId, item, 1);
-		// 	ORDERS.push(newItem);
-		// 	quantity++;
-		// }
+		let productName = item.name;
+		let exists = false;
+		ORDERS.forEach(el => {
+			if (el.product.name == productName) {
+				el.quantity++;
+				quantity++;
+				exists = true;
+			}
+		});
+		if (!exists) {
+			let productId = ORDERS.length;
+			let newItem = new Order(item, 1);
+			ORDERS.push(newItem);
+			quantity++;
+		}
 	}
 }
