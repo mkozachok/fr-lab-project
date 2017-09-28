@@ -12,7 +12,7 @@ export class UserService {
   users: FirebaseListObservable<any>;
   URL: string;
   constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-    this.users = db.list('/users');
+    //this.users = db.list('/users');
   }
   private basePath: string = '/avatars';
   uploads: FirebaseListObservable<Upload[]>;
@@ -90,7 +90,7 @@ export class UserService {
   }
 
   createUserAdditionalInformation( phone: string, address: string) {
-    return this.users.set(
+    return  this.db.list('/users').set(
       this.afAuth.auth.currentUser.uid,
       {
         gallery: [""],

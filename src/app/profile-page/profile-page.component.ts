@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '.././services/user.service';
 import { User } from '../models/user-model';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,8 +13,7 @@ export class ProfilePageComponent implements OnInit {
   user = {};
 
   constructor(
-    private _userService: UserService,
-    private afAuth: AngularFireAuth
+    private _userService: UserService
   ) {
 
   }
