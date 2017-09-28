@@ -55,19 +55,17 @@ export class OrderService {
 		}
 	}
 
-	addItem(item: Product): void {
-		let productName = item.name;
+	addItem(item: Product, itemKey: string): void {
 		let exists = false;
 		ORDERS.forEach(el => {
-			if (el.product.name == productName) {
+			if (el.productKey === itemKey) {
 				el.quantity++;
 				quantity++;
 				exists = true;
 			}
 		});
 		if (!exists) {
-			let productId = ORDERS.length;
-			let newItem = new Order(item, 1);
+			let newItem = new Order(item, 1, itemKey);
 			ORDERS.push(newItem);
 			quantity++;
 		}

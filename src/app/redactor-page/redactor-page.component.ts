@@ -8,7 +8,7 @@ import { Design } from '../models/design-model';
 import { Order } from '../models/order-model';
 import { Product } from '../models/product-model';
 import { DesignService } from '../services/design.service';
-import { OrderService } from '../order-page/order-page.service';
+import { OrderService } from '../services/order-page.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
 import {FirebaseListObservable } from 'angularfire2/database';

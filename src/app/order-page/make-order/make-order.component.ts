@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user-model';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { OrderService } from '../order-page.service';
+import { OrderService } from '../../services/order-page.service';
 import { MakeOrderService } from '../../services/make-order.service';
 
 import { DialogComponent } from '../../components/dialog/dialog.component';

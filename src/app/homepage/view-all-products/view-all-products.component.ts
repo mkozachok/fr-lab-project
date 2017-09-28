@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Product } from '../../models/product-model';
 import { ViewOneProductComponent } from '../view-one-product/view-one-product.component';
 import { ProductsListService } from '../../services/products-list.service';
-import { OrderService } from '../../order-page/order-page.service';
+import { OrderService } from '../../services/order-page.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
@@ -39,6 +39,6 @@ export class ViewAllProductsComponent implements OnInit {
   }
 */
   ngOnInit() {
-    this.productListService.getAll().subscribe((items) => {this.prods = items});
+    this.productListService.getProducts().subscribe((items) => {this.prods = items});
   };
 }

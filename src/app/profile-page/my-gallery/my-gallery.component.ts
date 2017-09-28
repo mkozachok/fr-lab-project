@@ -5,7 +5,7 @@ import { UserService } from '../../services/user.service';
 import { ProductsListService } from '../../services/products-list.service';
 import { Subscription } from "rxjs";
 import { Product } from '../../models/product-model';
-import { OrderService } from '../../order-page/order-page.service';
+import { OrderService } from '../../services/order-page.service';
 
 @Component({
   selector: 'app-my-gallery',
