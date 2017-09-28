@@ -37,6 +37,10 @@ export class RedactorPageComponent{
   categories: FirebaseListObservable<any>;
   price: FirebaseListObservable<any>;
   user: User;
+  templatePrice: number = 0;
+  selectedDesignsPrices = [];
+  designsPrice: number = 0;
+
 
   constructor(private designService: DesignService,
      private userService: UserService,
@@ -100,6 +104,7 @@ resize = function(){
   selectTemplate = function(template){
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
+    this.templatePrice = template.price;
     this.drawTemplate();
 
   }
@@ -144,6 +149,7 @@ resize = function(){
   selectCategory = function(category){
     console.log(this.selectedCategory.src);
     this.selectedCategory.src = category.url;
+    this.selectedDesignsPrices.push(category.price);
     this.categoryName = category.name;
     let img = new Image();
     img.crossOrigin = "Anonymous";
@@ -155,21 +161,23 @@ resize = function(){
       image.set({
           left: 155,
           top: 180,
+          id: self.selectedDesignsPrices.length
       });
       self.drawImg(image);
-
     }
     
   }
 
   createProduct(redactor, b64) {
+    this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
     let newProduct = new Product();
     newProduct.name = redactor.type;
     newProduct.type = redactor.type;
     newProduct.category = redactor.categoryName;
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
-    newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
+    // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
+    newProduct.price = this.designsPrice + this.templatePrice;
     return newProduct;
   }
 
@@ -213,6 +221,8 @@ resize = function(){
   }
 
   handleImage = function(e){
+    this.selectedDesignsPrices.push(5);
+    let self = this;
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
     var reader:any,
@@ -225,7 +235,8 @@ resize = function(){
             var image = new fabric.Image(imgObj);
             image.set({
                 left: 215,
-                top: 200
+                top: 200,
+                id: self.selectedDesignsPrices.length
             });
             canvas.add(image);
   }
@@ -242,10 +253,13 @@ getCanvas = function(){
 
 removeImg = function(){
   let object = this.getCanvas().getActiveObject();
+  this.selectedDesignsPrices[object.id - 1] = 0;
 	this.getCanvas().remove(object);
 }
 
 addText = function(){
+  this.selectedDesignsPrices.push(2);
+  let self = this;
   let canvas = this.getCanvas();
   this.categoryName = "custom design";
   canvas.add(new fabric.IText('Your text', {
@@ -253,7 +267,8 @@ addText = function(){
       top: 220,
       fontFamily: 'arial',
       fill: '#333',
-	    fontSize: 40
+      fontSize: 40,
+      id: self.selectedDesignsPrices.length
     }));
 }
 changeColor = function(element){
@@ -294,6 +309,7 @@ setFontOptions = function(element){
       {
         type: "tshirtm",
         url: "assets/images/templates/tshirtm.png",
+        price: 6,
           goods:[
           {
             color: "#ffffff",
@@ -340,35 +356,44 @@ setFontOptions = function(element){
       },
       {
         type:"tankm",
-        url: "assets/images/templates/tankm.png"
+        url: "assets/images/templates/tankm.png",
+        price: 8
       },
       {
         type: "sleevem",
-        url: "assets/images/templates/sleevem.png"
+        url: "assets/images/templates/sleevem.png",
+        price: 8
+
       },
       {
         type: "cap",
-        url: "assets/images/templates/cap.png"
+        url: "assets/images/templates/cap.png",
+        price: 10
       },
       {
         type: "mug",
-        url: "assets/images/templates/mug.png"
+        url: "assets/images/templates/mug.png",
+        price: 16
       },
       {
         type: "body",
-        url: "assets/images/templates/body.png"
+        url: "assets/images/templates/body.png",
+        price: 5
       },
       {
         type: "tshirtw",
-        url: "assets/images/templates/tshirtw.png"
+        url: "assets/images/templates/tshirtw.png",
+        price: 5
       },
       {
         type: "tankw",
-        url: "assets/images/templates/tankw.png"
+        url: "assets/images/templates/tankw.png",
+        price: 6
       },
       {
         type: "sleevew",
-        url: "assets/images/templates/sleevew.png"
+        url: "assets/images/templates/sleevew.png",
+        price: 7
       }
   ];
 }
