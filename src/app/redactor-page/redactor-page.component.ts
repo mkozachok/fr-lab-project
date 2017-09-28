@@ -309,14 +309,25 @@ export class RedactorPageComponent {
   }
 
   drawImg = function (image) {
+    console.log(image)
     let canvas = this.getCanvas();
     this.resizeCanvas(canvas);
     canvas.add(image);
   }
 
   handleImage = function (e) {
-    this.selectedDesignsPrices.push(5);
     let self = this;
+    this.selectedDesignsPrices.push(5);
+    let ojb = {
+      x: this.x,
+      y: this.y,
+      h: this.h,
+      w: this.w,
+      left: 250,
+      top: 200,
+      id: self.selectedDesignsPrices.length,
+      clipTo: self.clipTShirt
+    }
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
     var reader: any,
@@ -327,11 +338,7 @@ export class RedactorPageComponent {
       imgObj.src = event.target.result;
       imgObj.onload = function () {
         var image = new fabric.Image(imgObj);
-        image.set({
-          left: 215,
-          top: 200,
-          id: self.selectedDesignsPrices.length
-        });
+        image.set(ojb);
         canvas.add(image);
       }
     }
@@ -351,19 +358,26 @@ export class RedactorPageComponent {
     this.getCanvas().remove(object);
   }
 
+
   addText = function () {
-    this.selectedDesignsPrices.push(2);
     let self = this;
-    let canvas = this.getCanvas();
-    this.categoryName = "custom design";
-    canvas.add(new fabric.IText('Your text', {
+    let ojb = {
+      x: this.x,
+      y: this.y,
+      h: this.h,
+      w: this.w,
       left: 205,
       top: 220,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
-      id: self.selectedDesignsPrices.length
-    }));
+      id: self.selectedDesignsPrices.length,
+      clipTo: self.clipTShirt
+    }
+    this.selectedDesignsPrices.push(2);
+    let canvas = this.getCanvas();
+    this.categoryName = "custom design";
+    canvas.add(new fabric.IText('Your text', ojb));
   }
   changeColor = function (element) {
     let object = this.getCanvas().getActiveObject();
