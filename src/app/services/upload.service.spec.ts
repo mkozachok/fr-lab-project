@@ -1,16 +1,22 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { UserService } from './user.service';
 
-import { UploadService } from './upload.service';
+/* 
+describe('UserService', () => {
+  let service: UserService;
 
-/* describe('UploadService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [UploadService]
-    });
+  it('getValue should return real value by way of the real MyService', () => {
+    service = new UserService();
+    expect(service.getValue()).toBe('real value');
   });
 
-  it('should be created', inject([UploadService], (service: UploadService) => {
-    expect(service).toBeTruthy();
-  }));
-});
- */
+  it('getValue should return stubbed value from a MyService spy', () => {
+    const myService = new MyService();
+    const stubValue = 'stub value';
+    const spy = spyOn(myService, 'getValue').and.returnValue(stubValue);
+    service = new DependentService(myService);
+
+    expect(service.getValue()).toBe(stubValue, 'service returned stub value');
+    expect(spy.calls.count()).toBe(1, 'stubbed method was called once');
+    expect(spy.calls.mostRecent().returnValue).toBe(stubValue);
+  });
+}); */
