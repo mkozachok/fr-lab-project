@@ -123,7 +123,10 @@ resize = function(){
         width: 580,
         height:580
       });
+      image.selectable = false;
+      image.evented=false;
       canvas.add(image);
+
     }
     img.src = self.selectedTemplateImage.src;
     this.resizeCanvas(canvas);
@@ -164,7 +167,7 @@ resize = function(){
       });
       self.drawImg(image);
     }
-    
+
   }
 
   createProduct(redactor, b64) {
@@ -183,7 +186,7 @@ resize = function(){
   saveProduct = function(event){
     let productKey: string;
     let self = this;
-    
+
      mergeImages([this.getTemplateCanvas().toDataURL(),
      this.getCanvas().toDataURL()])
       .then(b64 =>{
