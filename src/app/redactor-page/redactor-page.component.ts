@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, HostListener} from '@angular/core';
 import mergeImages from 'merge-images';
 import {UploadService} from '../services/upload.service';
 import { fabric } from 'fabric';
@@ -112,14 +112,10 @@ resize = function(){
     let canvas = this.getTemplateCanvas();
     canvas.clear();
     let img = new Image();
-
     let self = this;
-
     img.onload = function(){
       let image = new fabric.Image(img);
       image.set({
-        // width:img.width,
-        // height:img.height
         width: 580,
         height:580
       });
@@ -218,7 +214,7 @@ resize = function(){
 
   drawImg = function(image){
     let canvas = this.getCanvas();
-    this.resizeCanvas(canvas);
+    // this.resizeCanvas(canvas);
     canvas.add(image);
   }
 
@@ -244,6 +240,7 @@ resize = function(){
   }
 }
 reader.readAsDataURL(e.target.files[0]);
+this.resizeCanvas(canvas);
 }
 
 getCanvas = function(){
@@ -252,7 +249,12 @@ getCanvas = function(){
   }
   return this.viewPortCanvas;
 }
-
+@HostListener('window:keydown', ['$event'])
+keyBoardInput = function(event: KeyboardEvent){
+  if(event.keyCode == 8 && this.getCanvas().getActiveObject()){
+    this.removeImg();
+  }
+}
 removeImg = function(){
   let object = this.getCanvas().getActiveObject();
   this.selectedDesignsPrices[object.id - 1] = 0;
@@ -272,6 +274,7 @@ addText = function(){
       fontSize: 40,
       id: self.selectedDesignsPrices.length
     }));
+    this.resizeCanvas(canvas);
 }
 changeColor = function(element){
   let object = this.getCanvas().getActiveObject();
