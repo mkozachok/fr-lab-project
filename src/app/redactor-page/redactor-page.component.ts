@@ -76,30 +76,30 @@ export class RedactorPageComponent{
    console.log(myType);
  }
 
-resize = function(){
-  let baseCanvas = this.getTemplateCanvas();
-  let categoryCanvas = this.getCanvas();
-  this.resizeCanvas(baseCanvas);
-  this.resizeCanvas(categoryCanvas);
-}
- resizeCanvas = function(canvas) {
-
- var canvasSizer = document.getElementById("canvas");
- var canvasScaleFactor = canvasSizer.offsetWidth/700;
- var width = canvasSizer.offsetWidth;
- var height = canvasSizer.offsetHeight;
- var ratio = canvas.getWidth() /canvas.getHeight();
-    if((width/height)>ratio){
-      width = height*ratio;
-    } else {
-      height = width / ratio;
-    }
- var scale = width / canvas.getWidth();
- var zoom = canvas.getZoom();
- zoom *= scale;
- canvas.setDimensions({ width: width, height: height });
- canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
-};
+// resize = function(){
+//   let baseCanvas = this.getTemplateCanvas();
+//   let categoryCanvas = this.getCanvas();
+//   this.resizeCanvas(baseCanvas);
+//   this.resizeCanvas(categoryCanvas);
+// }
+//  resizeCanvas = function(canvas) {
+//
+//  var canvasSizer = document.getElementById("canvas");
+//  var canvasScaleFactor = canvasSizer.offsetWidth/700;
+//  var width = canvasSizer.offsetWidth;
+//  var height = canvasSizer.offsetHeight;
+//  var ratio = canvas.getWidth() /canvas.getHeight();
+//     if((width/height)>ratio){
+//       width = height*ratio;
+//     } else {
+//       height = width / ratio;
+//     }
+//  var scale = width / canvas.getWidth();
+//  var zoom = canvas.getZoom();
+//  zoom *= scale;
+//  canvas.setDimensions({ width: width, height: height });
+//  canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
+// };
 
   selectTemplate = function(template){
     this.type = template.type;
@@ -125,7 +125,7 @@ resize = function(){
 
     }
     img.src = self.selectedTemplateImage.src;
-    this.resizeCanvas(canvas);
+    // this.resizeCanvas(canvas);
   }
   getTemplateCanvas = function(){
     if(!this.templateCanvas){
@@ -157,10 +157,10 @@ resize = function(){
 
       var image = new fabric.Image(img);
       image.set({
-          left: 155,
-          top: 180,
-          width:150,
-          height:150,
+          left: 180,
+          top: 200,
+          width:200,
+          height:200,
           id: self.selectedDesignsPrices.length
       });
       self.drawImg(image);
@@ -232,15 +232,16 @@ resize = function(){
         imgObj.onload = function () {
             var image = new fabric.Image(imgObj);
             image.set({
-                left: 215,
-                top: 200,
-                id: self.selectedDesignsPrices.length
+              left: 180,
+              top: 200,
+              width:200,
+              height:200,
+              id: self.selectedDesignsPrices.length
             });
             canvas.add(image);
   }
 }
 reader.readAsDataURL(e.target.files[0]);
-this.resizeCanvas(canvas);
 }
 
 getCanvas = function(){
@@ -268,13 +269,12 @@ addText = function(){
   this.categoryName = "custom design";
   canvas.add(new fabric.IText('Your text', {
       left: 205,
-      top: 220,
+      top: 130,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
       id: self.selectedDesignsPrices.length
     }));
-    this.resizeCanvas(canvas);
 }
 changeColor = function(element){
   let object = this.getCanvas().getActiveObject();

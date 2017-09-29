@@ -5,6 +5,8 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	min-height: 580px;
+	max-width:1440px;
+	width: 100%;
   height: 100%;
 	position: relative;
 	font-family: 'Quicksand', sans-serif;
@@ -111,14 +113,17 @@
 }
 #btns{
 	text-align: right;
-	position: absolute;
-	bottom: 10px;
+	margin-right: 50px;
+	color:rgba(0, 0, 0, 0.54);
+}
+#btns button:hover{
+	background:$darkRead;
+	color:#fff;
 }
 canvas{
-	// min-width: 700px;
+	max-width: 100%;
 }
 /deep/ .canvas-container{
-	// height: 600px !important;
 	position: absolute !important;
   top: 0 !important;
   left: 20% !important;
