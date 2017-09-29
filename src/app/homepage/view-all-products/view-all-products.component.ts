@@ -24,7 +24,7 @@ export class ViewAllProductsComponent implements OnInit {
   };
   
   addToCart(product):void {
-    this.orderService.addItem(product);
+    this.orderService.addItem(product, product.$key);
     let config = new MdSnackBarConfig();
     config.extraClasses = ['success-snackbar'];
     config.duration = 1300;

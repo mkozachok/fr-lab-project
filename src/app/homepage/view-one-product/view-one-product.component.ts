@@ -29,7 +29,7 @@ export class ViewOneProductComponent implements OnInit {
   };
 
   addToCart(item) {
-    this.orderService.addItem(item, item.$key);
+    this.orderService.addItem(item, '');
     let config = new MdSnackBarConfig();
     config.extraClasses = ['success-snackbar'];
     config.duration = 1300;

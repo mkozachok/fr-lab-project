@@ -184,7 +184,6 @@ export class RedactorPageComponent {
 
   selectTemplate = function (template) {
     this.setCordsdependOnTemplate(template);
-    console.log(template)
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
     this.templatePrice = template.price;
@@ -251,7 +250,9 @@ export class RedactorPageComponent {
     }
 
     this.selectedCategory.src = category.url;
-    this.selectedDesignsPrices.push(category.price);
+    if (category.price !== 'free') {
+      this.selectedDesignsPrices.push(category.price);
+    }
     this.categoryName = category.name;
     let img = new Image();
     img.crossOrigin = "Anonymous";
@@ -306,7 +307,7 @@ export class RedactorPageComponent {
     this.getCanvas().toDataURL()])
       .then(b64 => {
         let newProduct = this.createProduct(self, b64);
-        this.orderService.addItem(newProduct);
+        this.orderService.addItem(newProduct, '');
         this.router.navigate(['order-page']);
       });
   }
