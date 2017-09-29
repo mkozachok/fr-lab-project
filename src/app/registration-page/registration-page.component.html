@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Registration</h2>
+  <h2>{{title}}</h2>
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
     <md-form-field>
       <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
