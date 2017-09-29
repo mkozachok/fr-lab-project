@@ -40,10 +40,10 @@ export class RedactorPageComponent {
   templatePrice: number = 0;
   selectedDesignsPrices = [];
   designsPrice: number = 0;
-  x: number;
+/*   x: number;
   y: number;
   w: number;
-  h: number;
+  h: number; */
 
   constructor(private designService: DesignService,
     private userService: UserService,
@@ -54,8 +54,7 @@ export class RedactorPageComponent {
   ) { 
   }
 
-  //let x = 300, y = 100 ,w = 225, h = 300;
-  clipTShirt(ctx) {
+/*   clipTShirt(ctx) {
     ctx.save();
     
     ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -65,7 +64,7 @@ export class RedactorPageComponent {
     ctx.lineTo(this.x, this.y + this.h);
     ctx.lineTo(this.x, this.y);
     ctx.restore();
-  }
+  } */
 
 
   ngOnInit() {
@@ -120,7 +119,7 @@ export class RedactorPageComponent {
     canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0])
   };
 
-  setCordsdependOnTemplate(template){
+/*   setCordsdependOnTemplate(template){
     switch(template.type){
       case 'tshirtm':
       this.x = 170;
@@ -180,9 +179,10 @@ export class RedactorPageComponent {
       console.log('ooops');
       break;
     }
-  }
+  } */
 
   selectTemplate = function (template) {
+
     this.setCordsdependOnTemplate(template);
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
@@ -210,9 +210,9 @@ export class RedactorPageComponent {
         height: 580
       });
       canvas.add(image);
-      context.strokeStyle = "#0000ff";
+/*       context.strokeStyle = "#0000ff";
       context.lineWidth   = 1;
-      context.strokeRect(self.x, self.y, self.w, self.h); 
+      context.strokeRect(self.x, self.y, self.w, self.h);  */
     }
     img.src = self.selectedTemplateImage.src;
     this.resizeCanvas(canvas);
@@ -239,14 +239,14 @@ export class RedactorPageComponent {
   selectCategory = function (category) {
     let self = this;
     let ojb = {
-      x: this.x,
+/*       x: this.x,
       y: this.y,
       h: this.h,
-      w: this.w,
+      w: this.w, */
       left: 155,
       top: 180,
       id: self.selectedDesignsPrices.length,
-      clipTo: self.clipTShirt
+/*       clipTo: self.clipTShirt */
     }
 
     this.selectedCategory.src = category.url;
@@ -319,8 +319,18 @@ export class RedactorPageComponent {
   }
 
   handleImage = function (e) {
-    this.selectedDesignsPrices.push(5);
     let self = this;
+    this.selectedDesignsPrices.push(5);
+    let ojb = {
+/*       x: this.x,
+      y: this.y,
+      h: this.h,
+      w: this.w, */
+      left: 250,
+      top: 200,
+      id: self.selectedDesignsPrices.length,
+/*       clipTo: self.clipTShirt */
+    }
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
     var reader: any,
@@ -331,11 +341,7 @@ export class RedactorPageComponent {
       imgObj.src = event.target.result;
       imgObj.onload = function () {
         var image = new fabric.Image(imgObj);
-        image.set({
-          left: 215,
-          top: 200,
-          id: self.selectedDesignsPrices.length
-        });
+        image.set(ojb);
         canvas.add(image);
       }
     }
@@ -355,19 +361,26 @@ export class RedactorPageComponent {
     this.getCanvas().remove(object);
   }
 
+
   addText = function () {
-    this.selectedDesignsPrices.push(2);
     let self = this;
-    let canvas = this.getCanvas();
-    this.categoryName = "custom design";
-    canvas.add(new fabric.IText('Your text', {
+    let ojb = {
+/*       x: this.x,
+      y: this.y,
+      h: this.h,
+      w: this.w, */
       left: 205,
       top: 220,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
-      id: self.selectedDesignsPrices.length
-    }));
+      id: self.selectedDesignsPrices.length,
+/*       clipTo: self.clipTShirt */
+    }
+    this.selectedDesignsPrices.push(2);
+    let canvas = this.getCanvas();
+    this.categoryName = "custom design";
+    canvas.add(new fabric.IText('Your text', ojb));
   }
   changeColor = function (element) {
     let object = this.getCanvas().getActiveObject();
