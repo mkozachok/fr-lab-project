@@ -163,6 +163,8 @@ resize = function(){
       image.set({
           left: 155,
           top: 180,
+          width:150,
+          height:150,
           id: self.selectedDesignsPrices.length
       });
       self.drawImg(image);
@@ -178,7 +180,6 @@ resize = function(){
     newProduct.category = redactor.categoryName;
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
-    // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
     newProduct.price = this.designsPrice + this.templatePrice;
     return newProduct;
   }
@@ -192,13 +193,12 @@ resize = function(){
       .then(b64 =>{
 
         // Upload b64 as image
-        /// firebase.storage().ref('products/').child('/* name of img goes here */').putString(b64, 'data_url')
-        //////////////////////
+        firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(b64, 'data_url');
         let newProduct = this.createProduct(self, b64);
         this.productService.setProduct(newProduct).then(resolve => {
           productKey = resolve.key;
           this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-           // this.router.navigate(['profile-page/my-gallery']);
+           this.router.navigate(['profile-page/my-gallery']);
           });
         });
       });
