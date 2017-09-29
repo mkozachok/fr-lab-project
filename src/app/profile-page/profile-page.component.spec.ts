@@ -1,29 +1,61 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '.././services/user.service';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { By } from '@angular/platform-browser';
+
 import { ProfilePageComponent } from './profile-page.component';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { environment } from '../../environments/environment';
-import * as firebase from 'firebase';
-import { Router } from '@angular/router';
-/* describe('ProfilePageComponent', () => {
+
+import { DebugElement, Component, Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
+
+/*   const UserServiceStub = {
+    getUser(){
+      return {
+        photoURL: 'url',
+        displayName: 'Tony Stark'
+      }
+    }
+
+};
+
+
+describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
-  let userService: UserService;
-  let af: AngularFireAuth;
-  let router: Router;
-  let db: AngularFireDatabase;
+  let fixture: ComponentFixture<ProfilePageComponent>;
+  let userService: UserService; 
+  let de: DebugElement;
+  let el: HTMLElement;
+
+  beforeEach(async(() => {
+    TestBed
+      .configureTestingModule({
+        declarations: [ProfilePageComponent],
+         providers: [
+          { provide: UserService, useValue: UserServiceStub }
+      ],
+      schemas: [NO_ERRORS_SCHEMA] 
+    })
+      .compileComponents();
+  }));
+
 
   beforeEach(() => {
-    af = new AngularFireAuth(firebase.initializeApp(environment.firebase));
-    db = new AngularFireDatabase(firebase.app());
-    userService = new UserService(af, db, null);
-    component = new ProfilePageComponent(userService, af);
+    fixture = TestBed.createComponent(ProfilePageComponent);
+    component = fixture.componentInstance;
+    userService = fixture.debugElement.injector.get(UserService);
+    de = fixture.debugElement.query(By.css('.user-fullname'));
+    el = de.nativeElement;
+
   });
 
-
-
-  it('should return object', () => {
-    expect(component.ngOnInit).toBeTruthy();
+  it('should be created', () => {
+    expect(component).toBeTruthy();
   });
-});
- */
+
+  it('should display user name', () => {
+    component.user = userService.getUser()
+    fixture.detectChanges()
+  })
+});  */

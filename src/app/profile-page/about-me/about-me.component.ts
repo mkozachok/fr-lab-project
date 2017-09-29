@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MdSnackBar } from '@angular/material';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { environment } from '../../../environments/environment';
@@ -40,7 +39,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
   constructor(
     private _userService: UserService,
     public snackBar: MdSnackBar,
-    private afAuth: AngularFireAuth,
+    /* private afAuth: AngularFireAuth, */
     private _formBuilder: FormBuilder
   ) {
     let that = this;
