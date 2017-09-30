@@ -23,6 +23,18 @@ export class ProductsListService {
 		return this.products;
 	}
 
+	getProducts2(start, end): FirebaseListObservable<any> {
+		this.products =  this.db.list('/products', {
+			query: {
+				orderByChild: 'type',
+				limitToFirst: 10,
+				startAt: start,
+				endAt: end
+			}
+		});
+		return this.products
+	}
+
 	getTemplateTypes() {
 		return this.templateTypes;
 	}
@@ -38,11 +50,13 @@ export class ProductsListService {
 		}
 	}
 
-	search(search) {
-		return this.products.map(items => {
-			const filtered = items.filter(function(item) {
-			return item.category.indexOf(search) >=0 || item.type.indexOf(search) >=0 || item.name.indexOf(search) >=0;
-			})
+	search(search, arrOfProds) {
+		let transformedPhrase = search.toLowerCase();
+		return arrOfProds.filter(x => {
+		  return x['type'].toLowerCase()
+			.indexOf(transformedPhrase) >= 0 || x['name'].toLowerCase()
+			.indexOf(transformedPhrase) >= 0 || x['category'].toLowerCase()
+			.indexOf(transformedPhrase) >= 0;
 		});
 	}
 
@@ -69,11 +83,10 @@ export class ProductsListService {
 	}
 
 	findProduct(phrase, arrayOfProducts) {
-		let transformedPhrase = phrase.toLowerCase();
 		return arrayOfProducts.filter(x => {
-			return x['category'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
-				x['name'].toLowerCase().indexOf(transformedPhrase) >= 0 ||
-				x['owner'].toLowerCase().indexOf(transformedPhrase) >= 0;
+			return x['category'].indexOf(phrase) >= 0 ||
+				x['name'].indexOf(phrase) >= 0 ||
+				x['type'].indexOf(phrase) >= 0;
 		});
 	}
 

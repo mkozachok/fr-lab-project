@@ -6,9 +6,8 @@
         <md-form-field class="example-full-width">
           <input mdInput 
                     placeholder="template searching" 
-                    [(ngModel)] = "searchTerm" 
-                    #searchField 
-                    (ngModelChange) = "search(searchField.val)" 
+                    [(ngModel)] = "searchTerm"  
+                    (ngModelChange) = "search(searchTerm)" 
                     class="search" 
                     name="userFilter"> 
         </md-form-field>
@@ -47,7 +46,7 @@
             <ul>
               <li><span>type:</span> {{product.type}}</li>
               <li><span>category:</span> {{product.category}}</li>
-              <li><span>price:</span>  {{product.price | currency:'USD':true}}</li>
+              <li><span>price:</span>  {{ product.price }}</li>
             </ul>
           </div>
           <button md-raised-button (click)="addToCart(product)">add to my card</button>
