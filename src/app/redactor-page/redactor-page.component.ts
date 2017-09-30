@@ -237,6 +237,12 @@ export class RedactorPageComponent {
   }
   selectCategory = function (category) {
     let self = this;
+    if ( category.price === 'free') {
+      this.selectedDesignsPrices.push(0);
+    } else {
+      this.selectedDesignsPrices.push(category.price);
+    }
+    
     let ojb = {
 /*       x: this.x,
       y: this.y,
@@ -248,7 +254,6 @@ export class RedactorPageComponent {
 /*       clipTo: self.clipTShirt */
     }
     this.selectedCategory.src = category.url;
-    this.selectedDesignsPrices.push(category.price);
     this.categoryName = category.name;
     let img = new Image();
     img.crossOrigin = "Anonymous";
@@ -270,8 +275,13 @@ export class RedactorPageComponent {
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
     // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
-    newProduct.price = this.designsPrice + this.templatePrice;
+    newProduct.price = this.getProductPrice();
     return newProduct;
+  }
+
+  getProductPrice() {
+    this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
+    return this.designsPrice + this.templatePrice;
   }
 
   saveProduct = function (event) {
@@ -313,7 +323,7 @@ export class RedactorPageComponent {
     canvas.add(image);
   }
 
-  handleImage = function (e) {
+  handleImage = function (e) {    
     let self = this;
     this.selectedDesignsPrices.push(5);
     let ojb = {
@@ -341,6 +351,8 @@ export class RedactorPageComponent {
       }
     }
     reader.readAsDataURL(e.target.files[0]);
+    console.log(this.selectedDesignsPrices);
+    
   }
 
   getCanvas = function () {
@@ -352,6 +364,10 @@ export class RedactorPageComponent {
 
   removeImg = function () {
     let object = this.getCanvas().getActiveObject();
+    console.log(this.selectedDesignsPrices);
+    
+    console.log(object.id);
+    
     this.selectedDesignsPrices[object.id - 1] = 0;
     this.getCanvas().remove(object);
   }
@@ -359,6 +375,7 @@ export class RedactorPageComponent {
 
   addText = function () {
     let self = this;
+    this.selectedDesignsPrices.push(2);
     let ojb = {
 /*       x: this.x,
       y: this.y,
@@ -372,7 +389,6 @@ export class RedactorPageComponent {
       id: self.selectedDesignsPrices.length,
 /*       clipTo: self.clipTShirt */
     }
-    this.selectedDesignsPrices.push(2);
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
     canvas.add(new fabric.IText('Your text', ojb));
