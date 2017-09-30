@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewOneProductComponent } from './view-one-product.component';
+import { ForbiddenComponent } from './forbidden.component';
 
-/* describe('ViewOneProductComponent', () => {
-  let component: ViewOneProductComponent;
-  let fixture: ComponentFixture<ViewOneProductComponent>;
+describe('ForbiddenComponent', () => {
+  let component: ForbiddenComponent;
+  let fixture: ComponentFixture<ForbiddenComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewOneProductComponent ]
+      declarations: [ ForbiddenComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewOneProductComponent);
+    fixture = TestBed.createComponent(ForbiddenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,4 @@ import { ViewOneProductComponent } from './view-one-product.component';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-}); */
+});

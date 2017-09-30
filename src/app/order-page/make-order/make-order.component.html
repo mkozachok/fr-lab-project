@@ -1,4 +1,5 @@
-<div class="container">
+<app-loader *ngIf="showSpinner" class="loader"></app-loader>
+<div class="container" *ngIf="!showSpinner">
 	<form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value)">
 		<md-form-field class="example-full-width">
     	<input #nameRef="ngModel" required mdInput placeholder="First name" name="firstName" minlength="3" ngModel={{user.firstName}}>

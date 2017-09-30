@@ -9,7 +9,7 @@ import { PRODUCT_TYPE_FILTER, PRODUCT_CATEGORY_FILTER } from './filter';
 import { DesignService } from '../services/design.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as _ from 'lodash';
-import { OrderService } from '../order-page/order-page.service';
+import { OrderService } from '../services/order-page.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CurrencyPipe } from '@angular/common';
@@ -67,16 +67,10 @@ export class HomepageComponent implements OnInit {
   }
   
   addToCart(product):void {
-    this.orderService.addItem(product);
+    this.orderService.addItem(product, product.$key);
     let config = new MdSnackBarConfig();
     config.extraClasses = ['success-snackbar'];
     config.duration = 1300;
     this.snackBar.open('This product has been added to your shoping cart', '', config);
-  }
-
-  delete() {
-    this.userService.getUsersGallery(this.userService.getUserId()).subscribe(res => {
-      this.userService.deleteProductFromGallery(this.product.$key, this.userService.getUserId(), res);
-    });
   }
 }

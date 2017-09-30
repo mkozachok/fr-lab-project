@@ -19,10 +19,7 @@
       </md-error>
     </md-form-field>
     <md-form-field>
-      <input required type="text" placeholder="owner" mdInput formControlName="owner">
-      <md-error *ngIf="productForm.controls['owner'].hasError('required')">
-        Owner <strong>cannot be blank</strong>
-      </md-error>
+      <input type="text" placeholder="owner" mdInput formControlName="owner">
     </md-form-field>
     <md-form-field>
       <input required type="text" placeholder="type" mdInput formControlName="type">

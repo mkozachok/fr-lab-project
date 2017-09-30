@@ -38,7 +38,7 @@ export class AddAdminComponent implements OnInit {
   onSubmit(): void {
     this.waitForDelivery = true;
     this._adminService.setNewAdmin(this.adminForm.value).then(resolve => {
-      this.openSnackBar('The produc has been saved', 'success');
+      this.openSnackBar('The user has been added', 'success');
     }).catch(error => {
       this.openSnackBar(error.name, 'error');
     });

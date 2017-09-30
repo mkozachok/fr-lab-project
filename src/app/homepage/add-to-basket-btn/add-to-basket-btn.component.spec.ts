@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewOneProductComponent } from './view-one-product.component';
+// import { AddToBasketBtnComponent } from './add-to-basket-btn.component';
 
-/* describe('ViewOneProductComponent', () => {
-  let component: ViewOneProductComponent;
-  let fixture: ComponentFixture<ViewOneProductComponent>;
+/* describe('AddToBasketBtnComponent', () => {
+  let component: AddToBasketBtnComponent;
+  let fixture: ComponentFixture<AddToBasketBtnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewOneProductComponent ]
+      declarations: [ AddToBasketBtnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewOneProductComponent);
+    fixture = TestBed.createComponent(AddToBasketBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,5 @@ import { ViewOneProductComponent } from './view-one-product.component';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-}); */
+});
+ */

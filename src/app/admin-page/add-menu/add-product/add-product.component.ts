@@ -45,11 +45,7 @@ export class AddProductComponent implements OnInit {
           Validators.required
       ]
     ],
-      owner: [null, 
-        [
-          Validators.required
-      ]
-    ],
+      owner: [null],
       type: [null, 
         [
           Validators.required
