@@ -48,7 +48,7 @@
           </div>
         <div id="loadImg" (click)="imgLoader.click()">
           <div class="head" >Load Image <i class="material-icons">file_download</i></div>
-          <input type="file" #imgLoader accept="image/*" (change)="handleImage($event)" [hidden]="true">
+          <input type="file" #imgLoader accept="image/*" (change)="loadImageHandler($event)" [hidden]="true">
         </div>
         <md-expansion-panel>
             <md-expansion-panel-header>
@@ -87,12 +87,13 @@
     </md-tab-group>
   </div>
 
-  <div id="canvas" (window:resize)="resize()">
-    <div class="redactor_area">
+  <div id="canvas" (window:resize)="resizeCanvas()">
+    <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>
-       <canvas width="700px" height="550px" id="viewport"></canvas>
+      <!-- <div #boundingObject id="test"></div> -->
     </div>
     <div id="btns">
+    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
     <button md-raised-button (click)="buy()">Buy</button>
   </div>

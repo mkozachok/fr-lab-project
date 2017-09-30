@@ -1,4 +1,4 @@
-import { Component, HostListener} from '@angular/core';
+import { Component, HostListener, AfterViewInit, ViewChild} from '@angular/core';
 import mergeImages from 'merge-images';
 import {UploadService} from '../services/upload.service';
 import { fabric } from 'fabric';
@@ -27,12 +27,9 @@ import * as firebase from 'firebase';
 
 
 export class RedactorPageComponent{
+  @ViewChild('boundingObject') boundingObject;
  	title = 'redactor';
   type = "tshirtm";
-  selectedTemplateImage = {};
-  selectedCategory = {};
-  name = "";
-  resultImg = "";
   items: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
   price: FirebaseListObservable<any>;
@@ -40,6 +37,7 @@ export class RedactorPageComponent{
   templatePrice: number = 0;
   selectedDesignsPrices = [];
   designsPrice: number = 0;
+  templateImg;
 
 
   constructor(private designService: DesignService,
@@ -76,58 +74,84 @@ export class RedactorPageComponent{
    console.log(myType);
  }
 
-// resize = function(){
-//   let baseCanvas = this.getTemplateCanvas();
-//   let categoryCanvas = this.getCanvas();
-//   this.resizeCanvas(baseCanvas);
-//   this.resizeCanvas(categoryCanvas);
-// }
-//  resizeCanvas = function(canvas) {
-//
-//  var canvasSizer = document.getElementById("canvas");
-//  var canvasScaleFactor = canvasSizer.offsetWidth/700;
-//  var width = canvasSizer.offsetWidth;
-//  var height = canvasSizer.offsetHeight;
-//  var ratio = canvas.getWidth() /canvas.getHeight();
-//     if((width/height)>ratio){
-//       width = height*ratio;
-//     } else {
-//       height = width / ratio;
-//     }
-//  var scale = width / canvas.getWidth();
-//  var zoom = canvas.getZoom();
-//  zoom *= scale;
-//  canvas.setDimensions({ width: width, height: height });
-//  canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
-// };
 
-  selectTemplate = function(template){
-    this.type = template.type;
-    this.selectedTemplateImage.src = template.url;
-    this.templatePrice = template.price;
-    this.drawTemplate();
-
-  }
-  drawTemplate = function(){
-    let canvas = this.getTemplateCanvas();
-    canvas.clear();
-    let img = new Image();
-    let self = this;
-    img.onload = function(){
-      let image = new fabric.Image(img);
-      image.set({
-        width: 580,
-        height:580
-      });
-      image.selectable = false;
-      image.evented=false;
-      canvas.add(image);
-
+ resizeCanvas() {
+ let canvas = this.getCanvas();
+ var canvasSizer = document.getElementById("redactor_area");
+ var canvasScaleFactor = canvasSizer.offsetWidth/700;
+ var width = canvasSizer.offsetWidth;
+ var height = canvasSizer.offsetHeight;
+ var ratio = canvas.getWidth() /canvas.getHeight();
+    if((width/height)>ratio){
+      width = height*ratio;
+    } else {
+      height = width / ratio;
     }
-    img.src = self.selectedTemplateImage.src;
-    // this.resizeCanvas(canvas);
+ var scale = width / canvas.getWidth();
+ var zoom = canvas.getZoom();
+ zoom *= scale;
+ canvas.setDimensions({ width: width, height: height });
+ canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
+};
+
+  selectTemplate(template){
+    this.type = template.type;
+    this.templatePrice = template.price;
+    this.drawOnCanvas(template.url, true);
   }
-  getTemplateCanvas = function(){
+
+  drawOnCanvas(src, isTemplate){
+    let canvas = this.getCanvas();
+    this.getImage(src).then((img)=>{
+      if(isTemplate){
+        canvas.remove(this.templateImg);
+        this.templateImg = this.defineTemplateImage(img);
+        canvas.sendToBack(this.templateImg);
+      }else{
+        canvas.add(this.defineCategoryImage(img));
+      }
+    });
+    this.resizeCanvas();
+  }
+getImage(src){
+  return new Promise((resolve, reject)=>{
+    let img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = function(){
+      resolve(img);
+    }
+    img.onerror = function(){
+      reject();
+    }
+    img.src = src;
+  });
+}
+
+  defineTemplateImage(img){
+    let image = new fabric.Image(img);
+    image.set({
+      width: 580,
+      height:580
+    });
+    image.selectable = false;
+    image.evented=false;
+    return image;
+  }
+  defineCategoryImage(img){
+    let image = new fabric.Image(img);
+    image.set({
+      left: 180,
+      top: 200,
+      width:200,
+      height:200,
+      id:this.selectedDesignsPrices.length
+    });
+    image.selectable = true;
+    image.evented=true;
+    return image;
+  }
+
+  getCanvas = function(){
     if(!this.templateCanvas){
       this.templateCanvas = new fabric.Canvas('img_product');
     }
@@ -136,36 +160,17 @@ export class RedactorPageComponent{
   getColors = function(){
     let type = this.type;
     var templates = this.templates.filter(function(template){
-
       return template.type == type;
     })
     return templates[0].goods;
   }
   setColor = function(goods){
-    this.selectedTemplateImage.src = goods.url;
-    this.drawTemplate();
+    this.drawOnCanvas(goods.url, true);
   }
   selectCategory = function(category){
-    this.selectedCategory.src = category.url;
     this.selectedDesignsPrices.push(category.price);
     this.categoryName = category.name;
-    let img = new Image();
-    img.crossOrigin = "Anonymous";
-    let self = this;
-    img.src = self.selectedCategory.src;
-    img.onload = function(){
-
-      var image = new fabric.Image(img);
-      image.set({
-          left: 180,
-          top: 200,
-          width:200,
-          height:200,
-          id: self.selectedDesignsPrices.length
-      });
-      self.drawImg(image);
-    }
-
+    this.drawOnCanvas(category.url, false);
   }
 
   createProduct(redactor, b64) {
@@ -183,42 +188,30 @@ export class RedactorPageComponent{
   saveProduct = function(event){
     let productKey: string;
     let self = this;
+    let resultProductImg = this.getCanvas().toDataURL();
 
-     mergeImages([this.getTemplateCanvas().toDataURL(),
-     this.getCanvas().toDataURL()])
-      .then(b64 =>{
-
-        // Upload b64 as image
-        firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(b64, 'data_url');
-        let newProduct = this.createProduct(self, b64);
-        this.productService.setProduct(newProduct).then(resolve => {
-          productKey = resolve.key;
-          this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-           this.router.navigate(['profile-page/my-gallery']);
-          });
+    firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(resultProductImg, 'data_url');
+    let newProduct = this.createProduct(self, resultProductImg);
+    this.productService.setProduct(newProduct).then(resolve => {
+        productKey = resolve.key;
+        this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
+              this.router.navigate(['profile-page/my-gallery']);
         });
-      });
+    });
   }
 
   buy() {
     let productKey: string;
     let self = this;
-    mergeImages([this.getTemplateCanvas().toDataURL(),
-     this.getCanvas().toDataURL()])
-      .then(b64 =>{
-        let newProduct = this.createProduct(self, b64);
-        this.orderService.addItem(newProduct);
-        this.router.navigate(['order-page']);
-      });
+    let resultProductImg = this.getCanvas().toDataURL();
+
+    let newProduct = this.createProduct(self, resultProductImg);
+    this.orderService.addItem(newProduct);
+    this.router.navigate(['order-page']);
+
   }
 
-  drawImg = function(image){
-    let canvas = this.getCanvas();
-    // this.resizeCanvas(canvas);
-    canvas.add(image);
-  }
-
-  handleImage = function(e){
+  loadImageHandler = function(e){
     this.selectedDesignsPrices.push(5);
     let self = this;
     let canvas = this.getCanvas();
@@ -244,12 +237,6 @@ export class RedactorPageComponent{
 reader.readAsDataURL(e.target.files[0]);
 }
 
-getCanvas = function(){
-  if(!this.viewPortCanvas){
-    this.viewPortCanvas = new fabric.Canvas('viewport');
-  }
-  return this.viewPortCanvas;
-}
 @HostListener('window:keydown', ['$event'])
 keyBoardInput = function(event: KeyboardEvent){
   if(event.keyCode == 8 && this.getCanvas().getActiveObject()){
@@ -308,7 +295,6 @@ setFontOptions = function(element){
     break;
   }
   canvas.renderAll();
-  console.log(value);
 }
    templates = [
       {
