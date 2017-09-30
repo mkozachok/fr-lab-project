@@ -1,14 +1,16 @@
-<div>
-  <img src="{{ product.svg }}" alt="">
-</div>
-<div class="info">
- <div class = "aboutTheProduct">
-   <h3>{{product.name}}</h3>
-   <ul>
-     <li><span>type:</span> {{product.type}}</li>
-     <li><span>category:</span> {{product.category}}</li>
-   </ul>
- </div>
- <button md-raised-button (click)="addToCart(product)">add to my card</button>
- <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
-</div>
+<md-card>
+	<div class="img-container">
+	  <img src="{{ product.svg }}" alt="">
+	</div>
+	<div class="info">
+	 <div class = "aboutTheProduct">
+	   <h3>{{product.name}}</h3>
+	   <ul>
+	     <li><span>type:</span> {{product.type}}</li>
+	     <li><span>category:</span> {{product.category}}</li>
+	   </ul>
+	 </div>
+		 <button md-raised-button (click)="addToCart(product)">add to my card</button>
+		 <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
+	</div>
+</md-card>

@@ -1,4 +1,5 @@
-<div class="container">
+<app-loader *ngIf="showLoader" class="loader"></app-loader>
+<div *ngIf="!showLoader" class="container">
 	<md-accordion>
 		<md-expansion-panel *ngFor="let order of usersOrders">
 		  <md-expansion-panel-header>

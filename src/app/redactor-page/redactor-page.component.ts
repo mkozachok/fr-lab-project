@@ -8,7 +8,7 @@ import { Design } from '../models/design-model';
 import { Order } from '../models/order-model';
 import { Product } from '../models/product-model';
 import { DesignService } from '../services/design.service';
-import { OrderService } from '../order-page/order-page.service';
+import { OrderService } from '../services/order-page.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
 import { FirebaseListObservable } from 'angularfire2/database';
@@ -51,12 +51,12 @@ export class RedactorPageComponent {
     private productService: ProductsListService,
     private uploadService: UploadService,
     private router: Router
-  ) { 
+  ) {
   }
 
 /*   clipTShirt(ctx) {
     ctx.save();
-    
+
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.moveTo(this.x, this.y);
     ctx.lineTo(this.x + this.w, this.y);
@@ -175,15 +175,15 @@ export class RedactorPageComponent {
       this.w = 218;
       this.h = 400;
       break;
-      default: 
+      default:
       console.log('ooops');
       break;
     }
   } */
 
   selectTemplate = function (template) {
-    //this.setCordsdependOnTemplate(template);
-    //console.log(template)
+
+    this.setCordsdependOnTemplate(template);
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
     this.templatePrice = template.price;
@@ -198,7 +198,7 @@ export class RedactorPageComponent {
     canvas.clear();
     let img = new Image();
 
-    
+
     let self = this;
 
     img.onload = function () {
@@ -235,6 +235,7 @@ export class RedactorPageComponent {
     this.selectedTemplateImage.src = goods.url;
     this.drawTemplate();
   }
+
   selectCategory = function (category) {
     let self = this;
     if ( category.price === 'free') {
@@ -242,7 +243,7 @@ export class RedactorPageComponent {
     } else {
       this.selectedDesignsPrices.push(category.price);
     }
-    
+
     let ojb = {
 /*       x: this.x,
       y: this.y,
@@ -253,6 +254,7 @@ export class RedactorPageComponent {
       id: self.selectedDesignsPrices.length,
 /*       clipTo: self.clipTShirt */
     }
+
     this.selectedCategory.src = category.url;
     this.categoryName = category.name;
     let img = new Image();
@@ -299,20 +301,21 @@ export class RedactorPageComponent {
         this.productService.setProduct(newProduct).then(resolve => {
           productKey = resolve.key;
           this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-            // this.router.navigate(['profile-page/my-gallery']);
+
+           this.router.navigate(['profile-page/my-gallery']);
           });
         });
       });
   }
 
-  buy() {
+  buy = function(event) {
     let productKey: string;
     let self = this;
     mergeImages([this.getTemplateCanvas().toDataURL(),
     this.getCanvas().toDataURL()])
       .then(b64 => {
         let newProduct = this.createProduct(self, b64);
-        this.orderService.addItem(newProduct);
+        this.orderService.addItem(newProduct, '');
         this.router.navigate(['order-page']);
       });
   }
@@ -323,7 +326,7 @@ export class RedactorPageComponent {
     canvas.add(image);
   }
 
-  handleImage = function (e) {    
+  handleImage = function (e) {
     let self = this;
     this.selectedDesignsPrices.push(5);
     let ojb = {
@@ -352,7 +355,7 @@ export class RedactorPageComponent {
     }
     reader.readAsDataURL(e.target.files[0]);
     console.log(this.selectedDesignsPrices);
-    
+
   }
 
   getCanvas = function () {
@@ -365,9 +368,9 @@ export class RedactorPageComponent {
   removeImg = function () {
     let object = this.getCanvas().getActiveObject();
     console.log(this.selectedDesignsPrices);
-    
+
     console.log(object.id);
-    
+
     this.selectedDesignsPrices[object.id - 1] = 0;
     this.getCanvas().remove(object);
   }
