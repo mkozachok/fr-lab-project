@@ -43,21 +43,7 @@ export class RedactorPageComponent {
     private productService: ProductsListService,
     private uploadService: UploadService,
     private router: Router
-  ) {
-  }
-
-/*   clipTShirt(ctx) {
-    ctx.save();
-
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x + this.w, this.y);
-    ctx.lineTo(this.x + this.w, this.y + this.h);
-    ctx.lineTo(this.x, this.y + this.h);
-    ctx.lineTo(this.x, this.y);
-    ctx.restore();
-  } */
-
+  ) {}
 
   ngOnInit() {
 
@@ -97,9 +83,6 @@ export class RedactorPageComponent {
         var bottom = top + movingBox.getHeight();
         var left = movingBox.left;
         var right = left + movingBox.getWidth();
-
-
-
         var topBound = boundingBox.top;
         var bottomBound = topBound + boundingBox.getHeight();
         var leftBound = boundingBox.left;
@@ -149,9 +132,8 @@ resizeCanvas() {
     this.type = template.type;
     this.templatePrice = template.price;
     this.drawOnCanvas(template.url, true);
-
     this.getCanvas().add(this.boundingBox);
-    // this.getCanvas().centerObject(this.boundingBox);
+
   }
 
   drawOnCanvas(src, isTemplate){
@@ -165,7 +147,6 @@ resizeCanvas() {
       }else{
         let category = this.defineCategoryImage(img);
         canvas.add(category);
-        // canvas.centerObject(category);
       }
     });
     this.resizeCanvas();
@@ -271,6 +252,7 @@ getImage(src){
   buy = function(event) {
     let productKey: string;
     let self = this;
+    this.getCanvas().remove(this.boundingBox);
     let resultProductImg = this.getCanvas().toDataURL();
     let newProduct = this.createProduct(self, resultProductImg);
     this.orderService.addItem(newProduct, '');
@@ -300,6 +282,7 @@ getImage(src){
             canvas.add(image);
   }
 }
+reader.readAsDataURL(e.target.files[0]);
 }
 
 @HostListener('window:keydown', ['$event'])
@@ -328,10 +311,40 @@ addText = function(){
       id: self.selectedDesignsPrices.length,
 /*       clipTo: self.clipTShirt */
     }));
-
-    this.categoryName = "custom design";
-    canvas.renderAll();
   }
+  changeColor = function(element){
+  let object = this.getCanvas().getActiveObject();
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFill(element.target.value);
+  canvas.renderAll();
+ }
+ setFont = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontFamily(element.value);
+  canvas.renderAll();
+}
+changeFontSize = function(element){
+  let canvas = this.getCanvas();
+  canvas.getActiveObject().setFontSize(element.value);
+  canvas.renderAll();
+}
+setFontOptions = function(element){
+  let canvas = this.getCanvas();
+  let value = element.source.value;
+  let checked = element.checked;
+  switch(value){
+    case "bold" :
+      canvas.getActiveObject().set("fontWeight", checked?900:200);
+    break;
+    case "italic" :
+      canvas.getActiveObject().set("fontStyle", checked?value:"");
+    break;
+    case "linethrough" :
+      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
+    break; 
+  }
+  canvas.renderAll();
+}
 
    templates = [
       {
