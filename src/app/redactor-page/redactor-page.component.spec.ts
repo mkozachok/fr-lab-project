@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RedactorPageComponent } from './redactor-page.component';
 
-describe('RedactorPageComponent', () => {
+/* describe('RedactorPageComponent', () => {
   let component: RedactorPageComponent;
   let fixture: ComponentFixture<RedactorPageComponent>;
 
@@ -22,4 +22,4 @@ describe('RedactorPageComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-});
+}); */

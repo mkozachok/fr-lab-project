@@ -2,23 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Upload } from '../models/upload-model';
-
+// import { NgForm} from '@angular/forms';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import * as firebase from 'firebase';
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
+  // providers: [UserService, NgForm, AngularFireAuth]
 })
 export class RegistrationPageComponent implements OnInit {
   error: any;
   selectedFiles: FileList;
   currentUpload: Upload;
   downloadedPhoto: boolean = false;
-  addPhoto = "add_a_photo";
+  addPhoto = 'add_a_photo';
+  title = 'Registration';
 
-  constructor(private _userService: UserService, private router: Router) { }
+constructor(private _userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.selectedFiles)
+    console.log(this.selectedFiles);
   }
   onSubmit(value: any) {
     this.error = null;

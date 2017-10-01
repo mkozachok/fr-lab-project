@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MakeOrderComponent } from './make-order.component';
 
-describe('MakeOrderComponent', () => {
+/* describe('MakeOrderComponent', () => {
   let component: MakeOrderComponent;
   let fixture: ComponentFixture<MakeOrderComponent>;
 
@@ -22,4 +22,4 @@ describe('MakeOrderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+}); */

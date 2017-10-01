@@ -87,6 +87,7 @@
     </md-tab-group>
   </div>
 
+    <app-loader *ngIf="showSpinner"></app-loader>
   <div id="canvas" (window:resize)="resizeCanvas()">
     <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>
@@ -95,6 +96,8 @@
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()">Save</button>
     <button md-raised-button (click)="buy()">Buy</button>
+    <span>Price is: {{ getProductPrice() }}</span>
+    <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
   </div>
   </div>
 </div>

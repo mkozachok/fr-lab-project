@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Order } from '../models/order-model';
-import { OrderService } from './order-page.service';
+import { OrderService } from '../services/order-page.service';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 

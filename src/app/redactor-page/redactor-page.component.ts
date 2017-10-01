@@ -7,10 +7,10 @@ import { Design } from '../models/design-model';
 import { Order } from '../models/order-model';
 import { Product } from '../models/product-model';
 import { DesignService } from '../services/design.service';
-import { OrderService } from '../order-page/order-page.service';
+import { OrderService } from '../services/order-page.service';
 import { UserService } from '../services/user.service';
 import { ProductsListService } from '../services/products-list.service';
-import {FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
@@ -25,8 +25,8 @@ import * as firebase from 'firebase';
 })
 
 
-export class RedactorPageComponent{
- 	title = 'redactor';
+export class RedactorPageComponent {
+  title = 'redactor';
   type = "tshirtm";
   items: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
@@ -37,14 +37,28 @@ export class RedactorPageComponent{
   designsPrice: number = 0;
   templateImg;
 
-
   constructor(private designService: DesignService,
-     private userService: UserService,
-     private orderService: OrderService,
-     private productService: ProductsListService,
-     private uploadService: UploadService,
-     private router: Router
-   ){}
+    private userService: UserService,
+    private orderService: OrderService,
+    private productService: ProductsListService,
+    private uploadService: UploadService,
+    private router: Router
+  ) {
+  }
+
+/*   clipTShirt(ctx) {
+    ctx.save();
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x + this.w, this.y);
+    ctx.lineTo(this.x + this.w, this.y + this.h);
+    ctx.lineTo(this.x, this.y + this.h);
+    ctx.lineTo(this.x, this.y);
+    ctx.restore();
+  } */
+
+
   ngOnInit() {
 
    let self = this;
@@ -69,8 +83,8 @@ export class RedactorPageComponent{
      lockMovementY: true,
      evented: false,
      stroke: "red",
-     strokeDashArray: [5,10],
      selectable: false,
+     strokeDashArray: [5,10],
   });
 
   ngAfterViewInit(){
@@ -104,12 +118,12 @@ export class RedactorPageComponent{
    console.log(cat);
  }
 
- typeChoose(myType) {
-  this.designService.typeChoose(myType).subscribe(res => {
-    this.items = res;
-   });
-   console.log(myType);
- }
+  typeChoose(myType) {
+    this.designService.typeChoose(myType).subscribe(res => {
+      this.items = res;
+    });
+    console.log(myType);
+  }
 
 
 resizeCanvas() {
@@ -200,7 +214,7 @@ getImage(src){
     }
     return this.templateCanvas;
   }
-  getColors = function(){
+  getColors = function () {
     let type = this.type;
     var templates = this.templates.filter(function(template){
       return template.type == type;
@@ -210,8 +224,13 @@ getImage(src){
   setColor = function(goods){
     this.drawOnCanvas(goods.url, true);
   }
+
   selectCategory = function(category){
-    this.selectedDesignsPrices.push(category.price);
+    if ( category.price === 'free') {
+      this.selectedDesignsPrices.push(0);
+    } else {
+      this.selectedDesignsPrices.push(category.price);
+    }
     this.categoryName = category.name;
     this.drawOnCanvas(category.url, false);
   }
@@ -224,11 +243,17 @@ getImage(src){
     newProduct.category = redactor.categoryName;
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
-    newProduct.price = this.designsPrice + this.templatePrice;
+    // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
+    newProduct.price = this.getProductPrice();
     return newProduct;
   }
 
-  saveProduct = function(event){
+  getProductPrice() {
+    this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
+    return this.designsPrice + this.templatePrice;
+  }
+
+  saveProduct = function (event) {
     let productKey: string;
     let self = this;
     this.getCanvas().remove(this.boundingBox);
@@ -243,23 +268,27 @@ getImage(src){
     });
   }
 
-  buy() {
+  buy = function(event) {
     let productKey: string;
     let self = this;
     let resultProductImg = this.getCanvas().toDataURL();
-
     let newProduct = this.createProduct(self, resultProductImg);
-    this.orderService.addItem(newProduct);
+    this.orderService.addItem(newProduct, '');
     this.router.navigate(['order-page']);
-
   }
 
   loadImageHandler = function(e){
     this.selectedDesignsPrices.push(5);
-    let self = this;
+    let ojb = {
+      width:200,
+      height:200,
+      left: 240,
+      top:200,
+      id: this.selectedDesignsPrices.length
+    };
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
-    var reader:any,
+    var reader: any,
     target: EventTarget;
     reader = new FileReader();
     reader.onload = function (event) {
@@ -267,18 +296,10 @@ getImage(src){
         imgObj.src = event.target.result;
         imgObj.onload = function () {
             var image = new fabric.Image(imgObj);
-            image.set({
-              width:200,
-              height:200,
-              left: 240,
-              top:200,
-              id: self.selectedDesignsPrices.length
-            });
+            image.set(ojb);
             canvas.add(image);
-            // canvas.centerObject(image);
   }
 }
-reader.readAsDataURL(e.target.files[0]);
 }
 
 @HostListener('window:keydown', ['$event'])
@@ -296,50 +317,22 @@ removeImg = function(){
 addText = function(){
   this.selectedDesignsPrices.push(2);
   let self = this;
-  let canvas = this.getCanvas();
   this.categoryName = "custom design";
+  let canvas = this.getCanvas();
   canvas.add(new fabric.IText('Your text', {
       left: 250,
       top: 110,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
-      id: self.selectedDesignsPrices.length
+      id: self.selectedDesignsPrices.length,
+/*       clipTo: self.clipTShirt */
     }));
-}
-changeColor = function(element){
-  let object = this.getCanvas().getActiveObject();
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFill(element.target.value);
-  canvas.renderAll();
-}
-setFont = function(element){
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFontFamily(element.value);
-  canvas.renderAll();
-}
-changeFontSize = function(element){
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFontSize(element.value);
-  canvas.renderAll();
-}
-setFontOptions = function(element){
-  let canvas = this.getCanvas();
-  let value = element.source.value;
-  let checked = element.checked;
-  switch(value){
-    case "bold" :
-      canvas.getActiveObject().set("fontWeight", checked?900:200);
-    break;
-    case "italic" :
-      canvas.getActiveObject().set("fontStyle", checked?value:"");
-    break;
-    case "linethrough" :
-      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
-    break;
+
+    this.categoryName = "custom design";
+    canvas.renderAll();
   }
-  canvas.renderAll();
-}
+
    templates = [
       {
         type: "tshirtm",
@@ -399,36 +392,36 @@ setFontOptions = function(element){
         url: "assets/images/templates/sleevem.png",
         price: 8
 
-      },
-      {
-        type: "cap",
-        url: "assets/images/templates/cap.png",
-        price: 10
-      },
-      {
-        type: "mug",
-        url: "assets/images/templates/mug.png",
-        price: 16
-      },
-      {
-        type: "body",
-        url: "assets/images/templates/body.png",
-        price: 5
-      },
-      {
-        type: "tshirtw",
-        url: "assets/images/templates/tshirtw.png",
-        price: 5
-      },
-      {
-        type: "tankw",
-        url: "assets/images/templates/tankw.png",
-        price: 6
-      },
-      {
-        type: "sleevew",
-        url: "assets/images/templates/sleevew.png",
-        price: 7
-      }
+    },
+    {
+      type: "cap",
+      url: "assets/images/templates/cap.png",
+      price: 10
+    },
+    {
+      type: "mug",
+      url: "assets/images/templates/mug.png",
+      price: 16
+    },
+    {
+      type: "body",
+      url: "assets/images/templates/body.png",
+      price: 5
+    },
+    {
+      type: "tshirtw",
+      url: "assets/images/templates/tshirtw.png",
+      price: 5
+    },
+    {
+      type: "tankw",
+      url: "assets/images/templates/tankw.png",
+      price: 6
+    },
+    {
+      type: "sleevew",
+      url: "assets/images/templates/sleevew.png",
+      price: 7
+    }
   ];
 }
