@@ -3,8 +3,9 @@
     <md-tab-group>
       <md-tab label="Product Type">
           <div class="templates">
-            <div class="template_img" *ngFor="let template of templates">
-              <img [src]="template.url" (click)="selectTemplate(template)" width="80"/>
+            <div class="template_img" *ngFor="let template of templateTypes">
+              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template)"></div>
+              <!--<img [src]="template.url" (click)="selectTemplate(template)" width="80"/>-->
             </div>
           </div>
 

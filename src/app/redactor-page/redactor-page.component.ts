@@ -36,6 +36,7 @@ export class RedactorPageComponent {
   items: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
   price: FirebaseListObservable<any>;
+  templateTypes: FirebaseListObservable<any>;
   user: User;
   templatePrice: number = 0;
   selectedDesignsPrices = [];
@@ -78,6 +79,7 @@ export class RedactorPageComponent {
       this.user.firstName = res.displayName.split(' ')[0];
       this.user.lastName = res.displayName.split(' ')[1];
     });
+    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
   }
 
   categoryChoose(cat) {
@@ -183,7 +185,7 @@ export class RedactorPageComponent {
 
   selectTemplate = function (template) {
 
-    this.setCordsdependOnTemplate(template);
+    //this.setCordsdependOnTemplate(template);
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
     this.templatePrice = template.price;
@@ -229,7 +231,7 @@ export class RedactorPageComponent {
 
       return template.type == type;
     })
-    return templates[0].goods;
+    return this.templates[0].goods;
   }
   setColor = function (goods) {
     this.selectedTemplateImage.src = goods.url;
