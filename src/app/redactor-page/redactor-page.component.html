@@ -90,7 +90,6 @@
   <div id="canvas" (window:resize)="resizeCanvas()">
     <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>
-      <!-- <div #boundingObject id="test"></div> -->
     </div>
     <div id="btns">
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>

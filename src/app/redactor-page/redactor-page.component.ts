@@ -1,5 +1,4 @@
-import { Component, HostListener, AfterViewInit, ViewChild} from '@angular/core';
-import mergeImages from 'merge-images';
+import { Component, HostListener, AfterViewInit} from '@angular/core';
 import {UploadService} from '../services/upload.service';
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
@@ -27,7 +26,6 @@ import * as firebase from 'firebase';
 
 
 export class RedactorPageComponent{
-  @ViewChild('boundingObject') boundingObject;
  	title = 'redactor';
   type = "tshirtm";
   items: FirebaseListObservable<any>;
@@ -59,6 +57,45 @@ export class RedactorPageComponent{
      this.user.lastName = res.displayName.split(' ')[1];
    });
  }
+   boundingBox = new fabric.Rect({
+     fill: "transparent",
+     width: 235,
+     height: 440,
+     top:80,
+     left: 225,
+     hasBorders: true,
+     hasControls: false,
+     lockMovementX: true,
+     lockMovementY: true,
+     evented: false,
+     stroke: "red",
+     strokeDashArray: [5,10],
+     selectable: false,
+  });
+
+  ngAfterViewInit(){
+    let canvas = this.getCanvas();
+    let boundingBox = this.boundingBox;
+
+    canvas.on("object:moving", function(el) {
+        let movingBox = canvas.getActiveObject();
+        var top = movingBox.top;
+        var bottom = top + movingBox.getHeight();
+        var left = movingBox.left;
+        var right = left + movingBox.getWidth();
+
+
+
+        var topBound = boundingBox.top;
+        var bottomBound = topBound + boundingBox.getHeight();
+        var leftBound = boundingBox.left;
+        var rightBound = leftBound + boundingBox.getWidth();
+        // capping logic here
+        movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
+        movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
+    });
+    this.boundingBox = boundingBox;
+}
 
  categoryChoose(cat) {
    this.designService.categoryChoose(cat).subscribe(res => {
@@ -75,29 +112,32 @@ export class RedactorPageComponent{
  }
 
 
- resizeCanvas() {
- let canvas = this.getCanvas();
- var canvasSizer = document.getElementById("redactor_area");
- var canvasScaleFactor = canvasSizer.offsetWidth/700;
- var width = canvasSizer.offsetWidth;
- var height = canvasSizer.offsetHeight;
- var ratio = canvas.getWidth() /canvas.getHeight();
-    if((width/height)>ratio){
-      width = height*ratio;
-    } else {
-      height = width / ratio;
-    }
- var scale = width / canvas.getWidth();
- var zoom = canvas.getZoom();
- zoom *= scale;
- canvas.setDimensions({ width: width, height: height });
- canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
+resizeCanvas() {
+   let canvas = this.getCanvas();
+   var canvasSizer = document.getElementById("redactor_area");
+   var canvasScaleFactor = canvasSizer.offsetWidth/700;
+   var width = canvasSizer.offsetWidth;
+   var height = canvasSizer.offsetHeight;
+   var ratio = canvas.getWidth() /canvas.getHeight();
+      if((width/height)>ratio){
+        width = height*ratio;
+      } else {
+        height = width / ratio;
+      }
+   var scale = width / canvas.getWidth();
+   var zoom = canvas.getZoom();
+   zoom *= scale;
+   canvas.setDimensions({ width: width, height: height });
+   canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
 };
 
   selectTemplate(template){
     this.type = template.type;
     this.templatePrice = template.price;
     this.drawOnCanvas(template.url, true);
+
+    this.getCanvas().add(this.boundingBox);
+    // this.getCanvas().centerObject(this.boundingBox);
   }
 
   drawOnCanvas(src, isTemplate){
@@ -107,8 +147,11 @@ export class RedactorPageComponent{
         canvas.remove(this.templateImg);
         this.templateImg = this.defineTemplateImage(img);
         canvas.sendToBack(this.templateImg);
+        canvas.centerObject(this.templateImg);
       }else{
-        canvas.add(this.defineCategoryImage(img));
+        let category = this.defineCategoryImage(img);
+        canvas.add(category);
+        // canvas.centerObject(category);
       }
     });
     this.resizeCanvas();
@@ -131,7 +174,7 @@ getImage(src){
     let image = new fabric.Image(img);
     image.set({
       width: 580,
-      height:580
+      height:580,
     });
     image.selectable = false;
     image.evented=false;
@@ -140,10 +183,10 @@ getImage(src){
   defineCategoryImage(img){
     let image = new fabric.Image(img);
     image.set({
-      left: 180,
-      top: 200,
       width:200,
       height:200,
+      left: 240,
+      top:200,
       id:this.selectedDesignsPrices.length
     });
     image.selectable = true;
@@ -188,8 +231,8 @@ getImage(src){
   saveProduct = function(event){
     let productKey: string;
     let self = this;
+    this.getCanvas().remove(this.boundingBox);
     let resultProductImg = this.getCanvas().toDataURL();
-
     firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(resultProductImg, 'data_url');
     let newProduct = this.createProduct(self, resultProductImg);
     this.productService.setProduct(newProduct).then(resolve => {
@@ -225,13 +268,14 @@ getImage(src){
         imgObj.onload = function () {
             var image = new fabric.Image(imgObj);
             image.set({
-              left: 180,
-              top: 200,
               width:200,
               height:200,
+              left: 240,
+              top:200,
               id: self.selectedDesignsPrices.length
             });
             canvas.add(image);
+            // canvas.centerObject(image);
   }
 }
 reader.readAsDataURL(e.target.files[0]);
@@ -255,8 +299,8 @@ addText = function(){
   let canvas = this.getCanvas();
   this.categoryName = "custom design";
   canvas.add(new fabric.IText('Your text', {
-      left: 205,
-      top: 130,
+      left: 250,
+      top: 110,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
