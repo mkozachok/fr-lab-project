@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductsListService } from '../../../../services/products-list.service';
 import { MdDialog } from '@angular/material';
-import { AddProductComponent } from '../../../add-menu/add-product/add-product.component';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
 @Input() owner: string;
 @Input() svg: string;
 @Input() price: string;
+@Input() type: string;
 
 
   constructor(
@@ -32,8 +33,15 @@ export class ProductComponent implements OnInit {
   }
 
   onEdit(){
-    let dialogRef = this.dialog.open(AddProductComponent,{
-      data: {name: 'test'}
+    let dialogRef = this.dialog.open(EditProductComponent, {
+      data: {
+        $key: this.$key,
+        name: this.name,
+        category: this.category,
+        owner: this.owner,
+        price: this.price,
+        type: this.type
+      }
     });
   }
 

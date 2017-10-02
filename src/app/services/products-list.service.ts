@@ -78,6 +78,10 @@ export class ProductsListService {
 		return this.products.push(product);
 	}
 
+	updateProduct(key, product): firebase.Promise<void> {
+		return this.products.update(key, product);
+	}
+
 	deleteProduct(id) {
 		this.db.database.ref('/products').child(id).remove();
 	}
@@ -100,8 +104,5 @@ export class ProductsListService {
 		});
 	}
 
-	checkPath(path): boolean {
-		return this.router.routerState.snapshot.url.includes(path);
-	}
 
 }

@@ -56,6 +56,7 @@ import { DesignService } from './services/design.service';
 import { AdminService } from './services/admin.service';
 import { MakeOrderService } from './services/make-order.service';
 import { OrderService } from './services/order-page.service';
+import { CommonService } from './services/common.service'
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -114,7 +115,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     AuthGuard,
     AdminGuard,
     MakeOrderService,
-    OrderService
+    OrderService,
+    CommonService
   ],
   entryComponents: [DialogComponent],
   bootstrap: [

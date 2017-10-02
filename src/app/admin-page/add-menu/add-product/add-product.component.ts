@@ -4,6 +4,7 @@ import { MdSnackBar } from '@angular/material';
 import { ProductsListService } from '../../../services/products-list.service';
 import { Product } from '../../../models/product-model';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-add-product',
@@ -28,39 +29,35 @@ export class AddProductComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     public snackBar: MdSnackBar,
-    private _productService: ProductsListService
+    private _productService: ProductsListService,
+    private _commonService: CommonService
   ) { }
 
   ngOnInit(): void {
-
-    //console.log(this.dialogData)
-    this.isAddContentPage = this._productService.checkPath('/add-menu');
-
     this.productForm = this._formBuilder.group({
-      category: [null, 
+      category: [null,
         [
           Validators.required
-      ]
-    ],
-      name: [null, 
+        ]
+      ],
+      name: [null,
         [
           Validators.required
-      ]
-    ],
-      price: [null, 
+        ]
+      ],
+      price: [null,
         [
           Validators.required
-      ]
-    ],
+        ]
+      ],
       owner: [null],
-      type: [null, 
+      type: [null,
         [
           Validators.required
+        ]
       ]
-    ]
     })
   }
-
 
   onSubmit(): void {
     this.waitForDelivery = true;
@@ -69,13 +66,6 @@ export class AddProductComponent implements OnInit {
     this.product.price = this.productForm.value.price;
     this.product.type = this.productForm.value.type;
     this.product.owner = this.productForm.value.owner;
-  }
-
-  openSnackBar(message: string, action: string): void {
-    this.waitForDelivery = false;
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
   }
 
   onNotify(url) {
@@ -88,9 +78,9 @@ export class AddProductComponent implements OnInit {
       owner: this.product.owner,
       price: this.product.price,
     }).then(resolve => {
-      this.openSnackBar('The produc has been saved', 'success');
+      this._commonService.openSnackBar('The produc has been saved', 'success');
     }).catch(error => {
-      this.openSnackBar(error.name, 'error');
-    });
+      this._commonService.openSnackBar(error.name, 'error');
+    }).then(() => this.waitForDelivery = false);
   }
 }
