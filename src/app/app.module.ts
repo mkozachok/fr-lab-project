@@ -24,6 +24,7 @@ import { AdminGuard } from './guards/admin.guard';
 
 // App components goes here
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
 import { AppComponent } from './app.component';
 //import { AddDesignComponent } from './admin-page/add-menu/add-design/add-design.component';
 //import { AddProductComponent } from './admin-page/add-menu/add-product/add-product.component';

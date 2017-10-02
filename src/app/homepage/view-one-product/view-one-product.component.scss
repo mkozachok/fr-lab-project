@@ -48,7 +48,7 @@ ul, li {
 		width: 100%;
 		display: block;
 		background: #eee;
-		padding: 2%;
+		padding: 1.5%;
 		font-size: 1.1vw;
 		line-height: 2.2em;
 		font-weight: normal;
@@ -57,5 +57,30 @@ ul, li {
 	button:hover {
 	    background: #7b0041;
 	    color: #eee;
+	}
+}
+
+@media screen and (max-width : 900px) {
+	.info button {
+		padding: 2.5%;
+	}
+	.aboutTheProduct ul li,  .info button{
+		font-size: 1.5vw;
+	}
+
+	h3 {
+		font-size: 1.8vw !important;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	.info button {
+		padding: 3.5%;
+	}
+	.aboutTheProduct ul li, .info button {
+		font-size: 2.0vw;
+	}
+	h3 {
+		font-size: 2.3vw !important;
 	}
 }

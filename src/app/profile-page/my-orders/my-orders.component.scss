@@ -39,3 +39,9 @@ md-expansion-panel {
      left: 50%;
      transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width : 900px) {
+	app-ordered-product {
+		width: calc((100% / 3) - 2%);
+	}
+}

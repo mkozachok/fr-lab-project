@@ -5,9 +5,9 @@
     	<input #nameRef="ngModel" required mdInput placeholder="First name" name="firstName" minlength="3" ngModel={{user.firstName}}>
   	</md-form-field>
     <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="error">
-      <div [hidden]="!nameRef.errors.required">
+      <md-error [hidden]="!nameRef.errors.required">
         Please, enter your name
-      </div>
+      </md-error>
       <div [hidden]="!nameRef.errors.minlength">
         Please, enter at least 3 characters
       </div>
