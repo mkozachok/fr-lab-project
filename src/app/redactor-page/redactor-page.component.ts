@@ -31,6 +31,7 @@ export class RedactorPageComponent {
   items: FirebaseListObservable<any>;
   categories: FirebaseListObservable<any>;
   price: FirebaseListObservable<any>;
+  templateTypes: FirebaseListObservable<any>;
   user: User;
   templatePrice: number = 0;
   selectedDesignsPrices = [];
@@ -91,9 +92,10 @@ export class RedactorPageComponent {
         movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
         movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
+    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
     this.boundingBox = boundingBox;
-}
-
+  }
+    
  categoryChoose(cat) {
    this.designService.categoryChoose(cat).subscribe(res => {
     this.items = res;
@@ -107,8 +109,7 @@ export class RedactorPageComponent {
     });
     console.log(myType);
   }
-
-
+    //this.setCordsdependOnTemplate(template);
 resizeCanvas() {
    let canvas = this.getCanvas();
    var canvasSizer = document.getElementById("redactor_area");
@@ -200,7 +201,7 @@ getImage(src){
     var templates = this.templates.filter(function(template){
       return template.type == type;
     })
-    return templates[0].goods;
+    return this.templates[0].goods;
   }
   setColor = function(goods){
     this.drawOnCanvas(goods.url, true);
@@ -345,6 +346,7 @@ setFontOptions = function(element){
   }
   canvas.renderAll();
 }
+
 
    templates = [
       {

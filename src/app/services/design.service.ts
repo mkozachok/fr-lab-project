@@ -8,12 +8,14 @@ export class DesignService {
   designs:FirebaseListObservable<any>;
   designCategories: FirebaseListObservable<any>;
   designFilter: FirebaseListObservable<any>;
+  templateTypes: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.db = db;
     this.designs = db.list('/redactor/design');
     this.designCategories = db.list('/redactor/designCategories');
     this.designFilter = db.list('/redactor/priceFilter');
+    this.templateTypes = db.list('/templateTypes');
   }
 
   setDesign(design): firebase.Promise<void>  {
@@ -26,6 +28,10 @@ export class DesignService {
 
   getDesignCategory() {
     return this.designCategories;
+  }
+
+  getTemplateTypes() {
+    return this.templateTypes;
   }
 
   getPrice() {
