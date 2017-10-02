@@ -14,45 +14,64 @@
       </form>
     </div>
     <md-list class="objectTypeFilter">
-        <h2 md-subheader>Sorting by type</h2>
-        <div (click) = "sorting('all')">
-          <md-list-item (click)="navChanged('all')" [ngClass]="{'active' : 'all' === selected}">
-              all
+      <h2 md-subheader>Sorting by type</h2>
+      <div (click) = "sorting('all')">
+        <md-list-item (click)="navChanged('all')" [ngClass]="{'active' : 'all' === selected}">
+            all
+        </md-list-item>
+      </div>
+      <div class="iconsBlock">
+        <div *ngFor = "let templateType of templateTypes" 
+            (click) = "sorting(templateType.type)" class="icons">
+          <md-list-item (click)="navChanged(templateType.type)" [ngClass]="{'active' : templateType.type === selected}" [innerHTML] = "templateType.tag">
           </md-list-item>
         </div>
-        <div class="iconsBlock">
-          <div *ngFor = "let templateType of templateTypes" 
-              (click) = "sorting(templateType.type)" class="icons">
-            <md-list-item (click)="navChanged(templateType.type)" [ngClass]="{'active' : templateType.type === selected}" [innerHTML] = "templateType.tag">
-            </md-list-item>
-          </div>
-        </div>
-        <h2 md-subheader>Sorting by category</h2>
-        <div *ngFor = "let productCategory of categories" 
-            (click) = "sorting(productCategory.category)">
-          <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
-            {{productCategory.category}}
-          </md-list-item>
-        </div>
-      </md-list>
+      </div>
+      <h2 md-subheader>Sorting by category</h2>
+      <div *ngFor = "let productCategory of categories" 
+          (click) = "sorting(productCategory.category)">
+        <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
+          {{productCategory.category}}
+        </md-list-item>
+      </div>
+    </md-list>
   </div> 
   <div class = "rightcol wrapper">
     <div class="oneObjet" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}">
-      <div>
-          <img src="{{ product.svg }}" alt="">
+      <div class="productImg">
+        <img src="{{ product.svg }}" alt="">
+      </div>
+      <div class="info">
+        <div class = "aboutTheProduct">
+          <h3>{{product.name}}</h3>
+          <ul>
+            <li><span>type:</span> {{product.type}}</li>
+            <li><span>category:</span> {{product.category}}</li>
+            <li><span>price:</span>  {{ product.price }}</li>
+            <ng-container *ngFor = "let template of templateTypes">
+                <ng-container *ngIf = "product.type === template.type">
+                  <li>
+                    <md-select [(ngModel)]="mySize" placeholder="sizes">
+                        <md-option *ngFor="let size of template.size" [value]="size">
+                          {{size}}
+                        </md-option>
+                    </md-select> 
+                  </li>             
+                </ng-container>
+            </ng-container>
+          </ul>
         </div>
-        <div class="info">
-          <div class = "aboutTheProduct">
-            <h3>{{product.name}}</h3>
-            <ul>
-              <li><span>type:</span> {{product.type}}</li>
-              <li><span>category:</span> {{product.category}}</li>
-              <li><span>price:</span>  {{ product.price }}</li>
-            </ul>
-          </div>
-          <button md-raised-button (click)="addToCart(product)">add to my card</button>
-          <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
-        </div>  
+
+        <!--
+        <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category">
+            <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
+              {{category.category}}
+            </md-option>
+          </md-select>
+        -->
+        <button md-raised-button (click)="addToCart(product)">add to my card</button>
+        <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
+      </div>  
     </div>
     <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>

@@ -20,7 +20,7 @@ import { SafeHtml } from '@angular/platform-browser';
   moduleId: module.id,
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss'],
+  styleUrls: ['./homepage.component.scss', './homepage.component.media.scss'],
   providers: [ProductsListService, OrderService, DesignService]
 })
 
@@ -44,7 +44,9 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit():void {
     this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-    this.productListService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+    this.productListService.getTemplateTypes().subscribe(res => {
+      this.templateTypes = res;
+    });
     this.productListService.getProducts().subscribe(items => {
       this.prods = items;
       this.arrOfProds = this.prods;

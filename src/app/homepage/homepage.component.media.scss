@@ -1,0 +1,38 @@
+
+@media (max-width:960px) and (min-width:741px) {
+    .homepage  {
+        display: block;
+        .rightcol, .leftcol {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width:740px) {
+    .homepage  {
+        display: block;
+        .oneObjet {
+            width: 49%;
+        }
+        .rightcol, .leftcol {
+            width: 100%;
+        }
+        .icons {
+            width: 11% !important;
+        }
+    }
+}
+
+@media (max-width:480px) {
+    .homepage  {
+        display: block;
+        .oneObjet {
+            width: 100%;
+        }
+        img{
+            max-height: auto;
+            height: auto;
+            width: 100%;
+        }
+    }
+}
