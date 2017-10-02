@@ -2,6 +2,10 @@ md-card {
 	padding: 0;
 }
 
+.aboutTheProduct {
+	padding: 3%;
+}
+
 img {
 	max-height: 200px;
 	width: 100%;
@@ -17,23 +21,41 @@ ul, li {
     }
 }
 
-button {
-	min-width: 1%;
-	width: 100%;
-	display: block;
-}
-
-button:hover {
-    background: #7b0041;
-    color: #eee;
-}
-
-.info {
-	text-align: center;
-}
-
 .aboutTheProduct {
 	ul {
 		padding: 2% 0;
+
+		li {
+			font-size: 1vw;
+			margin: 2%;
+		}
+
+		li span {
+			font-weight: 500;
+		}
+	}
+
+	h3 {
+		font-weight: normal;
+		font-size: 1.2vw;
+		text-align: center;
+	}
+}
+
+.info {
+	button {
+		min-width: 1%;
+		width: 100%;
+		display: block;
+		background: #eee;
+		padding: 2%;
+		font-size: 1.1vw;
+		line-height: 2.2em;
+		font-weight: normal;
+	}
+
+	button:hover {
+	    background: #7b0041;
+	    color: #eee;
 	}
 }

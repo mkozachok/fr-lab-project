@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MdSnackBar } from '@angular/material';
 import { AdminService } from '../../../services/admin.service';
 import { Observable } from 'rxjs';
+import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-add-admin',
@@ -17,7 +18,8 @@ export class AddAdminComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     public snackBar: MdSnackBar,
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private _commonSrvice: CommonService
   ) { }
 
   ngOnInit(): void {
@@ -38,17 +40,9 @@ export class AddAdminComponent implements OnInit {
   onSubmit(): void {
     this.waitForDelivery = true;
     this._adminService.setNewAdmin(this.adminForm.value).then(resolve => {
-      this.openSnackBar('The user has been added', 'success');
+      this._commonSrvice.openSnackBar('The admin has been added', 'success');
     }).catch(error => {
-      this.openSnackBar(error.name, 'error');
-    });
+      this._commonSrvice.openSnackBar(error.message, 'error');
+    }).then(()=>this.waitForDelivery = false);
   }
-
-  openSnackBar(message: string, action: string): void {
-    this.waitForDelivery = false;
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
-
 }

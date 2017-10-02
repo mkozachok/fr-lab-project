@@ -9,16 +9,12 @@
 		    <md-panel-description>
 		    	Amount: {{order.totalSum}} UAH
 		    </md-panel-description>
+		    <md-panel-description>
+		    	Status: {{order.new ? 'new' : 'accepted'}}
+		    </md-panel-description>
 		  </md-expansion-panel-header>
 		  <div class="items">
-		  	<div class="item" *ngFor="let item of order.orders">
-		  		<div class="img-container">
-		  			<img src="{{item.product.svg}}">
-		  		</div>
-		  		<p>{{item.product.name}}</p>
-		  		<p>quantity: {{item.quantity}}</p>
-		  		<p>price: {{item.product.price}} UAH</p>
-		  	</div>
+		  		<app-ordered-product *ngFor="let item of order.orders" [item]="item"></app-ordered-product>
 		  </div>
 		</md-expansion-panel>
 	</md-accordion>

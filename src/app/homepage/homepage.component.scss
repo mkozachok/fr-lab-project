@@ -243,3 +243,22 @@ md-divider {
     margin-top: 100px;
     color: #7b0041;
 }
+
+.pagination {
+    min-width: 100%;
+    text-align: center;
+}
+
+/deep/ .ngx-pagination .current {
+    background: $darkRead !important;
+}
+
+/deep/ .ngx-pagination li{
+    transition: all ease .3s;
+}
+
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+}
