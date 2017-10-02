@@ -183,7 +183,7 @@ export class RedactorPageComponent {
 
   selectTemplate = function (template) {
 
-    this.setCordsdependOnTemplate(template);
+    // this.setCordsdependOnTemplate(template);
     this.type = template.type;
     this.selectedTemplateImage.src = template.url;
     this.templatePrice = template.price;
