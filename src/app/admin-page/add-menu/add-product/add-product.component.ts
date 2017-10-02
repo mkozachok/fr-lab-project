@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { ProductsListService } from '../../../services/products-list.service';
 import { Product } from '../../../models/product-model';
+import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-product',
@@ -10,8 +11,10 @@ import { Product } from '../../../models/product-model';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
+  isAddContentPage: boolean;
   waitForDelivery: boolean;
-  productForm: FormGroup
+  productForm: FormGroup;
+
   ReferenceToProducts: string = 'products';
   product = {
     name: '',
@@ -29,6 +32,10 @@ export class AddProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    //console.log(this.dialogData)
+    this.isAddContentPage = this._productService.checkPath('/add-menu');
+
     this.productForm = this._formBuilder.group({
       category: [null, 
         [
@@ -53,6 +60,7 @@ export class AddProductComponent implements OnInit {
     ]
     })
   }
+
 
   onSubmit(): void {
     this.waitForDelivery = true;

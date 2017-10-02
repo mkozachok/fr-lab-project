@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductsListService } from '../../../../services/products-list.service';
+import { MdDialog } from '@angular/material';
+import { AddProductComponent } from '../../../add-menu/add-product/add-product.component';
 
 @Component({
   selector: 'app-product',
@@ -14,8 +16,10 @@ export class ProductComponent implements OnInit {
 @Input() svg: string;
 @Input() price: string;
 
+
   constructor(
-    private _productService: ProductsListService
+    private _productService: ProductsListService,
+    public dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,12 @@ export class ProductComponent implements OnInit {
   onDelete(){
     this._productService.deleteProductImg(this.svg);
     this._productService.deleteProduct(this.$key)
+  }
+
+  onEdit(){
+    let dialogRef = this.dialog.open(AddProductComponent,{
+      data: {name: 'test'}
+    });
   }
 
 }

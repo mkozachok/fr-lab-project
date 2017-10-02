@@ -49,6 +49,7 @@ import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.compon
     OrderComponent,
     SubOrderComponent
   ],
+  entryComponents: [AddProductComponent],
   providers: [AdminService]
 })
 export class AdminPageModule { }
