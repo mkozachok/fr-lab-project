@@ -4,6 +4,7 @@ import { MakeOrderService } from '../../services/make-order.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from "rxjs";
 import { Observable } from 'rxjs/Observable';
+import { OrderedProductComponent } from './ordered-product/ordered-product.component';
 
 @Component({
   selector: 'app-my-orders',
