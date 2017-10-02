@@ -54,7 +54,7 @@
           <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
         </div>  
     </div>
-    <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 .main-flex-wrapper {
     display: flex;
     flex-direction: column;
@@ -12,3 +14,16 @@
 .content {
     flex: 1;
 }
+
+/deep/ .pagination {
+    min-width: 100%;
+    text-align: center !important;
+  }
+  
+/deep/ .ngx-pagination .current {
+    background: $darkRead !important;
+  }
+  
+/deep/ .ngx-pagination li{
+    transition: all ease .3s;
+  }
