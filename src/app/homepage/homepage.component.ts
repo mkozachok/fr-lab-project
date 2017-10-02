@@ -13,7 +13,8 @@ import { OrderService } from '../services/order-page.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CurrencyPipe } from '@angular/common';
-import { Subject } from 'rxjs/Subject'
+import { Subject } from 'rxjs/Subject';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   moduleId: module.id,
