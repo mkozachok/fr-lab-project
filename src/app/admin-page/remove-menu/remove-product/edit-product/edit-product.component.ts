@@ -62,10 +62,10 @@ export class EditProductComponent implements OnInit {
       owner: product.owner,
       price: product.price,
     }).then(() => {
-      this._commonService.openSnackBar('The product has been updated', 'success', this.waitForDelivery);
+      this._commonService.openSnackBar('The product has been updated', 'success');
       this.dialogRef.close();
     }).catch(error => {
-      this._commonService.openSnackBar(error.name, 'error',  this.waitForDelivery);
+      this._commonService.openSnackBar(error.name, 'error');
     });
 
   }
