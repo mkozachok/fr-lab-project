@@ -13,6 +13,8 @@ import { OrderService } from '../services/order-page.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CurrencyPipe } from '@angular/common';
+import { Subject } from 'rxjs/Subject';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
   moduleId: module.id,
@@ -23,7 +25,8 @@ import { CurrencyPipe } from '@angular/common';
 })
 
 export class HomepageComponent implements OnInit {
-  prods: FirebaseListObservable<any>;
+  prods: Observable<Array<any>>;
+  arrOfProds: Observable<Array<any>>;
   @Input() filtered: Product[];
   @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
@@ -33,6 +36,8 @@ export class HomepageComponent implements OnInit {
   templateTypes: FirebaseListObservable<any>;
   @Input() product;
   deleteButton: boolean;
+  startAt = new Subject()
+  endAt = new Subject()
 
   constructor(private productListService: ProductsListService, private db: AngularFireDatabase, private designService: DesignService, private orderService:OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
   };
@@ -40,7 +45,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit():void {
     this.designService.getDesignCategory().subscribe(res => {this.categories = res});
     this.productListService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
-    this.productListService.getProducts().subscribe(items => {this.prods = items});
+    this.productListService.getProducts().subscribe(items => {
+      this.prods = items;
+      this.arrOfProds = this.prods;
+    });
+    //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
    };
 
    sorting(propValue) {
@@ -54,10 +63,10 @@ export class HomepageComponent implements OnInit {
   } 
 
   search(search) {   
-    //this.productListService.search(search).subscribe(res => {this.prods = res});
-    console.log(this.prods);
+    this.prods = this.arrOfProds;
+    this.prods = this.productListService.search(search, this.prods);
   }
-
+  
   addToCart(product):void {
     this.orderService.addItem(product, product.$key);
     let config = new MdSnackBarConfig();

@@ -8,24 +8,12 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	box-sizing: border-box;
 }
 
-.item {
-	width: calc(100% / 5);
-
-	p {
-		text-align: center;
-	}
-
-	.img-container {
-		width: 80%;
-		margin: 0 auto;
-
-		img {
-			width: 100%;
-			height: 150px;
-		}
-	}
+app-ordered-product {
+	width: calc((100% / 5) - 2%);
+	margin: 0.5% 1% 1% 1%;
 }
 
 .mat-expansion-panel-spacing {
@@ -36,12 +24,13 @@ md-expansion-panel {
 	margin-bottom: 1%;
 }
 
-md-expansion-panel-header {
-	padding: 0 2%;
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+    width: 15%;
+}
 
-	md-panel-title {
-		width: 30%;
-	}
+.mat-content {
+    align-items: center;
 }
 
  .loader{

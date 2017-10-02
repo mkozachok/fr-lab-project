@@ -6,9 +6,8 @@
         <md-form-field class="example-full-width">
           <input mdInput 
                     placeholder="template searching" 
-                    [(ngModel)] = "searchTerm" 
-                    #searchField 
-                    (ngModelChange) = "search(searchField.val)" 
+                    [(ngModel)] = "searchTerm"  
+                    (ngModelChange) = "search(searchTerm)" 
                     class="search" 
                     name="userFilter"> 
         </md-form-field>
@@ -21,11 +20,12 @@
               all
           </md-list-item>
         </div>
-        <div *ngFor = "let templateType of templateTypes" 
-            (click) = "sorting(templateType.type)">
-          <md-list-item (click)="navChanged(templateType.type)" [ngClass]="{'active' : templateType.type === selected}">
-            {{templateType.type}}
-          </md-list-item>
+        <div class="iconsBlock">
+          <div *ngFor = "let templateType of templateTypes" 
+              (click) = "sorting(templateType.type)" class="icons">
+            <md-list-item (click)="navChanged(templateType.type)" [ngClass]="{'active' : templateType.type === selected}" [innerHTML] = "templateType.tag">
+            </md-list-item>
+          </div>
         </div>
         <h2 md-subheader>Sorting by category</h2>
         <div *ngFor = "let productCategory of categories" 
@@ -47,14 +47,14 @@
             <ul>
               <li><span>type:</span> {{product.type}}</li>
               <li><span>category:</span> {{product.category}}</li>
-              <li><span>price:</span>  {{product.price | currency:'USD':true}}</li>
+              <li><span>price:</span>  {{ product.price }}</li>
             </ul>
           </div>
           <button md-raised-button (click)="addToCart(product)">add to my card</button>
           <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
         </div>  
     </div>
-    <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
   </div>
 </div>
