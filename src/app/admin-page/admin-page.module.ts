@@ -21,6 +21,7 @@ import { ImgWindowComponent } from '../components/img-window/img-window.componen
 import { NewOrdersComponent } from './new-orders/new-orders.component';
 import { OrderComponent } from './new-orders/order/order.component';
 import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.component';
+import { EditProductComponent } from './remove-menu/remove-product/edit-product/edit-product.component';
 
 @NgModule({
   imports: [
@@ -47,8 +48,10 @@ import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.compon
     ImgWindowComponent,
     NewOrdersComponent,
     OrderComponent,
-    SubOrderComponent
+    SubOrderComponent,
+    EditProductComponent
   ],
+  entryComponents: [EditProductComponent],
   providers: [AdminService]
 })
 export class AdminPageModule { }

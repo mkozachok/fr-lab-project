@@ -5,17 +5,19 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import * as firebase from 'firebase/app';
 import { environment } from '../../../environments/environment';
 import { Subscription } from "rxjs";
-
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
-  styleUrls: ['./about-me.component.scss'],
+  styleUrls: ['./about-me.component.scss']
 })
+
 export class AboutMeComponent implements OnInit, OnDestroy {
   ReferenceToAvatars: string = 'avatars';
   showLoader = true;
   userForm: FormGroup;
+  waitForDelivery: boolean;
   user = {
     firstName: "",
     lastName: "",
@@ -39,11 +41,10 @@ export class AboutMeComponent implements OnInit, OnDestroy {
   constructor(
     private _userService: UserService,
     public snackBar: MdSnackBar,
-    /* private afAuth: AngularFireAuth, */
+    private _commonService: CommonService,
     private _formBuilder: FormBuilder
   ) {
-    let that = this;
-    let test;
+
   }
 
   ngOnInit(): Subscription {
@@ -111,6 +112,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.waitForDelivery = true;
     this.id = this.user.id;
     this.name = `${this.userForm.value.firstName} ${this.userForm.value.lastName}`;
     this.email = this.userForm.value.email;
@@ -119,22 +121,18 @@ export class AboutMeComponent implements OnInit, OnDestroy {
   }
 
 
-  openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
 
   onNotify(url) {
-    if(this.user.photoUrl.includes('firebasestorage.googleapis.com/v0/b/kolibri-7dd6a')){
+    if (this.user.photoUrl.includes('firebasestorage.googleapis.com/v0/b/kolibri-7dd6a')) {
       this._userService.deleteUserOldAvatar(this.user.photoUrl);
     }
-   
-     this._userService.updateUser(this.id, this.name, url, this.phone, this.address).then(resolve => {
-      this.openSnackBar('User has been saved', 'success');
+
+    this._userService.updateUser(this.id, this.name, url, this.phone, this.address).then(resolve => {
+      this._commonService.openSnackBar('User has been saved', 'success');
     }).catch(error => {
-      this.openSnackBar(error.name, 'error');
-    }); 
+      this._commonService.openSnackBar(error.name, 'error');
+      console.log(error)
+    }).then(() => this.waitForDelivery = false);
   }
 
 

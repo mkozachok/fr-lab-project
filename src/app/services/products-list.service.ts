@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../models/product-model';
 import { PRODUCTS } from '../homepage/products';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -12,19 +13,22 @@ import * as firebase from 'firebase';
 export class ProductsListService {
 	products: FirebaseListObservable<any>;
 	templateTypes: FirebaseListObservable<any>;
-	
-	constructor(private db: AngularFireDatabase) {
+
+	constructor(
+		private db: AngularFireDatabase,
+		public router: Router
+	) {
 		this.db = db;
 		this.products = db.list('/products');
 		this.templateTypes = db.list('/templateTypes');
 	}
-	
+
 	getProducts() {
 		return this.products;
 	}
 
 	getProducts2(start, end): FirebaseListObservable<any> {
-		this.products =  this.db.list('/products', {
+		this.products = this.db.list('/products', {
 			query: {
 				orderByChild: 'type',
 				limitToFirst: 10,
@@ -40,12 +44,12 @@ export class ProductsListService {
 	}
 
 	selectProducts(propValue) {
-		if(propValue == 'all') {
+		if (propValue == 'all') {
 			return this.products;
 		} else {
 			return this.products.map(items => {
-			  const filtered = items.filter(item => item.category == propValue || item.type == propValue);
-			  return filtered;
+				const filtered = items.filter(item => item.category == propValue || item.type == propValue);
+				return filtered;
 			});
 		}
 	}
@@ -53,10 +57,10 @@ export class ProductsListService {
 	search(search, arrOfProds) {
 		let transformedPhrase = search.toLowerCase();
 		return arrOfProds.filter(x => {
-		  return x['type'].toLowerCase()
-			.indexOf(transformedPhrase) >= 0 || x['name'].toLowerCase()
-			.indexOf(transformedPhrase) >= 0 || x['category'].toLowerCase()
-			.indexOf(transformedPhrase) >= 0;
+			return x['type'].toLowerCase()
+				.indexOf(transformedPhrase) >= 0 || x['name'].toLowerCase()
+					.indexOf(transformedPhrase) >= 0 || x['category'].toLowerCase()
+						.indexOf(transformedPhrase) >= 0;
 		});
 	}
 
@@ -74,11 +78,15 @@ export class ProductsListService {
 		return this.products.push(product);
 	}
 
+	updateProduct(key, product): firebase.Promise<void> {
+		return this.products.update(key, product);
+	}
+
 	deleteProduct(id) {
 		this.db.database.ref('/products').child(id).remove();
 	}
 
-	deleteProductImg(url){
+	deleteProductImg(url) {
 		firebase.storage().refFromURL(url).delete();
 	}
 
@@ -95,4 +103,6 @@ export class ProductsListService {
 			return productKeys.includes(product.$key);
 		});
 	}
+
+
 }

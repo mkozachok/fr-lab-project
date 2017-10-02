@@ -1,5 +1,5 @@
 <div class="add-wrapper">
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <md-form-field>
       <input required type="text" placeholder="category" mdInput formControlName="category">
       <md-error *ngIf="productForm.controls['category'].hasError('required')">
@@ -27,13 +27,16 @@
         Type <strong>cannot be blank</strong>
       </md-error>
     </md-form-field>
-    <app-file-upload  #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToProducts"></app-file-upload>
-    <button [disabled]="!fileUp.downloadedPhoto || !productForm.valid || waitForDelivery" (click)="fileUp.upload()"
-      type="submit" md-raised-button color="primary" class="edit-save-button">
-          Add product
-      </button>
+    <md-dialog-actions>
+      <button [disabled]="!productForm.valid || waitForDelivery" type="submit"
+        md-raised-button color="primary" class="edit-save-button">
+            Edit product
+        </button>
+      <button [disabled]="waitForDelivery" md-raised-button md-dialog-close color="primary" class="edit-save-button">
+            Close
+        </button>
+    </md-dialog-actions>
   </form>
   <div>
-
   </div>
 </div>

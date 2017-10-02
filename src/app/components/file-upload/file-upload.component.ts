@@ -26,23 +26,22 @@ export class FileUploadComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
-    if (this.selectedFiles.length === 0) {
-      this.downloadedPhoto = false;
-    } else {
+    if (this.selectedFiles.length) {
       this.downloadedPhoto = true;
     }
     console.log(this.downloadedPhoto)
   }
 
+
   upload() {
     let counter: number = 0;
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    console.log(this.saveUrl)
     this._uploadService.pushUpload(this.currentUpload, this.saveUrl);
     let timer = setInterval(() => {
       counter++;
@@ -50,6 +49,7 @@ export class FileUploadComponent implements OnInit {
       if (this.photoUrl) {
         this.notify.emit(this.photoUrl)
         clearInterval(timer);
+        this.downloadedPhoto = false;
       }else if(counter > 30) {
         clearInterval(timer);
         throw new Error('Timeout')

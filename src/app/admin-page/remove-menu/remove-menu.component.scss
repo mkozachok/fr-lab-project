@@ -18,8 +18,11 @@
         font-size: 1.2vw;
 
         span {
+            display: inline-block;
             width: 10vw;
             margin-right: 1vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 
