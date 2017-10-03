@@ -31,6 +31,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 // homepage components
 import { HomepageComponent } from './homepage/homepage.component';
@@ -105,7 +106,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     NgxPaginationModule,
     MaterialModule,
     SharedModule,
-    WildcardRoutingModule
+    WildcardRoutingModule,
+    ReCaptchaModule
   ],
   providers: [
     UserService,
