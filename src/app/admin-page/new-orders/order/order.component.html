@@ -14,13 +14,18 @@
     </md-panel-description>
   </md-expansion-panel-header>
   <div class="sub-order-wrapper">
-    <app-sub-order class="sub-order"
+<!--     <app-sub-order class="sub-order"
      *ngFor="let order of orders"
       [quantity]="order.quantity"
       [name]="order.product.name"
       [svg]="order.product.svg"
       [price]="order.product.price">
-    </app-sub-order>
+    </app-sub-order> -->
+    <app-ordered-product
+    class="sub-order"
+    *ngFor="let order of orders"
+    [item]="order">
+    </app-ordered-product>
   </div>
   <md-action-row>
     <button md-button color="primary" (click)="accept()">Mark as accepted</button>

@@ -100,7 +100,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px;
+    width: 60px;
     transform: translate(-50%, -50%);
     height: 40px;
     text-align: center;
@@ -110,7 +110,7 @@ body {
       background-color: $darkRead;
       height: 100%;
       width: 6px;
-      margin: 0 2px;
+      margin: 0 1px; 
       display: inline-block;
       
       -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
