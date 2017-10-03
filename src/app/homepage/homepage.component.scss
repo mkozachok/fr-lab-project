@@ -3,6 +3,7 @@
 .homepage {
     display: flex;
     width: 100%;
+    min-width: 320px;
     max-width: 1170px;
     margin: 40px auto 20px;
 
@@ -159,6 +160,10 @@ md-divider {
     * {
         width: 100%;
     }
+
+    .productImg {
+        text-align: center;
+    }
     
     img{
         max-height: 200px;
@@ -257,4 +262,3 @@ md-divider {
         background: #7b0041;
     }
 }
-

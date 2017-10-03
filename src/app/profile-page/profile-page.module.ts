@@ -7,13 +7,12 @@ import { MaterialModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
 // import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.component';
 
-import { OrderedProductComponent } from './my-orders/ordered-product/ordered-product.component';
+
 
 @NgModule({
   declarations: [
     profilePageRoutingComponents,
-    // MyGalleryComponent,
-    OrderedProductComponent
+    // MyGalleryComponent
   ],
   imports: [
     CommonModule,

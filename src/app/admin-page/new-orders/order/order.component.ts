@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs'
 import { MakeOrderService } from '../../../services/make-order.service';
+import { OrderedProductComponent } from '../../../profile-page/my-orders/ordered-product/ordered-product.component';
 
 @Component({
   selector: 'app-order',
