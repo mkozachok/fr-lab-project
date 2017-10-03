@@ -55,7 +55,7 @@ export class UserService {
       displayName: name,
       photoURL: photoURL
     }).then(res => {
-      this.getUserFromDataBase(id).set({
+      this.getUserFromDataBase(id).update({
         additionalInfo: {
           phone: phone,
           address: address

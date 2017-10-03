@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../components/loader/loader.component';
 import { FileUploadComponent } from '../components/file-upload/file-upload.component';
 import { ViewOneProductComponent } from '../homepage/view-one-product/view-one-product.component';
@@ -11,7 +13,9 @@ import { OrderedProductComponent } from '../profile-page/my-orders/ordered-produ
 @NgModule({
   imports: [
     MaterialModule,
-    CommonModule
+    CommonModule,
+    BrowserModule,
+    FormsModule
   ],
   declarations: [
     LoaderComponent,

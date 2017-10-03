@@ -8,7 +8,24 @@
 	   <ul>
 	     <li><span>type:</span> {{product.type}}</li>
 	     <li><span>category:</span> {{product.category}}</li>
-	     <li><span>price:</span> {{product.price | currency:'USD':true}}</li>
+			 <li><span>price:</span> {{product.price | currency:'USD':true}}</li>
+				<ng-container *ngFor = "let template of templateTypes">
+						<ng-container *ngIf = "product.type === template.type" class="size">
+								<li>
+										<md-select [(ngModel)]="mySize" placeholder="size" (ngModelChange)="setSize(mySize, product)">
+												<md-option *ngFor="let size of template.size" [value]="size">
+													{{size}}
+												</md-option>
+										</md-select>
+										<!-- <select [(ngModel)]="mySize" (ngModelChange)="setSize(mySize, product)">
+												<option value="" disabled selected>Size</option>
+												<option *ngFor="let size of template.size" [value]="size">
+													{{size}}
+												</option>
+										</select> -->
+								</li>
+						</ng-container>
+				</ng-container>
 	   </ul>
 	 </div>
 		 <button md-raised-button (click)="addToCart(product)">add to my card</button>

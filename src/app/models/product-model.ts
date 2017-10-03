@@ -7,4 +7,5 @@ export class Product {
     public layouts: any[];
     public owner: string;
     public price: number;
+    public size: string;
 }

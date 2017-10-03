@@ -8,7 +8,7 @@
 
 app-view-one-product {
 	width: calc((100% / 4) - 1%);
-	border: 1px solid #eee;
+	height: auto;
 	box-sizing: border-box;
 	margin: 0 0.5% 1% 0.5%;
 }
@@ -18,4 +18,16 @@ app-view-one-product {
      top: 50%;
      left: 50%;
      transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width : 900px) {
+	app-view-one-product {
+		width: calc((100% / 3) - 1%);
+	}
+}
+
+@media screen and (max-width : 450px) {
+	app-view-one-product {
+		width: calc((100% / 2) - 1%);
+	}
 }

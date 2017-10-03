@@ -40,7 +40,7 @@ export class HomepageComponent implements OnInit {
   startAt = new Subject()
   endAt = new Subject()
 
-  constructor(private productListService: ProductsListService, private db: AngularFireDatabase, private designService: DesignService, private orderService:OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
+  constructor(private productListService: ProductsListService, private db: AngularFireDatabase, private designService: DesignService, private orderService: OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
   };
 
   ngOnInit():void {
@@ -71,10 +71,21 @@ export class HomepageComponent implements OnInit {
   }
   
   addToCart(product):void {
-    this.orderService.addItem(product, product.$key);
-    let config = new MdSnackBarConfig();
-    config.extraClasses = ['success-snackbar'];
-    config.duration = 1300;
-    this.snackBar.open('This product has been added to your shoping cart', '', config);
+    if (!product.size) {
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open(`Please, choose a product size`, 'required', config);
+    } else {
+      this.orderService.addItem(product, product.$key);
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open('This product has been added to the cart', 'sucess', config);
+    }
+  }
+
+  setSize(size, product):void {
+    product.size = size;
   }
 }

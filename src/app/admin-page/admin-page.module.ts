@@ -20,7 +20,6 @@ import { DesignComponent } from './remove-menu/remove-design/design/design.compo
 import { ImgWindowComponent } from '../components/img-window/img-window.component';
 import { NewOrdersComponent } from './new-orders/new-orders.component';
 import { OrderComponent } from './new-orders/order/order.component';
-import { SubOrderComponent } from './new-orders/order/sub-order/sub-order.component';
 import { EditProductComponent } from './remove-menu/remove-product/edit-product/edit-product.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { EditProductComponent } from './remove-menu/remove-product/edit-product/
     ImgWindowComponent,
     NewOrdersComponent,
     OrderComponent,
-    SubOrderComponent,
     EditProductComponent
   ],
   entryComponents: [EditProductComponent],
