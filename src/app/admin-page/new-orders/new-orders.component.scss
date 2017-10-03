@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 /deep/ .order-wrapper{
     padding: 2vw;
     display: flex;
@@ -23,6 +25,12 @@
     .mat-expansion-panel-header-title,
     .mat-expansion-panel-header-description {
         width: 15%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media screen and (max-width: $break-l) {
+            
+        }
     }
 
     .mat-content {

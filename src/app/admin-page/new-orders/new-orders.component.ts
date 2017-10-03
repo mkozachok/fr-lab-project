@@ -20,7 +20,6 @@ export class NewOrdersComponent implements OnInit {
       this.showSpinner = false;
       this.orders = res.filter(order => order.new);
       this.originalArray = this.orders;
-      console.log(this.orders)
     })
   }
 
