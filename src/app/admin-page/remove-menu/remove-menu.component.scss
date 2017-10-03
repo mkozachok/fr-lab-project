@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 /deep/ .mat-tab-label{
 	min-width: calc(100%/3) !important;
 }
@@ -15,7 +17,11 @@
 
     .table-row {
         border-bottom: 1px solid black;
-        font-size: 1.2vw;
+        font-size: 1.2em;
+
+        @media screen  and (max-width: $break-m){
+            font-size: 0.8em;
+        }
 
         span {
             display: inline-block;
