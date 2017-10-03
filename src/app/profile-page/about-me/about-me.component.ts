@@ -43,9 +43,9 @@ export class AboutMeComponent implements OnInit, OnDestroy {
     public snackBar: MdSnackBar,
     private _commonService: CommonService,
     private _formBuilder: FormBuilder
-  ) {  
+  ) {
 
-    }
+  }
 
   ngOnInit(): Subscription {
     this.userForm = this._formBuilder.group({
@@ -122,17 +122,15 @@ export class AboutMeComponent implements OnInit, OnDestroy {
 
 
 
-  onNotify(url) {
+  onNotify(url = this.user.photoUrl) {
+    let { firstName, lastName, address, phone } = this.userForm.value;
     if (this.user.photoUrl.includes('firebasestorage.googleapis.com/v0/b/kolibri-7dd6a')) {
       this._userService.deleteUserOldAvatar(this.user.photoUrl);
     }
-
-    console.log(url)
-    this._userService.updateUser(this.id, this.name, url, this.phone, this.address).then(resolve => {
+    this._userService.updateUser(this.user.id, `${firstName} ${lastName}`, url, phone, address).then(resolve => {
       this._commonService.openSnackBar('User has been saved', 'success');
     }).catch(error => {
       this._commonService.openSnackBar(error.name, 'error');
-      console.log(error)
     }).then(() => this.waitForDelivery = false);
   }
 
