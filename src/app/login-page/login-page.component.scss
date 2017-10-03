@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -13,8 +15,12 @@ form {
   align-items: center;
 }
 
-.button-google {
+button {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
   margin-top: 20px;
+  color: white;
+  background-color: $darkRead;
 }
 
 p {

@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -19,8 +21,12 @@ form {
   }
 
   button {
-    margin: 10px;
-  }
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    margin-top: 20px;
+    color: white;
+    background-color: $darkRead;
+    }
 }
 
 p {
