@@ -71,12 +71,13 @@ export class RedactorPageComponent {
      evented: false,
      stroke: "red",
      selectable: false,
-     strokeDashArray: [5,10],
+     strokeDashArray: [5,10]
   });
 
-  ngAfterViewInit(){
+
+  ngAfterContentInit(){
     let canvas = this.getCanvas();
-    let boundingBox = this.boundingBox;
+    let boundingBox = this.setBoundingBox();
 
     canvas.on("object:moving", function(el) {
         let movingBox = canvas.getActiveObject();
@@ -95,7 +96,7 @@ export class RedactorPageComponent {
     this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
     this.boundingBox = boundingBox;
   }
-    
+
  categoryChoose(cat) {
    this.designService.categoryChoose(cat).subscribe(res => {
     this.items = res;
@@ -129,11 +130,72 @@ resizeCanvas() {
    canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
 };
 
+setBoundingBox(){
+  let boundingBox = this.boundingBox;
+  switch(this.type){
+     case "men's T-shirt":
+     boundingBox.width = 235;
+     boundingBox.height = 440;
+     boundingBox.top = 80;
+     boundingBox.left = 225;
+     break;
+     case "men's shirt":
+     boundingBox.width = 250;
+     boundingBox.height = 360;
+     boundingBox.top = 140;
+     boundingBox.left = 225;
+     break;
+     case "men's sweater":
+     boundingBox.width = 215;
+     boundingBox.height = 400;
+     boundingBox.top = 100;
+     boundingBox.left = 245;
+     break;
+     case "cap":
+     boundingBox.width = 270;
+     boundingBox.height = 200;
+     boundingBox.top = 180;
+     boundingBox.left = 220;
+     break;
+     case "cup":
+     boundingBox.width = 330;
+     boundingBox.height = 400;
+     boundingBox.top = 75;
+     boundingBox.left = 100;
+     break;
+     case "body":
+     boundingBox.width = 240;
+     boundingBox.height = 350;
+     boundingBox.top = 100;
+     boundingBox.left = 230;
+     break;
+     case "women's T-shirt":
+     boundingBox.width = 220;
+     boundingBox.height = 420;
+     boundingBox.top = 100;
+     boundingBox.left = 240;
+     break;
+     case "women's shirt":
+     boundingBox.width = 210;
+     boundingBox.height = 380;
+     boundingBox.top = 140;
+     boundingBox.left = 245;
+     break;
+     case "women's sweater":
+     boundingBox.width = 210;
+     boundingBox.height = 420;
+     boundingBox.top = 100;
+     boundingBox.left = 245;
+     break;
+  }
+  return boundingBox;
+}
+
   selectTemplate(template){
     this.type = template.type;
     this.templatePrice = template.price;
     this.drawOnCanvas(template.url, true);
-    this.getCanvas().add(this.boundingBox);
+    this.getCanvas().add(this.setBoundingBox());
 
   }
 
@@ -179,9 +241,9 @@ getImage(src){
   defineCategoryImage(img){
     let image = new fabric.Image(img);
     image.set({
-      width:200,
-      height:200,
-      left: 240,
+      width:150,
+      height:150,
+      left: 270,
       top:200,
       id:this.selectedDesignsPrices.length
     });
@@ -204,6 +266,7 @@ getImage(src){
     return this.templates[0].goods;
   }
   setColor = function(goods){
+    // this.selectedCategory.src = category.url;
     this.drawOnCanvas(goods.url, true);
   }
 
@@ -239,7 +302,7 @@ getImage(src){
     let productKey: string;
     let self = this;
     this.getCanvas().remove(this.boundingBox);
-    let resultProductImg = this.getCanvas().toDataURL();
+    let resultProductImg = this.getCanvas().toDataURL('png');
     firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(resultProductImg, 'data_url');
     let newProduct = this.createProduct(self, resultProductImg);
     this.productService.setProduct(newProduct).then(resolve => {
@@ -342,7 +405,7 @@ setFontOptions = function(element){
     break;
     case "linethrough" :
       canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
-    break; 
+    break;
   }
   canvas.renderAll();
 }

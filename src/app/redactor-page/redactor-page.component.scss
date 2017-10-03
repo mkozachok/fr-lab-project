@@ -34,7 +34,7 @@
 }
 
 .templates, .gategory_images{
-	margin-top:20px;
+	margin:20px 0;
 	flex-wrap: wrap;
 	display: flex;
 	flex-direction: row;
@@ -51,6 +51,7 @@
 
 .template_img,.category_img{
 	width: 33%;
+	margin-top: 20px;
 }
 
 .category_img {
