@@ -89,7 +89,7 @@
           </md-error>
         </md-form-field>
         <app-file-upload #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToAvatars"></app-file-upload>
-        <button type="submit" [disabled]="!fileUp.downloadedPhoto || !userForm.valid || waitForDelivery" (click)="fileUp.upload()" md-raised-button color="primary" class="edit-save-button">
+        <button type="submit" [disabled]="!userForm.valid || waitForDelivery" (click)="fileUp.upload()" md-raised-button color="primary" class="edit-save-button">
           Save changes
       </button>
       </form>

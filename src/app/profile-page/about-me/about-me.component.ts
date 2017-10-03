@@ -43,9 +43,9 @@ export class AboutMeComponent implements OnInit, OnDestroy {
     public snackBar: MdSnackBar,
     private _commonService: CommonService,
     private _formBuilder: FormBuilder
-  ) {
+  ) {  
 
-  }
+    }
 
   ngOnInit(): Subscription {
     this.userForm = this._formBuilder.group({
@@ -127,6 +127,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
       this._userService.deleteUserOldAvatar(this.user.photoUrl);
     }
 
+    console.log(url)
     this._userService.updateUser(this.id, this.name, url, this.phone, this.address).then(resolve => {
       this._commonService.openSnackBar('User has been saved', 'success');
     }).catch(error => {

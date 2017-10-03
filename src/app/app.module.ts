@@ -44,7 +44,7 @@ import { PosterComponent } from './homepage/poster/poster.component';
 
 
 // Materials modules goes here
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -89,6 +89,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
     FormsModule,
     AppRoutingModule,
     ProfilePageModule,
@@ -103,11 +104,11 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     HttpModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    MaterialModule,
     SharedModule,
     WildcardRoutingModule
   ],
   providers: [
+    MdIconRegistry,
     UserService,
     ProductsListService,
     DesignService,
