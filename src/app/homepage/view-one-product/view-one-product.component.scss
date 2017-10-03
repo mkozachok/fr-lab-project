@@ -6,9 +6,15 @@ md-card {
 	padding: 3%;
 }
 
-img {
-	height: auto;
-	max-width: 90%;
+.img-container {
+	width: 100%;
+
+	img {
+		height: auto;
+		max-width: 80%;
+		margin: 0 auto;
+		display: block;
+	}
 }
 
 ul, li {
@@ -35,6 +41,10 @@ ul, li {
 		}
 
 		li md-select {
+			width: 100%;
+		}
+
+		li select {
 			width: 100%;
 		}
 	}

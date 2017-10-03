@@ -4,12 +4,11 @@
 	padding: 2% 1% 0 1%;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: stretch;
 }
 
 app-view-one-product {
 	width: calc((100% / 4) - 1%);
-	display: flex;
+	height: auto;
 	box-sizing: border-box;
 	margin: 0 0.5% 1% 0.5%;
 }

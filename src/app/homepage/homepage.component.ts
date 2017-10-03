@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
       config.duration = 1300;
-      this.snackBar.open('Please, choose a size', 'required', config);
+      this.snackBar.open(`Please, choose a product size`, 'required', config);
     } else {
       this.orderService.addItem(product, product.$key);
       let config = new MdSnackBarConfig();
