@@ -34,6 +34,7 @@
     padding: 0;
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
+    box-sizing: border-box;
 }
 
 html {
@@ -160,11 +161,21 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
   background: $activeRoute;
 }
 
-.homepage .icons .demo-icon, .oneTemplate .demo-icon{
+.homepage .icons .demo-icon, .oneTemplate .demo-icon {
   color:#999;
   transition: all ease .2s;
   font-size: 50px;
   cursor: pointer;
+}
+
+button{
+  /deep/ .icons .demo-icon
+  {
+    display: block;
+    font-size: 50px !important;
+    color:#999;
+    margin: 3px auto;
+  }
 }
 
 .oneTemplate:hover .demo-icon {

@@ -1,9 +1,22 @@
-
 @media (max-width:960px) and (min-width:741px) {
     .homepage  {
         display: block;
         .rightcol, .leftcol {
             width: 100%;
+        }
+        .leftcol {
+            display: flex;
+        }
+        .objectTypeFilter {
+            display: none;
+        }
+    }
+    .mobileMenus {
+        display: flex;
+        flex-wrap: wrap;
+        .productTypeResponsive, .productCategoryResponsive {
+            width: 48%;
+            margin: 0 1%;
         }
     }
 }
@@ -14,17 +27,33 @@
         .oneObjet {
             width: 49%;
         }
-        .rightcol, .leftcol {
+        .objectTypeFilter {
+            display: none;
+        }
+        .rightcol, .leftcol{
             width: 100%;
+        }
+        .leftcol {
+            display: flex;
         }
         .icons {
             width: 11% !important;
+        }
+    }
+    .mobileMenus {
+        display: flex;
+        flex-wrap: wrap;
+        .productTypeResponsive, .productCategoryResponsive {
+            width: 48%;
+            margin: 0 1%;
         }
     }
 }
 
 @media (max-width:480px) {
     .homepage  {
+        width: 99%;
+        margin: 0 auto;
         display: block;
         .oneObjet {
             width: 100%;
@@ -33,6 +62,31 @@
             max-height: auto;
             height: auto;
             width: 100%;
+        }
+        .objectTypeFilter {
+            display: none;
+        }
+        .rightcol, .leftcol{
+            width: 100%;
+        }
+        .leftcol {
+            display: block;
+            > * {
+                width: 100%;
+            }
+            .searching-form {
+                width: 80% !important;
+                margin: 0 auto;
+                * {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+    .mobileMenus {
+        display: flex;
+        .productTypeResponsive, .productCategoryResponsive {
+            margin: 0 1%;
         }
     }
 }

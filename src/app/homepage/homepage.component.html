@@ -13,6 +13,27 @@
         </md-form-field>
       </form>
     </div>
+    <div class="mobileMenus">
+      <div class="productTypeResponsive">
+          <button md-button [mdMenuTriggerFor]="menu1">type</button>
+          <md-menu #menu1="mdMenu">
+              <button md-menu-item (click) = "sorting('all')">all</button>
+              <button md-menu-item *ngFor = "let templateType of templateTypes" 
+              (click) = "sorting(templateType.type)">
+              <span  [innerHTML] = "templateType.tag"  class="icons"></span>
+            </button>
+          </md-menu>
+      </div>
+      <div class="productCategoryResponsive">
+          <button md-button [mdMenuTriggerFor]="menu2">category</button>
+          <md-menu #menu2="mdMenu">
+            <button md-menu-item *ngFor = "let productCategory of categories" 
+            (click) = "sorting(productCategory.category)">
+              {{productCategory.category}}
+            </button>
+          </md-menu>
+      </div>
+    </div>
     <md-list class="objectTypeFilter">
       <h2 md-subheader>Sorting by type</h2>
       <div (click) = "sorting('all')">
@@ -61,14 +82,6 @@
             </ng-container>
           </ul>
         </div>
-
-        <!--
-        <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category">
-            <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
-              {{category.category}}
-            </md-option>
-          </md-select>
-        -->
         <button md-raised-button (click)="addToCart(product)">add to my card</button>
         <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
       </div>  

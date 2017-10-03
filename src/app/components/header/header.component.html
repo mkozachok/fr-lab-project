@@ -1,7 +1,7 @@
 <md-toolbar color="primary" class="header">
-  <a routerLink="/"><img [src]="logoSrc" alt="Logo"></a>
+  <a routerLink="/"  class="logo"><img [src]="logoSrc" alt="Logo"></a>
   <span class="spacer"></span>
-  <div>
+  <div class="headerContent">
   <span *ngIf="!user">
     <a routerLink="/registration-page" class="login">
       <md-icon class="header-icon">

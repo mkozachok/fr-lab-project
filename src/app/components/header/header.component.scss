@@ -86,3 +86,24 @@
         right: -0.8em;
     }
 }
+
+/*
+@media (max-width:740px) {
+    .header {
+        flex-wrap: wrap !important;
+        height: auto !important;
+        .spacer {
+            display: none;
+        }
+        .logo {
+            display: block !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        .headerContent {
+            width: 100% !important;
+        }
+    }
+}
+*/
