@@ -4,7 +4,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
 @Component({
   selector: 'app-poster',
   templateUrl: './poster.component.html',
-  styleUrls: ['./poster.component.scss']
+  styleUrls: ['./poster.component.scss', './poster.component.media.scss']
 })
 export class PosterComponent implements OnInit {
   title: 'create your own template';

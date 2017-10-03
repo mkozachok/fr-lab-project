@@ -15,6 +15,7 @@ import { UserService } from '../services/user.service';
 import { CurrencyPipe } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { SafeHtml } from '@angular/platform-browser';
+import { MdMenuModule } from '@angular/material';
 
 @Component({
   moduleId: module.id,

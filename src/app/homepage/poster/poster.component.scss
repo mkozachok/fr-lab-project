@@ -12,11 +12,18 @@
         margin: 0 auto;
         padding: 20px 30px;
         font-size: 20px;
-        color: #eee;
-        background: #7b0041;
+        color: #555;
         transition: ease all .2s;
         font-family: 'Quicksand', sans-serif;
         font-weight: 400;
+        border:none;
+        background: #eee;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #7b0041;
+        color: #fff;
     }
 
     .or {
