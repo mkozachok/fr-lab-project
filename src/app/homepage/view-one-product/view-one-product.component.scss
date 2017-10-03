@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 md-card {
 	padding: 0;
 }
@@ -32,7 +34,7 @@ ul, li {
 		padding: 2% 0;
 
 		li {
-			font-size: 1em;
+			// font-size: 1em;
 			margin: 2%;
 		}
 
@@ -51,7 +53,7 @@ ul, li {
 
 	h3 {
 		font-weight: normal;
-		font-size: 1.1em;
+		// font-size: 1.1em;
 		text-align: center;
 	}
 }
@@ -74,16 +76,16 @@ ul, li {
 	}
 }
 
-@media screen and (max-width : 900px) {
+@media (max-width:$break-l) and (min-width:$break-m) {
 	.info button {
 		padding: 2.5%;
 	}
 	.aboutTheProduct ul li,  .info button{
-		font-size: 0.8em;
+		// font-size: 0.8em;
 	}
 
 	h3 {
-		font-size: 0.8em !important;
+		// font-size: 0.8em !important;
 	}
 }
 
@@ -92,9 +94,9 @@ ul, li {
 		padding: 3.5%;
 	}
 	.aboutTheProduct ul li, .info button {
-		font-size: 2.0vw;
+		// font-size: 2.0vw;
 	}
 	h3 {
-		font-size: 2.3vw !important;
+		// font-size: 2.3vw !important;
 	}
 }

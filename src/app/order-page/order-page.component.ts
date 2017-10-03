@@ -27,7 +27,7 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer
 	) { 
 		iconRegistry
-			.addSvgIcon('home', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_home_black_24px.svg'))
+			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'))
 	}
 
 	ngOnInit() {

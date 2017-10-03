@@ -15,6 +15,8 @@ import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import * as firebase from 'firebase';
+import { MdDialog } from '@angular/material';
+import { SizeDialogComponent } from '../components/size-dialog/size-dialog.component';
 
 @Component({
   moduleId: module.id,
@@ -43,7 +45,8 @@ export class RedactorPageComponent {
     private orderService: OrderService,
     private productService: ProductsListService,
     private uploadService: UploadService,
-    private router: Router
+    private router: Router,
+    public dialog: MdDialog
   ) {}
 
   ngOnInit() {
@@ -57,6 +60,9 @@ export class RedactorPageComponent {
      this.user.firstName = res.displayName.split(' ')[0];
      this.user.lastName = res.displayName.split(' ')[1];
    });
+   this.productService.getTemplateTypes().subscribe(res => {
+    this.templateTypes = res;
+  });
  }
    boundingBox = new fabric.Rect({
      fill: "transparent",
@@ -251,13 +257,14 @@ getImage(src){
   }
 
   buy = function(event) {
-    let productKey: string;
-    let self = this;
-    this.getCanvas().remove(this.boundingBox);
-    let resultProductImg = this.getCanvas().toDataURL();
-    let newProduct = this.createProduct(self, resultProductImg);
-    this.orderService.addItem(newProduct, '');
-    this.router.navigate(['order-page']);
+    this.openDialog();
+    // let productKey: string;
+    // let self = this;
+    // this.getCanvas().remove(this.boundingBox);
+    // let resultProductImg = this.getCanvas().toDataURL();
+    // let newProduct = this.createProduct(self, resultProductImg);
+    // this.orderService.addItem(newProduct, '');
+    // this.router.navigate(['order-page']);
   }
 
   loadImageHandler = function(e){
@@ -345,6 +352,19 @@ setFontOptions = function(element){
     break; 
   }
   canvas.renderAll();
+}
+
+openDialog() {
+  let dialogRef = this.dialog.open(SizeDialogComponent, {
+    width: '30%',
+    data: {
+      // sizes: 
+    }
+  });
+  // dialogRef.afterClosed().subscribe(result => {
+  //   this.router.navigate(['']);
+  //   this.orderService.removeAll();
+  //    });
 }
 
 
