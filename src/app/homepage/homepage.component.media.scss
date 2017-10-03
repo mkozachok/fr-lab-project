@@ -1,4 +1,5 @@
-@media (max-width:960px) and (min-width:741px) {
+@import '../../variables.scss';
+@media (max-width:$break-l) and (min-width:$break-m) {
     .homepage  {
         display: block;
         .rightcol, .leftcol {
@@ -21,7 +22,7 @@
     }
 }
 
-@media (max-width:740px) {
+@media (max-width:$break-m) {
     .homepage  {
         display: block;
         .oneObjet {
@@ -50,7 +51,7 @@
     }
 }
 
-@media (max-width:480px) {
+@media (max-width:$break-s) {
     .homepage  {
         width: 99%;
         margin: 0 auto;
