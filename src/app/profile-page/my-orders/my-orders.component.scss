@@ -16,6 +16,10 @@ app-ordered-product {
 	margin: 0.5% 1% 1% 1%;
 }
 
+md-expansion-panel-header {
+	font-size: 1em;
+}
+
 .mat-expansion-panel-spacing {
 	margin: 1% 0;
 }
@@ -38,4 +42,24 @@ md-expansion-panel {
      top: 50%;
      left: 50%;
      transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width : 900px) {
+	md-expansion-panel-header {
+		font-size: 0.8em;
+	}
+
+	app-ordered-product {
+		width: calc((100% / 3) - 2%);
+	}
+}
+
+@media screen and (max-width : 450px) {
+	md-expansion-panel-header {
+		font-size: 0.6em;
+	}
+
+	app-ordered-product {
+		width: calc((100% / 2) - 2%);
+	}
 }

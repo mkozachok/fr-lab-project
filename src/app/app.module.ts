@@ -24,6 +24,7 @@ import { AdminGuard } from './guards/admin.guard';
 
 // App components goes here
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
+import { OrderPageComponent } from './order-page/order-page.component';
 import { AppComponent } from './app.component';
 //import { AddDesignComponent } from './admin-page/add-menu/add-design/add-design.component';
 //import { AddProductComponent } from './admin-page/add-menu/add-product/add-product.component';
@@ -31,6 +32,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 // homepage components
 import { HomepageComponent } from './homepage/homepage.component';
@@ -105,7 +107,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     ReactiveFormsModule,
     NgxPaginationModule,
     SharedModule,
-    WildcardRoutingModule
+    WildcardRoutingModule,
+    ReCaptchaModule
   ],
   providers: [
     MdIconRegistry,

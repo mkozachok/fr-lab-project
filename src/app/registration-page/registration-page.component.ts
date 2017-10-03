@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Upload } from '../models/upload-model';
+import { ViewChild } from '@angular/core';
+import { ReCaptchaComponent } from 'angular2-recaptcha';
 // import { NgForm} from '@angular/forms';
 // import { AngularFireAuth } from 'angularfire2/auth';
 // import * as firebase from 'firebase';
@@ -12,17 +14,19 @@ import { Upload } from '../models/upload-model';
   // providers: [UserService, NgForm, AngularFireAuth]
 })
 export class RegistrationPageComponent implements OnInit {
+  @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
   error: any;
   selectedFiles: FileList;
   currentUpload: Upload;
   downloadedPhoto: boolean = false;
   addPhoto = 'add_a_photo';
   title = 'Registration';
+  verified = false;
+  token: any;
 
 constructor(private _userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.selectedFiles);
   }
   onSubmit(value: any) {
     this.error = null;
@@ -48,5 +52,9 @@ constructor(private _userService: UserService, private router: Router) { }
     this._userService.createPrimaryInformation(this.currentUpload, value.name, value.surname);
   }
 
+  captchaHandler($event) {
+    this.verified = true;
+    setTimeout(() => this.verified = false, 120000);
+  }
 
 }

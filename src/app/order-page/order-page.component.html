@@ -6,21 +6,24 @@
   <div *ngIf = "totalQuantity !== 0">
     <div class="item-headers">
       <div class="product"></div>
-      <div></div>
       <div>Type</div>
-      <div>Quantity</div>
+      <div>Size</div>
       <div>Price</div>
+      <div>Quantity</div>
       <div></div>
     </div>
     <div class="item" *ngFor="let order of orders">
       <div class="product img-container">
           <img src="{{order.product.svg}}">
-        </div>
-        <div>
-          {{order.product.name}}
-        </div>
-        <div class="type">
-          {{order.product.type}}
+      </div>
+      <div class="type">
+        {{order.product.type}}
+      </div>
+      <div>
+        {{order.product.size}}
+      </div>
+        <div class="price">
+          {{order.product.price | currency:'USD':true}}
         </div>
         <div class="quantity">
           <button button md-raised-button class="add" (click)="addButtonClick(order)">
@@ -31,9 +34,6 @@
             -
           </button> 
         </div>
-        <div class="price">
-          {{order.product.price}} UAH
-        </div>
         <div class="remove">
           <button button md-raised-button class="delete" (click)="removeOrder(order)">
             Delete
@@ -42,7 +42,7 @@
     </div>
     <div class="info">
       <div class="total">
-        Total amount: <span class="amount">{{totalAmount}} UAH</span>
+        Total amount: <span class="amount">{{totalAmount | currency:'USD':true}}</span>
       </div>
       <div>
         <button button md-raised-button class="checkout" (click)="navigate()">CHECKOUT</button> 

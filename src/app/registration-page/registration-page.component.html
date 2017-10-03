@@ -54,7 +54,8 @@
     <p *ngIf="this.downloadedPhoto">
       Photo has been downloaded
     </p>
-    <button [disabled]="!userForm.form.valid || !this.downloadedPhoto"  md-raised-button type="submit">registrate</button>
+    <re-captcha (captchaResponse)="captchaHandler($event)" site_key="6Ldf5TIUAAAAAEiuoULGAMikYpayKwucYwIgIWld"></re-captcha>
+    <button [disabled]="!userForm.form.valid || !this.downloadedPhoto || !this.verified"  md-raised-button type="submit">registrate</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
 </div>
