@@ -21,6 +21,7 @@ export class OrderPageComponent implements OnInit {
 
 	ngOnInit() {
 		this.orders = this.orderService.getAll();
+		console.log(this.orders);
 		this.totalQuantity = this.orderService.getQuantity();
 		this.totalAmount = this.orderService.getTotalAmount();
 	}

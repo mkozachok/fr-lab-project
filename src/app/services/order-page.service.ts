@@ -58,7 +58,7 @@ export class OrderService {
 	addItem(item: Product, itemKey: string): void {
 		let exists = false;
 		ORDERS.forEach(el => {
-			if (el.productKey === itemKey && (itemKey !== '')) {
+			if (el.productKey === itemKey && (el.product.size === item.size) && (itemKey !== '')) {
 				el.quantity++;
 				quantity++;
 				exists = true;

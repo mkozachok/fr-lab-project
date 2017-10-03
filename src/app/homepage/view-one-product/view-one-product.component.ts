@@ -19,21 +19,35 @@ export class ViewOneProductComponent implements OnInit {
   @Output() click = new EventEmitter();
   selectedItems: Product[];
   deleteButton: boolean;
+  templateTypes: FirebaseListObservable<any>;
 
   constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
   };
 
   ngOnInit():void {
     this.deleteButton = (this.router.url === '/profile-page/my-gallery');
-    console.log(this);
+    this.productListService.getTemplateTypes().subscribe(res => {
+      this.templateTypes = res;
+    });
   };
 
-  addToCart(item) {
-    this.orderService.addItem(item, '');
-    let config = new MdSnackBarConfig();
-    config.extraClasses = ['success-snackbar'];
-    config.duration = 1300;
-    this.snackBar.open('This product has been added to your shoping cart', '', config);
+  addToCart(product) {
+    if (!product.size) {
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open('Please, choose a size', 'required', config);
+    } else {
+      this.orderService.addItem(product, product.$key);
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open('This product has been added to the cart', 'sucess', config);
+    }
+  }
+
+  setSize(size, product):void {
+    product.size = size;
   }
 
   delete() {

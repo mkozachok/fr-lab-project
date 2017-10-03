@@ -6,8 +6,8 @@
   <div *ngIf = "totalQuantity !== 0">
     <div class="item-headers">
       <div class="product"></div>
-      <div></div>
       <div>Type</div>
+      <div>Size</div>
       <div>Price</div>
       <div>Quantity</div>
       <div></div>
@@ -15,13 +15,13 @@
     <div class="item" *ngFor="let order of orders">
       <div class="product img-container">
           <img src="{{order.product.svg}}">
-        </div>
-        <div>
-          {{order.product.name}}
-        </div>
-        <div class="type">
-          {{order.product.type}}
-        </div>
+      </div>
+      <div class="type">
+        {{order.product.type}}
+      </div>
+      <div>
+        {{order.product.size}}
+      </div>
         <div class="price">
           {{order.product.price | currency:'USD':true}}
         </div>

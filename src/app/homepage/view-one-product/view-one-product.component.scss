@@ -7,8 +7,8 @@ md-card {
 }
 
 img {
-	max-height: 200px;
-	width: 100%;
+	height: auto;
+	max-width: 90%;
 }
 
 ul, li {
@@ -26,18 +26,22 @@ ul, li {
 		padding: 2% 0;
 
 		li {
-			font-size: 1vw;
+			font-size: 1em;
 			margin: 2%;
 		}
 
 		li span {
 			font-weight: 500;
 		}
+
+		li md-select {
+			width: 100%;
+		}
 	}
 
 	h3 {
 		font-weight: normal;
-		font-size: 1.2vw;
+		font-size: 1.1em;
 		text-align: center;
 	}
 }
@@ -49,7 +53,7 @@ ul, li {
 		display: block;
 		background: #eee;
 		padding: 1.5%;
-		font-size: 1.1vw;
+		font-size: 1em;
 		line-height: 2.2em;
 		font-weight: normal;
 	}
@@ -65,11 +69,11 @@ ul, li {
 		padding: 2.5%;
 	}
 	.aboutTheProduct ul li,  .info button{
-		font-size: 1.5vw;
+		font-size: 0.8em;
 	}
 
 	h3 {
-		font-size: 1.8vw !important;
+		font-size: 0.8em !important;
 	}
 }
 
