@@ -22,7 +22,7 @@ export class FileUploadComponent implements OnInit {
     // this.uploadEvent = () => {
     //
     // }
-    
+
   }
 
   ngOnInit() {
@@ -39,22 +39,26 @@ export class FileUploadComponent implements OnInit {
 
 
   upload() {
-    let counter: number = 0;
-    let file = this.selectedFiles.item(0);
-    this.currentUpload = new Upload(file);
-    this._uploadService.pushUpload(this.currentUpload, this.saveUrl);
-    let timer = setInterval(() => {
-      counter++;
-      this.photoUrl = this._uploadService.getUrl();
-      if (this.photoUrl) {
-        this.notify.emit(this.photoUrl)
-        clearInterval(timer);
-        this.downloadedPhoto = false;
-      }else if(counter > 30) {
-        clearInterval(timer);
-        throw new Error('Timeout')
-      }
-    }, 500)
+    if (this.selectedFiles) {
+      let counter: number = 0;
+      let file = this.selectedFiles.item(0);
+      this.currentUpload = new Upload(file);
+      this._uploadService.pushUpload(this.currentUpload, this.saveUrl);
+      let timer = setInterval(() => {
+        counter++;
+        this.photoUrl = this._uploadService.getUrl();
+        if (this.photoUrl) {
+          this.notify.emit(this.photoUrl)
+          clearInterval(timer);
+          this.downloadedPhoto = false;
+        } else if (counter > 30) {
+          clearInterval(timer);
+          throw new Error('Timeout')
+        }
+      }, 500)
+    }else{
+      this.notify.emit(undefined);
+    }
   }
 
 

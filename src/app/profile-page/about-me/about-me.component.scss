@@ -77,8 +77,9 @@
     .edit-photo-button {
         text-align: center;
         width: 10vw;
-        height: 2vw;
-        font-size: 1.2vw;
+        min-width: 135px;
+        height: 35px;
+        font-size: 1em;
         line-height: 1.2vw;
     }
 
