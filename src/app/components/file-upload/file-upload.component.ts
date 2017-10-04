@@ -13,10 +13,8 @@ export class FileUploadComponent implements OnInit {
   selectedFiles: FileList;
   currentUpload: Upload;
   downloadedPhoto: boolean = false;
-  addPhoto: string = "insert_photo";
+  addPhoto = "insert_photo";
   photoUrl: string;
-  @Input() saveUrl: string;
-  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
   // @Output() uploadEvent = new EventEmitter();
   constructor(private _uploadService: UploadService) {
     // this.uploadEvent = () => {
@@ -28,7 +26,10 @@ export class FileUploadComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  uploading() {
+    new Promise(this.upload)
+    .then((res) => console.log(res));
+  }
   detectFiles(event) {
     this.selectedFiles = event.target.files;
     if (this.selectedFiles.length) {

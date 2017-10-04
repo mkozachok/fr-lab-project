@@ -21,16 +21,12 @@ export class UserService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   loginInGoogle() {
-<<<<<<< HEAD
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
             // .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   loginInFacebook() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
             // .then((success) => console.log(this.afAuth.auth.currentUser));
-=======
-    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
->>>>>>> 4de64d5b3f3262359bf10107815f07e700232f52
   }
   logOut() {
     this.router.navigate(['/login-page'])
