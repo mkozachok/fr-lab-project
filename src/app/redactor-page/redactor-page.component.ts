@@ -40,62 +40,6 @@ export class RedactorPageComponent {
   designsPrice: number = 0;
   templateImg;
   myGoods: Array<any> = [];
-
-  constructor(private designService: DesignService,
-    private userService: UserService,
-    private orderService: OrderService,
-    private productService: ProductsListService,
-    private uploadService: UploadService,
-
-    private router: Router,
-    public dialog: MdDialog
-  ) {}
-
-//   ngOnInit() {
-
-//    let self = this;
-//    this.designService.getDesigns().subscribe(res => {this.items = res});
-//    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-//    this.designService.getPrice().subscribe(res => {this.price = res});
-//    this.userService.getUser().subscribe(res => {
-//      this.user = new User();
-//      this.user.firstName = res.displayName.split(' ')[0];
-//      this.user.lastName = res.displayName.split(' ')[1];
-//    });
-//    this.productService.getTemplateTypes().subscribe(res => {
-//     this.templateTypes = res;
-//   });
-//  }
-//    boundingBox = new fabric.Rect({
-//      fill: "transparent",
-//      width: 235,
-//      height: 440,
-//      top:80,
-//      left: 225,
-//      hasBorders: true,
-//      hasControls: false,
-//      lockMovementX: true,
-//      lockMovementY: true,
-//      evented: false,
-//      stroke: "red",
-//      selectable: false,
-//      strokeDashArray: [5,10]
-// =======
-//     private router: Router
-//   ) { }
-
-  ngOnInit() {
-   let self = this;
-   this.designService.getDesigns().subscribe(res => {this.items = res});
-   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-   this.designService.getPrice().subscribe(res => {this.price = res});
-   this.userService.getUser().subscribe(res => {
-     this.user = new User();
-     this.user.firstName = res.displayName.split(' ')[0];
-     this.user.lastName = res.displayName.split(' ')[1];
-   });
-   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
-  }
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -111,6 +55,31 @@ export class RedactorPageComponent {
     selectable: false,
     strokeDashArray: [5, 10]
   });
+  // disableCategory = true;
+
+  constructor(private designService: DesignService,
+    private userService: UserService,
+    private orderService: OrderService,
+    private productService: ProductsListService,
+    private uploadService: UploadService,
+
+    private router: Router,
+    public dialog: MdDialog
+  ) {}
+
+  ngOnInit() {
+   let self = this;
+   this.designService.getDesigns().subscribe(res => {this.items = res});
+   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
+   this.designService.getPrice().subscribe(res => {this.price = res});
+   this.userService.getUser().subscribe(res => {
+     this.user = new User();
+     this.user.firstName = res.displayName.split(' ')[0];
+     this.user.lastName = res.displayName.split(' ')[1];
+   });
+   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+  }
+
 
 
   ngAfterContentInit() {
@@ -257,10 +226,12 @@ canvas.on("object:scaling", (event) => {
   }
 
   selectTemplate(template) {
+    // this.disableCategory = null;
     this.type = template.type;
     this.templatePrice = template.price;
     this.myGoods = template.goods;
     this.drawOnCanvas(template.url, true);
+    this.getCanvas().remove(this.boundingBox);
     this.getCanvas().add(this.setBoundingBox());
 
   }
