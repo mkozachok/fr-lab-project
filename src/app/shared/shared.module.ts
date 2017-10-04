@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { UploadService } from '../services/upload.service';
 import { CommonModule } from '@angular/common';
 import { OrderedProductComponent } from '../profile-page/my-orders/ordered-product/ordered-product.component';
+import { SizeDialogComponent } from '../components/size-dialog/size-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { OrderedProductComponent } from '../profile-page/my-orders/ordered-produ
     LoaderComponent,
     FileUploadComponent,
     ViewOneProductComponent,
-    OrderedProductComponent
+    OrderedProductComponent,
+    SizeDialogComponent
   ],
   exports: [
     LoaderComponent,
@@ -29,6 +31,9 @@ import { OrderedProductComponent } from '../profile-page/my-orders/ordered-produ
     ViewOneProductComponent,
     OrderedProductComponent
   ],
-  providers: [UploadService]
+  providers: [UploadService],
+  entryComponents: [
+    SizeDialogComponent
+  ]
 })
 export class SharedModule { }

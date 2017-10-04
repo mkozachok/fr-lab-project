@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { MdSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import * as firebase from 'firebase/app';
-import { environment } from '../../../environments/environment';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
+import { UserService } from '../../services';
+import { CommonService } from '../../services';
 import { Subscription } from "rxjs";
-import { CommonService } from '../../services/common.service';
+
 
 @Component({
   selector: 'app-about-me',
@@ -97,10 +96,17 @@ export class AboutMeComponent implements OnInit, OnDestroy {
         this.subscribeToGetUserFromDataBase = this._userService
           .getUserFromDataBase(this.user.id)
           .subscribe(res => {
+            let {phone, address} = res.additionalInfo;
             this.showLoader = false;
+            if(!phone){
+              phone = 'not specified'
+            }
+            if(!address){
+              address = 'not specified'
+            }
             this.userAdditionalInfo = {
-              address: res.additionalInfo.address,
-              phone: res.additionalInfo.phone
+              address: address,
+              phone: phone
             };
           })
       });

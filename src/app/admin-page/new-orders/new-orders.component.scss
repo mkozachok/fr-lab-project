@@ -28,9 +28,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
-        @media screen and (max-width: $break-l) {
-            
-        }
+        
+    }
+
+    .mat-expansion-panel-header{
+        height: auto !important;
+        min-height: 48px;
     }
 
     .mat-content {

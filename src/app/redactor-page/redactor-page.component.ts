@@ -1,5 +1,5 @@
-import { Component, HostListener, AfterViewInit} from '@angular/core';
-import {UploadService} from '../services/upload.service';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { UploadService } from '../services/upload.service';
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
 import { Upload } from '../models/upload-model';
@@ -15,6 +15,8 @@ import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import * as firebase from 'firebase';
+import { MdDialog } from '@angular/material';
+import { SizeDialogComponent } from '../components/size-dialog/size-dialog.component';
 
 @Component({
   moduleId: module.id,
@@ -43,66 +45,101 @@ export class RedactorPageComponent {
     private orderService: OrderService,
     private productService: ProductsListService,
     private uploadService: UploadService,
-    private router: Router
+
+    private router: Router,
+    public dialog: MdDialog
   ) {}
+
+//   ngOnInit() {
+
+//    let self = this;
+//    this.designService.getDesigns().subscribe(res => {this.items = res});
+//    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
+//    this.designService.getPrice().subscribe(res => {this.price = res});
+//    this.userService.getUser().subscribe(res => {
+//      this.user = new User();
+//      this.user.firstName = res.displayName.split(' ')[0];
+//      this.user.lastName = res.displayName.split(' ')[1];
+//    });
+//    this.productService.getTemplateTypes().subscribe(res => {
+//     this.templateTypes = res;
+//   });
+//  }
+//    boundingBox = new fabric.Rect({
+//      fill: "transparent",
+//      width: 235,
+//      height: 440,
+//      top:80,
+//      left: 225,
+//      hasBorders: true,
+//      hasControls: false,
+//      lockMovementX: true,
+//      lockMovementY: true,
+//      evented: false,
+//      stroke: "red",
+//      selectable: false,
+//      strokeDashArray: [5,10]
+// =======
+//     private router: Router
+//   ) { }
 
   ngOnInit() {
 
-   let self = this;
-   this.designService.getDesigns().subscribe(res => {this.items = res});
-   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-   this.designService.getPrice().subscribe(res => {this.price = res});
-   this.userService.getUser().subscribe(res => {
-     this.user = new User();
-     this.user.firstName = res.displayName.split(' ')[0];
-     this.user.lastName = res.displayName.split(' ')[1];
-   });
- }
-   boundingBox = new fabric.Rect({
-     fill: "transparent",
-     width: 235,
-     height: 440,
-     top:80,
-     left: 225,
-     hasBorders: true,
-     hasControls: false,
-     lockMovementX: true,
-     lockMovementY: true,
-     evented: false,
-     stroke: "red",
-     selectable: false,
-     strokeDashArray: [5,10]
+    let self = this;
+    this.designService.getDesigns().subscribe(res => { this.items = res });
+    this.designService.getDesignCategory().subscribe(res => { this.categories = res });
+    this.designService.getPrice().subscribe(res => { this.price = res });
+    this.userService.getUser().subscribe(res => {
+      this.user = new User();
+      this.user.firstName = res.displayName.split(' ')[0];
+      this.user.lastName = res.displayName.split(' ')[1];
+    });
+  }
+  boundingBox = new fabric.Rect({
+    fill: "transparent",
+    width: 235,
+    height: 440,
+    top: 80,
+    left: 225,
+    hasBorders: true,
+    hasControls: false,
+    lockMovementX: true,
+    lockMovementY: true,
+    evented: false,
+    stroke: "red",
+    selectable: false,
+    strokeDashArray: [5, 10]
   });
 
 
-  ngAfterContentInit(){
+  ngAfterContentInit() {
     let canvas = this.getCanvas();
     let boundingBox = this.setBoundingBox();
 
-    canvas.on("object:moving", function(el) {
-        let movingBox = canvas.getActiveObject();
-        var top = movingBox.top;
-        var bottom = top + movingBox.getHeight();
-        var left = movingBox.left;
-        var right = left + movingBox.getWidth();
-        var topBound = boundingBox.top;
-        var bottomBound = topBound + boundingBox.getHeight();
-        var leftBound = boundingBox.left;
-        var rightBound = leftBound + boundingBox.getWidth();
-        // capping logic here
-        movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
-        movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
+    canvas.on("object:moving", function (el) {
+      let movingBox = canvas.getActiveObject();
+      var top = movingBox.top;
+      var bottom = top + movingBox.getHeight();
+      var left = movingBox.left;
+      var right = left + movingBox.getWidth();
+      var topBound = boundingBox.top;
+      var bottomBound = topBound + boundingBox.getHeight();
+      var leftBound = boundingBox.left;
+      var rightBound = leftBound + boundingBox.getWidth();
+      // capping logic here
+      movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
+      movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
-    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
     this.boundingBox = boundingBox;
   }
 
- categoryChoose(cat) {
-   this.designService.categoryChoose(cat).subscribe(res => {
-    this.items = res;
-   });
-   console.log(cat);
- }
+  categoryChoose(cat) {
+    this.designService.categoryChoose(cat).subscribe(res => {
+      this.items = res;
+    });
+    console.log(cat);
+  }
 
   typeChoose(myType) {
     this.designService.typeChoose(myType).subscribe(res => {
@@ -110,88 +147,88 @@ export class RedactorPageComponent {
     });
     console.log(myType);
   }
-    //this.setCordsdependOnTemplate(template);
-resizeCanvas() {
-   let canvas = this.getCanvas();
-   var canvasSizer = document.getElementById("redactor_area");
-   var canvasScaleFactor = canvasSizer.offsetWidth/700;
-   var width = canvasSizer.offsetWidth;
-   var height = canvasSizer.offsetHeight;
-   var ratio = canvas.getWidth() /canvas.getHeight();
-      if((width/height)>ratio){
-        width = height*ratio;
-      } else {
-        height = width / ratio;
-      }
-   var scale = width / canvas.getWidth();
-   var zoom = canvas.getZoom();
-   zoom *= scale;
-   canvas.setDimensions({ width: width, height: height });
-   canvas.setViewportTransform([zoom , 0, 0, zoom , 0, 0])
-};
+  //this.setCordsdependOnTemplate(template);
+  resizeCanvas() {
+    let canvas = this.getCanvas();
+    var canvasSizer = document.getElementById("redactor_area");
+    var canvasScaleFactor = canvasSizer.offsetWidth / 700;
+    var width = canvasSizer.offsetWidth;
+    var height = canvasSizer.offsetHeight;
+    var ratio = canvas.getWidth() / canvas.getHeight();
+    if ((width / height) > ratio) {
+      width = height * ratio;
+    } else {
+      height = width / ratio;
+    }
+    var scale = width / canvas.getWidth();
+    var zoom = canvas.getZoom();
+    zoom *= scale;
+    canvas.setDimensions({ width: width, height: height });
+    canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0])
+  };
 
-setBoundingBox(){
-  let boundingBox = this.boundingBox;
-  switch(this.type){
-     case "men's T-shirt":
-     boundingBox.width = 235;
-     boundingBox.height = 440;
-     boundingBox.top = 80;
-     boundingBox.left = 225;
-     break;
-     case "men's shirt":
-     boundingBox.width = 250;
-     boundingBox.height = 360;
-     boundingBox.top = 140;
-     boundingBox.left = 225;
-     break;
-     case "men's sweater":
-     boundingBox.width = 215;
-     boundingBox.height = 400;
-     boundingBox.top = 100;
-     boundingBox.left = 245;
-     break;
-     case "cap":
-     boundingBox.width = 270;
-     boundingBox.height = 200;
-     boundingBox.top = 180;
-     boundingBox.left = 220;
-     break;
-     case "cup":
-     boundingBox.width = 330;
-     boundingBox.height = 400;
-     boundingBox.top = 75;
-     boundingBox.left = 100;
-     break;
-     case "body":
-     boundingBox.width = 240;
-     boundingBox.height = 350;
-     boundingBox.top = 100;
-     boundingBox.left = 230;
-     break;
-     case "women's T-shirt":
-     boundingBox.width = 220;
-     boundingBox.height = 420;
-     boundingBox.top = 100;
-     boundingBox.left = 240;
-     break;
-     case "women's shirt":
-     boundingBox.width = 210;
-     boundingBox.height = 380;
-     boundingBox.top = 140;
-     boundingBox.left = 245;
-     break;
-     case "women's sweater":
-     boundingBox.width = 210;
-     boundingBox.height = 420;
-     boundingBox.top = 100;
-     boundingBox.left = 245;
-     break;
+  setBoundingBox() {
+    let boundingBox = this.boundingBox;
+    switch (this.type) {
+      case "men's T-shirt":
+        boundingBox.width = 235;
+        boundingBox.height = 440;
+        boundingBox.top = 80;
+        boundingBox.left = 225;
+        break;
+      case "men's shirt":
+        boundingBox.width = 250;
+        boundingBox.height = 360;
+        boundingBox.top = 140;
+        boundingBox.left = 225;
+        break;
+      case "men's sweater":
+        boundingBox.width = 215;
+        boundingBox.height = 400;
+        boundingBox.top = 100;
+        boundingBox.left = 245;
+        break;
+      case "cap":
+        boundingBox.width = 270;
+        boundingBox.height = 200;
+        boundingBox.top = 180;
+        boundingBox.left = 220;
+        break;
+      case "cup":
+        boundingBox.width = 330;
+        boundingBox.height = 400;
+        boundingBox.top = 75;
+        boundingBox.left = 100;
+        break;
+      case "body":
+        boundingBox.width = 240;
+        boundingBox.height = 350;
+        boundingBox.top = 100;
+        boundingBox.left = 230;
+        break;
+      case "women's T-shirt":
+        boundingBox.width = 220;
+        boundingBox.height = 420;
+        boundingBox.top = 100;
+        boundingBox.left = 240;
+        break;
+      case "women's shirt":
+        boundingBox.width = 210;
+        boundingBox.height = 380;
+        boundingBox.top = 140;
+        boundingBox.left = 245;
+        break;
+      case "women's sweater":
+        boundingBox.width = 210;
+        boundingBox.height = 420;
+        boundingBox.top = 100;
+        boundingBox.left = 245;
+        break;
+    }
+    return boundingBox;
   }
-  return boundingBox;
-}
 
-  selectTemplate(template){
+  selectTemplate(template) {
     this.type = template.type;
     this.templatePrice = template.price;
     this.drawOnCanvas(template.url, true);
@@ -199,79 +236,79 @@ setBoundingBox(){
 
   }
 
-  drawOnCanvas(src, isTemplate){
+  drawOnCanvas(src, isTemplate) {
     let canvas = this.getCanvas();
-    this.getImage(src).then((img)=>{
-      if(isTemplate){
+    this.getImage(src).then((img) => {
+      if (isTemplate) {
         canvas.remove(this.templateImg);
         this.templateImg = this.defineTemplateImage(img);
         canvas.sendToBack(this.templateImg);
         canvas.centerObject(this.templateImg);
-      }else{
+      } else {
         let category = this.defineCategoryImage(img);
         canvas.add(category);
       }
     });
     this.resizeCanvas();
   }
-getImage(src){
-  return new Promise((resolve, reject)=>{
-    let img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = function(){
-      resolve(img);
-    }
-    img.onerror = function(){
-      reject();
-    }
-    img.src = src;
-  });
-}
+  getImage(src) {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.onload = function () {
+        resolve(img);
+      }
+      img.onerror = function () {
+        reject();
+      }
+      img.src = src;
+    });
+  }
 
-  defineTemplateImage(img){
+  defineTemplateImage(img) {
     let image = new fabric.Image(img);
     image.set({
       width: 580,
-      height:580,
+      height: 580,
     });
     image.selectable = false;
-    image.evented=false;
+    image.evented = false;
     return image;
   }
-  defineCategoryImage(img){
+  defineCategoryImage(img) {
     let image = new fabric.Image(img);
     image.set({
-      width:150,
-      height:150,
+      width: 150,
+      height: 150,
       left: 270,
-      top:200,
-      id:this.selectedDesignsPrices.length
+      top: 200,
+      id: this.selectedDesignsPrices.length
     });
     image.selectable = true;
-    image.evented=true;
+    image.evented = true;
     return image;
   }
 
-  getCanvas = function(){
-    if(!this.templateCanvas){
+  getCanvas = function () {
+    if (!this.templateCanvas) {
       this.templateCanvas = new fabric.Canvas('img_product');
     }
     return this.templateCanvas;
   }
   getColors = function () {
     let type = this.type;
-    var templates = this.templates.filter(function(template){
+    var templates = this.templates.filter(function (template) {
       return template.type == type;
     })
     return this.templates[0].goods;
   }
-  setColor = function(goods){
+  setColor = function (goods) {
     // this.selectedCategory.src = category.url;
     this.drawOnCanvas(goods.url, true);
   }
 
-  selectCategory = function(category){
-    if ( category.price === 'free') {
+  selectCategory = function (category) {
+    if (category.price === 'free') {
       this.selectedDesignsPrices.push(0);
     } else {
       this.selectedDesignsPrices.push(category.price);
@@ -303,172 +340,191 @@ getImage(src){
     let self = this;
     this.getCanvas().remove(this.boundingBox);
     let resultProductImg = this.getCanvas().toDataURL('png');
-    firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(resultProductImg, 'data_url');
-    let newProduct = this.createProduct(self, resultProductImg);
-    this.productService.setProduct(newProduct).then(resolve => {
+    let uploadTask = firebase.storage().ref('products/').child(Math.random().toString(36).substring(2, 15) + '.png').putString(resultProductImg, 'data_url')
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      null,
+      null,
+    ()=>{
+      let newProduct = this.createProduct(self, uploadTask.snapshot.downloadURL);
+      this.productService.setProduct(newProduct).then(resolve => {
         productKey = resolve.key;
         this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-              this.router.navigate(['profile-page/my-gallery']);
+          this.router.navigate(['profile-page/my-gallery']);
         });
-    });
+      });
+    })
   }
 
-  buy = function(event) {
+  buy = function (event) {
     let productKey: string;
     let self = this;
     this.getCanvas().remove(this.boundingBox);
     let resultProductImg = this.getCanvas().toDataURL();
     let newProduct = this.createProduct(self, resultProductImg);
-    this.orderService.addItem(newProduct, '');
-    this.router.navigate(['order-page']);
+    this.openDialog(newProduct);
   }
 
-  loadImageHandler = function(e){
+  loadImageHandler = function (e) {
     this.selectedDesignsPrices.push(5);
     let ojb = {
-      width:200,
-      height:200,
+      width: 200,
+      height: 200,
       left: 240,
-      top:200,
+      top: 200,
       id: this.selectedDesignsPrices.length
     };
     let canvas = this.getCanvas();
     this.categoryName = "custom design";
     var reader: any,
-    target: EventTarget;
+      target: EventTarget;
     reader = new FileReader();
     reader.onload = function (event) {
-        var imgObj = new Image();
-        imgObj.src = event.target.result;
-        imgObj.onload = function () {
-            var image = new fabric.Image(imgObj);
-            image.set(ojb);
-            canvas.add(image);
+      var imgObj = new Image();
+      imgObj.src = event.target.result;
+      imgObj.onload = function () {
+        var image = new fabric.Image(imgObj);
+        image.set(ojb);
+        canvas.add(image);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
   }
-}
-reader.readAsDataURL(e.target.files[0]);
-}
 
-@HostListener('window:keydown', ['$event'])
-keyBoardInput = function(event: KeyboardEvent){
-  if(event.keyCode == 8 && this.getCanvas().getActiveObject()){
-    this.removeImg();
+  @HostListener('window:keydown', ['$event'])
+  keyBoardInput = function (event: KeyboardEvent) {
+    if (event.keyCode == 8 && this.getCanvas().getActiveObject()) {
+      this.removeImg();
+    }
   }
-}
-removeImg = function(){
-  let object = this.getCanvas().getActiveObject();
-  this.selectedDesignsPrices[object.id - 1] = 0;
-	this.getCanvas().remove(object);
-}
+  removeImg = function () {
+    let object = this.getCanvas().getActiveObject();
+    this.selectedDesignsPrices[object.id - 1] = 0;
+    this.getCanvas().remove(object);
+  }
 
-addText = function(){
-  this.selectedDesignsPrices.push(2);
-  let self = this;
-  this.categoryName = "custom design";
-  let canvas = this.getCanvas();
-  canvas.add(new fabric.IText('Your text', {
+  addText = function () {
+    this.selectedDesignsPrices.push(2);
+    let self = this;
+    this.categoryName = "custom design";
+    let canvas = this.getCanvas();
+    canvas.add(new fabric.IText('Your text', {
       left: 250,
       top: 110,
       fontFamily: 'arial',
       fill: '#333',
       fontSize: 40,
       id: self.selectedDesignsPrices.length,
-/*       clipTo: self.clipTShirt */
+      /*       clipTo: self.clipTShirt */
     }));
   }
-  changeColor = function(element){
-  let object = this.getCanvas().getActiveObject();
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFill(element.target.value);
-  canvas.renderAll();
- }
- setFont = function(element){
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFontFamily(element.value);
-  canvas.renderAll();
-}
-changeFontSize = function(element){
-  let canvas = this.getCanvas();
-  canvas.getActiveObject().setFontSize(element.value);
-  canvas.renderAll();
-}
-setFontOptions = function(element){
-  let canvas = this.getCanvas();
-  let value = element.source.value;
-  let checked = element.checked;
-  switch(value){
-    case "bold" :
-      canvas.getActiveObject().set("fontWeight", checked?900:200);
-    break;
-    case "italic" :
-      canvas.getActiveObject().set("fontStyle", checked?value:"");
-    break;
-    case "linethrough" :
-      canvas.getActiveObject().set("textDecoration", checked?"line-through":"");
-    break;
+  changeColor = function (element) {
+    let object = this.getCanvas().getActiveObject();
+    let canvas = this.getCanvas();
+    canvas.getActiveObject().setFill(element.target.value);
+    canvas.renderAll();
   }
-  canvas.renderAll();
+  setFont = function (element) {
+    let canvas = this.getCanvas();
+    canvas.getActiveObject().setFontFamily(element.value);
+    canvas.renderAll();
+  }
+  changeFontSize = function (element) {
+    let canvas = this.getCanvas();
+    canvas.getActiveObject().setFontSize(element.value);
+    canvas.renderAll();
+  }
+  setFontOptions = function (element) {
+    let canvas = this.getCanvas();
+    let value = element.source.value;
+    let checked = element.checked;
+    switch (value) {
+      case "bold":
+        canvas.getActiveObject().set("fontWeight", checked ? 900 : 200);
+        break;
+      case "italic":
+        canvas.getActiveObject().set("fontStyle", checked ? value : "");
+        break;
+      case "linethrough":
+        canvas.getActiveObject().set("textDecoration", checked ? "line-through" : "");
+        break;
+    }
+    canvas.renderAll();
+  }
+
+openDialog(product) {
+  let dialogRef = this.dialog.open(SizeDialogComponent, {
+    width: '30%',
+    height: '40%',
+    data: {
+      product: product
+    }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    this.orderService.addItem(product, 'no');
+    localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+    this.router.navigate(['order-page']);
+  });
 }
 
 
-   templates = [
-      {
-        type: "tshirtm",
-        url: "assets/images/templates/tshirtm.png",
-        price: 6,
-          goods:[
-          {
-            color: "#ffffff",
-            url: "assets/images/templates/tshirtm.png"
-          },
-          {
-            color: "#fff500",
-            url: "assets/images/templates/tshirtm_yellow.png"
-          },
-          {
-            color: "#000000",
-            url: "assets/images/templates/tshirtm_black.png"
-          },
-          {
-            color: "#2244aa",
-            type: "tshirtm",
-            url: "assets/images/templates/tshirtm_darkblue.png"
-          },
-          {
-            color: "#b91816",
-            url: "assets/images/templates/tshirtm_red.png"
-          },
-          {
-            color: "#cccccc",
-            url: "assets/images/templates/tshirtm_grey.png"
-          },
-          {
-            color: "#664b2f",
-            url: "assets/images/templates/tshirtm_brown.png"
-          },
-          {
-            color: "#008a47",
-            url: "assets/images/templates/tshirtm_green.png"
-          },
-          {
-            color: "#0ac7df",
-            url: "assets/images/templates/tshirtm_blue.png"
-          },
-          {
-            color: "#fb4e81",
-            url: "assets/images/templates/tshirtm_pink.png"
-          }
-        ]
-      },
-      {
-        type:"tankm",
-        url: "assets/images/templates/tankm.png",
-        price: 8
-      },
-      {
-        type: "sleevem",
-        url: "assets/images/templates/sleevem.png",
-        price: 8
+  templates = [
+    {
+      type: "tshirtm",
+      url: "assets/images/templates/tshirtm.png",
+      price: 6,
+      goods: [
+        {
+          color: "#ffffff",
+          url: "assets/images/templates/tshirtm.png"
+        },
+        {
+          color: "#fff500",
+          url: "assets/images/templates/tshirtm_yellow.png"
+        },
+        {
+          color: "#000000",
+          url: "assets/images/templates/tshirtm_black.png"
+        },
+        {
+          color: "#2244aa",
+          type: "tshirtm",
+          url: "assets/images/templates/tshirtm_darkblue.png"
+        },
+        {
+          color: "#b91816",
+          url: "assets/images/templates/tshirtm_red.png"
+        },
+        {
+          color: "#cccccc",
+          url: "assets/images/templates/tshirtm_grey.png"
+        },
+        {
+          color: "#664b2f",
+          url: "assets/images/templates/tshirtm_brown.png"
+        },
+        {
+          color: "#008a47",
+          url: "assets/images/templates/tshirtm_green.png"
+        },
+        {
+          color: "#0ac7df",
+          url: "assets/images/templates/tshirtm_blue.png"
+        },
+        {
+          color: "#fb4e81",
+          url: "assets/images/templates/tshirtm_pink.png"
+        }
+      ]
+    },
+    {
+      type: "tankm",
+      url: "assets/images/templates/tankm.png",
+      price: 8
+    },
+    {
+      type: "sleevem",
+      url: "assets/images/templates/sleevem.png",
+      price: 8
 
     },
     {

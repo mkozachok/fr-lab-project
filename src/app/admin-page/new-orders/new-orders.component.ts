@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MakeOrderService } from '../../services/make-order.service';
+import { MakeOrderService } from '../../services';
 import { Observable } from 'rxjs';
 
 @Component({

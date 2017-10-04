@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminService } from '../../../services/admin.service';
+import { AdminService } from '../../../services';
 import { Observable, Subscription } from 'rxjs';
 import { Admin } from '../../../models/admin-model';
 

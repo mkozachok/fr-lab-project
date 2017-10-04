@@ -1,8 +1,6 @@
 @import "../../variables.scss";
 
-
-
-.admin-page {
+ .admin-page {
     display: flex;
     position: relative;
     height: 100%;
@@ -22,42 +20,30 @@
             width: 30vw;
         }
 
-        a {
+
+
+        .side-menu-button {
             color: $profileSideMenuButtons;
             display: block;
             text-decoration: none;
             padding: 1.5vw 1vw;
             min-height: 50px;
             font-size: 1.5em;
-            line-height: 50px;
             overflow: hidden;
             text-overflow: ellipsis;
-
-            
-    
-            @media screen and (max-width: $break-m){
-                font-size: 1.3em;
-            }
-    
-            @media screen and (max-width: $break-s){
-                font-size: 1em;
-            }
-        }
-
-        .side-menu-button {
-            display: block;
             width: 100%;
             text-align: left;
-            padding: 0;
             transition: ease all .2s;
 
-            &:hover {
-                a {
-                    color: $profileSideMenuButtonsHover;
-                    background-color: $profileSideMenuButtonsHoverBg;
-                }
-            }      
-        }
+            @media screen and (max-width: $break-s){
+                font-size: 0.8em;
+            }
+                    &:hover{
+                        color: $profileSideMenuButtonsHover;
+                        background-color: $profileSideMenuButtonsHoverBg;
+                    }
+                
+            } 
     }
 
     .content {
@@ -84,6 +70,7 @@
         background: transparent;
     }
 
-}
+    
 
+}
 

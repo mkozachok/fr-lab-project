@@ -11,9 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  adminsArr = [
-    "PAUi0aWuH5T062teCexxtByBHTB3"
-  ];
+
 
   constructor(
     private _router: Router,

@@ -1,0 +1,28 @@
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    height: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+
+md-select {
+    margin-top: 5%;
+}
+
+md-dialog-content {
+
+}
+
+::ng-deep md-dialog-actions {
+   margin-bottom: 5% !important;
+}
+
+md-dialog-content {
+    /* margin: 0 auto; */
+}

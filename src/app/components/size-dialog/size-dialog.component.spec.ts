@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImgWindowComponent } from './img-window.component';
+import { SizeDialogComponent } from './size-dialog.component';
 
-/* describe('ImgWindowComponent', () => {
-  let component: ImgWindowComponent;
-  let fixture: ComponentFixture<ImgWindowComponent>;
+describe('SizeDialogComponent', () => {
+  let component: SizeDialogComponent;
+  let fixture: ComponentFixture<SizeDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImgWindowComponent ]
+      declarations: [ SizeDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImgWindowComponent);
+    fixture = TestBed.createComponent(SizeDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,4 @@ import { ImgWindowComponent } from './img-window.component';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-}); */
+});
