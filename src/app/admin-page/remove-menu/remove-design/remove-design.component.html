@@ -2,7 +2,7 @@
     <app-loader *ngIf="showSpinner"></app-loader>
     <div class="table-wrapper" *ngIf="!showSpinner">
       <md-form-field>
-        <input mdInput placeholder="Admin searching"
+        <input mdInput placeholder="Design searching"
          [(ngModel)]="searchPhrase"
           (ngModelChange)="filterItem(searchPhrase)"
           class="search"

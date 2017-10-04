@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DesignService } from '../../../../services/design.service';
+import { MdDialog } from '@angular/material';
+import { EditDesignComponent } from '../edit-design/edit-design.component';
 
 @Component({
   selector: 'app-design',
@@ -14,7 +16,8 @@ export class DesignComponent implements OnInit {
   @Output() notify: EventEmitter<object> = new EventEmitter<object>();
 
   constructor(
-    private _designService: DesignService
+    private _designService: DesignService,
+    public dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -24,5 +27,15 @@ export class DesignComponent implements OnInit {
   deleteDesign() {
     this._designService.deleteDesignImg(this.url);
     this._designService.deleteDesign(this.$key);
+  }
+
+  onEdit(){
+    let dialogRef = this.dialog.open(EditDesignComponent, {
+      data: {
+        $key: this.$key,
+        name: this.name,
+        price: this.price
+      }
+    });
   }
 }

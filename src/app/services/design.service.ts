@@ -80,4 +80,7 @@ export class DesignService {
     });
   }
 
+  updateDesign(key, design): firebase.Promise<void> {
+		return this.designs.update(key, design);
+	}
 }

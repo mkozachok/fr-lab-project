@@ -24,7 +24,8 @@ import {
   ProductComponent,
   AdminComponent,
   DesignComponent,
-  EditProductComponent
+  EditProductComponent,
+  EditDesignComponent
 } from './remove-menu';
 
 
@@ -51,9 +52,13 @@ import {
     DesignComponent,
     NewOrdersComponent,
     OrderComponent,
-    EditProductComponent
+    EditProductComponent,
+    EditDesignComponent
   ],
-  entryComponents: [EditProductComponent],
+  entryComponents: [
+    EditProductComponent,
+    EditDesignComponent
+  ],
   providers: [AdminService]
 })
 export class AdminPageModule { }
