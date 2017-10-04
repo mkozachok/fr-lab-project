@@ -28,9 +28,9 @@
             </ng-container>
       </md-tab>
 
-      <md-tab label="Category">
+      <md-tab [disabled]="disableCategory"  label="Category">
           <div class="categories">
-            <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category">
+            <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category" ng-disabled="tab.disabled">
               <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
                 {{category.category}}
               </md-option>
