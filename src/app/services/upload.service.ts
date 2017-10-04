@@ -8,18 +8,18 @@ export class UploadService {
   url: string;
   private basePath: string = '/avatars';
   constructor(private db: AngularFireDatabase) { }
-  pushUpload(upload: Upload, path: string, url: string) {
+  pushUpload(upload: Upload, path: string) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${path}/${upload.file.name}`).put(upload.file);
 
-    return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       null,
       null,
       () => {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        url = upload.url;
+        this.url = upload.url;
       }
     );
   }
@@ -29,7 +29,7 @@ export class UploadService {
   }
 
   saveFileData(upload: Upload, path: string) {
-    this.db.list(`${path}/`).update('photoURL', upload.url);
+    this.db.list(`${path}/`).set('photoURL', upload.url);
   }
 
   // Writes the file details to the realtime db
