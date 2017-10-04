@@ -320,14 +320,12 @@ getImage(src){
   }
 
   buy = function(event) {
-    this.openDialog();
-    // let productKey: string;
-    // let self = this;
-    // this.getCanvas().remove(this.boundingBox);
-    // let resultProductImg = this.getCanvas().toDataURL();
-    // let newProduct = this.createProduct(self, resultProductImg);
-    // this.orderService.addItem(newProduct, '');
-    // this.router.navigate(['order-page']);
+    let productKey: string;
+    let self = this;
+    this.getCanvas().remove(this.boundingBox);
+    let resultProductImg = this.getCanvas().toDataURL();
+    let newProduct = this.createProduct(self, resultProductImg);
+    this.openDialog(newProduct);
   }
 
   loadImageHandler = function(e){
@@ -417,17 +415,18 @@ setFontOptions = function(element){
   canvas.renderAll();
 }
 
-openDialog() {
+openDialog(product) {
   let dialogRef = this.dialog.open(SizeDialogComponent, {
     width: '30%',
+    height: '40%',
     data: {
-      // sizes: 
+      product: product
     }
   });
-  // dialogRef.afterClosed().subscribe(result => {
-  //   this.router.navigate(['']);
-  //   this.orderService.removeAll();
-  //    });
+  dialogRef.afterClosed().subscribe(result => {
+    this.orderService.addItem(product, '');
+    this.router.navigate(['order-page']);
+  });
 }
 
 

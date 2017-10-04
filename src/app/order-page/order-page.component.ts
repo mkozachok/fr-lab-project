@@ -27,7 +27,9 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer
 	) { 
 		iconRegistry
-			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'))
+			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'));
+		// this.savaToLocalStorage();
+		// this.orders = this.getFromLocalStorage();
 	}
 
 	ngOnInit() {
@@ -66,4 +68,12 @@ export class OrderPageComponent implements OnInit {
 		this.orderService.removeItem(item);
 	}
 
+	// savaToLocalStorage() {
+	// 	localStorage.setItem('cart', JSON.stringify(this.orderService.getAll()));
+	// }
+
+	// getFromLocalStorage() {
+	// 	return JSON.parse(localStorage.getItem('cart'));
+	// 	// console.log(this.orders);
+	// }
 }
