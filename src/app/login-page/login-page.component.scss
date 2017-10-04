@@ -19,7 +19,11 @@ button {
   font-family: 'Quicksand', sans-serif;
   font-weight: 400;
   margin-top: 20px;
-  color: white;
+  color: #555;
+  background-color: $lightGrey;
+}
+button:hover {
+  color: #fff;
   background-color: $darkRead;
 }
 

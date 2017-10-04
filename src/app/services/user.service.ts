@@ -22,7 +22,11 @@ export class UserService {
   }
   loginInGoogle() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .then((success) => console.log(this.afAuth.auth.currentUser));
+            // .then((success) => console.log(this.afAuth.auth.currentUser));
+  }
+  loginInFacebook() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+            // .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   logOut() {
     this.router.navigate(['/login-page'])
