@@ -24,7 +24,10 @@ export class OrderService {
 
 	getQuantity(): number {
 		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {
-			quantity = JSON.parse(localStorage.getItem("cart-items")).length;
+			quantity = 0;
+			JSON.parse(localStorage.getItem("cart-items")).forEach(el => {
+				quantity += el.quantity;
+			});
 		}
 		return quantity;
 	}
