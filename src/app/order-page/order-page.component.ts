@@ -28,15 +28,17 @@ export class OrderPageComponent implements OnInit {
 	) { 
 		iconRegistry
 			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'));
-		// this.savaToLocalStorage();
-		// this.orders = this.getFromLocalStorage();
+			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
+				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
+			}
+			localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+			this.orders = this.orderService.getAll();
+			this.totalQuantity = this.orderService.getQuantity();
+			this.totalAmount = this.orderService.getTotalAmount();
 	}
 
 	ngOnInit() {
-		this.orders = this.orderService.getAll();
-		console.log(this.orders);
-		this.totalQuantity = this.orderService.getQuantity();
-		this.totalAmount = this.orderService.getTotalAmount();
+		
 	}
 
 	ngAfterContentChecked() {
@@ -46,10 +48,12 @@ export class OrderPageComponent implements OnInit {
 
 	addButtonClick(item) {
 		this.orderService.incrementItemQuantity(item);
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 
 	subtractButtonClick(item) {
 		this.orderService.decrementItemQuantity(item);
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 
 	navigate() {
@@ -62,18 +66,11 @@ export class OrderPageComponent implements OnInit {
 
 	empty(): void {
 		this.orderService.removeAll();
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 
 	removeOrder(item) {
 		this.orderService.removeItem(item);
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
-
-	// savaToLocalStorage() {
-	// 	localStorage.setItem('cart', JSON.stringify(this.orderService.getAll()));
-	// }
-
-	// getFromLocalStorage() {
-	// 	return JSON.parse(localStorage.getItem('cart'));
-	// 	// console.log(this.orders);
-	// }
 }

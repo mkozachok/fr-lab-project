@@ -13,11 +13,19 @@ export class OrderService {
 		return ORDERS;
 	}
 
+	setAll(orders) {
+		ORDERS = orders.slice();
+		quantity = ORDERS.length;
+	}
+
 	getItemIndex(item): number {
 		return ORDERS.indexOf(item);
 	}
 
 	getQuantity(): number {
+		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {
+			quantity = JSON.parse(localStorage.getItem("cart-items")).length;
+		}
 		return quantity;
 	}
 
@@ -33,6 +41,7 @@ export class OrderService {
 		ORDERS.length = 0;
 		quantity = 0;
 		amount = 0;
+		localStorage.setItem("cart-items", JSON.stringify(this.getAll()));
 	}
 
 	removeItem(item): void {
@@ -58,7 +67,7 @@ export class OrderService {
 	addItem(item: Product, itemKey: string): void {
 		let exists = false;
 		ORDERS.forEach(el => {
-			if (el.productKey === itemKey && (el.product.size === item.size) && (itemKey !== '')) {
+			if (el.productKey === itemKey && (el.product.size === item.size) && (itemKey !== 'no')) {
 				el.quantity++;
 				quantity++;
 				exists = true;

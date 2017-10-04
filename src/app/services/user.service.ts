@@ -42,8 +42,12 @@ export class UserService {
   //   return this.db.object('/users/' + userId + '/gallery');
   // }
 
-  getUserId(){
+  getUserId(): string{
     return this.afAuth.auth.currentUser.uid;
+  }
+
+  getUserIdAsync(){
+    return this.afAuth.authState
   }
 
   isUserLogIn() {

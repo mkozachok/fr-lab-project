@@ -66,6 +66,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 //scrolling
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +121,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     AdminGuard,
     MakeOrderService,
     OrderService,
-    CommonService
+    CommonService,
+
   ],
   entryComponents: [
     DialogComponent,
