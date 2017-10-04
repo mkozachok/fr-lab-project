@@ -17,18 +17,13 @@
 									{{size}}
 								</md-option>
 							</md-select>
-							<!-- <select [(ngModel)]="mySize" (ngModelChange)="setSize(mySize, product)">
-												<option value="" disabled selected>Size</option>
-												<option *ngFor="let size of template.size" [value]="size">
-													{{size}}
-												</option>
-										</select> -->
 						</li>
 					</ng-container>
 				</ng-container>
 			</ul>
 		</div>
 		<button md-raised-button (click)="addToCart(product)">add to my card</button>
-		<button md-raised-button *ngIf="deleteButton" (click)="delete()">delete</button>
+		<i class="material-icons clear" (click)="delete()">clear</i>
+		<!-- <button md-raised-button *ngIf="deleteButton" (click)="delete()">delete</button> -->
 	</div>
 </md-card>
