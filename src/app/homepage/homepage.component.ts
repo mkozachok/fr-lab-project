@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ProductsListService } from '../services/products-list.service';
 import { PosterComponent } from './poster/poster.component';
 import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
@@ -16,6 +16,11 @@ import { CurrencyPipe } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { SafeHtml } from '@angular/platform-browser';
 import { MdMenuModule } from '@angular/material';
+import { MdIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdDialog } from '@angular/material';
+import { EditProductComponent } from '../admin-page/remove-menu/remove-product/edit-product/edit-product.component';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   moduleId: module.id,
@@ -31,20 +36,45 @@ export class HomepageComponent implements OnInit {
   @Input() filtered: Product[];
   @Output() click = new EventEmitter();
   productsCategory: any[] = PRODUCT_CATEGORY_FILTER;
-  procuctsType: any[] =  PRODUCT_TYPE_FILTER;
+  procuctsType: any[] = PRODUCT_TYPE_FILTER;
   public selected: string = '';
   categories: FirebaseListObservable<any>;
   templateTypes: FirebaseListObservable<any>;
   @Input() product;
   deleteButton: boolean;
   startAt = new Subject()
-  endAt = new Subject()
+  endAt = new Subject();
+  isAdmin: boolean;
+  subscriptionToUserService: Subscription
+  subscriptionToAdminService: Subscription
 
-  constructor(private productListService: ProductsListService, private db: AngularFireDatabase, private designService: DesignService, private orderService: OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
+  constructor(
+    private productListService: ProductsListService,
+    private db: AngularFireDatabase,
+    private designService: DesignService,
+    private orderService: OrderService,
+    public snackBar: MdSnackBar,
+    private router: Router,
+    private userService: UserService,
+    private iconRegistry: MdIconRegistry,
+    private sanitizer: DomSanitizer,
+    public dialog: MdDialog,
+    private adminService: AdminService
+  ) {
+    iconRegistry
+      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_mode_edit_black_24px.svg'))
   };
 
-  ngOnInit():void {
-    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
+  ngOnInit(): void {
+    let that = this;
+    this.subscriptionToUserService = this.userService.getUserIdAsync().subscribe(user => {
+     this.subscriptionToAdminService = this.adminService.getAdmin(user.uid).subscribe(admin => {
+        if(admin.length > 0){
+          this.isAdmin = true;
+        }
+      })
+    })
+    this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;
     });
@@ -53,24 +83,29 @@ export class HomepageComponent implements OnInit {
       this.arrOfProds = this.prods;
     });
     //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
-   };
+  };
 
-   sorting(propValue) {
-    this.productListService.selectProducts(propValue).subscribe(res=> {
+  ngOnDestroy(){
+    this.subscriptionToUserService.unsubscribe();
+    this.subscriptionToAdminService.unsubscribe()
+  }
+
+  sorting(propValue) {
+    this.productListService.selectProducts(propValue).subscribe(res => {
       this.prods = res;
     });
   }
 
-  navChanged (child: string){
+  navChanged(child: string) {
     this.selected = child
-  } 
+  }
 
-  search(search) {   
+  search(search) {
     this.prods = this.arrOfProds;
     this.prods = this.productListService.search(search, this.prods);
   }
-  
-  addToCart(product):void {
+
+  addToCart(product): void {
     if (!product.size) {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
@@ -85,7 +120,20 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  setSize(size, product):void {
+  setSize(size, product): void {
     product.size = size;
+  }
+
+  onEdit({ $key, name, category, owner, price, type }) {
+    let dialogRef = this.dialog.open(EditProductComponent, {
+      data: {
+        $key: $key,
+        name: name,
+        category: category,
+        owner: owner,
+        price: price,
+        type: type
+      }
+    });
   }
 }
