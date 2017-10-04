@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DesignService } from '../../../services/design.service';
+import { DesignService } from '../../../services';
 import { Observable, Subscription } from 'rxjs';
 import { Design } from '../../../models/design-model';
 

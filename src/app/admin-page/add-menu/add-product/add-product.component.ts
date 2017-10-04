@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
-import { ProductsListService } from '../../../services/products-list.service';
 import { Product } from '../../../models/product-model';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { CommonService } from '../../../services/common.service';
+import { CommonService, ProductsListService } from '../../../services';
 
 @Component({
   selector: 'app-add-product',

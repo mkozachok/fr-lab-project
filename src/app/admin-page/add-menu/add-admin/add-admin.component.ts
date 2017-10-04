@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
-import { AdminService } from '../../../services/admin.service';
+import { AdminService, CommonService } from '../../../services';
 import { Observable } from 'rxjs';
-import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-add-admin',

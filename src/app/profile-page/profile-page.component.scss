@@ -63,12 +63,9 @@
             padding-left: 5%;
             text-shadow: 0 0 10px $profileUserFullName;
             text-overflow: ellipsis;
-
-            
-
         }
 
-        a {
+        .side-menu-button {
             color: $profileSideMenuButtons;
             display: block;
             text-decoration: none;
@@ -77,32 +74,18 @@
             font-size: 1.5em;
             overflow: hidden;
             text-overflow: ellipsis;
-
-            @media screen and (max-width: $break-s){
-                line-height: 50px;
-                vertical-align: middle;
-            }
-        }
-
-        .side-menu-button {
-            display: block;
             width: 100%;
             text-align: left;
-            padding: 0;
             transition: ease all .2s;
 
             @media screen and (max-width: $break-s){
                 font-size: 0.8em;
             }
-             
-                
-
-                a {
                     &:hover{
                         color: $profileSideMenuButtonsHover;
                         background-color: $profileSideMenuButtonsHoverBg;
                     }
-                }
+                
             }      
         }
     

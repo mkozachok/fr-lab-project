@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
-import { DesignService } from '../../../services/design.service';
-import { CommonService } from '../../../services/common.service';
+import { CommonService, DesignService } from '../../../services';
 
 @Component({
   selector: 'app-add-design',
