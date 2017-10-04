@@ -15,12 +15,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // App modules goes here
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { SharedModule } from './shared/shared.module';
-import { AdminPageModule } from './admin-page/admin-page.module';
+import { AdminPageModule } from './admin-page';
 import { WildcardRoutingModule } from './wildcard-routing/wildcard-routing.module';
 
 // App guards goes here
-import { AuthGuard } from './guards/auth.guard';
-import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard, AdminGuard } from './guards';
+
 
 // App components goes here
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
@@ -28,9 +28,11 @@ import { OrderPageComponent } from './order-page/order-page.component';
 import { AppComponent } from './app.component';
 //import { AddDesignComponent } from './admin-page/add-menu/add-design/add-design.component';
 //import { AddProductComponent } from './admin-page/add-menu/add-product/add-product.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import {
+  HeaderComponent,
+  FooterComponent,
+  DialogComponent
+} from './components/';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 
@@ -52,13 +54,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // Services goes here
-import { UserService } from './services/user.service';
-import { ProductsListService } from './services/products-list.service';
-import { DesignService } from './services/design.service';
-import { AdminService } from './services/admin.service';
-import { MakeOrderService } from './services/make-order.service';
-import { OrderService } from './services/order-page.service';
-import { CommonService } from './services/common.service'
+import {
+  UserService,
+  ProductsListService,
+  DesignService,
+  AdminService,
+  MakeOrderService,
+  OrderService,
+  CommonService
+} from './services';
+
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ProductsListService } from '../../../../services/products-list.service';
 import { MdDialog } from '@angular/material';
+import { ProductsListService } from '../../../../services';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 
 @Component({
