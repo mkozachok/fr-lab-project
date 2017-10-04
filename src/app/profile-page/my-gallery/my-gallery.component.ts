@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomepageComponent } from '../../homepage/homepage.component';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from '../../services/user.service';
-import { ProductsListService } from '../../services/products-list.service';
+import { UserService, ProductsListService, OrderService } from '../../services';
 import { Subscription } from "rxjs";
 import { Product } from '../../models/product-model';
-import { OrderService } from '../../services/order-page.service';
 
 @Component({
   selector: 'app-my-gallery',

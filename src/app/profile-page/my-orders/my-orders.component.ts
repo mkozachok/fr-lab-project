@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MdExpansionModule} from '@angular/material';
-import { MakeOrderService } from '../../services/make-order.service';
-import { UserService } from '../../services/user.service';
+import { MdExpansionModule } from '@angular/material';
+import { MakeOrderService, UserService } from '../../services';
 import { Subscription } from "rxjs";
 import { Observable } from 'rxjs/Observable';
-import { OrderedProductComponent } from './ordered-product/ordered-product.component';
+import { OrderedProductComponent } from './ordered-product';
 
 @Component({
   selector: 'app-my-orders',
