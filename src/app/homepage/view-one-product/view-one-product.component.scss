@@ -2,6 +2,7 @@
 
 md-card {
 	padding: 0;
+	position: relative;
 }
 
 .aboutTheProduct {
@@ -64,9 +65,9 @@ ul, li {
 		width: 100%;
 		display: block;
 		background: #eee;
-		padding: 1.5%;
+		padding: 15px 10px;
 		font-size: 1em;
-		line-height: 2.2em;
+		// line-height: 2.2em;
 		font-weight: normal;
 	}
 
@@ -74,6 +75,13 @@ ul, li {
 	    background: #7b0041;
 	    color: #eee;
 	}
+}
+
+.clear {
+	position: absolute;
+	right: 1%;
+	top: 0;
+	cursor: pointer;
 }
 
 @media (max-width:$break-l) and (min-width:$break-m) {
