@@ -5,7 +5,7 @@
           <div class="templates">
             <div class="template_img" *ngFor="let template of templateTypes">
               <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template)"></div>
-              <!--<img [src]="template.url" (click)="selectTemplate(template)" width="80"/>-->
+              <!-- <img [src]="template.url" (click)="selectTemplate(template)" width="80"/> -->
             </div>
           </div>
           <ng-container *ngIf = " myGoods?.length !== 0">
@@ -96,8 +96,8 @@
     </div>
     <div id="btns">
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
-    <button md-raised-button (click)="saveProduct()">Save</button>
-    <button md-raised-button (click)="buy()">Buy</button>
+    <button md-raised-button (click)="saveProduct()"><i class="material-icons">save</i></button>
+    <button md-raised-button (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
     <span>Price is: {{ getProductPrice() }}$</span>
     <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
   </div>

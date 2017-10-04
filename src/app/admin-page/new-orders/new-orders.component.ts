@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MakeOrderService } from '../../services/make-order.service';
+import { MakeOrderService } from '../../services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +20,6 @@ export class NewOrdersComponent implements OnInit {
       this.showSpinner = false;
       this.orders = res.filter(order => order.new);
       this.originalArray = this.orders;
-      console.log(this.orders)
     })
   }
 

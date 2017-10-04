@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-
-
 import { ProfilePageComponent } from './profile-page.component';
-import { MyGalleryComponent } from './my-gallery/my-gallery.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AboutMeComponent } from './about-me/about-me.component';
-import { AuthGuard } from '../guards/auth.guard';
+import { MyGalleryComponent } from './my-gallery';
+import { MyOrdersComponent } from './my-orders';
+import { AboutMeComponent } from './about-me';
+import { AuthGuard } from '../guards';
 
 
 const profilePageRoutes: Routes = [

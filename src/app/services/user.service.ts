@@ -21,8 +21,7 @@ export class UserService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   loginInGoogle() {
-    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .then((success) => console.log(this.afAuth.auth.currentUser));
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logOut() {
     this.router.navigate(['/login-page'])
@@ -42,8 +41,12 @@ export class UserService {
   //   return this.db.object('/users/' + userId + '/gallery');
   // }
 
-  getUserId(){
+  getUserId(): string{
     return this.afAuth.auth.currentUser.uid;
+  }
+
+  getUserIdAsync(){
+    return this.afAuth.authState
   }
 
   isUserLogIn() {
@@ -99,7 +102,6 @@ export class UserService {
           address: address
         }
       })
-      .then((success) => console.log(this.afAuth.auth.currentUser))
   }
 
   createPrimaryInformation(upload: Upload, name: string, surname: string) {

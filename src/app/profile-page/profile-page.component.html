@@ -6,17 +6,17 @@
             <h4 class="user-fullname">{{ user.displayName }}</h4>
         </div>
 
-        <button md-button class="side-menu-button" color="warn">
-            <a routerLink="about-me" [routerLinkActive]="['is-active']">About me</a>
+        <button routerLink="about-me" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            About me
         </button>
-        <button md-button class="side-menu-button" color="warn">
-            <a routerLink="my-orders" [routerLinkActive]="['is-active']">My orders</a>
+        <button routerLink="my-orders" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            My orders
         </button>
-        <button md-button class="side-menu-button" color="warn">
-            <a routerLink="my-gallery" [routerLinkActive]="['is-active']">My gallery</a>
+        <button routerLink="my-gallery" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            My gallery
         </button>
-        <button md-button class="side-menu-button" color="warn">
-                <a routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']">Admin-page</a>
+        <button routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            Admin page
         </button>
     </div>
     <div class="content">

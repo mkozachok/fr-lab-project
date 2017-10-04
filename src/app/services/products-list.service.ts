@@ -104,5 +104,7 @@ export class ProductsListService {
 		});
 	}
 
-
+	setSize(product, size) {
+		return product.size = size;
+	}
 }

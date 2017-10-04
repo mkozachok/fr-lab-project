@@ -39,6 +39,7 @@ export class ViewOneProductComponent implements OnInit {
       this.snackBar.open('Please, choose a size', 'required', config);
     } else {
       this.orderService.addItem(product, product.$key);
+      localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
       config.duration = 1300;

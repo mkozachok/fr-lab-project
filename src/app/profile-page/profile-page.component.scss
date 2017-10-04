@@ -14,6 +14,20 @@
         justify-content: center;
         width: 20vw;
         height: 100%;
+        font-size: 1.5em;
+        
+
+        @media screen and (max-width: $break-l){
+            width: 30vw;
+        }
+
+        @media screen and (max-width: $break-m){
+            font-size: 1.2em;
+        }
+
+        @media screen and (max-width: $break-s){
+            font-size: 0.8em;
+        }
 
         /deep/ .spinner-component {
             position: absolute;
@@ -41,48 +55,48 @@
         .user-fullname {
             position: absolute;
             bottom: 0;
-            height: 15%;
-            width: 95%;
+            height: 20%;
+            width: 100%;
             background-color: $profileUserFullName;
             line-height: 1.5em;
-            font-size: 2vw;
             color: white;
             padding-left: 5%;
             text-shadow: 0 0 10px $profileUserFullName;
-
+            text-overflow: ellipsis;
         }
 
-        a {
+        .side-menu-button {
             color: $profileSideMenuButtons;
             display: block;
             text-decoration: none;
             padding: 1.5vw 1vw;
-        }
-
-        .side-menu-button {
-            display: block;
-            width: 20vw;
-            font-size: 1.5vw;
+            min-height: 50px;
+            font-size: 1.5em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
             text-align: left;
-            padding: 0;
             transition: ease all .2s;
-            
-             
-                
 
-                a {
+            @media screen and (max-width: $break-s){
+                font-size: 0.8em;
+            }
                     &:hover{
                         color: $profileSideMenuButtonsHover;
                         background-color: $profileSideMenuButtonsHoverBg;
                     }
-                }
+                
             }      
         }
     
 
     .content {
         flex: 1;
-        padding-left: 20%;
+        padding-left: 20vw;
+
+        @media screen and (max-width: $break-l){
+            padding-left: 30vw;
+        }
     }
 
 

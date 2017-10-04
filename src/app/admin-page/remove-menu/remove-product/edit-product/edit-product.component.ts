@@ -2,8 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { ProductsListService } from '../../../../services/products-list.service';
-import { CommonService } from '../../../../services/common.service';
+import { ProductsListService } from '../../../../services';
+import { CommonService } from '../../../../services';
+
+
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',

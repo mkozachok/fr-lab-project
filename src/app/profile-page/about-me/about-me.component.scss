@@ -34,6 +34,8 @@
         padding: 1vw 0;
 
         
+
+        
         .info-group-row {
             display: inline-block;
             text-align: left;
@@ -41,12 +43,21 @@
 
         .info-group-label{
             width: 2vw;
+            min-width: 55px;
             font-weight: bold;
+            
         }
 
         .info-group-data{
             padding-left: 12vw;
-            color: $profileUserData;        
+            color: $profileUserData; 
+            
+            @media screen and (max-width: $break-m){
+                padding-left: 50px;
+                width: 50vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
         
     }

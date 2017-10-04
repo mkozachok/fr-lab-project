@@ -35,9 +35,10 @@
           </button> 
         </div>
         <div class="remove">
-          <button button md-raised-button class="delete" (click)="removeOrder(order)">
+            <md-icon svgIcon="delete" (click)="removeOrder(order)" class="delete"></md-icon>
+          <!-- <button button md-raised-button class="delete" (click)="removeOrder(order)">
             Delete
-          </button> 
+          </button>  -->
         </div>
     </div>
     <div class="info">
@@ -53,6 +54,5 @@
   <!-- IF CART IS EMPTY -->
   <div *ngIf = "totalQuantity === 0" class="empty-cart">
     <h4>There are no items</h4>
-    <md-icon svgIcon="home"></md-icon>
   </div>
 </div>
