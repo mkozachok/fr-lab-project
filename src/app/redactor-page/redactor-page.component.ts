@@ -321,14 +321,14 @@ canvas.on("object:scaling", (event) => {
     if (category.price === 'free') {
       this.selectedDesignsPrices.push(0);
     } else {
-      this.selectedDesignsPrices.push(category.price);
+      const priceNumber = parseFloat(category.price);
+      this.selectedDesignsPrices.push(priceNumber);
     }
     this.categoryName = category.name;
     this.drawOnCanvas(category.url, false);
   }
 
   createProduct(redactor, b64) {
-    this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
     let newProduct = new Product();
     newProduct.name = redactor.type;
     newProduct.type = redactor.type;
@@ -342,7 +342,8 @@ canvas.on("object:scaling", (event) => {
 
   getProductPrice() {
     this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
-    return this.designsPrice + this.templatePrice;
+    const rightNumber = this.designsPrice + this.templatePrice;
+    return parseFloat(rightNumber.toFixed(2));
   }
 
   saveProduct = function (event) {
