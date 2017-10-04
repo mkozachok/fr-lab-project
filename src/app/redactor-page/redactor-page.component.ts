@@ -131,7 +131,34 @@ export class RedactorPageComponent {
       movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
       movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
-    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
+
+this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
+canvas.on("object:scaling", (event) => {
+   let el = event.target;
+
+   if ((el.scaleX > 1) && (el.width * el.scaleX > this.boundingBox.getWidth())) {
+     el.setWidth(this.boundingBox.getWidth());
+     el.setScaleX(1);
+     el.setLeft(this.boundingBox.left);
+   }
+   if ((el.scaleY > 1) && (el.height * el.scaleY > this.boundingBox.getHeight())) {
+     el.setHeight(this.boundingBox.getHeight());
+     el.setScaleY(1);
+     el.setTop(this.boundingBox.top);
+   }
+
+   // need to make different func and apply here this code
+   el.left = el.left < this.boundingBox.left ? boundingBox.left : el.left;
+   el.top = el.top < this.boundingBox.top ? this.boundingBox.top : el.top;
+   if ((el.left + el.width * el.scaleX) > (this.boundingBox.left + this.boundingBox.getWidth())) {
+     el.left = (this.boundingBox.left + this.boundingBox.getWidth()) - el.width * el.scaleX;
+   }
+   if ((el.top + el.height * el.scaleY) > (this.boundingBox.top + this.boundingBox.getHeight())) {
+     el.top = (this.boundingBox.top + this.boundingBox.getHeight()) - el.height * el.scaleY;
+   }
+ })
+
+    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
     this.boundingBox = boundingBox;
   }
 
@@ -283,11 +310,15 @@ export class RedactorPageComponent {
       width: 150,
       height: 150,
       left: 270,
-      top: 200,
-      id: this.selectedDesignsPrices.length
+      top:200,
+      borderColor: 'red',
+      cornerColor: 'green',
+      hasRotatingPoint: false,
+      id:this.selectedDesignsPrices.length
     });
     image.selectable = true;
-    image.evented = true;
+    image.evented=true;
+    image.lockRotation = true;
     return image;
   }
 
@@ -313,7 +344,7 @@ export class RedactorPageComponent {
     // this.selectedCategory.src = category.url;
     this.drawOnCanvas(goods.url, true);
   }
-  
+
 
   selectCategory = function (category) {
     if (category.price === 'free') {
