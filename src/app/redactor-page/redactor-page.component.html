@@ -8,23 +8,24 @@
               <!--<img [src]="template.url" (click)="selectTemplate(template)" width="80"/>-->
             </div>
           </div>
+          <ng-container *ngIf = " myGoods?.length !== 0">
+            <md-expansion-panel>
+                <md-expansion-panel-header>
+                  <md-panel-title>
+                    <div class="head">Color <i class="material-icons">color_lens</i></div>
+                  </md-panel-title>
+                </md-expansion-panel-header>
 
-          <md-expansion-panel>
-              <md-expansion-panel-header>
-                <md-panel-title>
-                  <div class="head">Color <i class="material-icons">color_lens</i></div>
-                </md-panel-title>
-              </md-expansion-panel-header>
 
+                  <ul class="selected_color">
+                    <li *ngFor="let goods of myGoods" (click)="setColor(goods)">
+                      <span [style.background] = "goods.color">
+                      </span>
+                    </li>
+                  </ul>
 
-                <ul class="selected_color">
-                  <li *ngFor="let goods of getColors()" (click)="setColor(goods)">
-                    <span [style.background] = "goods.color">
-                    </span>
-                  </li>
-                </ul>
-
-            </md-expansion-panel>
+              </md-expansion-panel>
+            </ng-container>
       </md-tab>
 
       <md-tab label="Category">

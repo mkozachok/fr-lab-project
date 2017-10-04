@@ -37,6 +37,7 @@ export class RedactorPageComponent {
   selectedDesignsPrices = [];
   designsPrice: number = 0;
   templateImg;
+  myGoods: Array<any> = [];
 
   constructor(private designService: DesignService,
     private userService: UserService,
@@ -57,6 +58,7 @@ export class RedactorPageComponent {
      this.user.firstName = res.displayName.split(' ')[0];
      this.user.lastName = res.displayName.split(' ')[1];
    });
+   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
  }
    boundingBox = new fabric.Rect({
      fill: "transparent",
@@ -92,7 +94,7 @@ export class RedactorPageComponent {
         movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
         movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
-    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+   
     this.boundingBox = boundingBox;
   }
     
@@ -132,6 +134,7 @@ resizeCanvas() {
   selectTemplate(template){
     this.type = template.type;
     this.templatePrice = template.price;
+    this.myGoods = template.goods;
     this.drawOnCanvas(template.url, true);
     this.getCanvas().add(this.boundingBox);
 
@@ -196,16 +199,22 @@ getImage(src){
     }
     return this.templateCanvas;
   }
+
+  /*
   getColors = function () {
     let type = this.type;
-    var templates = this.templates.filter(function(template){
-      return template.type == type;
+    console.log(this.templateTypes);
+    var templates = this.templateTypes.filter(function(template){
+      return template.type === type;
     })
     return this.templates[0].goods;
   }
+  */
+
   setColor = function(goods){
     this.drawOnCanvas(goods.url, true);
   }
+  
 
   selectCategory = function(category){
     if ( category.price === 'free') {
@@ -345,98 +354,5 @@ setFontOptions = function(element){
     break; 
   }
   canvas.renderAll();
-}
-
-
-   templates = [
-      {
-        type: "tshirtm",
-        url: "assets/images/templates/tshirtm.png",
-        price: 6,
-          goods:[
-          {
-            color: "#ffffff",
-            url: "assets/images/templates/tshirtm.png"
-          },
-          {
-            color: "#fff500",
-            url: "assets/images/templates/tshirtm_yellow.png"
-          },
-          {
-            color: "#000000",
-            url: "assets/images/templates/tshirtm_black.png"
-          },
-          {
-            color: "#2244aa",
-            type: "tshirtm",
-            url: "assets/images/templates/tshirtm_darkblue.png"
-          },
-          {
-            color: "#b91816",
-            url: "assets/images/templates/tshirtm_red.png"
-          },
-          {
-            color: "#cccccc",
-            url: "assets/images/templates/tshirtm_grey.png"
-          },
-          {
-            color: "#664b2f",
-            url: "assets/images/templates/tshirtm_brown.png"
-          },
-          {
-            color: "#008a47",
-            url: "assets/images/templates/tshirtm_green.png"
-          },
-          {
-            color: "#0ac7df",
-            url: "assets/images/templates/tshirtm_blue.png"
-          },
-          {
-            color: "#fb4e81",
-            url: "assets/images/templates/tshirtm_pink.png"
-          }
-        ]
-      },
-      {
-        type:"tankm",
-        url: "assets/images/templates/tankm.png",
-        price: 8
-      },
-      {
-        type: "sleevem",
-        url: "assets/images/templates/sleevem.png",
-        price: 8
-
-    },
-    {
-      type: "cap",
-      url: "assets/images/templates/cap.png",
-      price: 10
-    },
-    {
-      type: "mug",
-      url: "assets/images/templates/mug.png",
-      price: 16
-    },
-    {
-      type: "body",
-      url: "assets/images/templates/body.png",
-      price: 5
-    },
-    {
-      type: "tshirtw",
-      url: "assets/images/templates/tshirtw.png",
-      price: 5
-    },
-    {
-      type: "tankw",
-      url: "assets/images/templates/tankw.png",
-      price: 6
-    },
-    {
-      type: "sleevew",
-      url: "assets/images/templates/sleevew.png",
-      price: 7
-    }
-  ];
+  }
 }
