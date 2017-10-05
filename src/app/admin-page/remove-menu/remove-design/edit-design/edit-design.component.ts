@@ -45,9 +45,9 @@ export class EditDesignComponent implements OnInit {
     this.dialogRef.disableClose;
     this._designService.updateDesign(this.data.$key, {
       name: product.name,
-      price: product.price,
+      price: parseFloat(product.price),
     }).then(() => {
-      this._commonService.openSnackBar('The product has been updated', 'success');
+      this._commonService.openSnackBar('The design has been updated', 'success');
       this.dialogRef.close();
     }).catch(error => {
       this._commonService.openSnackBar(error.name, 'error');
