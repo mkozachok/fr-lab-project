@@ -40,62 +40,6 @@ export class RedactorPageComponent {
   designsPrice: number = 0;
   templateImg;
   myGoods: Array<any> = [];
-
-  constructor(private designService: DesignService,
-    private userService: UserService,
-    private orderService: OrderService,
-    private productService: ProductsListService,
-    private uploadService: UploadService,
-
-    private router: Router,
-    public dialog: MdDialog
-  ) {}
-
-//   ngOnInit() {
-
-//    let self = this;
-//    this.designService.getDesigns().subscribe(res => {this.items = res});
-//    this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-//    this.designService.getPrice().subscribe(res => {this.price = res});
-//    this.userService.getUser().subscribe(res => {
-//      this.user = new User();
-//      this.user.firstName = res.displayName.split(' ')[0];
-//      this.user.lastName = res.displayName.split(' ')[1];
-//    });
-//    this.productService.getTemplateTypes().subscribe(res => {
-//     this.templateTypes = res;
-//   });
-//  }
-//    boundingBox = new fabric.Rect({
-//      fill: "transparent",
-//      width: 235,
-//      height: 440,
-//      top:80,
-//      left: 225,
-//      hasBorders: true,
-//      hasControls: false,
-//      lockMovementX: true,
-//      lockMovementY: true,
-//      evented: false,
-//      stroke: "red",
-//      selectable: false,
-//      strokeDashArray: [5,10]
-// =======
-//     private router: Router
-//   ) { }
-
-  ngOnInit() {
-   let self = this;
-   this.designService.getDesigns().subscribe(res => {this.items = res});
-   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-   this.designService.getPrice().subscribe(res => {this.price = res});
-   this.userService.getUser().subscribe(res => {
-     this.user = new User();
-     this.user.firstName = res.displayName.split(' ')[0];
-     this.user.lastName = res.displayName.split(' ')[1];
-   });
-   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
-  }
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -111,6 +55,31 @@ export class RedactorPageComponent {
     selectable: false,
     strokeDashArray: [5, 10]
   });
+  // disableCategory = true;
+
+  constructor(private designService: DesignService,
+    private userService: UserService,
+    private orderService: OrderService,
+    private productService: ProductsListService,
+    private uploadService: UploadService,
+
+    private router: Router,
+    public dialog: MdDialog
+  ) {}
+
+  ngOnInit() {
+   let self = this;
+   this.designService.getDesigns().subscribe(res => {this.items = res});
+   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
+   this.designService.getPrice().subscribe(res => {this.price = res});
+   this.userService.getUser().subscribe(res => {
+     this.user = new User();
+     this.user.firstName = res.displayName.split(' ')[0];
+     this.user.lastName = res.displayName.split(' ')[1];
+   });
+   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+  }
+
 
 
   ngAfterContentInit() {
@@ -131,7 +100,34 @@ export class RedactorPageComponent {
       movingBox.setLeft(Math.min(Math.max(left, leftBound), rightBound - movingBox.getWidth()));
       movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
-    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
+
+this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
+canvas.on("object:scaling", (event) => {
+   let el = event.target;
+
+   if ((el.scaleX > 1) && (el.width * el.scaleX > this.boundingBox.getWidth())) {
+     el.setWidth(this.boundingBox.getWidth());
+     el.setScaleX(1);
+     el.setLeft(this.boundingBox.left);
+   }
+   if ((el.scaleY > 1) && (el.height * el.scaleY > this.boundingBox.getHeight())) {
+     el.setHeight(this.boundingBox.getHeight());
+     el.setScaleY(1);
+     el.setTop(this.boundingBox.top);
+   }
+
+   // need to make different func and apply here this code
+   el.left = el.left < this.boundingBox.left ? boundingBox.left : el.left;
+   el.top = el.top < this.boundingBox.top ? this.boundingBox.top : el.top;
+   if ((el.left + el.width * el.scaleX) > (this.boundingBox.left + this.boundingBox.getWidth())) {
+     el.left = (this.boundingBox.left + this.boundingBox.getWidth()) - el.width * el.scaleX;
+   }
+   if ((el.top + el.height * el.scaleY) > (this.boundingBox.top + this.boundingBox.getHeight())) {
+     el.top = (this.boundingBox.top + this.boundingBox.getHeight()) - el.height * el.scaleY;
+   }
+ })
+
+    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
     this.boundingBox = boundingBox;
   }
 
@@ -230,10 +226,12 @@ export class RedactorPageComponent {
   }
 
   selectTemplate(template) {
+    // this.disableCategory = null;
     this.type = template.type;
     this.templatePrice = template.price;
     this.myGoods = template.goods;
     this.drawOnCanvas(template.url, true);
+    this.getCanvas().remove(this.boundingBox);
     this.getCanvas().add(this.setBoundingBox());
 
   }
@@ -283,11 +281,15 @@ export class RedactorPageComponent {
       width: 150,
       height: 150,
       left: 270,
-      top: 200,
-      id: this.selectedDesignsPrices.length
+      top:200,
+      borderColor: 'red',
+      cornerColor: 'green',
+      hasRotatingPoint: false,
+      id:this.selectedDesignsPrices.length
     });
     image.selectable = true;
-    image.evented = true;
+    image.evented=true;
+    image.lockRotation = true;
     return image;
   }
 
@@ -313,20 +315,20 @@ export class RedactorPageComponent {
     // this.selectedCategory.src = category.url;
     this.drawOnCanvas(goods.url, true);
   }
-  
+
 
   selectCategory = function (category) {
     if (category.price === 'free') {
       this.selectedDesignsPrices.push(0);
     } else {
-      this.selectedDesignsPrices.push(category.price);
+      const priceNumber = parseFloat(category.price);
+      this.selectedDesignsPrices.push(priceNumber);
     }
     this.categoryName = category.name;
     this.drawOnCanvas(category.url, false);
   }
 
   createProduct(redactor, b64) {
-    this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
     let newProduct = new Product();
     newProduct.name = redactor.type;
     newProduct.type = redactor.type;
@@ -340,7 +342,8 @@ export class RedactorPageComponent {
 
   getProductPrice() {
     this.designsPrice = this.selectedDesignsPrices.reduce((a, b) => a + b, 0);
-    return this.designsPrice + this.templatePrice;
+    const rightNumber = this.designsPrice + this.templatePrice;
+    return parseFloat(rightNumber.toFixed(2));
   }
 
   saveProduct = function (event) {

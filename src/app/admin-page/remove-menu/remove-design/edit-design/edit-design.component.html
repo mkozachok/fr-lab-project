@@ -1,0 +1,29 @@
+<div class="add-wrapper">
+  <form class="form" [formGroup]="designForm" (ngSubmit)="onSubmit()">
+    
+    <md-form-field>
+      <input required type="text" placeholder="name" mdInput formControlName="name">
+      <md-error *ngIf="designForm.controls['name'].hasError('required')">
+        Name <strong>cannot be blank</strong>
+      </md-error>
+    </md-form-field>
+    <md-form-field>
+      <input required type="text" placeholder="price" mdInput formControlName="price">
+      <md-error *ngIf="designForm.controls['price'].hasError('required')">
+        Price <strong>cannot be blank</strong>
+      </md-error>
+    </md-form-field>
+    
+    <md-dialog-actions>
+      <button [disabled]="!designForm.valid || waitForDelivery" type="submit"
+        md-raised-button color="primary" class="edit-save-button">
+            Edit design
+        </button>
+      <button [disabled]="waitForDelivery" md-raised-button md-dialog-close color="primary" class="edit-save-button">
+            Close
+        </button>
+    </md-dialog-actions>
+  </form>
+  <div>
+  </div>
+</div>

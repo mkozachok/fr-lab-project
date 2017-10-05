@@ -31,6 +31,13 @@ export class LoginPageComponent implements OnInit {
       .then((success) => this.googeAutarizationRouting())
       .catch(err => this.error = err);
   }
+  onSubmitFacebook() {
+    this.error = null;
+    this._userService.loginInFacebook()
+      .then((success) => this.googleAutorizationCheck())
+      .then((success) => this.googeAutarizationRouting())
+      .catch(err => this.error = err);
+  }
   googleAutorizationCheck() {
   this._userService.getUserFromDataBase(this._userService.getUserId())
     .subscribe(res => this.userValue = res.$exists());
