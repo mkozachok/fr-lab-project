@@ -122,9 +122,16 @@
   margin: 0 auto;
 }
 #btns{
-	text-align: right;
-	margin-right: 50px;
 	color:rgba(0, 0, 0, 0.54);
+	text-align: right;
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 150px;
 }
 #btns button:hover{
 	background:$darkRead;
@@ -173,13 +180,8 @@ input[type="color"]{
   font-size: 16px;
   color: rgba(0, 0, 0, 0.54);
 }
-#test{
-	border: 1px solid red;
-	position: absolute;
-	width: 235px;
-	height: 360px;
-	left: 54%;
-	top: 20%;
-	pointer-events: none;
+#price{
+	font-size:20px;
+	color:$darkRead;
 }
 }

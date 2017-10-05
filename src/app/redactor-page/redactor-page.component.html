@@ -95,11 +95,10 @@
       <canvas width="700px" height="550px" id="img_product"></canvas>
     </div>
     <div id="btns">
-    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
     <button md-raised-button (click)="saveProduct()"><i class="material-icons">save</i></button>
     <button md-raised-button (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
-    <span>Price is: {{ getProductPrice() }}$</span>
-    <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
+    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
   </div>
+    <span id="price">Price is: {{ getProductPrice() }}$</span>
   </div>
 </div>
