@@ -66,7 +66,6 @@ export class HomepageComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    let that = this;
     this.subscriptionToUserService = this.userService.getUserIdAsync().subscribe(user => {
       let id = user? user.uid : 'Please login';
      this.subscriptionToAdminService = this.adminService.getAdmin(id).subscribe(admin => {

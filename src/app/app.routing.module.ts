@@ -22,7 +22,7 @@ const routes: Routes = [
     {
         path: 'admin-page',
         component: AdminPageComponent,
-        //canActivate: [AdminGuard]
+        canActivate: [AdminGuard]
     },
     {
         path: 'profile-page',

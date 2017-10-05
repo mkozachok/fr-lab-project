@@ -15,7 +15,7 @@
         <button routerLink="my-gallery" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
             My gallery
         </button>
-        <button routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+        <button *ngIf="isAdmin" routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
             Admin page
         </button>
     </div>

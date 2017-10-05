@@ -10,7 +10,7 @@ import { Design } from '../../../models/design-model';
   styleUrls: ['./remove-design.component.scss']
 })
 export class RemoveDesignComponent implements OnInit, OnDestroy {
-  subscriptionToDesignList: Subscription;
+  removeDesignSubscription: Subscription = new Subscription();
   designs;
   arrOfDesigns: Observable<Array<any>>;
   showSpinner: boolean = true;
@@ -21,12 +21,12 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
   }
 
   getAdminsArr(): void{
-    this.subscriptionToDesignList = this._designService.getDesigns()
+    this.removeDesignSubscription.add(this._designService.getDesigns()
     .subscribe(res => {
       this.showSpinner = false;
       this.designs = res;
       this.arrOfDesigns = this.designs;
-    })
+    }))
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscriptionToDesignList.unsubscribe();
+    this.removeDesignSubscription.unsubscribe();
   }
 
    filterItem(phrase) {
