@@ -1,10 +1,10 @@
 <div id="container">
   <div id="tools">
-    <md-tab-group>
+    <md-tab-group #category>
       <md-tab label="Product Type">
           <div class="templates">
             <div class="template_img" *ngFor="let template of templateTypes">
-              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template)"></div>
+              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template, $event)"></div>
               <!-- <img [src]="template.url" (click)="selectTemplate(template)" width="80"/> -->
             </div>
           </div>
@@ -28,7 +28,7 @@
             </ng-container>
       </md-tab>
 
-      <md-tab [disabled]="disableCategory"  label="Category">
+      <md-tab [disabled]="isDisabled"  label="Category">
           <div class="categories">
             <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category" ng-disabled="tab.disabled">
               <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
