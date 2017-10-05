@@ -62,7 +62,7 @@ export class HomepageComponent implements OnInit {
     private adminService: AdminService
   ) {
     iconRegistry
-      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_mode_edit_black_24px.svg'))
+      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('./../../assets/icons/ic_mode_edit_black_24px.svg'))
   };
 
   ngOnInit(): void {
@@ -85,6 +85,8 @@ export class HomepageComponent implements OnInit {
     });
     //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
   };
+
+ 
 
   ngOnDestroy(){
     this.subscriptionToUserService.unsubscribe();
