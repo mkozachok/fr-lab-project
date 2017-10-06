@@ -75,7 +75,7 @@
             <ng-container *ngFor = "let template of templateTypes; let i = index">
                 <ng-container *ngIf = "product.type === template.type">
                   <li>
-                    <md-select [(ngModel)]="mySize" placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
+                    <md-select [(ngModel)]="mySize" #price placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
                         <md-option *ngFor="let size of template.size" [value]="size">
                           {{size}}
                         </md-option>

@@ -55,7 +55,7 @@ export class RedactorPageComponent {
     selectable: false,
     strokeDashArray: [5, 10]
   });
-  // disableCategory = true;
+  disableCategory = true;
 
   constructor(private designService: DesignService,
     private userService: UserService,
@@ -226,7 +226,8 @@ canvas.on("object:scaling", (event) => {
   }
 
   selectTemplate(template) {
-    // this.disableCategory = null;
+    this.disableCategory = false;
+    console.log(this.disableCategory);
     this.type = template.type;
     this.templatePrice = template.price;
     this.myGoods = template.goods;
@@ -324,7 +325,7 @@ canvas.on("object:scaling", (event) => {
       const priceNumber = parseFloat(category.price);
       this.selectedDesignsPrices.push(priceNumber);
     }
-    this.categoryName = category.name;
+    this.categoryName = category.category;
     this.drawOnCanvas(category.url, false);
   }
 
