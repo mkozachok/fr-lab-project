@@ -41,6 +41,7 @@ export class RedactorPageComponent {
   templateImg;
   myGoods: Array<any> = [];
   templateSizeQuantites = [];
+  showSize: boolean = false;
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -352,7 +353,11 @@ export class RedactorPageComponent {
     let newProduct = new Product();
     newProduct.name = redactor.type;
     newProduct.type = redactor.type;
-    newProduct.category = redactor.categoryName;
+    if (redactor.categoryName) {
+      newProduct.category = redactor.categoryName;
+    } else {
+      newProduct.category = 'no';
+    }
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
     // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
@@ -387,11 +392,10 @@ export class RedactorPageComponent {
   }
 
   buy = function (sizePanel) {
+    this.showSize = true;
     this.templateSizeQuantites.forEach(el => {
       this.totalQuantity += el.quantity;
-      console.log(el.quantity);
     });
-    console.log(this.totalQuantity);
     if (!this.totalQuantity) {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];

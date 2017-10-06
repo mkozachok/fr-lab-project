@@ -1,6 +1,6 @@
 <app-loader *ngIf="showLoader" class="loader"></app-loader>
 <div *ngIf="!showLoader" class="container">
-	<md-accordion>
+	<md-accordion *ngIf="usersOrders.length !== 0">
 		<md-expansion-panel *ngFor="let order of usersOrders">
 		  <md-expansion-panel-header>
 		  	<md-panel-title>
@@ -18,4 +18,8 @@
 		  </div>
 		</md-expansion-panel>
 	</md-accordion>
+	<div *ngIf="usersOrders.length === 0" class="empty">
+		<i class="material-icons">description</i>
+		<h3>You haven't made any orders yet</h3>
+	</div>
 </div>

@@ -25,7 +25,7 @@
                   </ul>
 
               </md-expansion-panel>
-              <md-expansion-panel class="size-expansion" #sizePanel>
+              <md-expansion-panel class="size-expansion" #sizePanel *ngIf = "showSize" [expanded]="showSize">
                   <md-expansion-panel-header>
                     <md-panel-title>
                       <div class="head">Size</div>
