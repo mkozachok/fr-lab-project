@@ -1,0 +1,26 @@
+<div class="remove-wrapper">
+  <app-loader *ngIf="showSpinner"></app-loader>
+  <div class="table-wrapper" *ngIf="!showSpinner">
+    <md-form-field>
+        <input mdInput placeholder="Product searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
+          name="productFilter">
+      </md-form-field>
+    <md-toolbar class="table-row">
+      <span>Name</span>
+      <span>Category</span>
+      <span>Owner</span>
+      <span>Price</span>
+      <span  class="img-title">Product image</span>
+    </md-toolbar>
+    <app-product
+     *ngFor="let product of productList"
+      [name]="product.name"
+      [$key]="product.$key"
+      [svg]="product.svg"
+      [category]="product.category"
+      [owner]="product.owner"
+      [price]="product.price"
+      [type]="product.type"
+      ></app-product>
+  </div>
+</div>

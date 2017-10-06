@@ -1,0 +1,98 @@
+@import "../../../variables.scss";
+
+/deep/ .mat-tab-label{
+	min-width: 50% !important;
+}
+
+ .loader{
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+}
+
+.edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw;
+}
+
+.info-detail-wrapper { 
+    padding: 3vw;
+
+    .title {
+        border-bottom: 2px solid $profileTitleDevider;
+    }
+
+    .greeting {
+        padding: 2vw 0;
+    }
+
+    .info-group {
+        display: flex;
+        padding: 1vw 0;
+  
+        .info-group-row {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .info-group-label{
+            width: 2vw;
+            min-width: 55px;
+            font-weight: bold;
+            
+        }
+
+        .info-group-data{
+            padding-left: 12vw;
+            color: $profileUserData; 
+            
+            @media screen and (max-width: $break-m){
+                padding-left: 50px;
+                width: 50vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        
+    }
+
+}
+
+.edit-wrapper {
+    form {
+        width: 40vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    md-form-field{
+        position: relative;
+        display: block;
+        margin: 1% auto;
+        width: 100%;       
+    }
+
+    /deep/ .spinner-component {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+    }
+
+    .edit-photo-button {
+        text-align: center;
+        width: 10vw;
+        min-width: 135px;
+        height: 35px;
+        font-size: 1em;
+        line-height: 1.2vw;
+    }
+
+    .edit-save-button{
+        @extend  .edit-photo-button;
+        width: 100px;
+    }
+}

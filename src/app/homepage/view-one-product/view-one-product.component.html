@@ -1,0 +1,29 @@
+<md-card>
+	<div class="img-container">
+		<img src="{{ product.svg }}" alt="">
+	</div>
+	<div class="info">
+		<div class="aboutTheProduct">
+			<h3>{{product.name}}</h3>
+			<ul>
+				<li><span>type:</span> {{product.type}}</li>
+				<li><span>category:</span> {{product.category}}</li>
+				<li><span>price:</span> {{product.price | currency:'USD':true}}</li>
+				<ng-container *ngFor="let template of templateTypes">
+					<ng-container *ngIf="product.type === template.type" class="size">
+						<li>
+							<md-select [(ngModel)]="mySize" placeholder="size" (ngModelChange)="setSize(mySize, product)">
+								<md-option *ngFor="let size of template.size" [value]="size">
+									{{size}}
+								</md-option>
+							</md-select>
+						</li>
+					</ng-container>
+				</ng-container>
+			</ul>
+		</div>
+		<button md-raised-button (click)="addToCart(product)">add to my card</button>
+		<i class="material-icons clear" (click)="delete()">clear</i>
+		<!-- <button md-raised-button *ngIf="deleteButton" (click)="delete()">delete</button> -->
+	</div>
+</md-card>

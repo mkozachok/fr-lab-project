@@ -1,0 +1,103 @@
+@import "../../variables.scss";
+
+/deep/ .mat-button {
+    min-width: 1% !important;
+    line-height: normal !important;
+}
+
+.profile-page {
+    display: flex;
+    height: 100%;
+
+    .side-menu {
+        position: fixed;
+        justify-content: center;
+        width: 20vw;
+        height: 100%;
+        font-size: 1.5em;
+        
+
+        @media screen and (max-width: $break-l){
+            width: 30vw;
+        }
+
+        @media screen and (max-width: $break-m){
+            font-size: 1.2em;
+        }
+
+        @media screen and (max-width: $break-s){
+            font-size: 0.8em;
+        }
+
+        /deep/ .spinner-component {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 100%;
+            background-size: cover; 
+            padding: 0 0 calc(200/200*100%);
+        }
+
+        img {
+            top: 0;
+            left: 0;
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .user-fullname {
+            position: absolute;
+            bottom: 0;
+            height: 20%;
+            width: 100%;
+            background-color: $profileUserFullName;
+            line-height: 1.5em;
+            color: white;
+            padding-left: 5%;
+            text-shadow: 0 0 10px $profileUserFullName;
+            text-overflow: ellipsis;
+        }
+
+        .side-menu-button {
+            color: $profileSideMenuButtons;
+            display: block;
+            text-decoration: none;
+            padding: 5% 3%;
+            min-height: 50px;
+            font-size: 1.2em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: left;
+            transition: ease all .2s;
+
+            @media screen and (max-width: $break-s){
+                font-size: 0.8em;
+            }
+                    &:hover{
+                        color: $profileSideMenuButtonsHover;
+                        background-color: $profileSideMenuButtonsHoverBg;
+                    }
+                
+            }      
+        }
+    
+
+    .content {
+        flex: 1;
+        padding-left: 20vw;
+
+        @media screen and (max-width: $break-l){
+            padding-left: 30vw;
+        }
+    }
+
+
+}

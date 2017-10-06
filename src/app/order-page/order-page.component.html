@@ -1,1 +1,55 @@
-<p>order-page</p>
+<router-outlet><router-outlet>
+<div class="container">
+  <div class="header">
+    <h2>Cart page</h2>
+  </div>
+  <div *ngIf = "totalQuantity !== 0">
+    <div class="item-headers">
+      <div class="product"></div>
+      <div>Type</div>
+      <div>Size</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div></div>
+    </div>
+    <div class="item" *ngFor="let order of orders">
+      <div class="product img-container">
+          <img src="{{order.product.svg}}">
+      </div>
+      <div class="type">
+        {{order.product.type}}
+      </div>
+      <div>
+        {{order.product.size}}
+      </div>
+        <div class="price">
+          {{order.product.price | currency:'USD':true}}
+        </div>
+        <div class="quantity">
+          <button button md-raised-button class="add" (click)="addButtonClick(order)">
+            +
+          </button> 
+          <input mdInput type="text" value="{{order.quantity}}" [readonly]="true">
+          <button button md-raised-button class="subtract" (click)="subtractButtonClick(order)">
+            -
+          </button> 
+        </div>
+        <div class="remove">
+            <md-icon svgIcon="delete" (click)="removeOrder(order)" class="delete"></md-icon>
+        </div>
+    </div>
+    <div class="info">
+      <div class="total">
+        Total amount: <span class="amount">{{totalAmount | currency:'USD':true}}</span>
+      </div>
+      <div>
+        <button button md-raised-button class="checkout" (click)="navigate()">CHECKOUT</button> 
+        <button button md-raised-button class="delete-all" (click)="empty()">CLEAR</button> 
+      </div>
+    </div>
+  </div>
+  <!-- IF CART IS EMPTY -->
+  <div *ngIf = "totalQuantity === 0" class="empty-cart">
+    <h4>There are no items</h4>
+  </div>
+</div>

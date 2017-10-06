@@ -1,0 +1,23 @@
+<div class="add-wrapper">
+  <form [formGroup]="designForm" (ngSubmit)="onSubmit()">
+    <md-form-field>
+      <input required required type="text" placeholder="name" mdInput formControlName="name">
+      <md-error *ngIf="designForm.controls['name'].hasError('required')">
+        First name <strong>cannot be blank</strong>
+      </md-error>
+    </md-form-field>
+    <md-form-field>
+      <input required type="text" placeholder="price" mdInput formControlName="price">
+      <md-error *ngIf="designForm.controls['price'].hasError('required')">
+        Price <strong>cannot be blank</strong>
+      </md-error>
+    </md-form-field>
+    <app-file-upload #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToDesigns"></app-file-upload>
+    <button [disabled]="!fileUp.downloadedPhoto || !designForm.valid || waitForDelivery" (click)="fileUp.upload()" type="submit" md-raised-button
+      color="primary" class="edit-save-button">
+          Add design
+      </button>
+  </form>
+  <div>
+  </div>
+</div>

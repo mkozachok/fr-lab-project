@@ -1,0 +1,29 @@
+@import '../../../../variables.scss';
+/deep/ .mat-tab-body{
+    width: 50vw;
+}
+
+/deep/ .table-row{
+
+    .img {
+        height: 10vw;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .delete {
+        &:hover {
+            cursor: pointer;
+            color: $darkRead;
+            transition: ease all .2s;
+        }
+    }
+
+}
+
+.img-title {
+    margin-left: 10px;
+}
+

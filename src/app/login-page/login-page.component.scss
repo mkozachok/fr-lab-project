@@ -1,3 +1,32 @@
-label {
-  display: block;
+@import "../../variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  margin-top: 20px;
+  color: #555;
+  background-color: $lightGrey;
+}
+button:hover {
+  color: #fff;
+  background-color: $darkRead;
+}
+
+p {
+  font-size: 12px;
 }

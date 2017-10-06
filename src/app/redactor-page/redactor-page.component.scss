@@ -1,0 +1,246 @@
+@import "../../variables.scss";
+
+/* canvas {
+	border: 1px solid black;
+}
+ */
+#container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	min-height: 580px;
+	max-width:1440px;
+	width: 100%;
+  height: 100%;
+	position: relative;
+	font-family: 'Quicksand', sans-serif;
+}
+#container{
+#tools{
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+}
+
+.categories {
+	width: 100%;
+	text-align: center;
+}
+
+.categories span {
+	padding: 0 5%;
+}
+
+.templates, .gategory_images{
+	margin:20px 0;
+	flex-wrap: wrap;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	text-align: center;
+	font-size: 16px;
+
+}
+
+.gategory_images {
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.template_img,.category_img{
+	width: 33%;
+	margin-top: 20px;
+}
+
+.category_img {
+	position: relative;
+}
+
+.price {
+	position: absolute;
+	top: 15px;
+	right: 0;
+	background: #fff;
+	color:$darkRead;
+	font-size: 12px;
+	padding: 3px 5px;
+	border-radius: 10px;
+	border: 1px solid $darkRead;
+}
+
+#canvas{
+	width: 75%;
+	text-align: center;
+}
+/deep/ .mat-tab-label{
+	min-width: 50% !important;
+}
+/deep/ .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #7b0041 !important;
+}
+.head{
+	width: 100%;
+	background-color: #7b0041;
+	padding: 10px 0;
+	text-align: center;
+	color:#fff;
+	font-size: 20px;
+	font-family: 'Quicksand', sans-serif;
+}
+#loadImg{
+	cursor: pointer;
+	margin: 20px 0;
+}
+.selected_color{
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.selected_color li{
+	padding: 10px 25px;
+}
+.selected_color li span{
+		cursor: pointer;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #bfbfbf;
+}
+#redactor_area{
+	max-width: 700px;
+  max-height: 550px;
+	width: 100%;
+
+	height: 100%;
+  margin: 0 auto;
+}
+#btns{
+	color:rgba(0, 0, 0, 0.54);
+	text-align: right;
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 150px;
+}
+#btns button:hover{
+	background:$darkRead;
+	color:#fff;
+}
+canvas{
+	max-width: 100%;
+}
+/deep/ .canvas-container{
+	position: absolute !important;
+  top: 0 !important;
+  // left: 20% !important;
+}
+/deep/ .mat-expansion-panel-header{
+	background-color: #7b0041 !important;
+}
+/deep/ .mat-expansion-panel-body{
+	text-align: center;
+}
+/deep/ .mat-expansion-panel-content{
+	visibility: hidden;
+}
+/deep/ .mat-slider{
+	width: 100%;
+}
+#text_btn{
+	margin:20px 0;
+	width: 100%;
+}
+input[type="color"]{
+	width: 50%;
+	margin: 0 20px;
+}
+#font{
+	display: block;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.54);
+	margin-top:20px;
+}
+#fontWeight{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.54);
+}
+#price{
+	font-size:20px;
+	color:$darkRead;
+}
+
+.size-expansion {
+	::ng-deep .mat-expansion-panel-body{
+		padding: 0;
+	}
+}
+
+.size {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	max-height: 200px;
+	overflow-y: auto;
+
+	.size-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px 20%;
+		border-bottom: 1px solid #BEBEBE;
+
+		.quantity {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			button {
+				min-width: 1%;
+				padding: 10px;
+				line-height: 5px;
+		
+				.mat-button-wrapper {
+					line-height: 0 !important;
+				}
+			}
+
+			button:hover {
+				background: #7b0041;
+				color: #eee;
+			}
+
+			input {
+				width: 25px;
+				height: 25.6px;
+				// padding: 5px;
+				text-align: center;
+				border: 1px solid #BEBEBE;
+			}
+	}
+	}
+}
+}
+
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+}

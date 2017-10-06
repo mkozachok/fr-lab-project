@@ -1,0 +1,10 @@
+<md-toolbar class="table-row">
+  <span mdTooltip="{{ name }}" mdTooltipPosition="above" class="name">{{ name }}</span>
+  <span mdTooltip="{{ category }}"  mdTooltipPosition="above">{{ category }}</span>
+  <span mdTooltip="{{ owner }}"  mdTooltipPosition="above">{{ owner }}</span>
+  <span >{{ price }}</span>
+  <img class="img" src="{{ svg }}" alt="">
+  <span class="spacer"></span>
+  <md-icon class="delete" (click)="onEdit()">mode_edit</md-icon>
+  <md-icon class="delete" (click)="onDelete()">delete</md-icon>
+</md-toolbar>

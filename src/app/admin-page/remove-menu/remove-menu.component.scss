@@ -1,0 +1,38 @@
+@import "../../../variables.scss";
+
+/deep/ .mat-tab-label{
+	min-width: calc(100%/3) !important;
+}
+
+
+/deep/ .remove-wrapper{
+    padding: 2vw;
+    display: flex;
+    justify-content: center;
+    min-height: 70vh;
+
+    .table-wrapper {
+        width: 100%;
+    }
+
+    .table-row {
+        border-bottom: 1px solid black;
+        font-size: 1.2em;
+
+        @media screen  and (max-width: $break-m){
+            font-size: 0.8em;
+        }
+
+        span {
+            display: inline-block;
+            width: 10vw;
+            margin-right: 1vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+}

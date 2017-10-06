@@ -1,3 +1,121 @@
-<p>
-  redactor-page works!
-</p>
+<div id="container">
+  <div id="tools">
+    <md-tab-group #category>
+      <md-tab label="Product Type">
+          <div class="templates">
+            <div class="template_img" *ngFor="let template of templateTypes">
+              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template, $event)"></div>
+              <!-- <img [src]="template.url" (click)="selectTemplate(template)" width="80"/> -->
+            </div>
+          </div>
+          <ng-container *ngIf = " myGoods?.length !== 0">
+            <md-expansion-panel>
+                <md-expansion-panel-header>
+                  <md-panel-title>
+                    <div class="head">Color <i class="material-icons">color_lens</i></div>
+                  </md-panel-title>
+                </md-expansion-panel-header>
+
+
+                  <ul class="selected_color">
+                    <li *ngFor="let goods of myGoods" (click)="setColor(goods)">
+                      <span [style.background] = "goods.color">
+                      </span>
+                    </li>
+                  </ul>
+
+              </md-expansion-panel>
+              <md-expansion-panel class="size-expansion" #sizePanel *ngIf = "showSize" [expanded]="showSize">
+                  <md-expansion-panel-header>
+                    <md-panel-title>
+                      <div class="head">Size</div>
+                    </md-panel-title>
+                  </md-expansion-panel-header>  
+                  <ul class="size">
+                    <li *ngFor="let size of templateSizeQuantites" class="size-item">
+                        <span class="size-name">{{size.size}}</span>
+                        <div class="quantity">
+                        <button button md-raised-button class="add" (click)="addButtonClick(size)">
+                            +
+                          </button> 
+                          <input mdInput type="text" value="{{size.quantity}}" [readonly]="true">
+                          <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
+                            -
+                          </button> 
+                          </div>
+                    </li>
+                  </ul>  
+              </md-expansion-panel>
+            </ng-container>
+      </md-tab>
+      <md-tab [disabled]="isDisabled"  label="Category">
+          <div class="categories">
+            <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category" ng-disabled="tab.disabled">
+              <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
+                {{category.category}}
+              </md-option>
+            </md-select>
+            <span> or </span>
+            <md-select [(ngModel)]="myType" (change) = "typeChoose(myType)" placeholder="choose type">
+              <md-option class="category"  *ngFor="let type of price" [value]="type.filter">
+                {{type.filter}}
+              </md-option>
+            </md-select>
+          </div>
+          <div class="gategory_images">
+            <div class="category_img" *ngFor="let image of items">
+                  <img [src]="image.url" (click)="selectCategory(image)" width="100"/>
+                  <div class="price">{{image.price !== "free" ? (image.price | currency:'USD':true) : (image.price)}}</div>
+            </div>
+          </div>
+        <div id="loadImg" (click)="imgLoader.click()">
+          <div class="head" >Load Image <i class="material-icons">file_download</i></div>
+          <input type="file" #imgLoader accept="image/*" (change)="loadImageHandler($event)" [hidden]="true">
+        </div>
+        <md-expansion-panel>
+            <md-expansion-panel-header>
+              <md-panel-title>
+                <div class="head">Add Text <i class="material-icons">text_fields</i></div>
+              </md-panel-title>
+            </md-expansion-panel-header>
+
+              <button id="text_btn" md-raised-button (click)="addText()">Add Your Text</button>
+              <span mdTooltip="Select text!">
+              <input type="color" value="#f8bbd0" [disabled]="!this.getCanvas().getActiveObject()" size="10" (change)="changeColor($event)">
+              </span>
+              <md-select style="display:block" placeholder="Font Family" [disabled]="!this.getCanvas().getActiveObject()"
+               (change)="setFont($event)">
+                  <md-option value="arial">Arial</md-option>
+                  <md-option value="monaco">Monaco</md-option>
+                  <md-option value="optima">Optima</md-option>
+                  <md-option value="comic sans ms">Comic Sans MS</md-option>
+                  <md-option value="verdana">Verdana</md-option>
+                  <md-option value="georgia">Georgia</md-option>
+                  <md-option value="impact">Impact</md-option>
+              </md-select>
+
+              <span id="font">Font size</span>
+              <md-slider min="1" max="120" step="0.5" value="40" [disabled]="!this.getCanvas().getActiveObject()" (input)="changeFontSize($event)"> </md-slider>
+              <div id="fontWeight">
+                <md-checkbox value="bold" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Bold</md-checkbox>
+                <md-checkbox value="italic" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Italic</md-checkbox>
+                <md-checkbox value="linethrough" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Linethrough</md-checkbox>
+              </div>
+          </md-expansion-panel>
+      </md-tab>
+    </md-tab-group>
+  </div>
+
+    <app-loader *ngIf="showSpinner"></app-loader>
+  <div id="canvas" (window:resize)="resizeCanvas()">
+    <div id="redactor_area">
+      <canvas width="700px" height="550px" id="img_product"></canvas>
+    </div>
+    <div id="btns">
+    <button md-raised-button [disabled]="isDisabled" (click)="saveProduct()"><i class="material-icons">save</i></button>
+    <button md-raised-button [disabled]="isDisabled" (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
+    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
+  </div>
+    <span id="price">Price is: {{ getProductPrice() }}$</span>
+  </div>
+</div>

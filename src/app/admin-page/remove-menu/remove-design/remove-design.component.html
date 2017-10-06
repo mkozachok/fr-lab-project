@@ -1,0 +1,24 @@
+<div class="remove-wrapper">
+    <app-loader *ngIf="showSpinner"></app-loader>
+    <div class="table-wrapper" *ngIf="!showSpinner">
+      <md-form-field>
+        <input mdInput placeholder="Design searching"
+         [(ngModel)]="searchPhrase"
+          (ngModelChange)="filterItem(searchPhrase)"
+          class="search"
+          name="designFilter">
+      </md-form-field>
+      <md-toolbar class="table-row">
+          <span>Name</span>
+          <span>Price</span>
+          <span class="img-title">Design image</span>
+        </md-toolbar>
+       <app-design
+        *ngFor="let design of designs"
+        [name]="design.name"
+        [$key]="design.$key"
+        [url]="design.url"
+        [price]="design.price">
+        </app-design>
+    </div>
+  </div>

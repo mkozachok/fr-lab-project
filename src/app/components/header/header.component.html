@@ -1,0 +1,35 @@
+<md-toolbar color="primary" class="header">
+  <a routerLink="/"  class="logo"><img [src]="logoSrc" alt="Logo"></a>
+  <span class="spacer"></span>
+  <div class="headerContent">
+  <span *ngIf="!user">
+    <a routerLink="/registration-page" class="login">
+      <md-icon class="header-icon">
+        border_color
+      </md-icon>
+      register
+    </a>
+    <a routerLink="/login-page" class="login">
+      <md-icon class="header-icon">
+          exit_to_app        
+      </md-icon>
+      Log in
+    </a>
+  </span>
+    <span *ngIf="user" class="log-out">
+      <span class="greeting">
+      <span>You entered as</span>
+    <a routerLink="/profile-page/about-me" class="user-cabinet">{{ user.displayName }}</a>
+    </span>
+    <span class="log-button" (click)="logOut()">
+    <md-icon class="header-icon">
+        border_color
+    </md-icon>
+    <span>Log out</span>
+  </span>
+    </span>
+    <a routerLink="/order-page" class="basket">
+      <md-icon class="mdl-badge">{{ basketIcon }}</md-icon>
+      <span *ngIf="ordersAmount !== 0" class="data-badge">{{ ordersAmount }}</span></a>
+  </div>
+</md-toolbar>

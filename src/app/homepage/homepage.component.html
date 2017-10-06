@@ -1,62 +1,95 @@
-
-    <div class = "main">
-      <header>
-        <div class = "logo">
-          Is's our Service
-        </div>
-        <div class="loginAndBascket">
-          <div class="login">
-            <button class = "auth"></button>
-          </div>
-          <div class="bascket">
-            <div class="itemsNumber">
-              0
-            </div>
-            <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
-          </div>
-        </div>
-      </header>
-      <section class="leftcol">
-        <div class="createTemplate">
-          <button class="createTemplateBtn">create new template</button>
-        </div>
-        <div class="objectTypeFilter">
-            <i class="fa fa-caret-right" aria-hidden="true"></i>
-            <ul>
-              <li>pillow</li>
-              <li>bag</li>
-              <li>package</li>
-              <li>coffe cup</li>
-              <li>tshirt</li>
-              <li>cup</li>
-            </ul>
-        </div>
-        <div class="categoryFilter">
-            <i class="fa fa-caret-right" aria-hidden="true"></i>
-            <ul>
-              <li>children</li>
-              <li>business</li>
-              <li>just for fun</li>
-            </ul>
-        </div>
-      </section>
-      <section class = "rightcol templates">
-        <div class = "oneObjet">
-          <div class = "objectDescription">
-            <h2>20×30 Pillow Case:</h2>
-            <p>
-                Personalize the photo pillow case with up to one photo
-            </p>
-          </div>
-          <div class = "objectPhoto">
-            <img src = "https://s-media-cache-ak0.pinimg.com/originals/e6/fd/26/e6fd26b861403eed87877ecabdba76cb.jpg" alt = "">
-          </div>
-        </div>
-      </section>
-      <footer>
-        <p>
-          copyright 20017
-        </p>
-      </footer>
+<app-poster></app-poster>
+<div class="homepage" id="shop">
+  <div class="leftcol">
+    <div>
+      <div class="allProducts">
+        <button md-button (click) = "sorting('all')">
+            show all products
+        </button>
+      </div>
+      <form class="searching-form">
+        <md-form-field class="example-full-width">
+          <input mdInput 
+                    placeholder="template searching" 
+                    [(ngModel)] = "searchTerm"  
+                    (ngModelChange) = "search(searchTerm)" 
+                    class="search" 
+                    name="userFilter"> 
+        </md-form-field>
+      </form>
     </div>
-
+    <div class="mobileMenus">
+      <div class="productTypeResponsive">
+          <button md-button [mdMenuTriggerFor]="menu1">type</button>
+          <md-menu #menu1="mdMenu">
+              <button md-menu-item (click) = "sorting('all')">all</button>
+              <button md-menu-item *ngFor = "let templateType of templateTypes" 
+              (click) = "sorting(templateType.type)">
+              <span  [innerHTML] = "templateType.tag"  class="icons"></span>
+            </button>
+          </md-menu>
+      </div>
+      <div class="productCategoryResponsive">
+          <button md-button [mdMenuTriggerFor]="menu2">category</button>
+          <md-menu #menu2="mdMenu">
+            <button md-menu-item *ngFor = "let productCategory of categories" 
+            (click) = "sorting(productCategory.category)">
+              {{productCategory.category}}
+            </button>
+          </md-menu>
+      </div>
+    </div>
+    <md-list class="objectTypeFilter">
+      <h2 md-subheader>Sorting by type</h2>
+      <div class="iconsBlock">
+        <div *ngFor = "let templateType of templateTypes" 
+            (click) = "sorting(templateType.type)" class="icons">
+          <md-list-item (click)="navChanged(templateType.type)" [ngClass]="{'active' : templateType.type === selected}" [innerHTML] = "templateType.tag">
+          </md-list-item>
+        </div>
+      </div>
+      <h2 md-subheader>Sorting by category</h2>
+      <div *ngFor = "let productCategory of categories" 
+          (click) = "sorting(productCategory.category)">
+        <ng-container *ngIf = " productCategory.category !=='all' ">
+          <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
+            {{productCategory.category}}
+          </md-list-item>
+        </ng-container>
+      </div>
+    </md-list>
+  </div> 
+  <div class = "rightcol wrapper">
+    <div class="oneObjet" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}">
+        <md-icon *ngIf="isAdmin" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
+      <div class="productImg">
+        <img src="{{ product.svg }}" alt="">
+      </div>
+      <div class="info">
+        <div class = "aboutTheProduct">
+          <h3>{{product.name}}</h3>
+          <ul>
+            <li><span>type:</span> {{product.type}}</li>
+            <li><span>category:</span> {{product.category}}</li>
+            <li><span>price:</span>  {{ product.price }}</li>
+            <ng-container *ngFor = "let template of templateTypes; let i = index">
+                <ng-container *ngIf = "product.type === template.type">
+                  <li>
+                    <md-select [(ngModel)]="mySize" #price placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
+                        <md-option *ngFor="let size of template.size" [value]="size">
+                          {{size}}
+                        </md-option>
+                    </md-select> 
+                  </li>             
+                </ng-container>
+            </ng-container>
+          </ul>
+        </div>
+        <button md-raised-button (click)="addToCart(product)">add to my card</button>
+        <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
+      </div>  
+    </div>
+    <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
+    <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
+  </div>
+</div>

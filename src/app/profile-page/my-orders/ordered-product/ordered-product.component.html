@@ -1,0 +1,10 @@
+<md-card>
+	<div class="img-container">
+		<img src="{{item.product.svg}}">
+	</div>
+	<md-card-title>{{item.product.name}}</md-card-title>
+	<ul>
+	    <li><span>quantity:</span> {{item.quantity}}</li>
+	    <li><span>price:</span> {{item.product.price | currency:'USD':true}}</li>
+	</ul>
+</md-card>

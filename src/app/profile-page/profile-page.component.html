@@ -1,5 +1,25 @@
-<h4> <a routerLink="my-gallery">gallery</a>
-    <a routerLink="my-orders">orders</a>
-    <a routerLink="my-settings">settings</a>
-</h4>
-<router-outlet></router-outlet>
+<div class="profile-page">
+    <div class="side-menu">
+        <div class="avatar-wrapper">
+            <app-loader *ngIf="showSpinner"></app-loader>
+             <img [src]="user.photoURL">
+            <h4 class="user-fullname">{{ user.displayName }}</h4>
+        </div>
+
+        <button routerLink="about-me" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            About me
+        </button>
+        <button routerLink="my-orders" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            My orders
+        </button>
+        <button routerLink="my-gallery" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            My gallery
+        </button>
+        <button *ngIf="isAdmin" routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
+            Admin page
+        </button>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

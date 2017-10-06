@@ -1,0 +1,110 @@
+@import '../../../variables.scss';
+
+md-card {
+	padding: 0;
+	position: relative;
+}
+
+.aboutTheProduct {
+	padding: 3%;
+}
+
+.img-container {
+	width: 100%;
+
+	img {
+		height: auto;
+		max-width: 80%;
+		margin: 0 auto;
+		display: block;
+	}
+}
+
+ul, li {
+    list-style: none;
+}
+
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+}
+
+.aboutTheProduct {
+	ul {
+		padding: 2% 0;
+
+		li {
+			// font-size: 1em;
+			margin: 2%;
+		}
+
+		li span {
+			font-weight: 500;
+		}
+
+		li md-select {
+			width: 100%;
+		}
+
+		li select {
+			width: 100%;
+		}
+	}
+
+	h3 {
+		font-weight: normal;
+		// font-size: 1.1em;
+		text-align: center;
+	}
+}
+
+.info {
+	button {
+		min-width: 1%;
+		width: 100%;
+		display: block;
+		background: #eee;
+		padding: 15px 10px;
+		font-size: 1em;
+		// line-height: 2.2em;
+		font-weight: normal;
+	}
+
+	button:hover {
+	    background: #7b0041;
+	    color: #eee;
+	}
+}
+
+.clear {
+	position: absolute;
+	right: 1%;
+	top: 0;
+	cursor: pointer;
+}
+
+@media (max-width:$break-l) and (min-width:$break-m) {
+	.info button {
+		padding: 2.5%;
+	}
+	.aboutTheProduct ul li,  .info button{
+		// font-size: 0.8em;
+	}
+
+	h3 {
+		// font-size: 0.8em !important;
+	}
+}
+
+@media screen and (max-width : 450px) {
+	.info button {
+		padding: 3.5%;
+	}
+	.aboutTheProduct ul li, .info button {
+		// font-size: 2.0vw;
+	}
+	h3 {
+		// font-size: 2.3vw !important;
+	}
+}

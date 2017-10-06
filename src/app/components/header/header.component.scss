@@ -1,0 +1,115 @@
+@import '../../../variables.scss';
+
+.header {
+    position: fixed;
+    top: 0;
+    background: rgba(250, 250, 250, 0.8);
+    color: #555;
+    padding: 0 2em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+
+    @media screen and (max-width: $break-m){
+        font-size: 0.7em;
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+/*     /deep/.mat-toolbar-row{
+        @media screen and (max-width: $break-m){
+            flex-direction: column !important;
+        }
+    } */
+
+     /deep/ .material-icons {
+        @media screen and (max-width: $break-middle){
+            font-size: 2em;
+        }
+    } 
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.7em;
+        color: #555;  
+
+        &:hover {
+            color: #7b0041;
+        }
+    }
+
+    .login {
+        margin-right: 5em;
+        font-weight: bold;
+    }
+
+    .user-cabinet {
+        font-weight: bold;
+    }
+
+    .header-icon {
+        transform: translateY(6px);
+        margin-right: 5px;
+        
+        @media screen and (max-width: $break-middle){
+            transform: translateY(5px);
+        }
+    }
+
+    .log-button {
+        @extend a;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .greeting {
+        display: inline-block;
+        transform: translateX(-2em);
+    }
+
+    .log-out{
+        @extend .greeting;
+    }
+
+    .basket {
+        position: relative;
+        right: 20px;
+        top: 5px;
+        margin-left: 5em;
+    }
+
+    .data-badge{
+        position: absolute;
+        background-color: orange;
+        border-radius: 50%;
+        font-size: .8em;
+        text-align: center;
+        line-height: 1.3em;
+        width: 1.3em;
+        height: 1.3em;
+        top: -1em;
+        right: -0.8em;
+    }
+}
+
+/*
+@media (max-width:740px) {
+    .header {
+        flex-wrap: wrap !important;
+        height: auto !important;
+        .spacer {
+            display: none;
+        }
+        .logo {
+            display: block !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        .headerContent {
+            width: 100% !important;
+        }
+    }
+}
+*/

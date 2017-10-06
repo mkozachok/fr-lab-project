@@ -1,3 +1,25 @@
-<p>
-  my-orders works!
-</p>
+<app-loader *ngIf="showLoader" class="loader"></app-loader>
+<div *ngIf="!showLoader" class="container">
+	<md-accordion *ngIf="usersOrders.length !== 0">
+		<md-expansion-panel *ngFor="let order of usersOrders">
+		  <md-expansion-panel-header>
+		  	<md-panel-title>
+      			{{order.date | date :'medium'}}
+    		</md-panel-title>
+		    <md-panel-description>
+		    	Amount: {{order.totalSum}} UAH
+		    </md-panel-description>
+		    <md-panel-description>
+		    	Status: {{order.new ? 'new' : 'accepted'}}
+		    </md-panel-description>
+		  </md-expansion-panel-header>
+		  <div class="items">
+		  		<app-ordered-product *ngFor="let item of order.orders" [item]="item"></app-ordered-product>
+		  </div>
+		</md-expansion-panel>
+	</md-accordion>
+	<div *ngIf="usersOrders.length === 0" class="empty">
+		<i class="material-icons">description</i>
+		<h3>You haven't made any orders yet</h3>
+	</div>
+</div>
