@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
@@ -13,15 +13,17 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   error: Error;
   userValue: boolean;
-  constructor(private _userService: UserService, private router: Router) {
+  constructor(private _userService: UserService, private router: Router, private _elementRef: ElementRef) {
   }
   ngOnInit() {
   }
 
+
+
   onSubmit(value: any) {
     this.error = null;
     this._userService.logIn(value.email, value.password)
-      .then((success) => this.router.navigate(['']))
+      .then((success) => this.router.navigate(['/']))
       .catch(err => this.error = err);
   }
   onSubmitGoogle() {
@@ -45,9 +47,10 @@ export class LoginPageComponent implements OnInit {
   googeAutarizationRouting() {
     if (!this.userValue) {
       this._userService.createUserAdditionalInformation('', '')
-      .then((success) => this.router.navigate(['']));
+      // .then((success) => this._elementRef.)
+      .then((success) => this.router.navigate(['/']));
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     }
   }
 }
