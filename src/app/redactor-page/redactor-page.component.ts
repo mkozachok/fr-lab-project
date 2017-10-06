@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import * as firebase from 'firebase';
 import { MdDialog } from '@angular/material';
-import { SizeDialogComponent } from '../components/size-dialog/size-dialog.component';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -40,6 +40,7 @@ export class RedactorPageComponent {
   designsPrice: number = 0;
   templateImg;
   myGoods: Array<any> = [];
+  templateSizeQuantites = [];
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -57,6 +58,7 @@ export class RedactorPageComponent {
   });
   @ViewChild('category') tab;
   isDisabled = true;
+  totalQuantity: number = 0;
 
   constructor(private designService: DesignService,
     private userService: UserService,
@@ -66,7 +68,8 @@ export class RedactorPageComponent {
 
     private router: Router,
     public dialog: MdDialog,
-    public myElement: ElementRef
+    public myElement: ElementRef,
+    public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
@@ -233,6 +236,14 @@ export class RedactorPageComponent {
     }
     this.isDisabled = false;
     this.type = template.type;
+    this.templateSizeQuantites.length = 0;
+    this.templateTypes.forEach(el => {
+      if (el.type === this.type) {
+        el.size.forEach(el => {
+          this.templateSizeQuantites.push({size: el, quantity: 0});
+        })
+      }
+    });
     this.templatePrice = template.price;
     this.myGoods = template.goods;
     this.drawOnCanvas(template.url, true);
@@ -371,13 +382,33 @@ export class RedactorPageComponent {
       })
   }
 
-  buy = function (event) {
-    let productKey: string;
-    let self = this;
-    this.getCanvas().remove(this.boundingBox);
-    let resultProductImg = this.getCanvas().toDataURL();
-    let newProduct = this.createProduct(self, resultProductImg);
-    this.openDialog(newProduct);
+  buy = function (sizePanel) {
+    this.templateSizeQuantites.forEach(el => {
+      this.totalQuantity += el.quantity;
+      console.log(el.quantity);
+    });
+    console.log(this.totalQuantity);
+    if (!this.totalQuantity) {
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open(`Please, choose a size`, 'required', config);
+      this.tab.selectedIndex = 0;
+    } else {
+      this.templateSizeQuantites.forEach(el => {
+        if (el.quantity !== 0) {
+          let productKey: string;
+          let self = this;
+          this.getCanvas().remove(this.boundingBox);
+          let resultProductImg = this.getCanvas().toDataURL();
+          let newProduct = this.createProduct(self, resultProductImg);
+          this.productService.setSize(newProduct, el.size);
+          this.orderService.addItem(newProduct, 'no', el.quantity);
+        }
+      });
+      localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+      this.router.navigate(['order-page']);
+    }
   }
 
   loadImageHandler = function (e) {
@@ -467,21 +498,15 @@ export class RedactorPageComponent {
     canvas.renderAll();
   }
 
-  openDialog(product) {
-    let dialogRef = this.dialog.open(SizeDialogComponent, {
-      width: '30%',
-      height: '40%',
-      data: {
-        product: product
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.orderService.addItem(product, 'no');
-      localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
-      this.router.navigate(['order-page']);
-    });
+  addButtonClick(size) {
+    return size.quantity++;
   }
 
+  subtractButtonClick(size) {
+    if (size.quantity > 0) {
+      return size.quantity--;
+    }
+  }
 
   templates = [
     {

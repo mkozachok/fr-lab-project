@@ -25,6 +25,27 @@
                   </ul>
 
               </md-expansion-panel>
+              <md-expansion-panel class="size-expansion" #sizePanel>
+                  <md-expansion-panel-header>
+                    <md-panel-title>
+                      <div class="head">Size</div>
+                    </md-panel-title>
+                  </md-expansion-panel-header>  
+                  <ul class="size">
+                    <li *ngFor="let size of templateSizeQuantites" class="size-item">
+                        <span class="size-name">{{size.size}}</span>
+                        <div class="quantity">
+                        <button button md-raised-button class="add" (click)="addButtonClick(size)">
+                            +
+                          </button> 
+                          <input mdInput type="number" value="{{size.quantity}}">
+                          <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
+                            -
+                          </button> 
+                          </div>
+                    </li>
+                  </ul>  
+              </md-expansion-panel>
             </ng-container>
       </md-tab>
 
@@ -95,8 +116,8 @@
       <canvas width="700px" height="550px" id="img_product"></canvas>
     </div>
     <div id="btns">
-    <button md-raised-button (click)="saveProduct()"><i class="material-icons">save</i></button>
-    <button md-raised-button (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
+    <button md-raised-button [disabled]="isDisabled" (click)="saveProduct()"><i class="material-icons">save</i></button>
+    <button md-raised-button [disabled]="isDisabled" (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
   </div>
     <span id="price">Price is: {{ getProductPrice() }}$</span>
