@@ -38,7 +38,7 @@
                         <button button md-raised-button class="add" (click)="addButtonClick(size)">
                             +
                           </button> 
-                          <input mdInput type="number" value="{{size.quantity}}">
+                          <input mdInput type="number" value="{{size.quantity}}" [readonly]="true">
                           <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
                             -
                           </button> 

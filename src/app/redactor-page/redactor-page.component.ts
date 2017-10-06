@@ -399,7 +399,7 @@ export class RedactorPageComponent {
     if (!this.totalQuantity) {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
-      config.duration = 1300;
+      config.duration = 1500;
       this.snackBar.open(`Please, choose a size`, 'required', config);
       this.tab.selectedIndex = 0;
     } else {
