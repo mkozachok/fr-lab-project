@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsListService } from '../../../services';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-remove-product',
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./remove-product.component.scss']
 })
 export class RemoveProductComponent implements OnInit {
+  removeProductSubscription: Subscription = new Subscription();
   photoUrl: string;
   name: string;
   productList: Observable<Array<any>>;
@@ -19,15 +20,19 @@ export class RemoveProductComponent implements OnInit {
   ) { }
 
   getProductsArr() {
-    this._productService.getProducts().subscribe(res => {
+   this.removeProductSubscription.add(this._productService.getProducts().subscribe(res => {
       this.showSpinner = false;
       this.productList = res;
       this.arrOfProducts = this.productList;
-    });
+    }));
   }
 
   ngOnInit() {
     this.getProductsArr();
+  }
+
+  ngOnDestroy(){
+    this.removeProductSubscription.unsubscribe();
   }
 
   filterItem(phrase) {

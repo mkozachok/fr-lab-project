@@ -9,13 +9,19 @@
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
 
-    @media screen and (max-width: $break-middle){
+    @media screen and (max-width: $break-m){
         font-size: 0.7em;
     }
 
     .spacer {
         flex: 1 1 auto;
     }
+
+/*     /deep/.mat-toolbar-row{
+        @media screen and (max-width: $break-m){
+            flex-direction: column !important;
+        }
+    } */
 
      /deep/ .material-icons {
         @media screen and (max-width: $break-middle){

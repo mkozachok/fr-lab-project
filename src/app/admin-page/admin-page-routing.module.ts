@@ -2,19 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { AdminPageComponent } from './admin-page.component';
-import { AddMenuComponent } from './add-menu/add-menu.component';
-import { RemoveMenuComponent } from './remove-menu/remove-menu.component'
-import { NewOrdersComponent } from './new-orders/new-orders.component';
+import { AddMenuComponent } from './add-menu';
+import { RemoveMenuComponent } from './remove-menu';
+import { NewOrdersComponent } from './new-orders';
 
-import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards';
 
 const adminPageRoutes: Routes = [
     {
         path: 'admin-page',
         component: AdminPageComponent,
-        canActivateChild: [AuthGuard],
+        canActivateChild: [AdminGuard],
         children: [
             {
                 path: 'add-menu',

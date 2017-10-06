@@ -32,10 +32,7 @@
     .info-group {
         display: flex;
         padding: 1vw 0;
-
-        
-
-        
+  
         .info-group-row {
             display: inline-block;
             text-align: left;
@@ -96,5 +93,6 @@
 
     .edit-save-button{
         @extend  .edit-photo-button;
+        width: 100px;
     }
 }

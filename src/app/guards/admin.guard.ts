@@ -28,7 +28,6 @@ export class AdminGuard implements CanActivate {
 
     if (this._userService.isUserLogIn()) {
       id = this._userService.isUserLogIn().uid;
-
       return this._adminService.getAdmin(id).map(res => {
         if (res[0]) {
           return true;
@@ -36,8 +35,13 @@ export class AdminGuard implements CanActivate {
           this._router.navigate(['/']);
         }
       })
-    }else{
+    }else{  
       this._router.navigate(['/login-page']);
     }
+
   }
+
+  canActivateChild(): Observable<boolean> | boolean {
+    return this.canActivate();
+}
 }
