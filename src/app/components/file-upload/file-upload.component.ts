@@ -5,7 +5,7 @@ import { UploadService } from '../../services/upload.service';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.css']
+  styleUrls: ['./file-upload.component.scss']
 })
 
 

@@ -29,8 +29,9 @@ export class LoginPageComponent implements OnInit {
   onSubmitGoogle() {
     this.error = null;
     this._userService.loginInGoogle()
-      .then((success) => this.googleAutorizationCheck())
-      .then((success) => this.googeAutarizationRouting())
+      // .then((success) => this.googleAutorizationCheck())
+      // .then((success) => this.googeAutarizationRouting())
+      .then((success) => this.router.navigate(['/']))
       .catch(err => this.error = err);
   }
   onSubmitFacebook() {
@@ -41,13 +42,13 @@ export class LoginPageComponent implements OnInit {
       .catch(err => this.error = err);
   }
   googleAutorizationCheck() {
-  this._userService.getUserFromDataBase(this._userService.getUserId())
+  const check =  this._userService.getUserFromDataBase(this._userService.getUserId())
     .subscribe(res => this.userValue = res.$exists());
+    check.unsubscribe();
   }
   googeAutarizationRouting() {
     if (!this.userValue) {
       this._userService.createUserAdditionalInformation('', '')
-      // .then((success) => this._elementRef.)
       .then((success) => this.router.navigate(['/']));
     } else {
       this.router.navigate(['/']);
