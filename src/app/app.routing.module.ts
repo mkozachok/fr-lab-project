@@ -12,6 +12,7 @@ import { MakeOrderComponent } from './order-page/make-order/make-order.component
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { OrderGuard } from './guards/make-order.guard';
 import { AboutMeComponent } from './profile-page/about-me/about-me.component';
 
 const routes: Routes = [
@@ -60,7 +61,8 @@ const routes: Routes = [
     },
     {
         path: 'make-order',
-        component: MakeOrderComponent
+        component: MakeOrderComponent,
+        canActivate: [OrderGuard]
     },
     {
         path: 'additional-info',

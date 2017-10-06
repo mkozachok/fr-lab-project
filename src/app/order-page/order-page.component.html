@@ -29,7 +29,7 @@
           <button button md-raised-button class="add" (click)="addButtonClick(order)">
             +
           </button> 
-          <input mdInput type="number" value="{{order.quantity}}">
+          <input mdInput type="text" value="{{order.quantity}}" [readonly]="true">
           <button button md-raised-button class="subtract" (click)="subtractButtonClick(order)">
             -
           </button> 

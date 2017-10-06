@@ -73,6 +73,7 @@ input::-webkit-inner-spin-button {
 		::ng-deep .mat-icon {
 			width: 32px;
 			height: 32px;
+			cursor: pointer;
 		}
 	}
 }
@@ -123,6 +124,12 @@ button:hover {
 .empty-cart {
 	margin-top: 10%;
 	text-align: center;
+}
+
+@-moz-document url-prefix() {
+	.header {
+		margin-bottom: 5%;
+	}
 }
 
 @media (max-width:$break-l) and (min-width:$break-m) {

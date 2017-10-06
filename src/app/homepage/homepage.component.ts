@@ -115,7 +115,6 @@ export class HomepageComponent implements OnInit {
       this.snackBar.open(`Please, choose a product size`, 'required', config);
     } else {
       this.orderService.addItem(product, product.$key, 1);
-      localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
       config.duration = 1300;
