@@ -4,14 +4,11 @@ import { Router } from '@angular/router';
 import { Upload } from '../models/upload-model';
 import { ViewChild } from '@angular/core';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
-// import { NgForm} from '@angular/forms';
-// import { AngularFireAuth } from 'angularfire2/auth';
-// import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
-  // providers: [UserService, NgForm, AngularFireAuth]
 })
 export class RegistrationPageComponent implements OnInit {
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;

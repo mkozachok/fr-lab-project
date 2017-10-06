@@ -96,18 +96,26 @@ export class AboutMeComponent implements OnInit, OnDestroy {
         this.subscribeToGetUserFromDataBase = this._userService
           .getUserFromDataBase(this.user.id)
           .subscribe(res => {
-            let {phone, address} = res.additionalInfo;
-            this.showLoader = false;
-            if(!phone){
-              phone = 'not specified'
+            if (res.additionalInfo) {
+              let {phone, address} = res.additionalInfo;
+              this.showLoader = false;
+              if(!phone){
+                phone = 'not specified'
+              }
+              if(!address){
+                address = 'not specified'
+              }
+              this.userAdditionalInfo = {
+                address: address,
+                phone: phone
+              };
+            } else {
+              this.showLoader = false;
+              this.userAdditionalInfo = {
+                address: 'not specified',
+                phone: 'not specified'
+              };
             }
-            if(!address){
-              address = 'not specified'
-            }
-            this.userAdditionalInfo = {
-              address: address,
-              phone: phone
-            };
           })
       });
   }

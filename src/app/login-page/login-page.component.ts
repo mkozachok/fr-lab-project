@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
@@ -13,22 +13,25 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   error: Error;
   userValue: boolean;
-  constructor(private _userService: UserService, private router: Router) {
+  constructor(private _userService: UserService, private router: Router, private _elementRef: ElementRef) {
   }
   ngOnInit() {
   }
 
+
+
   onSubmit(value: any) {
     this.error = null;
     this._userService.logIn(value.email, value.password)
-      .then((success) => this.router.navigate(['']))
+      .then((success) => this.router.navigate(['/']))
       .catch(err => this.error = err);
   }
   onSubmitGoogle() {
     this.error = null;
     this._userService.loginInGoogle()
-      .then((success) => this.googleAutorizationCheck())
-      .then((success) => this.googeAutarizationRouting())
+      // .then((success) => this.googleAutorizationCheck())
+      // .then((success) => this.googeAutarizationRouting())
+      .then((success) => this.router.navigate(['/']))
       .catch(err => this.error = err);
   }
   onSubmitFacebook() {
@@ -39,15 +42,16 @@ export class LoginPageComponent implements OnInit {
       .catch(err => this.error = err);
   }
   googleAutorizationCheck() {
-  this._userService.getUserFromDataBase(this._userService.getUserId())
+  const check =  this._userService.getUserFromDataBase(this._userService.getUserId())
     .subscribe(res => this.userValue = res.$exists());
+    check.unsubscribe();
   }
   googeAutarizationRouting() {
     if (!this.userValue) {
       this._userService.createUserAdditionalInformation('', '')
-      .then((success) => this.router.navigate(['']));
+      .then((success) => this.router.navigate(['/']));
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     }
   }
 }
