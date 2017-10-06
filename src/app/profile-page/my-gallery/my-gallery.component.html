@@ -1,4 +1,8 @@
 <app-loader *ngIf="showSpinner" class="loader"></app-loader>
 <div class="container" *ngIf="!showSpinner">
 	<app-view-one-product *ngFor="let product of usersProducts" [product]="product"></app-view-one-product>
+	<div *ngIf="usersProducts.length === 0" class="empty">
+		<i class="material-icons">collections</i>
+		<h3>There are no items in your gallery</h3>
+	</div>
 </div>

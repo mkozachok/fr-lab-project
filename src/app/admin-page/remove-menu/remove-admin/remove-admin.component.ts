@@ -11,7 +11,7 @@ import { Admin } from '../../../models/admin-model';
 
 
 export class RemoveAdminComponent implements OnInit, OnDestroy {
-  subscriptionToAdminsList: Subscription;
+  removeAdminSubscription: Subscription = new Subscription();
   admins: Observable<Array<any>>;
   arrOfAdmins: Observable<Array<any>>;
   filteredArr: Observable<Array<any>>;
@@ -23,12 +23,12 @@ export class RemoveAdminComponent implements OnInit, OnDestroy {
   }
 
   getAdminsArr(): void{
-    this.subscriptionToAdminsList = this._adminService.getAdminsList()
+    this.removeAdminSubscription.add(this._adminService.getAdminsList()
     .subscribe(res => {
       this.showSpinner = false;
       this.admins = res;
       this.arrOfAdmins = this.admins;
-    })
+    }))
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class RemoveAdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscriptionToAdminsList.unsubscribe();
+    this.removeAdminSubscription.unsubscribe();
   }
 
   filterItem(phrase) {

@@ -2,6 +2,11 @@
 <div class="homepage" id="shop">
   <div class="leftcol">
     <div>
+      <div class="allProducts">
+        <button md-button (click) = "sorting('all')">
+            show all products
+        </button>
+      </div>
       <form class="searching-form">
         <md-form-field class="example-full-width">
           <input mdInput 
@@ -36,11 +41,6 @@
     </div>
     <md-list class="objectTypeFilter">
       <h2 md-subheader>Sorting by type</h2>
-      <div (click) = "sorting('all')">
-        <md-list-item (click)="navChanged('all')" [ngClass]="{'active' : 'all' === selected}">
-            all
-        </md-list-item>
-      </div>
       <div class="iconsBlock">
         <div *ngFor = "let templateType of templateTypes" 
             (click) = "sorting(templateType.type)" class="icons">
@@ -51,9 +51,11 @@
       <h2 md-subheader>Sorting by category</h2>
       <div *ngFor = "let productCategory of categories" 
           (click) = "sorting(productCategory.category)">
-        <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
-          {{productCategory.category}}
-        </md-list-item>
+        <ng-container *ngIf = " productCategory.category !=='all' ">
+          <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
+            {{productCategory.category}}
+          </md-list-item>
+        </ng-container>
       </div>
     </md-list>
   </div> 
@@ -73,7 +75,7 @@
             <ng-container *ngFor = "let template of templateTypes; let i = index">
                 <ng-container *ngIf = "product.type === template.type">
                   <li>
-                    <md-select [(ngModel)]="mySize" placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
+                    <md-select [(ngModel)]="mySize" #price placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
                         <md-option *ngFor="let size of template.size" [value]="size">
                           {{size}}
                         </md-option>

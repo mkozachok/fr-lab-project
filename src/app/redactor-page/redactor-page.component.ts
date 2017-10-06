@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { Component, HostListener, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { UploadService } from '../services/upload.service';
 import { fabric } from 'fabric';
 import { User } from '../models/user-model';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import * as firebase from 'firebase';
 import { MdDialog } from '@angular/material';
-import { SizeDialogComponent } from '../components/size-dialog/size-dialog.component';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -40,6 +40,8 @@ export class RedactorPageComponent {
   designsPrice: number = 0;
   templateImg;
   myGoods: Array<any> = [];
+  templateSizeQuantites = [];
+  showSize: boolean = false;
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -55,7 +57,11 @@ export class RedactorPageComponent {
     selectable: false,
     strokeDashArray: [5, 10]
   });
-  // disableCategory = true;
+  disableCategory = true;
+
+  @ViewChild('category') tab;
+  isDisabled = true;
+  totalQuantity: number = 0;
 
   constructor(private designService: DesignService,
     private userService: UserService,
@@ -64,20 +70,22 @@ export class RedactorPageComponent {
     private uploadService: UploadService,
 
     private router: Router,
-    public dialog: MdDialog
-  ) {}
+    public dialog: MdDialog,
+    public myElement: ElementRef,
+    public snackBar: MdSnackBar
+  ) { }
 
   ngOnInit() {
-   let self = this;
-   this.designService.getDesigns().subscribe(res => {this.items = res});
-   this.designService.getDesignCategory().subscribe(res => {this.categories = res});
-   this.designService.getPrice().subscribe(res => {this.price = res});
-   this.userService.getUser().subscribe(res => {
-     this.user = new User();
-     this.user.firstName = res.displayName.split(' ')[0];
-     this.user.lastName = res.displayName.split(' ')[1];
-   });
-   this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+    //this.tab.isActive=false;
+    this.designService.getDesigns().subscribe(res => { this.items = res });
+    this.designService.getDesignCategory().subscribe(res => { this.categories = res });
+    this.designService.getPrice().subscribe(res => { this.price = res });
+    this.userService.getUser().subscribe(res => {
+      this.user = new User();
+      this.user.firstName = res.displayName.split(' ')[0];
+      this.user.lastName = res.displayName.split(' ')[1];
+    });
+    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
   }
 
 
@@ -101,33 +109,33 @@ export class RedactorPageComponent {
       movingBox.setTop(Math.min(Math.max(top, topBound), bottomBound - movingBox.getHeight()));
     });
 
-this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
-canvas.on("object:scaling", (event) => {
-   let el = event.target;
+    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
+    canvas.on("object:scaling", (event) => {
+      let el = event.target;
 
-   if ((el.scaleX > 1) && (el.width * el.scaleX > this.boundingBox.getWidth())) {
-     el.setWidth(this.boundingBox.getWidth());
-     el.setScaleX(1);
-     el.setLeft(this.boundingBox.left);
-   }
-   if ((el.scaleY > 1) && (el.height * el.scaleY > this.boundingBox.getHeight())) {
-     el.setHeight(this.boundingBox.getHeight());
-     el.setScaleY(1);
-     el.setTop(this.boundingBox.top);
-   }
+      if ((el.scaleX > 1) && (el.width * el.scaleX > this.boundingBox.getWidth())) {
+        el.setWidth(this.boundingBox.getWidth());
+        el.setScaleX(1);
+        el.setLeft(this.boundingBox.left);
+      }
+      if ((el.scaleY > 1) && (el.height * el.scaleY > this.boundingBox.getHeight())) {
+        el.setHeight(this.boundingBox.getHeight());
+        el.setScaleY(1);
+        el.setTop(this.boundingBox.top);
+      }
 
-   // need to make different func and apply here this code
-   el.left = el.left < this.boundingBox.left ? boundingBox.left : el.left;
-   el.top = el.top < this.boundingBox.top ? this.boundingBox.top : el.top;
-   if ((el.left + el.width * el.scaleX) > (this.boundingBox.left + this.boundingBox.getWidth())) {
-     el.left = (this.boundingBox.left + this.boundingBox.getWidth()) - el.width * el.scaleX;
-   }
-   if ((el.top + el.height * el.scaleY) > (this.boundingBox.top + this.boundingBox.getHeight())) {
-     el.top = (this.boundingBox.top + this.boundingBox.getHeight()) - el.height * el.scaleY;
-   }
- })
+      // need to make different func and apply here this code
+      el.left = el.left < this.boundingBox.left ? boundingBox.left : el.left;
+      el.top = el.top < this.boundingBox.top ? this.boundingBox.top : el.top;
+      if ((el.left + el.width * el.scaleX) > (this.boundingBox.left + this.boundingBox.getWidth())) {
+        el.left = (this.boundingBox.left + this.boundingBox.getWidth()) - el.width * el.scaleX;
+      }
+      if ((el.top + el.height * el.scaleY) > (this.boundingBox.top + this.boundingBox.getHeight())) {
+        el.top = (this.boundingBox.top + this.boundingBox.getHeight()) - el.height * el.scaleY;
+      }
+    })
 
-    this.designService.getTemplateTypes().subscribe(res => {this.templateTypes = res});
+    this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
     this.boundingBox = boundingBox;
   }
 
@@ -226,8 +234,21 @@ canvas.on("object:scaling", (event) => {
   }
 
   selectTemplate(template) {
-    // this.disableCategory = null;
+    this.disableCategory = false;
+    console.log(this.disableCategory);
+    if (this.isDisabled) {
+      this.tab.selectedIndex = 1;
+    }
+    this.isDisabled = false;
     this.type = template.type;
+    this.templateSizeQuantites.length = 0;
+    this.templateTypes.forEach(el => {
+      if (el.type === this.type) {
+        el.size.forEach(el => {
+          this.templateSizeQuantites.push({size: el, quantity: 0});
+        })
+      }
+    });
     this.templatePrice = template.price;
     this.myGoods = template.goods;
     this.drawOnCanvas(template.url, true);
@@ -281,14 +302,14 @@ canvas.on("object:scaling", (event) => {
       width: 150,
       height: 150,
       left: 270,
-      top:200,
+      top: 200,
       borderColor: 'red',
       cornerColor: 'green',
       hasRotatingPoint: false,
-      id:this.selectedDesignsPrices.length
+      id: this.selectedDesignsPrices.length
     });
     image.selectable = true;
-    image.evented=true;
+    image.evented = true;
     image.lockRotation = true;
     return image;
   }
@@ -324,7 +345,7 @@ canvas.on("object:scaling", (event) => {
       const priceNumber = parseFloat(category.price);
       this.selectedDesignsPrices.push(priceNumber);
     }
-    this.categoryName = category.name;
+    this.categoryName = category.category;
     this.drawOnCanvas(category.url, false);
   }
 
@@ -332,7 +353,11 @@ canvas.on("object:scaling", (event) => {
     let newProduct = new Product();
     newProduct.name = redactor.type;
     newProduct.type = redactor.type;
-    newProduct.category = redactor.categoryName;
+    if (redactor.categoryName) {
+      newProduct.category = redactor.categoryName;
+    } else {
+      newProduct.category = 'no';
+    }
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
     // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
@@ -355,24 +380,43 @@ canvas.on("object:scaling", (event) => {
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       null,
       null,
-    ()=>{
-      let newProduct = this.createProduct(self, uploadTask.snapshot.downloadURL);
-      this.productService.setProduct(newProduct).then(resolve => {
-        productKey = resolve.key;
-        this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
-          this.router.navigate(['profile-page/my-gallery']);
+      () => {
+        let newProduct = this.createProduct(self, uploadTask.snapshot.downloadURL);
+        this.productService.setProduct(newProduct).then(resolve => {
+          productKey = resolve.key;
+          this.userService.addToUsersGallery(this.userService.getUserId(), productKey).then(resolve => {
+            this.router.navigate(['profile-page/my-gallery']);
+          });
         });
-      });
-    })
+      })
   }
 
-  buy = function (event) {
-    let productKey: string;
-    let self = this;
-    this.getCanvas().remove(this.boundingBox);
-    let resultProductImg = this.getCanvas().toDataURL();
-    let newProduct = this.createProduct(self, resultProductImg);
-    this.openDialog(newProduct);
+  buy = function (sizePanel) {
+    this.showSize = true;
+    this.templateSizeQuantites.forEach(el => {
+      this.totalQuantity += el.quantity;
+    });
+    if (!this.totalQuantity) {
+      let config = new MdSnackBarConfig();
+      config.extraClasses = ['success-snackbar'];
+      config.duration = 1300;
+      this.snackBar.open(`Please, choose a size`, 'required', config);
+      this.tab.selectedIndex = 0;
+    } else {
+      this.templateSizeQuantites.forEach(el => {
+        if (el.quantity !== 0) {
+          let productKey: string;
+          let self = this;
+          this.getCanvas().remove(this.boundingBox);
+          let resultProductImg = this.getCanvas().toDataURL();
+          let newProduct = this.createProduct(self, resultProductImg);
+          this.productService.setSize(newProduct, el.size);
+          this.orderService.addItem(newProduct, 'no', el.quantity);
+        }
+      });
+      localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+      this.router.navigate(['order-page']);
+    }
   }
 
   loadImageHandler = function (e) {
@@ -462,21 +506,15 @@ canvas.on("object:scaling", (event) => {
     canvas.renderAll();
   }
 
-openDialog(product) {
-  let dialogRef = this.dialog.open(SizeDialogComponent, {
-    width: '30%',
-    height: '40%',
-    data: {
-      product: product
-    }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    this.orderService.addItem(product, 'no');
-    localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
-    this.router.navigate(['order-page']);
-  });
-}
+  addButtonClick(size) {
+    return size.quantity++;
+  }
 
+  subtractButtonClick(size) {
+    if (size.quantity > 0) {
+      return size.quantity--;
+    }
+  }
 
   templates = [
     {

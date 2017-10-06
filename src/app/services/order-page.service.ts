@@ -67,7 +67,15 @@ export class OrderService {
 		}
 	}
 
-	addItem(item: Product, itemKey: string): void {
+	setItemQuantity(item, itemQuantity) {
+		let index = this.getItemIndex(item);
+		console.log(index);
+		console.log(ORDERS);
+		// ORDERS[index].quantity = itemQuantity;
+		// quantity += itemQuantity;
+	}
+
+	addItem(item: Product, itemKey: string, itemQuantity: number): void {
 		let exists = false;
 		ORDERS.forEach(el => {
 			if (el.productKey === itemKey && (el.product.size === item.size) && (itemKey !== 'no')) {
@@ -77,7 +85,7 @@ export class OrderService {
 			}
 		});
 		if (!exists) {
-			let newItem = new Order(item, 1, itemKey);
+			let newItem = new Order(item, itemQuantity, itemKey);
 			ORDERS.push(newItem);
 			quantity++;
 		}

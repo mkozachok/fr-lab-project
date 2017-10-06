@@ -8,7 +8,7 @@
         .leftcol {
             display: flex;
         }
-        .objectTypeFilter {
+        .objectTypeFilter, .allProducts {
             display: none;
         }
     }
@@ -28,7 +28,7 @@
         .oneObjet {
             width: 49%;
         }
-        .objectTypeFilter {
+        .objectTypeFilter, .allProducts {
             display: none;
         }
         .rightcol, .leftcol{
@@ -60,11 +60,9 @@
             width: 100%;
         }
         img{
-            max-height: auto;
-            height: auto;
             width: 100%;
         }
-        .objectTypeFilter {
+        .objectTypeFilter, .allProducts {
             display: none;
         }
         .rightcol, .leftcol{

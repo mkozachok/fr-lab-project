@@ -62,11 +62,10 @@ export class HomepageComponent implements OnInit {
     private adminService: AdminService
   ) {
     iconRegistry
-      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_mode_edit_black_24px.svg'))
+      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('./../../assets/icons/ic_mode_edit_black_24px.svg'))
   };
 
   ngOnInit(): void {
-    let that = this;
     this.subscriptionToUserService = this.userService.getUserIdAsync().subscribe(user => {
       let id = user? user.uid : 'Please login';
      this.subscriptionToAdminService = this.adminService.getAdmin(id).subscribe(admin => {
@@ -85,6 +84,8 @@ export class HomepageComponent implements OnInit {
     });
     //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
   };
+
+ 
 
   ngOnDestroy(){
     this.subscriptionToUserService.unsubscribe();
@@ -113,7 +114,7 @@ export class HomepageComponent implements OnInit {
       config.duration = 1300;
       this.snackBar.open(`Please, choose a product size`, 'required', config);
     } else {
-      this.orderService.addItem(product, product.$key);
+      this.orderService.addItem(product, product.$key, 1);
       localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
@@ -123,6 +124,7 @@ export class HomepageComponent implements OnInit {
   }
 
   setSize(size, product): void {
+    console.log(size)
     product.size = size;
   }
 

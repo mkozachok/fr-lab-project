@@ -1,10 +1,10 @@
 <div id="container">
   <div id="tools">
-    <md-tab-group>
+    <md-tab-group #category>
       <md-tab label="Product Type">
           <div class="templates">
             <div class="template_img" *ngFor="let template of templateTypes">
-              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template)"></div>
+              <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template, $event)"></div>
               <!-- <img [src]="template.url" (click)="selectTemplate(template)" width="80"/> -->
             </div>
           </div>
@@ -25,10 +25,30 @@
                   </ul>
 
               </md-expansion-panel>
+              <md-expansion-panel class="size-expansion" #sizePanel *ngIf = "showSize" [expanded]="showSize">
+                  <md-expansion-panel-header>
+                    <md-panel-title>
+                      <div class="head">Size</div>
+                    </md-panel-title>
+                  </md-expansion-panel-header>  
+                  <ul class="size">
+                    <li *ngFor="let size of templateSizeQuantites" class="size-item">
+                        <span class="size-name">{{size.size}}</span>
+                        <div class="quantity">
+                        <button button md-raised-button class="add" (click)="addButtonClick(size)">
+                            +
+                          </button> 
+                          <input mdInput type="number" value="{{size.quantity}}">
+                          <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
+                            -
+                          </button> 
+                          </div>
+                    </li>
+                  </ul>  
+              </md-expansion-panel>
             </ng-container>
       </md-tab>
-
-      <md-tab [disabled]="disableCategory"  label="Category">
+      <md-tab [disabled]="isDisabled"  label="Category">
           <div class="categories">
             <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category" ng-disabled="tab.disabled">
               <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
@@ -81,9 +101,6 @@
                 <md-checkbox value="italic" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Italic</md-checkbox>
                 <md-checkbox value="linethrough" [disabled]="!this.getCanvas().getActiveObject()" (change)="setFontOptions($event)">Linethrough</md-checkbox>
               </div>
-
-
-
           </md-expansion-panel>
       </md-tab>
     </md-tab-group>
@@ -95,11 +112,10 @@
       <canvas width="700px" height="550px" id="img_product"></canvas>
     </div>
     <div id="btns">
+    <button md-raised-button [disabled]="isDisabled" (click)="saveProduct()"><i class="material-icons">save</i></button>
+    <button md-raised-button [disabled]="isDisabled" (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
-    <button md-raised-button (click)="saveProduct()"><i class="material-icons">save</i></button>
-    <button md-raised-button (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
-    <span>Price is: {{ getProductPrice() }}$</span>
-    <!-- <img width="700px" id="result" [src]="resultImg" alt=""/> -->
   </div>
+    <span id="price">Price is: {{ getProductPrice() }}$</span>
   </div>
 </div>

@@ -130,8 +130,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
 
   ],
   entryComponents: [
-    DialogComponent,
-    // SizeDialogComponent
+    DialogComponent
   ],
   bootstrap: [
     AppComponent

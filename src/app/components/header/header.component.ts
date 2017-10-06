@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { OrderService } from '../../services/order-page.service';
-
+import { UserService, OrderService } from '../../services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +9,13 @@ import { OrderService } from '../../services/order-page.service';
   providers: [OrderService]
 })
 export class HeaderComponent implements OnInit {
-  logoSrc = "/assets/images/logo.png";
+  logoSrc = "./assets/images/logo.png";
   basketIcon = "shopping_cart";
   user = {};
   ordersAmount: number;
+  subscription: Subscription
   constructor(private _userService: UserService, private orderService: OrderService) {
-    this._userService.getUser().subscribe(res => this.user = res);
+   this.subscription = this._userService.getUser().subscribe(res => this.user = res);
     // console.log(JSON.parse(localStorage.getItem("cart-items")).length);
     // this.ordersAmount = JSON.parse(localStorage.getItem("cart-items")).length;
     this.ordersAmount = this.orderService.getQuantity();
@@ -28,7 +28,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+  }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   logOut() {

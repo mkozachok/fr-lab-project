@@ -28,7 +28,7 @@ input::-webkit-inner-spin-button {
 	display: flex;
 	padding: 2% 0;
 	background: #7b0041;
-	color: white;
+	color: #eee;
 	font-size: 1.1em;
 
 	div {
@@ -48,6 +48,7 @@ input::-webkit-inner-spin-button {
 	display: flex;
 	border: 1px solid #eee;
 	border-top: none;
+	padding: 1%;
 
 	div {
 		width: 16%;
@@ -60,7 +61,7 @@ input::-webkit-inner-spin-button {
 		justify-content: flex-start;
 
 		img {
-			max-height: 80%;
+			height: auto;
 			max-width: 80%;
 		}
 	}
@@ -85,8 +86,10 @@ input::-webkit-inner-spin-button {
 	}
 
 	.add, .subtract {
+		width: 20%;
 		height: 20%;
 		line-height: 20%;
+		padding: 0;
 
 		.mat-button-wrapper {
 			line-height: 0 !important;
@@ -96,6 +99,11 @@ input::-webkit-inner-spin-button {
 
 button {
 	min-width: 1%;
+}
+
+button:hover {
+	background: #7b0041;
+	color: #eee;
 }
 
 .info {
@@ -115,4 +123,55 @@ button {
 .empty-cart {
 	margin-top: 10%;
 	text-align: center;
+}
+
+@media (max-width:$break-l) and (min-width:$break-m) {
+
+	.quantity {
+		.add, .subtract {
+			height: 30%;
+			width: 30%;
+		}
+
+		input {
+			height: 30%;
+			width: 30%;
+		}
+	}
+}
+
+@media (max-width:$break-m) {
+
+	.quantity {
+		.add, .subtract {
+			height: 40%;
+			width: 30%;
+		}
+
+		input {
+			height: 40%;
+			width: 30%;
+		}
+	}
+}
+
+@media (max-width:$break-s) {
+
+	.header {
+		h2 {
+			font-size: 0.9em;
+		}
+	}
+
+	.quantity {
+		.add, .subtract {
+			height: 45%;
+			width: 30%;
+		}
+
+		input {
+			height: 45%;
+			width: 30%;
+		}
+	}
 }
