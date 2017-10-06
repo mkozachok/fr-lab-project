@@ -20,6 +20,7 @@ import { WildcardRoutingModule } from './wildcard-routing/wildcard-routing.modul
 
 // App guards goes here
 import { AuthGuard, AdminGuard } from './guards';
+import { OrderGuard } from './guards/make-order.guard';
 
 
 // App components goes here
@@ -127,7 +128,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     MakeOrderService,
     OrderService,
     CommonService,
-
+    OrderGuard
   ],
   entryComponents: [
     DialogComponent

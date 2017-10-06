@@ -126,6 +126,12 @@ button:hover {
 	text-align: center;
 }
 
+@-moz-document url-prefix() {
+	.header {
+		margin-bottom: 5%;
+	}
+}
+
 @media (max-width:$break-l) and (min-width:$break-m) {
 
 	.quantity {
