@@ -3,4 +3,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px;
+}
+
+.message {
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+.close {
+    padding-top: 50px;
+}
+
+.message-403 {
+    font-size: 8vw;
 }

@@ -40,10 +40,7 @@ export class AdminGuard implements CanActivate {
     } else {
       this._router.navigate(['/'])
         .then(res => {
-          this.dialog.open(ForbiddenComponent, {
-            height: '50%',
-            width: '50%'
-          })
+          this.dialog.open(ForbiddenComponent)
         });
     }
 
