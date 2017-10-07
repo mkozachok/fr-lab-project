@@ -113,7 +113,6 @@ export class HomepageComponent implements OnInit {
   }
 
   setSize(size, product): void {
-    console.log(size)
     product.size = size;
   }
 }
