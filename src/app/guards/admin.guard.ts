@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AdminService } from '../services/admin.service';
-import { UserService } from '../services/user.service';
+import { AdminService, UserService } from '../services';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
 import { AuthGuard } from './auth.guard';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { MdDialog } from '@angular/material';
+import { ForbiddenComponent } from '../components'
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -17,7 +18,8 @@ export class AdminGuard implements CanActivate {
     private _router: Router,
     private _userService: UserService,
     private _adminService: AdminService,
-    private _afAuth: AngularFireAuth
+    private _afAuth: AngularFireAuth,
+    public dialog: MdDialog
   ) {
 
   }
@@ -35,13 +37,17 @@ export class AdminGuard implements CanActivate {
           this._router.navigate(['/']);
         }
       })
-    }else{  
-      this._router.navigate(['/login-page']);
+    } else {
+      this._router.navigate(['/'])
+        .then(res => {
+          this.dialog.open(ForbiddenComponent)
+        });
     }
 
   }
 
+
   canActivateChild(): Observable<boolean> | boolean {
     return this.canActivate();
-}
+  }
 }
