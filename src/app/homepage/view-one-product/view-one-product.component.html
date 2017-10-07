@@ -1,10 +1,11 @@
 <md-card>
+	<md-icon *ngIf="isAdmin" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
 	<div class="img-container">
 		<img src="{{ product.svg }}" alt="">
 	</div>
 	<div class="info">
 		<div class="aboutTheProduct">
-			<h3>{{product.name}}</h3>
+			<!--<h3>{{product.name}}</h3>-->
 			<ul>
 				<li><span>type:</span> {{product.type}}</li>
 				<li><span>category:</span> {{product.category}}</li>

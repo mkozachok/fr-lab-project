@@ -108,3 +108,9 @@ ul, li {
 		// font-size: 2.3vw !important;
 	}
 }
+
+/deep/ .homepage {
+	.clear {
+		display: none !important;
+	}
+}

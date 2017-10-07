@@ -59,36 +59,12 @@
       </div>
     </md-list>
   </div> 
-  <div class = "rightcol wrapper">
-    <div class="oneObjet" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}">
-        <md-icon *ngIf="isAdmin" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
-      <div class="productImg">
-        <img src="{{ product.svg }}" alt="">
-      </div>
-      <div class="info">
-        <div class = "aboutTheProduct">
-          <h3>{{product.name}}</h3>
-          <ul>
-            <li><span>type:</span> {{product.type}}</li>
-            <li><span>category:</span> {{product.category}}</li>
-            <li><span>price:</span>  {{ product.price }}</li>
-            <ng-container *ngFor = "let template of templateTypes; let i = index">
-                <ng-container *ngIf = "product.type === template.type">
-                  <li>
-                    <md-select [(ngModel)]="mySize" #price placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
-                        <md-option *ngFor="let size of template.size" [value]="size">
-                          {{size}}
-                        </md-option>
-                    </md-select> 
-                  </li>             
-                </ng-container>
-            </ng-container>
-          </ul>
-        </div>
-        <button md-raised-button (click)="addToCart(product)">add to my card</button>
-        <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
-      </div>  
-    </div>
+  <div class="homepageSpinner" *ngIf="showSpinner">
+    <app-loader *ngIf="showSpinner" class="loader"></app-loader>
+  </div>
+  <div class = "rightcol wrapper" *ngIf="!showSpinner">
+      <app-view-one-product class="oneObjet" [product]="product" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}"></app-view-one-product>
+    
     <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
   </div>
