@@ -38,7 +38,8 @@ import {
   HeaderComponent,
   FooterComponent,
   DialogComponent,
-  LogOutMessageComponent
+  LogOutMessageComponent,
+  ForbiddenComponent
 } from './components';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
@@ -101,7 +102,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     SmoothScrollToDirective,
     SmoothScrollDirective,
     AdditionalInfoComponent,
-    LogOutMessageComponent
+    LogOutMessageComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -140,7 +142,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
   ],
   entryComponents: [
     DialogComponent,
-    LogOutMessageComponent
+    LogOutMessageComponent,
+    ForbiddenComponent
   ],
   bootstrap: [
     AppComponent
