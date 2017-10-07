@@ -71,7 +71,7 @@ export class HomepageComponent implements OnInit {
     });
     this.productListService.getProducts().subscribe(items => {
       this.showSpinner = false;
-      this.prods = items;
+      this.prods = items.reverse();
       this.arrOfProds = this.prods;
     });
     //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
@@ -84,7 +84,7 @@ export class HomepageComponent implements OnInit {
 
   sorting(propValue) {
     this.productListService.selectProducts(propValue).subscribe(res => {
-      this.prods = res;
+      this.prods = res.reverse();
     });
   }
 
