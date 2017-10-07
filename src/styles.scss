@@ -185,3 +185,9 @@ button{
 .homepage .icons md-list-item:hover .demo-icon {
   color:#fff;
 }
+
+::ng-deep snack-bar-container {
+  &.success-snackbar {
+      background: #7b0041;
+  }
+}

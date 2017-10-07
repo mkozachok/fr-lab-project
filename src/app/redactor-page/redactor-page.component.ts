@@ -401,7 +401,7 @@ export class RedactorPageComponent {
       config.extraClasses = ['success-snackbar'];
       config.duration = 1500;
       this.snackBar.open(`Please, choose a size`, 'required', config);
-      this.tab.selectedIndex = 0;
+      this.tab.selectedIndex = 1;
     } else {
       this.templateSizeQuantites.forEach(el => {
         if (el.quantity !== 0) {

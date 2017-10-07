@@ -1,9 +1,9 @@
 @import "../../variables.scss";
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+@-moz-document url-prefix() {
+	.header {
+		margin-bottom: 5%;
+	}
 }
 
 * {
@@ -46,7 +46,7 @@ input::-webkit-inner-spin-button {
 
 .item {
 	display: flex;
-	border: 1px solid #eee;
+	border: 1.2px solid #eee;
 	border-top: none;
 	padding: 1%;
 
@@ -71,8 +71,8 @@ input::-webkit-inner-spin-button {
 		padding-right: 5%;
 		
 		::ng-deep .mat-icon {
-			width: 32px;
-			height: 32px;
+			width: 2em;
+			height: 2em;
 			cursor: pointer;
 		}
 	}
@@ -92,8 +92,8 @@ input::-webkit-inner-spin-button {
 		line-height: 20%;
 		padding: 0;
 
-		.mat-button-wrapper {
-			line-height: 0 !important;
+		::ng-deep .mat-button-wrapper {
+			line-height: 0;
 		}
 	}
 }
@@ -126,38 +126,66 @@ button:hover {
 	text-align: center;
 }
 
-@-moz-document url-prefix() {
-	.header {
-		margin-bottom: 5%;
-	}
-}
-
 @media (max-width:$break-l) and (min-width:$break-m) {
+	.header {
+		h2 {
+			font-size: 1.2em;
+		}
+	}
 
-	.quantity {
-		.add, .subtract {
-			height: 30%;
-			width: 30%;
+	.item {
+		.quantity {
+			.add, .subtract {
+				height: 30%;
+				width: 30%;
+			}
+
+			input {
+				height: 30%;
+				width: 30%;
+			}
 		}
 
-		input {
-			height: 30%;
-			width: 30%;
+		.remove {
+
+			::ng-deep .mat-icon {
+				width: 1.7em;
+				height: 1.7em;
+			}
 		}
 	}
 }
 
 @media (max-width:$break-m) {
 
-	.quantity {
-		.add, .subtract {
-			height: 40%;
-			width: 30%;
+	.header {
+		h2 {
+			font-size: 1.1em;
+		}
+	}
+
+	.item-headers, .item, .info {
+		font-size: 1em;
+	}
+
+	.item {
+		.quantity {
+			.add, .subtract {
+				height: 40%;
+				width: 30%;
+			}
+
+			input {
+				height: 40%;
+				width: 30%;
+			}
 		}
 
-		input {
-			height: 40%;
-			width: 30%;
+		.remove {			
+			::ng-deep .mat-icon {
+				width: 1.5em;
+				height: 1.5em;
+			}
 		}
 	}
 }
@@ -170,15 +198,43 @@ button:hover {
 		}
 	}
 
-	.quantity {
-		.add, .subtract {
-			height: 45%;
-			width: 30%;
+	.item-headers, .item, .info {
+		font-size: 0.7em;
+	}
+
+	.item {
+		.quantity {
+			.add, .subtract {
+				height: 30%;
+				width: 30%;
+				line-height: 0;
+
+				::ng-deep .mat-button-wrapper {
+					font-size: 0.8em;
+					line-height: 0.8em;
+				}
+			}
+
+			input {
+				height: 30%;
+				width: 30%;
+				font-size: 1em;
+			}
 		}
 
-		input {
-			height: 45%;
-			width: 30%;
+		.img-container {	
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+
+	.info {
+		font-size: 0.8em;
+
+		button {
+			font-size: 0.8em;
+			line-height: 2.2em;
 		}
 	}
 }
