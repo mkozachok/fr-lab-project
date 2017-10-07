@@ -2,8 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { ProductsListService } from '../../../../services';
-import { CommonService } from '../../../../services';
+import { CommonService, ProductsListService } from '../../../../services';
 
 
 @Component({

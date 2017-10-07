@@ -19,8 +19,13 @@ import { AdminPageModule } from './admin-page';
 import { WildcardRoutingModule } from './wildcard-routing/wildcard-routing.module';
 
 // App guards goes here
-import { AuthGuard, AdminGuard } from './guards';
-import { OrderGuard } from './guards/make-order.guard';
+import {
+  AuthGuard,
+  AdminGuard,
+  OrderGuard,
+  UnregisteredGuard
+} from './guards';
+
 
 
 // App components goes here
@@ -32,8 +37,9 @@ import { AppComponent } from './app.component';
 import {
   HeaderComponent,
   FooterComponent,
-  DialogComponent
-} from './components/';
+  DialogComponent,
+  LogOutMessageComponent
+} from './components';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 
@@ -94,7 +100,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     DialogComponent,
     SmoothScrollToDirective,
     SmoothScrollDirective,
-    AdditionalInfoComponent
+    AdditionalInfoComponent,
+    LogOutMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -128,10 +135,12 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     MakeOrderService,
     OrderService,
     CommonService,
-    OrderGuard
+    OrderGuard,
+    UnregisteredGuard
   ],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    LogOutMessageComponent
   ],
   bootstrap: [
     AppComponent

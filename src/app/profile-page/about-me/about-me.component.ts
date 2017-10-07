@@ -90,6 +90,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
           photoUrl: res.photoURL,
           id: res.uid
         }
+        
 
 
 
@@ -138,7 +139,7 @@ export class AboutMeComponent implements OnInit, OnDestroy {
 
   onNotify(url = this.user.photoUrl) {
     let { firstName, lastName, address, phone } = this.userForm.value;
-    if (this.user.photoUrl.includes('firebasestorage.googleapis.com/v0/b/kolibri-7dd6a')) {
+    if (this.user.photoUrl.includes('firebasestorage.googleapis.com/v0/b/kolibri')) {
       this._userService.deleteUserOldAvatar(this.user.photoUrl);
     }
     this._userService.updateUser(this.user.id, `${firstName} ${lastName}`, url, phone, address).then(resolve => {
