@@ -29,17 +29,15 @@ export class LoginPageComponent implements OnInit {
   onSubmitGoogle() {
     this.error = null;
     this._userService.loginInGoogle()
-      // .then((success) => this.googleAutorizationCheck())
-      // .then((success) => this.googeAutarizationRouting())
       .then((success) => this.router.navigate(['/']))
       .catch(err => this.error = err);
   }
   onSubmitFacebook() {
     this.error = null;
     this._userService.loginInFacebook()
-      .then((success) => this.googleAutorizationCheck())
-      .then((success) => this.googeAutarizationRouting())
-      .catch(err => this.error = err);
+    .then((success) => this.router.navigate(['/']))
+    .catch(err => this.error = err);
+
   }
   googleAutorizationCheck() {
   const check =  this._userService.getUserFromDataBase(this._userService.getUserId())

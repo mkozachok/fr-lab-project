@@ -3,25 +3,26 @@
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate >
       <md-form-field>
         <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
+        <md-error  *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+            <p [hidden]="!emailRef.errors.required">
+                Please enter email
+              </p>
+              <p [hidden]="!emailRef.errors.pattern">
+                Please enter email
+              </p>
+        </md-error>
       </md-form-field>
-      <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
-        <p [hidden]="!emailRef.errors.required">
-          Please enter email
-        </p>
-        <p [hidden]="!emailRef.errors.pattern">
-          Please enter email
-        </p>
-      </div>
       <md-form-field>
         <input required #passwordRef="ngModel" minlength="6" type="password" mdInput placeholder="password" name="password" ngModel/>
+      <md-error *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+          <p [hidden]="!passwordRef.errors.required">
+              Please enter password
+            </p>
+      </md-error>
       </md-form-field>
-      <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
-        <p [hidden]="!passwordRef.errors.required">
-          Please enter password
-        </p>
-      </div>
     <button [disabled]="!userForm.form.valid" md-raised-button type="submit">log in</button>
-    <p *ngIf="this.error">{{this.error.message}}</p>
+    <p *ngIf="this.error" class="error-message">{{this.error.message}}</p>
   </form>
   <button class="button-google" md-raised-button (click)="onSubmitGoogle()" >log in with google</button>
+  <button class="button-google" md-raised-button (click)="onSubmitFacebook()" >log in with facebook</button>
 </div>
