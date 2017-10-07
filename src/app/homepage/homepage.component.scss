@@ -13,6 +13,12 @@
     min-width: 320px;
     max-width: 1170px;
     margin: 40px auto 20px;
+    height: auto;
+
+    .homepageSpinner {
+        width: 100%;
+        position: relative;
+    }
 
     h2 {
         color: #7b0041;
@@ -168,7 +174,7 @@ md-divider {
 
 .active {background: #eee;}
 
-.rightcol {
+.rightcol   {
     /*margin-left: 21%; */
     display: flex;
     flex-wrap: wrap;

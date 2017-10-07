@@ -29,8 +29,8 @@ export class UserService {
             // .then((success) => console.log(this.afAuth.auth.currentUser));
   }
   logOut() {
-    this.router.navigate(['/login-page'])
-      .then(() => this.afAuth.auth.signOut());
+    this.afAuth.auth.signOut()
+      .then(()=>this.router.navigate(['/login-page']))
   }
 
   getUser() {

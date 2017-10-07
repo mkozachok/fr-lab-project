@@ -18,9 +18,8 @@ import { SafeHtml } from '@angular/platform-browser';
 import { MdMenuModule } from '@angular/material';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdDialog } from '@angular/material';
-import { EditProductComponent } from '../admin-page/remove-menu/remove-product/edit-product/edit-product.component';
 import { AdminService } from '../services/admin.service';
+import { ViewOneProductComponent } from './view-one-product/view-one-product.component'
 
 @Component({
   moduleId: module.id,
@@ -31,6 +30,7 @@ import { AdminService } from '../services/admin.service';
 })
 
 export class HomepageComponent implements OnInit {
+  public showSpinner = true;
   prods: Observable<Array<any>>;
   arrOfProds: Observable<Array<any>>;
   @Input() filtered: Product[];
@@ -44,7 +44,6 @@ export class HomepageComponent implements OnInit {
   deleteButton: boolean;
   startAt = new Subject()
   endAt = new Subject();
-  isAdmin: boolean;
   subscriptionToUserService: Subscription
   subscriptionToAdminService: Subscription
 
@@ -58,7 +57,6 @@ export class HomepageComponent implements OnInit {
     private userService: UserService,
     private iconRegistry: MdIconRegistry,
     private sanitizer: DomSanitizer,
-    public dialog: MdDialog,
     private adminService: AdminService
   ) {
     iconRegistry
@@ -66,20 +64,14 @@ export class HomepageComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.subscriptionToUserService = this.userService.getUserIdAsync().subscribe(user => {
-      let id = user? user.uid : 'Please login';
-     this.subscriptionToAdminService = this.adminService.getAdmin(id).subscribe(admin => {
-        if(admin.length > 0){
-          this.isAdmin = true;
-        }
-      })
-    })
+
     this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;
     });
     this.productListService.getProducts().subscribe(items => {
-      this.prods = items;
+      this.showSpinner = false;
+      this.prods = items.reverse();
       this.arrOfProds = this.prods;
     });
     //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
@@ -88,13 +80,11 @@ export class HomepageComponent implements OnInit {
  
 
   ngOnDestroy(){
-    this.subscriptionToUserService.unsubscribe();
-    this.subscriptionToAdminService.unsubscribe()
   }
 
   sorting(propValue) {
     this.productListService.selectProducts(propValue).subscribe(res => {
-      this.prods = res;
+      this.prods = res.reverse();
     });
   }
 
@@ -125,18 +115,5 @@ export class HomepageComponent implements OnInit {
   setSize(size, product): void {
     console.log(size)
     product.size = size;
-  }
-
-  onEdit({ $key, name, category, owner, price, type }) {
-    let dialogRef = this.dialog.open(EditProductComponent, {
-      data: {
-        $key: $key,
-        name: name,
-        category: category,
-        owner: owner,
-        price: price,
-        type: type
-      }
-    });
   }
 }

@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomepageComponent } from './homepage/homepage.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RedactorPageComponent } from './redactor-page/redactor-page.component';
 import { MakeOrderComponent } from './order-page/make-order/make-order.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AdminGuard } from './guards/admin.guard';
-import { OrderGuard } from './guards/make-order.guard';
-import { AboutMeComponent } from './profile-page/about-me/about-me.component';
+import { AdminPageComponent } from './admin-page';
+
+import { ProfilePageComponent, AboutMeComponent } from './profile-page';
+import {
+    AdminGuard,
+    AuthGuard,
+    UnregisteredGuard,
+    OrderGuard
+} from './guards';
 
 const routes: Routes = [
     {
@@ -49,11 +52,13 @@ const routes: Routes = [
     },
     {
         path: 'registration-page',
-        component: RegistrationPageComponent
+        component: RegistrationPageComponent,
+        canActivate: [UnregisteredGuard]
     },
     {
         path: 'login-page',
-        component: LoginPageComponent
+        component: LoginPageComponent,
+        canActivate: [UnregisteredGuard]
     },
     {
         path: 'order-page',

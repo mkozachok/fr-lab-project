@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { ProductsListService } from '../../../../services';
-import { EditProductComponent } from '../edit-product/edit-product.component';
+import { EditProductComponent } from '../edit-product';
 
 @Component({
   selector: 'app-product',
@@ -28,8 +28,10 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(){
-    this._productService.deleteProductImg(this.svg);
-    this._productService.deleteProduct(this.$key)
+    if (this.svg.includes('firebasestorage.googleapis.com/v0/b/kolibri')) {
+      this._productService.deleteProductImg(this.svg);
+    }
+    this._productService.deleteProduct(this.$key);
   }
 
   onEdit(){
