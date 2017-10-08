@@ -14,10 +14,10 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-make-order',
-  templateUrl: './make-order.component.html',
-  styleUrls: ['./make-order.component.scss'],
-  providers: [MakeOrderService, OrderService]
+	selector: 'app-make-order',
+	templateUrl: './make-order.component.html',
+	styleUrls: ['./make-order.component.scss'],
+	providers: [MakeOrderService, OrderService]
 })
 export class MakeOrderComponent implements OnInit {
 	autorised: boolean;
@@ -29,15 +29,15 @@ export class MakeOrderComponent implements OnInit {
 		address: ''
 	}
 	userSubscribe: Subscription;
-  	additionalUserInfoSubscribe: Subscription;
-  	public showSpinner = true;
+	additionalUserInfoSubscribe: Subscription;
+	public showSpinner = true;
 
 	constructor(private userService: UserService, private afAuth: AngularFireAuth,
 		private makeOrderService: MakeOrderService, private orderService: OrderService,
 		public dialog: MdDialog, private router: Router) {
-			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
-				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
-			}
+		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {
+			this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
+		}
 	}
 
 	ngOnInit() {
@@ -48,16 +48,12 @@ export class MakeOrderComponent implements OnInit {
 			} else {
 				this.user.firstName = res.displayName.split(' ')[0];
 				this.user.lastName = res.displayName.split(' ')[1],
-				this.user.email = res.email;
+					this.user.email = res.email;
 
 				this.additionalUserInfoSubscribe = this.userService.getUserFromDataBase(this.userService.getUserId()).subscribe(res => {
 					this.showSpinner = false;
-					if (res.additionalInfo.phone) {
-						this.user.phone = res.additionalInfo.phone;
-					}
-					if (res.additionalInfo.address) {
-						this.user.address = res.additionalInfo.address;
-					}
+					this.user.phone = !!res.additionalInfo ? res.additionalInfo.phone : 'not specified';
+					this.user.address = !!res.additionalInfo ? res.additionalInfo.address : 'not specified';
 				});
 			}
 		});
@@ -81,13 +77,13 @@ export class MakeOrderComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(result => {
 			this.router.navigate(['']);
 			this.showSpinner = false;
-   		});
+		});
 	}
 
 	ngOnDestroy(): void {
 		if (this.autorised) {
 			this.userSubscribe.unsubscribe();
-	    	this.additionalUserInfoSubscribe.unsubscribe();
+			this.additionalUserInfoSubscribe.unsubscribe();
 		}
-  	}
+	}
 }
