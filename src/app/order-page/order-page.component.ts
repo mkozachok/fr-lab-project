@@ -34,21 +34,7 @@ export class OrderPageComponent implements OnInit {
 			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
 				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
 			}
-			this.productListService.getProducts().subscribe(res => {
-				this.productsKeys = res.map(i => {return i.$key});
-				this.orderService.getAll().filter(el => {
-					if (!this.productsKeys.includes(el.productKey)) {
-						this.orderService.removeItem(el);
-					}					
-					res.forEach(element => {
-						if (element.$key === el.productKey) {
-							let size = el.product.size;
-							el.product = Object.assign(element);
-							el.product.size = size;
-						}
-					});
-				});
-			});
+			this.checkForUpdates();
 			localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 			this.orders = this.orderService.getAll();
 			this.totalQuantity = this.orderService.getQuantity();
@@ -87,4 +73,22 @@ export class OrderPageComponent implements OnInit {
 		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 
+	checkForUpdates() {
+		this.productListService.getProducts().subscribe(res => {
+			this.productsKeys = res.map(i => {return i.$key});
+			this.orderService.getAll().filter(el => {
+				if (!this.productsKeys.includes(el.productKey) && el.productKey !== 'no') {
+					this.orderService.removeItem(el);
+				} else {
+					res.forEach(element => {
+						if (element.$key === el.productKey) {
+							for (var prop in element) {
+								el.product[prop] = element[prop];
+							}
+						}
+					});
+				}				
+			});
+		});
+	}
 }

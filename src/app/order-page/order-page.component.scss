@@ -52,7 +52,7 @@
 			justify-content: flex-start;
 	
 			img {
-				height: auto;
+				height: 12vw;
 				max-width: 80%;
 			}
 		}
@@ -75,6 +75,7 @@
 			width: 20%;
 			text-align: center;
 			border: 1px solid #BEBEBE;
+			font-size: 0.9em;
 		}
 	
 		.add, .subtract {
