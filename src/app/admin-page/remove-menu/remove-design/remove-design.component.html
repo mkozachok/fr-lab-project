@@ -1,6 +1,11 @@
 <div class="remove-wrapper">
     <app-loader *ngIf="showSpinner"></app-loader>
-    <div class="table-wrapper" *ngIf="!showSpinner">
+    <app-empty-content
+    *ngIf="!showSpinner && !arrOfDesigns?.length"
+    [icon]="iconEmpty"
+    [message]="messageEmpty">
+   </app-empty-content>
+    <div class="table-wrapper" *ngIf="!showSpinner && arrOfDesigns?.length">
       <md-form-field>
         <input mdInput placeholder="Design searching"
          [(ngModel)]="searchPhrase"
@@ -8,7 +13,7 @@
           class="search"
           name="designFilter">
       </md-form-field>
-      <md-toolbar class="table-row">
+      <md-toolbar class="table-row" *ngIf="designs?.length">
           <span>Name</span>
           <span>Price</span>
           <span class="img-title">Design image</span>
@@ -20,5 +25,10 @@
         [url]="design.url"
         [price]="design.price">
         </app-design>
+        <app-empty-content
+        *ngIf="!designs?.length"
+        [icon]="iconNotFound"
+        [message]="messageNotFound">
+       </app-empty-content>
     </div>
   </div>

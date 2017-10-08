@@ -8,6 +8,10 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./remove-product.component.scss']
 })
 export class RemoveProductComponent implements OnInit {
+  iconEmpty:string = 'collections';
+  messageEmpty:string = 'There are no products';
+  iconNotFound:string = 'search';
+  messageNotFound:string = 'There are no products you are loking for';
   removeProductSubscription: Subscription = new Subscription();
   photoUrl: string;
   name: string;

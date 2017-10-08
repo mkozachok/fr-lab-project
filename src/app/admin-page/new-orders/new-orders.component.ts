@@ -8,6 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./new-orders.component.scss']
 })
 export class NewOrdersComponent implements OnInit {
+  iconEmpty:string = 'description';
+  messageEmpty:string = 'There are no new orders';
+  iconNotFound:string = 'search';
+  messageNotFound:string = 'There are no orders you are loking for';
+  noContent: boolean;
   showSpinner: boolean = true;
   orders: Observable<Array<any>>;
   originalArray: Observable<Array<any>>;
