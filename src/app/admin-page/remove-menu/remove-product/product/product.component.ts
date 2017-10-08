@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { ProductsListService } from '../../../../services';
+import { ProductsListService, OrderService } from '../../../../services';
 import { EditProductComponent } from '../edit-product';
-import { OrderService } from '../../../../services';
 
 @Component({
   selector: 'app-product',
@@ -17,6 +16,8 @@ export class ProductComponent implements OnInit {
 @Input() svg: string;
 @Input() price: string;
 @Input() type: string;
+@Input() multiDelete: boolean;
+@Output() checkedProduct:EventEmitter<object> = new EventEmitter<object>();
 
 
   constructor(
@@ -47,6 +48,10 @@ export class ProductComponent implements OnInit {
         type: this.type
       }
     });
+  }
+
+  onChange($event){
+    this.checkedProduct.emit({$key: this.$key, checked: $event.checked, url: this.svg})
   }
 
 }

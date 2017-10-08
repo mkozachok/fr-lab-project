@@ -70,7 +70,10 @@
         background: transparent;
     }
 
-    
-
 }
 
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+  }

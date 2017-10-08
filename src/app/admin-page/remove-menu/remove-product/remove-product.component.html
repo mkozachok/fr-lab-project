@@ -16,9 +16,19 @@
       <span>Owner</span>
       <span>Price</span>
       <span  class="img-title">Product image</span>
+      <span class="spacer"></span>
+      <div class="button-container">
+        <button md-button color="primary" (click)="changeDeleteType()">
+          {{ deleteType }}
+        </button>
+        <button [disabled]="!multiDelete" color="primary" md-button (click)="deleteSelected()">
+            delete selected
+        </button>
+      </div>
     </md-toolbar>
     <app-product
      *ngFor="let product of productList"
+     (checkedProduct)="checkedProduct($event)"
       [name]="product.name"
       [$key]="product.$key"
       [svg]="product.svg"
@@ -26,6 +36,7 @@
       [owner]="product.owner"
       [price]="product.price"
       [type]="product.type"
+      [multiDelete]="multiDelete"
       ></app-product>
       <app-empty-content
       *ngIf="!productList?.length"
