@@ -145,7 +145,7 @@
     </md-tab-group>
   </div>
 
-    <app-loader *ngIf="showSpinner"></app-loader>
+    <app-loader *ngIf="showSpinner" class="loader"></app-loader>
   <div id="canvas" (window:resize)="resizeCanvas()">
     <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>

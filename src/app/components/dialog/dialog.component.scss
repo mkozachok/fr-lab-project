@@ -1,0 +1,22 @@
+div {
+	padding: 1%;
+
+	button {
+		min-width: 1%;
+		background: #eee;
+		color: #555;
+	}
+
+	button:hover {
+		background: #7b0041;
+		color: #eee;
+	}
+
+	md-dialog-content {
+		margin-bottom: 1%;
+	}
+
+	md-dialog-actions {
+		justify-content: center;
+	}
+}

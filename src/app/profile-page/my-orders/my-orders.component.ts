@@ -19,7 +19,7 @@ export class MyOrdersComponent implements OnInit {
 	ngOnInit() {
   		this.makeOrderService.getAll().subscribe(res => {
         this.showLoader = false;
-  			this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res);
+				this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res.reverse());
   		});
 	}
 }

@@ -38,7 +38,6 @@ export class OrderPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
 	}
 
 	ngAfterContentChecked() {
@@ -58,10 +57,6 @@ export class OrderPageComponent implements OnInit {
 
 	navigate() {
 		this.router.navigate(['make-order']);
-	}
-
-	getOrders(): void {
-		this.orderService.getAll();
 	}
 
 	empty(): void {

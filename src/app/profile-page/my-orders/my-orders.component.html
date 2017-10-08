@@ -7,7 +7,7 @@
       			{{order.date | date :'medium'}}
     		</md-panel-title>
 		    <md-panel-description>
-		    	Amount: {{order.totalSum}} UAH
+		    	Amount: {{order.totalSum | currency:'USD':true}}
 		    </md-panel-description>
 		    <md-panel-description>
 		    	Status: {{order.new ? 'new' : 'accepted'}}

@@ -23,7 +23,7 @@ export class MyGalleryComponent implements OnInit {
 			this.productIds = gallery.map(i => {return i.productKey});
 			this.productService.getProducts().subscribe(products => {
 				this.showSpinner = false;
-				this.usersProducts = this.productService.getProductsByIds(this.productIds, products);
+				this.usersProducts = this.productService.getProductsByIds(this.productIds, products.reverse());
 			});
 		});
 	}
