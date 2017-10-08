@@ -7,7 +7,7 @@
               <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template, $event)"></div>
             </div>
           </div>
-        
+
       </md-tab>
       <md-tab [disabled]="isDisabled"  label="Category">
           <ng-container *ngIf = " myGoods?.length !== 0">

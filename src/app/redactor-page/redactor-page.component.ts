@@ -23,7 +23,7 @@ import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
   providers: [OrderService],
   selector: 'app-redactor-page',
   templateUrl: './redactor-page.component.html',
-  styleUrls: ['./redactor-page.component.scss']
+  styleUrls: ['./redactor-page.component.scss', './redactor-page.component.media.scss']
 })
 
 
@@ -136,6 +136,9 @@ export class RedactorPageComponent {
 
     this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
     this.boundingBox = boundingBox;
+
+
+      this.resizeCanvas();
   }
 
   categoryChoose(cat) {
@@ -199,10 +202,10 @@ export class RedactorPageComponent {
         boundingBox.left = 220;
         break;
       case "cup":
-        boundingBox.width = 330;
-        boundingBox.height = 400;
-        boundingBox.top = 75;
-        boundingBox.left = 100;
+        boundingBox.width = 325;
+        boundingBox.height = 390;
+        boundingBox.top = 100;
+        boundingBox.left = 110;
         break;
       case "body":
         boundingBox.width = 240;
@@ -234,7 +237,6 @@ export class RedactorPageComponent {
 
   selectTemplate(template) {
     this.disableCategory = false;
-    console.log(this.disableCategory);
     if (this.isDisabled) {
       this.tab.selectedIndex = 1;
     }
@@ -262,14 +264,16 @@ export class RedactorPageComponent {
       if (isTemplate) {
         canvas.remove(this.templateImg);
         this.templateImg = this.defineTemplateImage(img);
+
+        canvas.add(this.templateImg);
         canvas.sendToBack(this.templateImg);
-        canvas.centerObject(this.templateImg);
+        canvas.renderAll();
       } else {
         let category = this.defineCategoryImage(img);
         canvas.add(category);
       }
     });
-    this.resizeCanvas();
+
   }
   getImage(src) {
     return new Promise((resolve, reject) => {
@@ -290,6 +294,8 @@ export class RedactorPageComponent {
     image.set({
       width: 580,
       height: 580,
+      left: 60,
+      top: 0,
     });
     image.selectable = false;
     image.evented = false;
