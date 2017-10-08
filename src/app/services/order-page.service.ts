@@ -51,6 +51,7 @@ export class OrderService {
 		let index = this.getItemIndex(item);
 		quantity -= ORDERS[index].quantity;
 		ORDERS.splice(index, 1);
+		localStorage.setItem("cart-items", JSON.stringify(this.getAll()));
 	}
 
 	incrementItemQuantity(item) {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { ProductsListService } from '../../../../services';
 import { EditProductComponent } from '../edit-product';
+import { OrderService } from '../../../../services';
 
 @Component({
   selector: 'app-product',
@@ -20,7 +21,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private _productService: ProductsListService,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {

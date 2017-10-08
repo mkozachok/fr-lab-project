@@ -5,6 +5,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProductsListService } from '../services/products-list.service';
 
 
 @Component({
@@ -19,18 +20,35 @@ export class OrderPageComponent implements OnInit {
 	totalAmount: number;
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
+	productsKeys: Array<string>;
 
 	constructor(
 		private orderService: OrderService,
 		private router: Router,
 		private iconRegistry: MdIconRegistry,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private productListService: ProductsListService
 	) { 
 		iconRegistry
 			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'));
 			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
 				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
 			}
+			this.productListService.getProducts().subscribe(res => {
+				this.productsKeys = res.map(i => {return i.$key});
+				this.orderService.getAll().filter(el => {
+					if (!this.productsKeys.includes(el.productKey)) {
+						this.orderService.removeItem(el);
+					}					
+					res.forEach(element => {
+						if (element.$key === el.productKey) {
+							let size = el.product.size;
+							el.product = Object.assign(element);
+							el.product.size = size;
+						}
+					});
+				});
+			});
 			localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 			this.orders = this.orderService.getAll();
 			this.totalQuantity = this.orderService.getQuantity();
@@ -68,4 +86,5 @@ export class OrderPageComponent implements OnInit {
 		this.orderService.removeItem(item);
 		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
+
 }
