@@ -23,7 +23,7 @@ import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
   providers: [OrderService],
   selector: 'app-redactor-page',
   templateUrl: './redactor-page.component.html',
-  styleUrls: ['./redactor-page.component.scss', './redactor-page.component.media.scss']
+  styleUrls: ['./redactor-page.component.scss']
 })
 
 
