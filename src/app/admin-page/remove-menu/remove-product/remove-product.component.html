@@ -1,11 +1,16 @@
 <div class="remove-wrapper">
   <app-loader *ngIf="showSpinner"></app-loader>
-  <div class="table-wrapper" *ngIf="!showSpinner">
+  <app-empty-content
+  *ngIf="!showSpinner && !arrOfProducts?.length"
+  [icon]="iconEmpty"
+  [message]="messageEmpty">
+ </app-empty-content>
+  <div class="table-wrapper" *ngIf="!showSpinner && arrOfProducts?.length">
     <md-form-field>
         <input mdInput placeholder="Product searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
           name="productFilter">
       </md-form-field>
-    <md-toolbar class="table-row">
+    <md-toolbar class="table-row"  *ngIf="productList?.length">
       <span>Name</span>
       <span>Category</span>
       <span>Owner</span>
@@ -22,5 +27,10 @@
       [price]="product.price"
       [type]="product.type"
       ></app-product>
+      <app-empty-content
+      *ngIf="!productList?.length"
+      [icon]="iconNotFound"
+      [message]="messageNotFound">
+     </app-empty-content>
   </div>
 </div>

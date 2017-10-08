@@ -1,14 +1,28 @@
 <div class="remove-wrapper">
+    <app-empty-content
+    *ngIf="!showSpinner && !arrOfAdmins?.length"
+    [icon]="iconEmpty"
+    [message]="messageEmpty">
+   </app-empty-content>
   <app-loader *ngIf="showSpinner"></app-loader>
-  <div class="table-wrapper" *ngIf="!showSpinner">
+  <div class="table-wrapper" *ngIf="!showSpinner  && arrOfAdmins?.length">
     <md-form-field>
       <input mdInput placeholder="Admin searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
         name="userFilter">
     </md-form-field>
-    <md-toolbar class="table-row">
+    <md-toolbar class="table-row"  *ngIf="admins?.length">
         <span>Name</span>
         <span>Id</span>
       </md-toolbar>
-    <app-admin *ngFor="let admin of admins" [name]="admin.name" [$key]="admin.$key"></app-admin>
+    <app-admin
+      *ngFor="let admin of admins"
+      [name]="admin.name"
+      [$key]="admin.$key">
+    </app-admin>
+    <app-empty-content
+      *ngIf="!admins?.length"
+      [icon]="iconNotFound"
+      [message]="messageNotFound">
+   </app-empty-content>
   </div>
 </div>

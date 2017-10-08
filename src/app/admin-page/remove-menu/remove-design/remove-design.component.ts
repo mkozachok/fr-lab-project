@@ -10,6 +10,10 @@ import { Design } from '../../../models/design-model';
   styleUrls: ['./remove-design.component.scss']
 })
 export class RemoveDesignComponent implements OnInit, OnDestroy {
+  iconEmpty:string = 'collections';
+  messageEmpty:string = 'There are no designs';
+  iconNotFound:string = 'search';
+  messageNotFound:string = 'There are no designs you are loking for';
   removeDesignSubscription: Subscription = new Subscription();
   designs;
   arrOfDesigns: Observable<Array<any>>;

@@ -12,6 +12,8 @@ import { Product } from '../../models/product-model';
   providers: [OrderService]
 })
 export class MyGalleryComponent implements OnInit {
+	iconEmpty:string = 'collections';
+	messageEmpty:string = 'There are no items in your gallery';
 	usersProducts: Observable<Array<any>>;
 	productIds: Array<string>;
 	public showSpinner = true;

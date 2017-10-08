@@ -1,6 +1,11 @@
 <div class="order-wrapper">
   <app-loader *ngIf="showSpinner"></app-loader>
-  <div class="table-wrapper" *ngIf="!showSpinner">
+  <app-empty-content
+   *ngIf="!showSpinner && !originalArray?.length"
+   [icon]="iconEmpty"
+   [message]="messageEmpty">
+  </app-empty-content>
+  <div class="table-wrapper" *ngIf="!showSpinner && originalArray?.length">
     <md-form-field>
       <input mdInput placeholder="New order searching" [(ngModel)]="searchPhrase" (ngModelChange)="filterItem(searchPhrase)" class="search"
         name="userFilter">
@@ -15,5 +20,10 @@
         [$key]="order.$key">
       </app-order>
     </md-accordion>
+    <app-empty-content
+    *ngIf="!orders?.length"
+    [icon]="iconNotFound"
+    [message]="messageNotFound">
+   </app-empty-content>
   </div>
 </div>
