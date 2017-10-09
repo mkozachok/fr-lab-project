@@ -35,11 +35,7 @@ export class ProductsListService {
 				product = el;
 			}
 		});
-		console.log(product);
 		return product;
-		// return this.products.filter(el => {
-		// 	return el.$key = key;
-		// })
 	}
 
 	getProducts2(start, end): FirebaseListObservable<any> {
@@ -127,16 +123,6 @@ export class ProductsListService {
 			return productKeys.includes(product.$key);
 		});
 	}
-
-	// getProductById(productKey: string, products: FirebaseListObservable<any>) {
-	// 	return products.filter(product => {
-	// 		return productKey === product.$key;
-	// 	});
-	// }
-
-	// getProductByKey(productKey: string) {
-	// 	return this.db.object('/products/' + productKey);
-	// }
 
 	setSize(product, size) {
 		return product.size = size;

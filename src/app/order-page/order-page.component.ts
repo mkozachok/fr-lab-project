@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsListService } from '../services/products-list.service';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class OrderPageComponent implements OnInit {
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
 	productsKeys: Array<string>;
+	icon:boolean;
 
 	constructor(
 		private orderService: OrderService,
@@ -29,8 +31,14 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer,
 		private productListService: ProductsListService
 	) { 
-		iconRegistry
-			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'));
+		firebase.storage().ref().child('/icons/ic_delete_black_36px.svg')
+		.getDownloadURL()
+		  .then(res => {
+			iconRegistry
+			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl(res));
+			this.icon = true;
+		  })
+
 			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
 				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
 			}

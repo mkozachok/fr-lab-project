@@ -2,7 +2,7 @@
   <a routerLink="/"  class="logo"><img [src]="logoSrc" alt="Logo"></a>
   <span class="spacer"></span>
   <div class="headerContent">
-  <span *ngIf="!user">
+  <span *ngIf="!user && fetchedData">
     <a routerLink="/registration-page" class="login">
       <md-icon class="header-icon">
         border_color
@@ -16,14 +16,14 @@
       Log in
     </a>
   </span>
-    <span *ngIf="user" class="log-out">
+    <span *ngIf="user && fetchedData" class="log-out">
       <span class="greeting">
       <span>You entered as</span>
     <a routerLink="/profile-page/about-me" class="user-cabinet">{{ user.displayName }}</a>
     </span>
     <span class="log-button" (click)="logOut()">
     <md-icon class="header-icon">
-        border_color
+      first_page
     </md-icon>
     <span>Log out</span>
   </span>

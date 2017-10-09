@@ -27,22 +27,20 @@ export class UserService {
     return this.afAuth.auth.signInWithPopup( new firebase.auth.FacebookAuthProvider())
   }
   logOut() {
-    this.afAuth.auth.signOut()
+    this.router.navigate(['']).then(()=>{
+      this.afAuth.auth.signOut()
       .then(()=>this.router.navigate(['/login-page']))
+    })
   }
 
   getUser() {
     return this.afAuth.authState;
   }
-  // PAUi0aWuH5T062teCexxtByBHTB3
+  
   getUserFromDataBase(userId) {
     let user = this.db.object('/users/' + userId);
     return user;
   }
-
-  // getUsersGallery(userId: string) {
-  //   return this.db.object('/users/' + userId + '/gallery');
-  // }
 
   getUserId(): string{
     return this.afAuth.auth.currentUser.uid;
@@ -108,7 +106,7 @@ export class UserService {
   }
 
   createPrimaryInformation(upload: Upload, name: string, surname: string) {
-    console.log();
+    // console.log();
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -116,7 +114,7 @@ export class UserService {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        console.log(upload.url);
+        // console.log(upload.url);
         this.afAuth.auth.currentUser.updateProfile({
           displayName: `${name} ${surname}`,
           photoURL: upload.url

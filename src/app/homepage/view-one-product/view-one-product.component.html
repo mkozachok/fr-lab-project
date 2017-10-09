@@ -1,5 +1,5 @@
 <md-card>
-	<md-icon *ngIf="isAdmin" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
+	<md-icon *ngIf="isAdmin && icon" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
 	<div class="img-container">
 		<img src="{{ product.svg }}" alt="">
 	</div>
