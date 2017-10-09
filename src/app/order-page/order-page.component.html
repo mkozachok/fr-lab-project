@@ -34,7 +34,8 @@
           </button> 
         </div>
         <div class="remove">
-            <md-icon *ngIf="icon" svgIcon="delete" (click)="removeOrder(order)" class="delete"></md-icon>
+            <i class="demo-icon icon-icotrash delete" *ngIf="icon" svgIcon="delete" (click)="removeOrder(order)">&#xe809;</i>
+            <!--<md-icon *ngIf="icon" svgIcon="delete" (click)="removeOrder(order)" class="delete"></md-icon>-->
         </div>
     </div>
     <div class="info">
