@@ -60,6 +60,9 @@ export class ViewOneProductComponent implements OnInit {
   };
 
   addToCart(product) {
+    if(!product.size && product.fromAdminPanel){
+      product.size = 'not specified'
+    }
     if (!product.size) {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];

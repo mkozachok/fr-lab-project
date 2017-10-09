@@ -3,7 +3,7 @@
   <div class="leftcol">
     <div>
       <div class="allProducts">
-        <button md-button (click) = "sorting('all')">
+        <button md-button (click) = "sorting('all')" (mousedown)="navChanged('all')" [ngClass]="{'active' : false}">
             show all products
         </button>
       </div>
@@ -14,7 +14,8 @@
                     [(ngModel)] = "searchTerm"  
                     (ngModelChange) = "search(searchTerm)" 
                     class="search" 
-                    name="userFilter"> 
+                    name="userFilter"
+                    (click)="navChanged('all')" [ngClass]="{'active' : false}"> 
         </md-form-field>
       </form>
     </div>
@@ -44,7 +45,7 @@
       </div>
     </div>
     <md-list class="objectTypeFilter">
-      <h2 md-subheader>Sorting by type</h2>
+      <h2 md-subheader>Filtering by type</h2>
       <div class="iconsBlock">
         <div *ngFor = "let templateType of templateTypes" 
             (click) = "sorting(templateType.type)" class="icons">
@@ -52,9 +53,9 @@
           </md-list-item>
         </div>
       </div>
-      <h2 md-subheader>Sorting by category</h2>
+      <h2 md-subheader>Filtering by category</h2>
       <div *ngFor = "let productCategory of categories" 
-          (click) = "sorting(productCategory.category)">
+          (click) = "sorting(productCategory.category)" class="categoryFilter">
         <ng-container *ngIf = " productCategory.category !=='all' ">
           <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
             {{productCategory.category}}

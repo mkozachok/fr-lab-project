@@ -78,7 +78,7 @@ export class HomepageComponent implements OnInit {
     });
     this.homePageSubscription.add(this.productListService.getProducts().subscribe(items => {
       this.showSpinner = false;
-      let tempArr = items.slice();
+      tempArr = items.slice();
       tempArr.reverse();
       this.prods = tempArr;
       this.arrOfProds = this.prods;
