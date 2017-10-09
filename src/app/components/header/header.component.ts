@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   providers: [OrderService]
 })
 export class HeaderComponent implements OnInit {
-  logoSrc = "./assets/images/logo.png";
+  logoSrc = "./assets/images/colibriLogo.png";
   basketIcon = "shopping_cart";
   user = {};
   ordersAmount: number;
