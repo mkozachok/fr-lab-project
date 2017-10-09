@@ -123,6 +123,15 @@
 		margin-top: 5%;
 		text-align: center;
 	}
+
+	.delete{
+		cursor: pointer;
+		font-size: 1.3em;
+
+		&:hover {
+			color: $darkRead;
+		}
+	}
 }
 
 @media (max-width:$break-l) and (min-width:$break-m) {

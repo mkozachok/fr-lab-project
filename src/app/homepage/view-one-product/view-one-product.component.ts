@@ -25,7 +25,6 @@ import {
 })
 export class ViewOneProductComponent implements OnInit {
   @Input() product;
-  @Input() icon;
   @Output() click = new EventEmitter();
   selectedItems: Product[];
   deleteButton: boolean;
@@ -60,9 +59,6 @@ export class ViewOneProductComponent implements OnInit {
   };
 
   addToCart(product) {
-    if(!product.size && product.fromAdminPanel){
-      product.size = 'not specified'
-    }
     if (!product.size) {
       let config = new MdSnackBarConfig();
       config.extraClasses = ['success-snackbar'];
