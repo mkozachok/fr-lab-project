@@ -9,6 +9,9 @@
 .header {
     z-index: 100;
     padding-bottom: 64px;
+    @media screen and (max-width: 600px){
+        padding-bottom: 54px;
+    }
 }
 
 .content {

@@ -11,9 +11,6 @@
 
     @media screen and (max-width: $break-m){
         font-size: 0.7em;
-        .logo {
-            display: none;
-        }
     }
 
     .spacer {
@@ -39,6 +36,13 @@
 
         &:hover {
             color: #7b0041;
+        }
+    }
+
+    .logo {
+        img{
+            width: 50px;
+            margin-top: 6px;
         }
     }
 
@@ -80,6 +84,10 @@
         right: 20px;
         top: 5px;
         margin-left: 5em;
+        @media screen and (max-width: $break-m){
+            right: 0;
+            margin-left: 0;
+        }
     }
 
     .data-badge{
