@@ -145,14 +145,12 @@ export class RedactorPageComponent {
     this.designService.categoryChoose(cat).subscribe(res => {
       this.items = res;
     });
-    console.log(cat);
   }
 
   typeChoose(myType) {
     this.designService.typeChoose(myType).subscribe(res => {
       this.items = res;
     });
-    console.log(myType);
   }
   //this.setCordsdependOnTemplate(template);
   resizeCanvas() {
