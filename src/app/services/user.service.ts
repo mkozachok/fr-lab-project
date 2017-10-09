@@ -34,15 +34,11 @@ export class UserService {
   getUser() {
     return this.afAuth.authState;
   }
-  // PAUi0aWuH5T062teCexxtByBHTB3
+  
   getUserFromDataBase(userId) {
     let user = this.db.object('/users/' + userId);
     return user;
   }
-
-  // getUsersGallery(userId: string) {
-  //   return this.db.object('/users/' + userId + '/gallery');
-  // }
 
   getUserId(): string{
     return this.afAuth.auth.currentUser.uid;

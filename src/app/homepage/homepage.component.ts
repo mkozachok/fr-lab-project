@@ -45,8 +45,7 @@ export class HomepageComponent implements OnInit {
   deleteButton: boolean;
   startAt = new Subject()
   endAt = new Subject();
-  subscriptionToUserService: Subscription
-  subscriptionToAdminService: Subscription
+  homePageSubscription: Subscription = new Subscription();
   icon: boolean;
 
   constructor(
@@ -72,19 +71,20 @@ export class HomepageComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    let tempArr;
     this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;
     });
-    this.productListService.getProducts().subscribe(items => {
+    this.homePageSubscription.add(this.productListService.getProducts().subscribe(items => {
       this.showSpinner = false;
-      this.prods = items.reverse();
+      let tempArr = items.slice();
+      tempArr.reverse();
+      this.prods = tempArr;
       this.arrOfProds = this.prods;
-    });
-    //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
+    }));
   };
 
- 
 
   ngOnDestroy(){
   }
