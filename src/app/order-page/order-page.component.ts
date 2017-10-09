@@ -22,7 +22,6 @@ export class OrderPageComponent implements OnInit {
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
 	productsKeys: Array<string>;
-	icon:boolean;
 
 	constructor(
 		private orderService: OrderService,
@@ -31,13 +30,6 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer,
 		private productListService: ProductsListService
 	) { 
-		firebase.storage().ref().child('/icons/ic_delete_black_36px.svg')
-		.getDownloadURL()
-		  .then(res => {
-			iconRegistry
-			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl(res));
-			this.icon = true;
-		  })
 
 			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
 				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));

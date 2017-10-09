@@ -46,7 +46,6 @@ export class HomepageComponent implements OnInit {
   startAt = new Subject()
   endAt = new Subject();
   homePageSubscription: Subscription = new Subscription();
-  icon: boolean;
 
   constructor(
     private productListService: ProductsListService,
@@ -56,18 +55,9 @@ export class HomepageComponent implements OnInit {
     public snackBar: MdSnackBar,
     private router: Router,
     private userService: UserService,
-    private iconRegistry: MdIconRegistry,
     private sanitizer: DomSanitizer,
     private adminService: AdminService
-  ) {
-    firebase.storage().ref().child('/icons/ic_mode_edit_black_24px.svg')
-      .getDownloadURL()
-        .then(res => {
-          iconRegistry
-          .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl(res))
-          this.icon = true;
-        })
-    
+  ) {    
   };
 
   ngOnInit(): void {

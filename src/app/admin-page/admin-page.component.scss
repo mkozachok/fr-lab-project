@@ -70,6 +70,11 @@
         background: transparent;
     }
 
+    /deep/.select{
+        width: 50vw;
+        padding-bottom: 1.25em;
+    }
+
 }
 
 ::ng-deep snack-bar-container {
