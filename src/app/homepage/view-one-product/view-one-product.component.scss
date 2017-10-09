@@ -89,6 +89,10 @@ ul, li {
 	cursor: pointer;
 }
 
+.clear:hover {
+	color: $darkRead !important;
+}
+
 
 /deep/ .homepage {
 	.clear {
