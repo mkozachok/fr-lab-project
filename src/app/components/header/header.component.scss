@@ -67,7 +67,11 @@
     .log-button {
         @extend a;
         cursor: pointer;
-        font-weight: bold;
+        
+        span {
+            font-weight: bold;
+        }
+        
     }
 
     .greeting {
