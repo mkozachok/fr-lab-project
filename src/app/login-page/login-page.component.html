@@ -23,6 +23,6 @@
     <button [disabled]="!userForm.form.valid" md-raised-button type="submit">log in</button>
     <p *ngIf="this.error" class="error-message">{{this.error.message}}</p>
   </form>
-  <button class="button-google" md-raised-button (click)="onSubmitGoogle()" >log in with google</button>
-  <button class="button-google" md-raised-button (click)="onSubmitFacebook()" >log in with facebook</button>
+  <button class="button-google" md-raised-button (click)="onSubmitGoogle()" ><img src="https://png.icons8.com/google/androidL/24" title="Google" width="24" height="24">log in with google</button>
+  <button class="button-google" md-raised-button (click)="onSubmitFacebook()" ><img src="https://png.icons8.com/facebook/android/24" title="Facebook" width="24" height="24"> log in with facebook</button>
 </div>
