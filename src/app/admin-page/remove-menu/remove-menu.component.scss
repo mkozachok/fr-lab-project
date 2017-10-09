@@ -1,11 +1,13 @@
 @import "../../../variables.scss";
 
-/deep/ .mat-tab-label{
-	min-width: calc(100%/3) !important;
-}
+
 
 
 /deep/ .remove-wrapper{
+    /deep/ .mat-tab-label{
+        min-width: calc(100%/3);
+    }
+
     padding: 2vw;
     display: flex;
     justify-content: center;

@@ -1,11 +1,16 @@
 @import "../../variables.scss";
 
-/deep/ .mat-button {
-    min-width: 1% !important;
-    line-height: normal !important;
-}
+
 
 .profile-page {
+
+    /deep/ .mat-button {
+        min-width: 1% !important;
+        line-height: normal !important;
+    }
+    /deep/.mat-tab-label{
+        width: calc(100%/2);
+    }
     display: flex;
     height: 100%;
 
