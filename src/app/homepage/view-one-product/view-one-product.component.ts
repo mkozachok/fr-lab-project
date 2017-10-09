@@ -25,7 +25,6 @@ import {
 })
 export class ViewOneProductComponent implements OnInit {
   @Input() product;
-  @Input() icon;
   @Output() click = new EventEmitter();
   selectedItems: Product[];
   deleteButton: boolean;

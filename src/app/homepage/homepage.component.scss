@@ -102,13 +102,10 @@
         right: 10px;
         top: 10px;
         transition: ease all .2s;
+        font-size: 1.3em;
 
         &:hover{
-            svg {
-                path:first-child {
-                      fill: $darkRead;
-                  }
-              }
+            color: $darkRead;
         }
 
        
