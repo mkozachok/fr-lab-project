@@ -109,12 +109,13 @@
   <div id="canvas" (window:resize)="resizeCanvas()">
     <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>
+      <p *ngIf="showSelect" id="select">Select product</p>
+      <span id="price">Price is: {{ getProductPrice() }}$</span>
     </div>
     <div id="btns">
     <button md-raised-button [disabled]="isDisabled" (click)="saveProduct()"><i class="material-icons">save</i></button>
     <button md-raised-button [disabled]="isDisabled" (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
     <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()"><i class="material-icons">delete</i></button>
   </div>
-    <span id="price">Price is: {{ getProductPrice() }}$</span>
   </div>
 </div>

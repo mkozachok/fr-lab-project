@@ -42,6 +42,7 @@ export class RedactorPageComponent {
   myGoods: Array<any> = [];
   templateSizeQuantites = [];
   showSize: boolean = false;
+  showSelect: boolean = true;
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -152,7 +153,7 @@ export class RedactorPageComponent {
       this.items = res;
     });
   }
-  //this.setCordsdependOnTemplate(template);
+
   resizeCanvas() {
     let canvas = this.getCanvas();
     var canvasSizer = document.getElementById("redactor_area");
@@ -238,6 +239,7 @@ export class RedactorPageComponent {
     if (this.isDisabled) {
       this.tab.selectedIndex = 1;
     }
+    this.showSelect = false;
     this.isDisabled = false;
     this.type = template.type;
     this.templateSizeQuantites.length = 0;
@@ -352,7 +354,6 @@ export class RedactorPageComponent {
     }
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
-    // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
     newProduct.price = this.getProductPrice();
     return newProduct;
   }
