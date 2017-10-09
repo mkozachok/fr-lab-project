@@ -76,7 +76,7 @@ export class ViewOneProductComponent implements OnInit {
   }
 
   setSize(size, product): void {
-    product.size = size;
+    this.productListService.setSize(product, size);
   }
 
   delete() {
