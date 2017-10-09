@@ -76,6 +76,7 @@ export class AddProductComponent implements OnInit {
       layouts: [],
       owner: this.product.owner,
       price: this.product.price,
+      fromAdminPanel: true
     }).then(resolve => {
       this._commonService.openSnackBar('The produc has been saved', 'success');
     }).catch(error => {
