@@ -28,7 +28,7 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
 
   }
 
-  getAdminsArr(): void{
+  getDesignsArr(): void{
     this.removeDesignSubscription.add(this._designService.getDesigns()
     .subscribe(res => {
       this.showSpinner = false;
@@ -38,7 +38,7 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getAdminsArr();
+    this.getDesignsArr();
   }
 
   ngOnDestroy(){

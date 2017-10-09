@@ -12,6 +12,13 @@
 	@media (max-width:$break-m) {
 	flex-direction: column-reverse;
 	}
+
+	/deep/ .mat-tab-label{
+		min-width: 50% !important;
+		@media screen and (max-width:$break-l){
+		width: 40px;
+		}
+	}
 }
 #container{
 #tools{
@@ -105,12 +112,7 @@
 		min-height: 340px;
 	}
 }
-/deep/ .mat-tab-label{
-	min-width: 50% !important;
-	@media screen and (max-width:$break-l){
-    width: 40px;
-	}
-}
+
 /deep/ .mat-expansion-panel-body{
 	@media screen and (max-width:$break-l){
     padding: 0;

@@ -31,7 +31,7 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.editProductSubscription.add(this._designService.getDesignCategory().subscribe(res => {
-      this.category = res.map(el => el.category)
+      this.category = res.map(el => el.category).slice(1);
     }))
 
     this.editProductSubscription.add(this._productService.getTemplateTypes().subscribe(res => {

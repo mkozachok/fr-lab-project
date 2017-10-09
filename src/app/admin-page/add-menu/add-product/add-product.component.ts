@@ -43,7 +43,7 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.addProductSubscription.add(this._designService.getDesignCategory().subscribe(res => {
-      this.category = res.map(el => el.category)
+      this.category = res.map(el => el.category).splice(1);
     }))
 
     this.addProductSubscription.add(this._productService.getTemplateTypes().subscribe(res => {
@@ -95,8 +95,7 @@ export class AddProductComponent implements OnInit {
           svg: url,
           layouts: [],
           owner: this.product.owner,
-          price: this.product.price,
-          fromAdminPanel: true
+          price: this.product.price
         }).then(resolve => {
           this._commonService.openSnackBar('The produc has been saved', 'success');
         }).catch(error => {

@@ -13,6 +13,7 @@ export class DesignComponent implements OnInit {
   @Input() url: string;
   @Input() $key: string;
   @Input() price: string;
+  @Input() category: string;
   @Input() multiDelete: boolean;
   @Output() checkedProduct:EventEmitter<object> = new EventEmitter<object>();
 
@@ -35,7 +36,8 @@ export class DesignComponent implements OnInit {
       data: {
         $key: this.$key,
         name: this.name,
-        price: this.price
+        price: this.price,
+        category: this.category
       }
     });
   }
