@@ -20,6 +20,7 @@ import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AdminService } from '../services/admin.service';
 import { ViewOneProductComponent } from './view-one-product/view-one-product.component'
+import * as firebase from 'firebase';
 
 @Component({
   moduleId: module.id,
@@ -46,6 +47,7 @@ export class HomepageComponent implements OnInit {
   endAt = new Subject();
   subscriptionToUserService: Subscription
   subscriptionToAdminService: Subscription
+  icon: boolean;
 
   constructor(
     private productListService: ProductsListService,
@@ -59,12 +61,17 @@ export class HomepageComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private adminService: AdminService
   ) {
-    iconRegistry
-      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('./../../assets/icons/ic_mode_edit_black_24px.svg'))
+    firebase.storage().ref().child('/icons/ic_mode_edit_black_24px.svg')
+      .getDownloadURL()
+        .then(res => {
+          iconRegistry
+          .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl(res))
+          this.icon = true;
+        })
+    
   };
 
   ngOnInit(): void {
-
     this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;

@@ -72,7 +72,7 @@
     <app-loader *ngIf="showSpinner" class="loader"></app-loader>
   </div>
   <div class = "rightcol wrapper" *ngIf="!showSpinner">
-    <app-view-one-product class="oneObjet" [product]="product" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}"></app-view-one-product>
+    <app-view-one-product class="oneObjet" [icon]="icon" [product]="product" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}"></app-view-one-product>
     <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
   </div>
