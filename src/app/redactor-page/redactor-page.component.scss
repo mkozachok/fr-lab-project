@@ -236,10 +236,15 @@ input[type="color"]{
 #price{
 	font-size:20px;
 	color:$darkRead;
-	margin-top: 20px;
+	margin:20px 0;
   display: block;
 }
-
+#select{
+	font-size: 20px;
+	position: absolute;
+	top:40%;
+  right: 33%;
+}
 .size-expansion {
 	::ng-deep .mat-expansion-panel-body{
 		padding: 0;
