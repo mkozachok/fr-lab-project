@@ -17,13 +17,24 @@
           <span>Name</span>
           <span>Price</span>
           <span class="img-title">Design image</span>
+          <span class="spacer"></span>
+          <div class="button-container">
+            <button md-button color="primary" (click)="changeDeleteType()">
+              {{ deleteType }}
+            </button>
+            <button [disabled]="!multiDelete" color="primary" md-button (click)="deleteSelected()">
+                delete selected
+            </button>
+          </div>
         </md-toolbar>
        <app-design
+       (checkedProduct)="checkedProduct($event)"
         *ngFor="let design of designs"
         [name]="design.name"
         [$key]="design.$key"
         [url]="design.url"
-        [price]="design.price">
+        [price]="design.price"
+        [multiDelete]="multiDelete">
         </app-design>
         <app-empty-content
         *ngIf="!designs?.length"
