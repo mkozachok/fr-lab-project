@@ -186,8 +186,14 @@ button{
   color:#fff;
 }
 
+.iconsBlock {
+  md-list-item:hover .demo-icon {
+      color: $darkRead !important;
+  }
+}
+
 ::ng-deep snack-bar-container {
   &.success-snackbar {
-      background: #7b0041;
+      background: $darkRead;
   }
 }

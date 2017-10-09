@@ -21,7 +21,7 @@
     }
 
     h2 {
-        color: #7b0041;
+        color: $darkRead;
         font-weight: 300;      
     }
 
@@ -93,7 +93,7 @@
         text-align: center;
         font-size: 2em;
         margin-top: 100px;
-        color: #7b0041;
+        color: $darkRead;
     }
 
 /deep/ .edit {
@@ -124,7 +124,7 @@
     }
 
     button:hover {
-        background: #7b0041;
+        background: $darkRead;
         color: #eee;
     }
 }
@@ -153,8 +153,8 @@ md-list-item {
     cursor: pointer;
 }
 
-md-list-item:hover {
-    background: #7b0041;
+.categoryFilter md-list-item:hover {
+    background: $darkRead;
     color: #eee;
 }
 
@@ -225,7 +225,7 @@ md-divider {
     
     ::ng-deep snack-bar-container {
         &.success-snackbar {
-            background: #7b0041;
+            background: $darkRead;
         }
     }
 
@@ -241,7 +241,7 @@ md-divider {
     }
     
     button:hover {
-        background: #7b0041;
+        background: $darkRead;
         color: #eee;
     }
 }
@@ -265,7 +265,7 @@ md-divider {
     text-align: center;
     font-size: 2em;
     margin-top: 100px;
-    color: #7b0041;
+    color: $darkRead;
 }
 
 .mobileMenus {
@@ -288,7 +288,7 @@ md-divider {
         color: #555;
     }
     > div > button:hover {
-        background: #7b0041;
+        background: $darkRead;
         color: #fff;
     }
 }
@@ -308,6 +308,6 @@ md-divider {
 
 ::ng-deep snack-bar-container {
     &.success-snackbar {
-        background: #7b0041;
+        background: $darkRead;
     }
 }
