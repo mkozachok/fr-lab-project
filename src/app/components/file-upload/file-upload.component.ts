@@ -17,13 +17,8 @@ export class FileUploadComponent implements OnInit {
   photoUrl: string;
   @Input() saveUrl: string;
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
-  // @Output() uploadEvent = new EventEmitter();
-  constructor(private _uploadService: UploadService) {
-    // this.uploadEvent = () => {
-    //
-    // }
 
-  }
+  constructor(private _uploadService: UploadService) { }
 
   ngOnInit() {
 
@@ -34,7 +29,6 @@ export class FileUploadComponent implements OnInit {
     if (this.selectedFiles.length) {
       this.downloadedPhoto = true;
     }
-    console.log(this.downloadedPhoto)
   }
 
 
