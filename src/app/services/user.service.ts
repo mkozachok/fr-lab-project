@@ -108,7 +108,7 @@ export class UserService {
   }
 
   createPrimaryInformation(upload: Upload, name: string, surname: string) {
-    console.log();
+    // console.log();
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
     return uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -116,7 +116,7 @@ export class UserService {
         // upload success
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
-        console.log(upload.url);
+        // console.log(upload.url);
         this.afAuth.auth.currentUser.updateProfile({
           displayName: `${name} ${surname}`,
           photoURL: upload.url
