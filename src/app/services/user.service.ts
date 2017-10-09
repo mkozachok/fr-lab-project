@@ -27,8 +27,10 @@ export class UserService {
     return this.afAuth.auth.signInWithPopup( new firebase.auth.FacebookAuthProvider())
   }
   logOut() {
-    this.afAuth.auth.signOut()
+    this.router.navigate(['']).then(()=>{
+      this.afAuth.auth.signOut()
       .then(()=>this.router.navigate(['/login-page']))
+    })
   }
 
   getUser() {
