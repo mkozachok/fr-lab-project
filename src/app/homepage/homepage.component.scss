@@ -285,6 +285,11 @@ md-divider {
         cursor: pointer;
         padding: 15px 10px;
         background: #eee;
+        color: #555;
+    }
+    > div > button:hover {
+        background: #7b0041;
+        color: #fff;
     }
 }
 

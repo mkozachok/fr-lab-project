@@ -11,6 +11,9 @@
 
     @media screen and (max-width: $break-m){
         font-size: 0.7em;
+        .logo {
+            display: none;
+        }
     }
 
     .spacer {
