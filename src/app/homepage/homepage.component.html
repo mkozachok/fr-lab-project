@@ -55,7 +55,7 @@
       </div>
       <h2 md-subheader>Filtering by category</h2>
       <div *ngFor = "let productCategory of categories" 
-          (click) = "sorting(productCategory.category)">
+          (click) = "sorting(productCategory.category)" class="categoryFilter">
         <ng-container *ngIf = " productCategory.category !=='all' ">
           <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
             {{productCategory.category}}
