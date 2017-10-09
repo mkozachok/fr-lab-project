@@ -11,6 +11,7 @@ export class CommonService {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
+      extraClasses: ['success-snackbar'],
     });
   }
 }

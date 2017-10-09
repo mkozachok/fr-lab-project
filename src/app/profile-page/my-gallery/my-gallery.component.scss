@@ -1,9 +1,22 @@
+@import '../../../variables.scss';
+
 .container {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 2% 1% 0 1%;
 	display: flex;
 	flex-wrap: wrap;
+
+	.empty {
+		padding: 5%;
+		text-align: center;
+		width: 100%;
+		
+		h3 {
+			text-align: center;
+			font-size: 20px;
+		}
+	}
 }
 
 app-view-one-product {
@@ -20,25 +33,20 @@ app-view-one-product {
      transform: translate(-50%, -50%);
 }
 
-.empty {
-	padding: 5%;
-	text-align: center;
-	width: 100%;
-	
-	h3 {
-		text-align: center;
-		font-size: 20px;
+@media (max-width:$break-l) and (min-width:$break-m) {
+	app-view-one-product {
+		width: calc((100% / 3) - 1%);
 	}
 }
 
-// @media screen and (max-width : 900px) {
-// 	app-view-one-product {
-// 		width: calc((100% / 2) - 1%);
-// 	}
-// }
+@media (max-width:$break-m) {
+	app-view-one-product {
+		width: calc((100% / 2) - 1%);
+	}
+}
 
-// @media screen and (max-width : 450px) {
-// 	app-view-one-product {
-// 		width: calc(100% - 1%);
-// 	}
-// }
+@media (max-width:$break-s) {
+	app-view-one-product {
+		width: calc(100% - 1%);
+	}
+}

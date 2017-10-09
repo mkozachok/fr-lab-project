@@ -8,6 +8,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
 })
 export class PosterComponent implements OnInit {
   title: 'create your own template';
+  logoSrc = "./assets/images/colibriLogo.png";
 
   constructor() { }
 

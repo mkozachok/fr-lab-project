@@ -39,6 +39,13 @@
         }
     }
 
+    .logo {
+        img{
+            width: 50px;
+            margin-top: 6px;
+        }
+    }
+
     .login {
         margin-right: 5em;
         font-weight: bold;
@@ -77,6 +84,10 @@
         right: 20px;
         top: 5px;
         margin-left: 5em;
+        @media screen and (max-width: $break-m){
+            right: 0;
+            margin-left: 0;
+        }
     }
 
     .data-badge{

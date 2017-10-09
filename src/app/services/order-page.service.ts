@@ -51,6 +51,7 @@ export class OrderService {
 		let index = this.getItemIndex(item);
 		quantity -= ORDERS[index].quantity;
 		ORDERS.splice(index, 1);
+		localStorage.setItem("cart-items", JSON.stringify(this.getAll()));
 	}
 
 	incrementItemQuantity(item) {
@@ -66,14 +67,6 @@ export class OrderService {
 			quantity--;
 		}
 	}
-
-	// setItemQuantity(item, itemQuantity) {
-	// 	let index = this.getItemIndex(item);
-	// 	console.log(index);
-	// 	console.log(ORDERS);
-	// 	// ORDERS[index].quantity = itemQuantity;
-	// 	// quantity += itemQuantity;
-	// }
 
 	addItem(item: Product, itemKey: string, itemQuantity: number): void {
 		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				

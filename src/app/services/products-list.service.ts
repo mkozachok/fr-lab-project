@@ -27,6 +27,21 @@ export class ProductsListService {
 		return this.products;
 	}
 
+	getProductByKey(key: string) {
+		let product;
+		this.products.forEach(el => {
+			console.log(el.$key);
+			if (el.$key === key) {
+				product = el;
+			}
+		});
+		console.log(product);
+		return product;
+		// return this.products.filter(el => {
+		// 	return el.$key = key;
+		// })
+	}
+
 	getProducts2(start, end): FirebaseListObservable<any> {
 		this.products = this.db.list('/products', {
 			query: {
@@ -90,6 +105,15 @@ export class ProductsListService {
 		firebase.storage().refFromURL(url).delete();
 	}
 
+	deleteArrayOfProducts(arr) {
+		arr.forEach(el => {
+			if (el.url.includes('firebasestorage.googleapis.com/v0/b/kolibri')) {
+				this.deleteProductImg(el.url)
+			}
+			this.deleteProduct(el.id)
+		})
+	}
+
 	findProduct(phrase, arrayOfProducts) {
 		return arrayOfProducts.filter(x => {
 			return x['category'].indexOf(phrase) >= 0 ||
@@ -103,6 +127,16 @@ export class ProductsListService {
 			return productKeys.includes(product.$key);
 		});
 	}
+
+	// getProductById(productKey: string, products: FirebaseListObservable<any>) {
+	// 	return products.filter(product => {
+	// 		return productKey === product.$key;
+	// 	});
+	// }
+
+	// getProductByKey(productKey: string) {
+	// 	return this.db.object('/products/' + productKey);
+	// }
 
 	setSize(product, size) {
 		return product.size = size;

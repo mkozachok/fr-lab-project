@@ -13,7 +13,8 @@ export class DesignComponent implements OnInit {
   @Input() url: string;
   @Input() $key: string;
   @Input() price: string;
-  @Output() notify: EventEmitter<object> = new EventEmitter<object>();
+  @Input() multiDelete: boolean;
+  @Output() checkedProduct:EventEmitter<object> = new EventEmitter<object>();
 
   constructor(
     private _designService: DesignService,
@@ -37,5 +38,9 @@ export class DesignComponent implements OnInit {
         price: this.price
       }
     });
+  }
+
+  onChange($event){
+    this.checkedProduct.emit({$key: this.$key, checked: $event.checked, url: this.url})
   }
 }

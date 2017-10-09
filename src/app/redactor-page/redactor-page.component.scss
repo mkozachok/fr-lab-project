@@ -1,9 +1,4 @@
 @import "../../variables.scss";
-
-/* canvas {
-	border: 1px solid black;
-}
- */
 #container{
 	display: flex;
 	flex-direction: row;
@@ -14,6 +9,9 @@
   height: 100%;
 	position: relative;
 	font-family: 'Quicksand', sans-serif;
+	@media (max-width:$break-m) {
+	flex-direction: column-reverse;
+	}
 }
 #container{
 #tools{
@@ -21,7 +19,9 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-
+	@media (max-width:$break-m) {
+		width: 100%;
+	}
 }
 
 .categories {
@@ -46,11 +46,32 @@
 .gategory_images {
 	max-height: 300px;
 	overflow-y: scroll;
+	@media screen and (max-width:$break-l){
+		display: flex;
+	   flex-direction: row;
+	   flex-wrap: wrap;
+	}
+	@media (max-width:$break-m) {
+		max-height: 145px;
+		display: -webkit-box;
+	}
 }
 
 .template_img,.category_img{
 	width: 33%;
 	margin-top: 20px;
+}
+.category_img{
+	@media screen and (max-width:$break-l){
+		width: 50%;
+	}
+	@media (max-width:$break-m) {
+		width: 25%;
+	}
+	@media (max-width:$break-s) {
+		width: 33%;
+	}
+
 }
 
 .category_img {
@@ -72,13 +93,43 @@
 #canvas{
 	width: 75%;
 	text-align: center;
+	@media (max-width:$break-m) {
+		width: 100%;
+	}
+	@media (max-width:$break-m) {
+		position: relative;
+		min-height: 500px;
+		display: block;
+	}
+	@media (max-width:$break-s) {
+		min-height: 340px;
+	}
 }
 /deep/ .mat-tab-label{
 	min-width: 50% !important;
+	@media screen and (max-width:$break-l){
+    width: 40px;
+	}
 }
-/deep/ .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: #7b0041 !important;
+/deep/ .mat-expansion-panel-body{
+	@media screen and (max-width:$break-l){
+    padding: 0;
+	}
 }
+
+/deep/   .mat-expansion-panel-content{
+	height: 0;
+}
+
+/deep/  .mat-expanded .mat-expansion-panel-content{
+	height: auto;
+}
+/deep/ .mat-expansion-panel ng-tns-c7-2 mat-expanded{
+	@media (max-width:$break-m) {
+		margin-bottom: 20px !important;
+	}
+}
+
 .head{
 	width: 100%;
 	background-color: #7b0041;
@@ -120,9 +171,7 @@
 }
 #redactor_area{
 	max-width: 700px;
-  max-height: 550px;
 	width: 100%;
-
 	height: 100%;
   margin: 0 auto;
 }
@@ -137,6 +186,9 @@
   right: 0;
   top: 0;
   height: 150px;
+	@media (max-width:$break-s) {
+		top: 50%;
+	}
 }
 #btns button:hover{
 	background:$darkRead;
@@ -144,11 +196,6 @@
 }
 canvas{
 	max-width: 100%;
-}
-/deep/ .canvas-container{
-	position: absolute !important;
-  top: 0 !important;
-  // left: 20% !important;
 }
 /deep/ .mat-expansion-panel-header{
 	background-color: #7b0041 !important;
@@ -184,10 +231,13 @@ input[type="color"]{
 	font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.54);
+	margin-bottom: 20px;
 }
 #price{
 	font-size:20px;
 	color:$darkRead;
+	margin-top: 20px;
+  display: block;
 }
 
 .size-expansion {
@@ -221,7 +271,7 @@ input[type="color"]{
 				min-width: 1%;
 				padding: 10px;
 				line-height: 5px;
-		
+
 				.mat-button-wrapper {
 					line-height: 0 !important;
 				}

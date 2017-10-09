@@ -35,4 +35,26 @@
     .spacer {
         flex: 1 1 auto;
     }
+
+    .checkbox {
+        width: 0;
+
+        label {
+            width: 0;
+        }
+    }
+
+    .button-container{
+        button {
+            display: block;
+            font-size: 1em;
+            padding: 5px;
+        }
+    }
+
+    .icons {
+        display: flex;
+        align-items: center;
+        width: 50px;
+    }
 }

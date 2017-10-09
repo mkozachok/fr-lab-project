@@ -12,6 +12,8 @@ import { Product } from '../../models/product-model';
   providers: [OrderService]
 })
 export class MyGalleryComponent implements OnInit {
+	iconEmpty:string = 'collections';
+	messageEmpty:string = 'There are no items in your gallery';
 	usersProducts: Observable<Array<any>>;
 	productIds: Array<string>;
 	public showSpinner = true;
@@ -23,7 +25,7 @@ export class MyGalleryComponent implements OnInit {
 			this.productIds = gallery.map(i => {return i.productKey});
 			this.productService.getProducts().subscribe(products => {
 				this.showSpinner = false;
-				this.usersProducts = this.productService.getProductsByIds(this.productIds, products);
+				this.usersProducts = this.productService.getProductsByIds(this.productIds, products.reverse());
 			});
 		});
 	}

@@ -1,58 +1,58 @@
 <app-loader *ngIf="showSpinner" class="loader"></app-loader>
 <div class="container" *ngIf="!showSpinner">
 	<form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm.value)">
-		<md-form-field class="example-full-width">
+		<md-form-field>
     	<input #nameRef="ngModel" required mdInput placeholder="First name" name="firstName" minlength="3" ngModel={{user.firstName}}>
-  	</md-form-field>
-    <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="error">
-      <md-error [hidden]="!nameRef.errors.required">
-        Please, enter your name
+      <md-error *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="error">
+        <div [hidden]="!nameRef.errors.required">
+          Please, enter your name
+        </div>
+        <div [hidden]="!nameRef.errors.minlength">
+          Please, enter at least 3 characters
+        </div>
       </md-error>
-      <div [hidden]="!nameRef.errors.minlength">
-        Please, enter at least 3 characters
-      </div>
-    </div>
-  	<md-form-field class="example-full-width">
-    	<input #lastNameRef="ngModel" required mdInput placeholder="Last name" name="lastName" minlength="3" ngModel={{user.lastName}}>
-  	</md-form-field>
-    <div *ngIf="lastNameRef.errors && (lastNameRef.dirty || lastNameRef.touched)" class="error">
-      <div [hidden]="!lastNameRef.errors.required">
-        Please, enter your last name
-      </div>
-      <div [hidden]="!lastNameRef.errors.minlength">
-        Please, enter at least 3 characters
-      </div>
-    </div>
-  	<md-form-field class="example-full-width">
-    	<input #emailRef="ngModel" type="email" required mdInput placeholder="Email address" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel={{user.email}}>
-  	</md-form-field>
-    <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" class="error">
-      <div [hidden]="!emailRef.errors.required">
-        Please, enter your email
-      </div>
-      <div [hidden]="!emailRef.errors.pattern">
-        Please, enter a valid email
-      </div>
-    </div>
-  	<md-form-field class="example-full-width">
-    	<input #phoneRef="ngModel" required mdInput pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\ ]?[0-9]{3}[-\s\ ]?[0-9]{3,6}$" placeholder="Phone number" name="phoneNumber" ngModel={{user.phone}}>
-  	</md-form-field>
-    <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)" class="error">
-      <div [hidden]="!phoneRef.errors.required">
-        Please, enter your phone number
-      </div>
-      <div [hidden]="!phoneRef.errors.pattern">
-        Please, enter a valid phone number
-      </div>
-    </div>
-  	<md-form-field class="example-full-width">
-    	<input #addressRef="ngModel" required mdInput placeholder="Address" minlength="4" name="address" ngModel={{user.address}}>
     </md-form-field>
-    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)" class="error">
-      <div [hidden]="!addressRef.errors.required">
-        Please, enter your address
-      </div>
-    </div>
+  	<md-form-field>
+    	<input #lastNameRef="ngModel" required mdInput placeholder="Last name" name="lastName" minlength="3" ngModel={{user.lastName}}>
+      <md-error *ngIf="lastNameRef.errors && (lastNameRef.dirty || lastNameRef.touched)" class="error">
+        <div [hidden]="!lastNameRef.errors.required">
+          Please, enter your last name
+        </div>
+        <div [hidden]="!lastNameRef.errors.minlength">
+          Please, enter at least 3 characters
+        </div>
+      </md-error>
+    </md-form-field>
+  	<md-form-field>
+    	<input #emailRef="ngModel" type="email" required mdInput placeholder="Email address" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel={{user.email}}>
+      <md-error *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" class="error">
+        <div [hidden]="!emailRef.errors.required">
+          Please, enter your email
+        </div>
+        <div [hidden]="!emailRef.errors.pattern">
+          Please, enter a valid email
+        </div>
+      </md-error>
+    </md-form-field>
+  	<md-form-field>
+    	<input #phoneRef="ngModel" required mdInput pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\ ]?[0-9]{3}[-\s\ ]?[0-9]{3,6}$" placeholder="Phone number" name="phoneNumber" ngModel={{user.phone}}>
+      <md-error *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)" class="error">
+        <div [hidden]="!phoneRef.errors.required">
+          Please, enter your phone number
+        </div>
+        <div [hidden]="!phoneRef.errors.pattern">
+          Please, enter a valid phone number
+        </div>
+      </md-error>
+    </md-form-field>
+  	<md-form-field>
+    	<input #addressRef="ngModel" required mdInput placeholder="Address" minlength="4" name="address" ngModel={{user.address}}>
+      <md-error *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)" class="error">
+        <div [hidden]="!addressRef.errors.required">
+          Please, enter your address
+        </div>
+      </md-error>
+    </md-form-field>
     <button md-raised-button class="confirm" type="submit" [disabled]="!orderForm.form.valid">Confirm</button>
 	</form>
 </div>

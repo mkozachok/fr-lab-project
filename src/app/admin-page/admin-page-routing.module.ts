@@ -13,7 +13,7 @@ const adminPageRoutes: Routes = [
     {
         path: 'admin-page',
         component: AdminPageComponent,
-        canActivateChild: [AdminGuard],
+        //canActivateChild: [AdminGuard],
         children: [
             {
                 path: 'add-menu',
