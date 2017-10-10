@@ -1,5 +1,5 @@
 <div class="profile-page">
-    <div class="side-menu">
+    <div [@menuState]="menuState" class="side-menu">
         <div class="avatar-wrapper">
             <app-loader *ngIf="showSpinner"></app-loader>
              <img [src]="user.photoURL">
@@ -18,6 +18,7 @@
         <button *ngIf="isAdmin" routerLink="/admin-page/add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
             Admin page
         </button>
+        <md-icon  *ngIf="width" class="toogle-menu" md-button (click)="toggleMenu()">{{ icon }}</md-icon>
     </div>
     <div class="content">
         <router-outlet></router-outlet>
