@@ -29,10 +29,12 @@ export class RemoveDesignComponent implements OnInit, OnDestroy {
   }
 
   getDesignsArr(): void{
+    let tempArr;
     this.removeDesignSubscription.add(this._designService.getDesigns()
     .subscribe(res => {
       this.showSpinner = false;
-      this.designs = res;
+      tempArr = res.reverse();
+      this.designs = tempArr;
       this.arrOfDesigns = this.designs;
     }))
   }

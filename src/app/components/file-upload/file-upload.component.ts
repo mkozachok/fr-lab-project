@@ -26,6 +26,7 @@ export class FileUploadComponent implements OnInit {
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
+    console.log(event.target.files)
     if (this.selectedFiles.length) {
       this.downloadedPhoto = true;
     }
@@ -43,6 +44,7 @@ export class FileUploadComponent implements OnInit {
         this.photoUrl = this._uploadService.getUrl();
         if (this.photoUrl) {
           this.notify.emit(this.photoUrl)
+          this.photoUrl = undefined;
           clearInterval(timer);
           this.downloadedPhoto = false;
         } else if (counter > 30) {

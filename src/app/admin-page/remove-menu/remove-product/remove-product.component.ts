@@ -28,9 +28,11 @@ export class RemoveProductComponent implements OnInit {
   ) { }
 
   getProductsArr() {
+    let tempArr;
     this.removeProductSubscription.add(this._productService.getProducts().subscribe(res => {
       this.showSpinner = false;
-      this.productList = res;
+      tempArr = res.reverse();
+      this.productList = tempArr;
       this.arrOfProducts = this.productList;
     }));
   }
