@@ -7,6 +7,7 @@ import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsListService } from '../services/products-list.service';
 import * as firebase from 'firebase';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class OrderPageComponent implements OnInit {
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
 	productsKeys: Array<string>;
+	templateTypes: FirebaseListObservable<any>;
+	public showSpinner = true;
 
 	constructor(
 		private orderService: OrderService,
@@ -30,15 +33,18 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer,
 		private productListService: ProductsListService
 	) { 
-
-			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
-				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
-			}
-			this.checkForUpdates();
-			localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
-			this.orders = this.orderService.getAll();
-			this.totalQuantity = this.orderService.getQuantity();
-			this.totalAmount = this.orderService.getTotalAmount();
+		this.productListService.getTemplateTypes().subscribe(res => {
+			this.templateTypes = res;
+			this.showSpinner = false;
+		});
+		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
+			this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
+		}
+		this.checkForUpdates();
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+		this.orders = this.orderService.getAll();
+		this.totalQuantity = this.orderService.getQuantity();
+		this.totalAmount = this.orderService.getTotalAmount();
 	}
 
 	ngOnInit() {
@@ -60,6 +66,7 @@ export class OrderPageComponent implements OnInit {
 	}
 
 	navigate() {
+		console.log(this.orderService.getAll());
 		this.router.navigate(['make-order']);
 	}
 
@@ -90,5 +97,10 @@ export class OrderPageComponent implements OnInit {
 				}				
 			});
 		});
+	}
+
+	setSize(order) {
+		this.orderService.checkifExists(order);
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 }

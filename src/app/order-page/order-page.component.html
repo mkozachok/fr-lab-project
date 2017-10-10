@@ -1,11 +1,12 @@
-<div class="container">
+<app-loader *ngIf="showSpinner" class="loader"></app-loader>
+<div class="container" *ngIf="!showSpinner">
   <div class="header">
     <h2>Cart page</h2>
   </div>
   <div *ngIf = "totalQuantity !== 0">
     <div class="item-headers">
       <div class="product"></div>
-      <div>Type</div>
+      <div class="type">Type</div>
       <div>Size</div>
       <div>Price</div>
       <div>Quantity</div>
@@ -18,8 +19,16 @@
       <div class="type">
         {{order.product.type}}
       </div>
-      <div>
-        {{order.product.size}}
+      <div class="size">
+        <ng-container *ngFor="let template of templateTypes">
+					<ng-container *ngIf="order.product.type === template.type" class="size">
+							<md-select [(ngModel)]="order.product.size" placeholder="size" (ngModelChange)="setSize(order)">
+								<md-option *ngFor="let size of template.size" [value]="size">
+									{{size}}
+								</md-option>
+							</md-select>
+					</ng-container>
+				</ng-container>
       </div>
         <div class="price">
           {{order.product.price | currency:'USD':true}}

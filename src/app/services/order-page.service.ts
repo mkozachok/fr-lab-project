@@ -87,4 +87,16 @@ export class OrderService {
 		}
 		localStorage.setItem("cart-items", JSON.stringify(this.getAll()));
 	}
+
+	checkifExists(item) {
+			ORDERS.forEach(el => {
+				if ((this.getItemIndex(item) !== this.getItemIndex(el))) {
+					if (el.productKey === item.productKey && (el.product.size === item.product.size) && (item.productKey !== 'no')) {
+						el.quantity += item.quantity;
+						quantity += item.quantity;
+						this.removeItem(item);
+					}
+				}
+			});
+	}
 }
