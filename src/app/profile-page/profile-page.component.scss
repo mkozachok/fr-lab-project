@@ -97,8 +97,8 @@
             text-align: left;
             transition: ease all .2s;
 
-            @media screen and (max-width:$break-s){
-                padding: 0;
+            @media screen and (max-width:$break-l){
+                padding: 15px 5px;
                 min-height: 0;
             }
 

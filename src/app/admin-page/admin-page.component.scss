@@ -17,12 +17,16 @@
     .side-menu {
         position: fixed;
         justify-content: center;
-        width: 200px;
-        height: 100%;
+        width: 300px;
+        font-size: 1.5em;
+        z-index: 55;
+        background: white;
+        
 
         @media screen and (max-width: $break-l){
-            width: 25vw;
-        }
+            height: 85%;
+            width: 90vw; 
+       }
 
 
 
@@ -39,8 +43,9 @@
             text-align: left;
             transition: ease all .2s;
 
-            @media screen and (max-width: $break-s){
-                font-size: 0.8em;
+            @media screen and (max-width:$break-l){
+                padding: 15px 5px;
+                min-height: 0;
             }
                     &:hover{
                         color: $profileSideMenuButtonsHover;
@@ -50,12 +55,32 @@
             } 
     }
 
+    .toogle-menu {
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        transform: translate(10vw, 0);
+        top: 0;
+        width: 10vw;
+        height: 100%;
+        transition: 0.3s ease-in-out;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+
+        &:hover {
+            background-color: $profileSideMenuButtonsHoverBg;
+        }
+    }
+
     .content {
         flex: 1;
-        padding-left: 200px;
+        padding-left: 300px;
 
         @media screen and (max-width: $break-l){
-            padding-left: 25vw;
+             padding-left: 10vw; 
         }
     }
 

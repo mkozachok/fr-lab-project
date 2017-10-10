@@ -30,7 +30,7 @@
             color: #555;
         }
 
-        button:hover {
+        button:not([disabled]):hover {
             background: #7b0041;
             color: #eee;
         }

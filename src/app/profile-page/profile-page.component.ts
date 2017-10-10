@@ -5,9 +5,7 @@ import {
   state,
   style,
   transition,
-  animate,
-  keyframes,
-  group
+  animate
 } from '@angular/core';
 import { UserService, AdminService } from '.././services';
 import { User } from '../models/user-model';
@@ -45,6 +43,7 @@ export class ProfilePageComponent implements OnInit {
       this.width = (window.innerWidth < 960)? true : false;
       if(!this.width){
         this.menuState = 'opened';
+        this.icon = 'keyboard_arrow_left';
       }
     }
   }

@@ -24,7 +24,7 @@
     } */
 
      /deep/ .material-icons {
-        @media screen and (max-width: $break-middle){
+        @media screen and (max-width: $break-m){
             font-size: 2em;
         }
     } 
@@ -43,6 +43,10 @@
         img{
             width: 50px;
             margin-top: 6px;
+        }
+
+        @media screen and (max-width: $break-middle){
+            padding-right: 50px;
         }
     }
 
