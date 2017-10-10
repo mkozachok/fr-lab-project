@@ -19,17 +19,9 @@
       <div class="type">
         {{order.product.type}}
       </div>
-      <div class="size">
-        <ng-container *ngFor="let template of templateTypes">
-					<ng-container *ngIf="order.product.type === template.type" class="size">
-							<md-select [(ngModel)]="order.product.size" placeholder="size" (ngModelChange)="setSize(order)">
-								<md-option *ngFor="let size of template.size" [value]="size">
-									{{size}}
-								</md-option>
-							</md-select>
-					</ng-container>
-				</ng-container>
-      </div>
+        <div>
+          {{order.product.size}}
+        </div>
         <div class="price">
           {{order.product.price | currency:'USD':true}}
         </div>

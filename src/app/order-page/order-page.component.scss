@@ -132,27 +132,6 @@
 			color: $darkRead;
 		}
 	}
-
-	md-select {
-		padding-top: 0;
-		width: 70%;
-
-		::ng-deep .mat-select-trigger {
-			width: 100%;
-			min-width: 1%;
-		}
-		 md-option {
-			 width: 70%;
-			::ng-deep .mat-option-ripple {
-				width: 100%;
-				min-width: 1%;
-			}
-		 }
-	}
-
-	::ng-deep .mat-option {
-		width: 60% !important;
-	}
 }
 
 @media (max-width:$break-l) and (min-width:$break-m) {
@@ -240,7 +219,7 @@
 		.quantity {
 			.add, .subtract {
 				height: 25%;
-				width: 30%;
+				width: 35%;
 				line-height: 0;
 
 				::ng-deep .mat-button-wrapper {
@@ -251,7 +230,7 @@
 
 			input {
 				height: 25%;
-				width: 30%;
+				width: 35%;
 				font-size: 1em;
 			}
 		}
@@ -279,17 +258,6 @@
 
 	.type {
 		display: none !important;
-	}
-
-	md-select {
-		::ng-deep .mat-select-trigger {
-			font-size: 1.0em !important;
-		}
-
-	}
-
-	::ng-deep .mat-option {
-		font-size: 1.0em !important;
 	}
 
 	.item-headers {

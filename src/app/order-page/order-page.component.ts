@@ -23,8 +23,6 @@ export class OrderPageComponent implements OnInit {
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
 	productsKeys: Array<string>;
-	templateTypes: FirebaseListObservable<any>;
-	public showSpinner = true;
 
 	constructor(
 		private orderService: OrderService,
@@ -33,10 +31,6 @@ export class OrderPageComponent implements OnInit {
 		private sanitizer: DomSanitizer,
 		private productListService: ProductsListService
 	) { 
-		this.productListService.getTemplateTypes().subscribe(res => {
-			this.templateTypes = res;
-			this.showSpinner = false;
-		});
 		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
 			this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
 		}
@@ -97,10 +91,5 @@ export class OrderPageComponent implements OnInit {
 				}				
 			});
 		});
-	}
-
-	setSize(order) {
-		this.orderService.checkifExists(order);
-		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
 	}
 }
