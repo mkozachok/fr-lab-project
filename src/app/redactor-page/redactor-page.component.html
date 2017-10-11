@@ -5,50 +5,49 @@
           <div class="templates">
             <div class="template_img" *ngFor="let template of templateTypes">
               <div class="oneTemplate" [innerHTML] = "template.tag" (click)="selectTemplate(template, $event)"></div>
-              <!-- <img [src]="template.url" (click)="selectTemplate(template)" width="80"/> -->
             </div>
           </div>
-          <ng-container *ngIf = " myGoods?.length !== 0">
-            <md-expansion-panel>
-                <md-expansion-panel-header>
-                  <md-panel-title>
-                    <div class="head">Color <i class="material-icons">color_lens</i></div>
-                  </md-panel-title>
-                </md-expansion-panel-header>
 
-
-                  <ul class="selected_color">
-                    <li *ngFor="let goods of myGoods" (click)="setColor(goods)">
-                      <span [style.background] = "goods.color">
-                      </span>
-                    </li>
-                  </ul>
-
-              </md-expansion-panel>
-              <md-expansion-panel class="size-expansion" #sizePanel *ngIf = "showSize" [expanded]="showSize">
-                  <md-expansion-panel-header>
-                    <md-panel-title>
-                      <div class="head">Size</div>
-                    </md-panel-title>
-                  </md-expansion-panel-header>  
-                  <ul class="size">
-                    <li *ngFor="let size of templateSizeQuantites" class="size-item">
-                        <span class="size-name">{{size.size}}</span>
-                        <div class="quantity">
-                        <button button md-raised-button class="add" (click)="addButtonClick(size)">
-                            +
-                          </button> 
-                          <input mdInput type="text" value="{{size.quantity}}" [readonly]="true">
-                          <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
-                            -
-                          </button> 
-                          </div>
-                    </li>
-                  </ul>  
-              </md-expansion-panel>
-            </ng-container>
       </md-tab>
       <md-tab [disabled]="isDisabled"  label="Category">
+          <ng-container *ngIf = " myGoods?.length !== 0">
+              <md-expansion-panel class="colorChoose">
+                  <md-expansion-panel-header>
+                    <md-panel-title>
+                      <div class="head">Color <i class="material-icons">color_lens</i></div>
+                    </md-panel-title>
+                  </md-expansion-panel-header>
+
+
+                    <ul class="selected_color">
+                      <li *ngFor="let goods of myGoods" (click)="setColor(goods)">
+                        <span [style.background] = "goods.color">
+                        </span>
+                      </li>
+                    </ul>
+              </md-expansion-panel>
+                <md-expansion-panel class="size-expansion" #sizePanel *ngIf = "showSize" [expanded]="showSize">
+                    <md-expansion-panel-header>
+                      <md-panel-title>
+                        <div class="head">Size</div>
+                      </md-panel-title>
+                    </md-expansion-panel-header>
+                    <ul class="size">
+                      <li *ngFor="let size of templateSizeQuantites" class="size-item">
+                          <span class="size-name">{{size.size}}</span>
+                          <div class="quantity">
+                          <button button md-raised-button class="add" (click)="addButtonClick(size)">
+                              +
+                            </button>
+                            <input mdInput type="text" value="{{size.quantity}}" [readonly]="true">
+                            <button button md-raised-button class="subtract" (click)="subtractButtonClick(size)">
+                              -
+                            </button>
+                            </div>
+                      </li>
+                    </ul>
+                </md-expansion-panel>
+              </ng-container>
           <div class="categories">
             <md-select [(ngModel)]="myCategory" (change) = "categoryChoose(myCategory)" placeholder="choose category" ng-disabled="tab.disabled">
               <md-option class="category"  *ngFor="let category of categories" [value]="category.category">
@@ -106,16 +105,17 @@
     </md-tab-group>
   </div>
 
-    <app-loader *ngIf="showSpinner"></app-loader>
+    <app-loader *ngIf="showSpinner" class="loader"></app-loader>
   <div id="canvas" (window:resize)="resizeCanvas()">
     <div id="redactor_area">
       <canvas width="700px" height="550px" id="img_product"></canvas>
+      <p *ngIf="showSelect" id="select">Select product</p>
+      <span id="price">Price is: {{ getProductPrice() }}$</span>
     </div>
     <div id="btns">
     <button md-raised-button [disabled]="isDisabled" (click)="saveProduct()"><i class="material-icons">save</i></button>
     <button md-raised-button [disabled]="isDisabled" (click)="buy()"><i class="material-icons">add_shopping_cart</i></button>
-    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()">Remove</button>
+    <button md-raised-button [disabled]="!this.getCanvas().getActiveObject()" (click)="removeImg()"><i class="material-icons">delete</i></button>
   </div>
-    <span id="price">Price is: {{ getProductPrice() }}$</span>
   </div>
 </div>

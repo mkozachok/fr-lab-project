@@ -11,6 +11,10 @@ import { Admin } from '../../../models/admin-model';
 
 
 export class RemoveAdminComponent implements OnInit, OnDestroy {
+  iconEmpty:string = 'person';
+  messageEmpty:string = 'There are no admins';
+  iconNotFound:string = 'search';
+  messageNotFound:string = 'There are no admins you are loking for';
   removeAdminSubscription: Subscription = new Subscription();
   admins: Observable<Array<any>>;
   arrOfAdmins: Observable<Array<any>>;

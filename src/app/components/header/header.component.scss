@@ -24,7 +24,7 @@
     } */
 
      /deep/ .material-icons {
-        @media screen and (max-width: $break-middle){
+        @media screen and (max-width: $break-m){
             font-size: 2em;
         }
     } 
@@ -36,6 +36,17 @@
 
         &:hover {
             color: #7b0041;
+        }
+    }
+
+    .logo {
+        img{
+            width: 50px;
+            margin-top: 6px;
+        }
+
+        @media screen and (max-width: $break-middle){
+            padding-right: 50px;
         }
     }
 
@@ -60,7 +71,11 @@
     .log-button {
         @extend a;
         cursor: pointer;
-        font-weight: bold;
+        
+        span {
+            font-weight: bold;
+        }
+        
     }
 
     .greeting {
@@ -77,6 +92,10 @@
         right: 20px;
         top: 5px;
         margin-left: 5em;
+        @media screen and (max-width: $break-m){
+            right: 0;
+            margin-left: 0;
+        }
     }
 
     .data-badge{

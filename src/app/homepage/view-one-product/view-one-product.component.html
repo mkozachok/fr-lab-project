@@ -1,10 +1,10 @@
 <md-card>
+	<i class="demo-icon icon-pencil edit" *ngIf="isAdmin" svgIcon="mode_edit" (click)="onEdit(product)">&#xe80a;</i>
 	<div class="img-container">
 		<img src="{{ product.svg }}" alt="">
 	</div>
 	<div class="info">
 		<div class="aboutTheProduct">
-			<h3>{{product.name}}</h3>
 			<ul>
 				<li><span>type:</span> {{product.type}}</li>
 				<li><span>category:</span> {{product.category}}</li>
@@ -24,6 +24,5 @@
 		</div>
 		<button md-raised-button (click)="addToCart(product)">add to my card</button>
 		<i class="material-icons clear" (click)="delete()">clear</i>
-		<!-- <button md-raised-button *ngIf="deleteButton" (click)="delete()">delete</button> -->
 	</div>
 </md-card>

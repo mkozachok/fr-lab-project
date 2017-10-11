@@ -7,13 +7,13 @@ import { AddMenuComponent } from './add-menu';
 import { RemoveMenuComponent } from './remove-menu';
 import { NewOrdersComponent } from './new-orders';
 
-import { AdminGuard } from '../guards';
+import { AdminGuard } from '../guards/admin.guard';
 
 const adminPageRoutes: Routes = [
     {
         path: 'admin-page',
         component: AdminPageComponent,
-        canActivateChild: [AdminGuard],
+        //canActivateChild: [AdminGuard],
         children: [
             {
                 path: 'add-menu',

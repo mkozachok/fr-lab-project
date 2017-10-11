@@ -9,26 +9,26 @@ import { Subscription } from 'rxjs';
   providers: [OrderService]
 })
 export class HeaderComponent implements OnInit {
-  logoSrc = "./assets/images/logo.png";
+  logoSrc = "./assets/images/colibriLogo.png";
   basketIcon = "shopping_cart";
   user = {};
   ordersAmount: number;
-  subscription: Subscription
+  fetchedData: boolean;
+  subscription: Subscription = new Subscription();
   constructor(private _userService: UserService, private orderService: OrderService) {
-   this.subscription = this._userService.getUser().subscribe(res => this.user = res);
-    // console.log(JSON.parse(localStorage.getItem("cart-items")).length);
-    // this.ordersAmount = JSON.parse(localStorage.getItem("cart-items")).length;
+   
     this.ordersAmount = this.orderService.getQuantity();
-    // localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
   }
 
   ngAfterContentChecked() {
     this.ordersAmount = this.orderService.getQuantity();
-    // this.ordersAmount = JSON.parse(localStorage.getItem("cart-items")).length;
   }
 
   ngOnInit() {
-    
+    this.subscription.add(this._userService.getUser().subscribe(res =>{
+      this.fetchedData = true;
+      this.user = res;
+    }));
   }
 
   ngOnDestroy(){

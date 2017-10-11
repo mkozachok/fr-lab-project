@@ -2,9 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { ProductsListService } from '../../../../services';
-import { CommonService } from '../../../../services';
-
+import { CommonService, ProductsListService, DesignService } from '../../../../services';
+import { Observable, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-edit-product',
@@ -13,12 +12,16 @@ import { CommonService } from '../../../../services';
 })
 
 export class EditProductComponent implements OnInit {
+  editProductSubscription: Subscription = new Subscription();
+  category: Observable<Array<string>>;
+  types: Observable<Array<string>>;
   waitForDelivery: boolean;
   productForm: FormGroup;
 
   ReferenceToProducts: string = 'products';
   constructor(
     private _formBuilder: FormBuilder,
+    private _designService: DesignService,
     public snackBar: MdSnackBar,
     private _productService: ProductsListService,
     private _commonService: CommonService,
@@ -27,7 +30,13 @@ export class EditProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.editProductSubscription.add(this._designService.getDesignCategory().subscribe(res => {
+      this.category = res.map(el => el.category).slice(1);
+    }))
 
+    this.editProductSubscription.add(this._productService.getTemplateTypes().subscribe(res => {
+        this.types = res.map(el => el.type)
+      }));
     this.productForm = this._formBuilder.group({
       category: [this.data.category,
       [
@@ -51,6 +60,10 @@ export class EditProductComponent implements OnInit {
       ]
       ]
     })
+  }
+
+  ngOnDestroy(){
+    this.editProductSubscription.unsubscribe();
   }
 
   onSubmit(): void {

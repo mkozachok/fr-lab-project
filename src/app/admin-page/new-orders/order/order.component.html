@@ -10,7 +10,7 @@
       {{ userInfo.phoneNumber }} {{ userInfo.email }}
     </md-panel-description>
     <md-panel-description>
-      Amount: {{ totalSum }} UAH
+      Amount: {{ totalSum | currency:'USD':true }} 
     </md-panel-description>
   </md-expansion-panel-header>
   <div class="sub-order-wrapper">

@@ -1,4 +1,9 @@
 <app-loader *ngIf="showLoader" class="loader"></app-loader>
+<app-empty-content
+*ngIf="!usersOrders?.length && !showLoader"
+[icon]="iconEmpty"
+[message]="messageEmpty">
+</app-empty-content>
 <div *ngIf="!showLoader" class="container">
 	<md-accordion *ngIf="usersOrders.length !== 0">
 		<md-expansion-panel *ngFor="let order of usersOrders">
@@ -7,7 +12,7 @@
       			{{order.date | date :'medium'}}
     		</md-panel-title>
 		    <md-panel-description>
-		    	Amount: {{order.totalSum}} UAH
+		    	Amount: {{order.totalSum | currency:'USD':true}}
 		    </md-panel-description>
 		    <md-panel-description>
 		    	Status: {{order.new ? 'new' : 'accepted'}}
@@ -18,8 +23,4 @@
 		  </div>
 		</md-expansion-panel>
 	</md-accordion>
-	<div *ngIf="usersOrders.length === 0" class="empty">
-		<i class="material-icons">description</i>
-		<h3>You haven't made any orders yet</h3>
-	</div>
 </div>

@@ -1,13 +1,22 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../../models/product-model';
-import { ProductsListService } from '../../services/products-list.service';
-import { OrderService } from '../../services/order-page.service';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
-import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { Subscription } from "rxjs";
+import { Product } from '../../models/product-model';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Observable, Subscription } from 'rxjs';
+import { EditProductComponent } from '../../admin-page/remove-menu';
+import {
+  MdSnackBar,
+  MdSnackBarConfig,
+  MdDialog
+} from '@angular/material';
+
+import {
+  UserService,
+  AdminService,
+  OrderService,
+  ProductsListService
+} from '../../services';
+
 
 @Component({
   selector: 'app-view-one-product',
@@ -20,11 +29,29 @@ export class ViewOneProductComponent implements OnInit {
   selectedItems: Product[];
   deleteButton: boolean;
   templateTypes: FirebaseListObservable<any>;
+  isAdmin: boolean;
+  viewOneProductSubscription: Subscription = new Subscription()
 
-  constructor(private productListService: ProductsListService, private orderService: OrderService, public snackBar: MdSnackBar, private router: Router, private userService: UserService) { 
+  constructor(
+    private productListService: ProductsListService,
+    private orderService: OrderService,
+    public snackBar: MdSnackBar,
+    private router: Router,
+    private userService: UserService,
+    private adminService: AdminService,
+    public dialog: MdDialog,
+  ) {
   };
 
-  ngOnInit():void {
+  ngOnInit(): void {
+    this.viewOneProductSubscription.add(this.userService.getUserIdAsync().subscribe(user => {
+      let id = user ? user.uid : 'Please login';
+      this.viewOneProductSubscription.add(this.adminService.getAdmin(id).subscribe(admin => {
+        if (admin.length > 0 && this.router.routerState.snapshot.url==='/') {
+          this.isAdmin = true;
+        }
+      }))
+    }))
     this.deleteButton = (this.router.url === '/profile-page/my-gallery');
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;
@@ -47,13 +74,26 @@ export class ViewOneProductComponent implements OnInit {
     }
   }
 
-  setSize(size, product):void {
-    product.size = size;
+  setSize(size, product): void {
+    this.productListService.setSize(product, size);
   }
 
   delete() {
     this.userService.getUsersGallery(this.userService.getUserId()).subscribe(res => {
       this.userService.deleteProductFromGallery(this.product.$key, this.userService.getUserId(), res);
+    });
+  }
+
+  onEdit({ $key, name, category, owner, price, type }) {
+    let dialogRef = this.dialog.open(EditProductComponent, {
+      data: {
+        $key: $key,
+        name: name,
+        category: category,
+        owner: owner,
+        price: price,
+        type: type
+      }
     });
   }
 }

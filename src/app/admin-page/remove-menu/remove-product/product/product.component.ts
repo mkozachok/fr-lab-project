@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { ProductsListService } from '../../../../services';
-import { EditProductComponent } from '../edit-product/edit-product.component';
+import { ProductsListService, OrderService } from '../../../../services';
+import { EditProductComponent } from '../edit-product';
 
 @Component({
   selector: 'app-product',
@@ -16,11 +16,14 @@ export class ProductComponent implements OnInit {
 @Input() svg: string;
 @Input() price: string;
 @Input() type: string;
+@Input() multiDelete: boolean;
+@Output() checkedProduct:EventEmitter<object> = new EventEmitter<object>();
 
 
   constructor(
     private _productService: ProductsListService,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {
@@ -28,8 +31,10 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(){
-    this._productService.deleteProductImg(this.svg);
-    this._productService.deleteProduct(this.$key)
+    if (this.svg.includes('firebasestorage.googleapis.com/v0/b/kolibri')) {
+      this._productService.deleteProductImg(this.svg);
+    }
+    this._productService.deleteProduct(this.$key);
   }
 
   onEdit(){
@@ -43,6 +48,10 @@ export class ProductComponent implements OnInit {
         type: this.type
       }
     });
+  }
+
+  onChange($event){
+    this.checkedProduct.emit({$key: this.$key, checked: $event.checked, url: this.svg})
   }
 
 }

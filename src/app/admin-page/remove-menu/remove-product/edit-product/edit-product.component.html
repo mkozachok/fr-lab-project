@@ -1,19 +1,13 @@
 <div class="add-wrapper">
   <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <md-form-field>
-      <input required type="text" placeholder="category" mdInput formControlName="category">
-      <md-error *ngIf="productForm.controls['category'].hasError('required')">
-        Category <strong>cannot be blank</strong>
-      </md-error>
-    </md-form-field>
-    <md-form-field>
       <input required type="text" placeholder="name" mdInput formControlName="name">
       <md-error *ngIf="productForm.controls['name'].hasError('required')">
         Name <strong>cannot be blank</strong>
       </md-error>
     </md-form-field>
     <md-form-field>
-      <input required type="text" placeholder="price" mdInput formControlName="price">
+      <input required type="number" placeholder="price" mdInput formControlName="price">
       <md-error *ngIf="productForm.controls['price'].hasError('required')">
         Price <strong>cannot be blank</strong>
       </md-error>
@@ -21,16 +15,20 @@
     <md-form-field>
       <input type="text" placeholder="owner" mdInput formControlName="owner">
     </md-form-field>
-    <md-form-field>
-      <input required type="text" placeholder="type" mdInput formControlName="type">
-      <md-error *ngIf="productForm.controls['type'].hasError('required')">
-        Type <strong>cannot be blank</strong>
-      </md-error>
-    </md-form-field>
+    <md-select required placeholder="type" formControlName="type" class="select">
+      <md-option *ngFor="let type of types" [value]="type">
+        {{ type }}
+      </md-option>
+    </md-select>
+     <md-select required placeholder="category" formControlName="category" class="select">
+        <md-option *ngFor="let category of category" [value]="category">
+          {{ category }}
+        </md-option>
+      </md-select> 
     <md-dialog-actions>
       <button [disabled]="!productForm.valid || waitForDelivery" type="submit"
         md-raised-button color="primary" class="edit-save-button">
-            Edit product
+            Save product
         </button>
       <button [disabled]="waitForDelivery" md-raised-button md-dialog-close color="primary" class="edit-save-button">
             Close

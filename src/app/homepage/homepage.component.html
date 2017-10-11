@@ -3,7 +3,7 @@
   <div class="leftcol">
     <div>
       <div class="allProducts">
-        <button md-button (click) = "sorting('all')">
+        <button md-button (click) = "sorting('all')" (mousedown)="navChanged('all')" [ngClass]="{'active' : false}">
             show all products
         </button>
       </div>
@@ -14,7 +14,8 @@
                     [(ngModel)] = "searchTerm"  
                     (ngModelChange) = "search(searchTerm)" 
                     class="search" 
-                    name="userFilter"> 
+                    name="userFilter"
+                    (click)="navChanged('all')" [ngClass]="{'active' : false}"> 
         </md-form-field>
       </form>
     </div>
@@ -36,11 +37,15 @@
             (click) = "sorting(productCategory.category)">
               {{productCategory.category}}
             </button>
+            <button md-menu-item 
+            (click) = "sorting('custom design')">
+              custom design
+            </button>
           </md-menu>
       </div>
     </div>
     <md-list class="objectTypeFilter">
-      <h2 md-subheader>Sorting by type</h2>
+      <h2 md-subheader>Filtering by type</h2>
       <div class="iconsBlock">
         <div *ngFor = "let templateType of templateTypes" 
             (click) = "sorting(templateType.type)" class="icons">
@@ -48,47 +53,27 @@
           </md-list-item>
         </div>
       </div>
-      <h2 md-subheader>Sorting by category</h2>
+      <h2 md-subheader>Filtering by category</h2>
       <div *ngFor = "let productCategory of categories" 
-          (click) = "sorting(productCategory.category)">
+          (click) = "sorting(productCategory.category)" class="categoryFilter">
         <ng-container *ngIf = " productCategory.category !=='all' ">
           <md-list-item (click)="navChanged(productCategory.category)" [ngClass]="{'active' : productCategory.category === selected}">
             {{productCategory.category}}
           </md-list-item>
         </ng-container>
       </div>
+      <div (click) = "sorting('custom design')">
+        <md-list-item (click)="navChanged('custom design')" [ngClass]="{'active' : 'custom design' === selected}">
+            custom design
+        </md-list-item>
+      </div>
     </md-list>
   </div> 
-  <div class = "rightcol wrapper">
-    <div class="oneObjet" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}">
-        <md-icon *ngIf="isAdmin" svgIcon="mode_edit" class="edit" (click)="onEdit(product)"></md-icon>
-      <div class="productImg">
-        <img src="{{ product.svg }}" alt="">
-      </div>
-      <div class="info">
-        <div class = "aboutTheProduct">
-          <h3>{{product.name}}</h3>
-          <ul>
-            <li><span>type:</span> {{product.type}}</li>
-            <li><span>category:</span> {{product.category}}</li>
-            <li><span>price:</span>  {{ product.price }}</li>
-            <ng-container *ngFor = "let template of templateTypes; let i = index">
-                <ng-container *ngIf = "product.type === template.type">
-                  <li>
-                    <md-select [(ngModel)]="mySize" #price placeholder="sizes" (ngModelChange)="setSize(mySize, product)">
-                        <md-option *ngFor="let size of template.size" [value]="size">
-                          {{size}}
-                        </md-option>
-                    </md-select> 
-                  </li>             
-                </ng-container>
-            </ng-container>
-          </ul>
-        </div>
-        <button md-raised-button (click)="addToCart(product)">add to my card</button>
-        <button md-raised-button *ngIf = "deleteButton" (click)="delete()">delete</button>
-      </div>  
-    </div>
+  <div class="homepageSpinner" *ngIf="showSpinner">
+    <app-loader *ngIf="showSpinner" class="loader"></app-loader>
+  </div>
+  <div class = "rightcol wrapper" *ngIf="!showSpinner">
+    <app-view-one-product class="oneObjet" [product]="product" *ngFor = "let product of prods | paginate: { itemsPerPage: 12, currentPage: p}"></app-view-one-product>
     <pagination-controls (pageChange)="p = $event" autoHide="true" class = "pagination" previousLabel="" nextLabel=""></pagination-controls>
     <div *ngIf = " prods?.length === 0" class="noResults">No results</div>
   </div>

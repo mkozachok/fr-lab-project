@@ -1,11 +1,7 @@
 @import "../../../variables.scss";
 
-/deep/ .mat-tab-label{
-	min-width: calc(100%/3) !important;
-}
-
-
 /deep/ .remove-wrapper{
+
     padding: 2vw;
     display: flex;
     justify-content: center;
@@ -35,4 +31,32 @@
     .spacer {
         flex: 1 1 auto;
     }
+
+    .checkbox {
+        width: 0;
+
+        label {
+            width: 0;
+        }
+    }
+
+    .button-container{
+        button {
+            display: block;
+            font-size: 1em;
+            padding: 5px;
+        }
+    }
+
+    .icons {
+        display: flex;
+        align-items: center;
+        width: 50px;
+    }
+
+    /deep/.select{
+        width: 50vw;
+        padding-bottom: 1.25em;
+    }
+
 }

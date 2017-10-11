@@ -13,7 +13,11 @@
         Price <strong>cannot be blank</strong>
       </md-error>
     </md-form-field>
-    
+    <md-select required placeholder="category" formControlName="category" class="select">
+      <md-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </md-option>
+    </md-select>
     <md-dialog-actions>
       <button [disabled]="!designForm.valid || waitForDelivery" type="submit"
         md-raised-button color="primary" class="edit-save-button">

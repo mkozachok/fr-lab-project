@@ -1,8 +1,12 @@
 @import '../../../variables.scss';
 
 md-card {
+	height: 100%;
 	padding: 0;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .aboutTheProduct {
@@ -60,6 +64,7 @@ ul, li {
 }
 
 .info {
+
 	button {
 		min-width: 1%;
 		width: 100%;
@@ -84,27 +89,13 @@ ul, li {
 	cursor: pointer;
 }
 
-@media (max-width:$break-l) and (min-width:$break-m) {
-	.info button {
-		padding: 2.5%;
-	}
-	.aboutTheProduct ul li,  .info button{
-		// font-size: 0.8em;
-	}
-
-	h3 {
-		// font-size: 0.8em !important;
-	}
+.clear:hover {
+	color: $darkRead !important;
 }
 
-@media screen and (max-width : 450px) {
-	.info button {
-		padding: 3.5%;
-	}
-	.aboutTheProduct ul li, .info button {
-		// font-size: 2.0vw;
-	}
-	h3 {
-		// font-size: 2.3vw !important;
+
+/deep/ .homepage {
+	.clear {
+		display: none !important;
 	}
 }

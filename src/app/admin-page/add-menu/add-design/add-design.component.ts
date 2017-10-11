@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { CommonService, DesignService } from '../../../services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-design',
@@ -9,11 +10,13 @@ import { CommonService, DesignService } from '../../../services';
   styleUrls: ['./add-design.component.scss']
 })
 export class AddDesignComponent implements OnInit {
+  ReferenceToDesigns: string = 'designs';
   waitForDelivery: boolean;
   designForm: FormGroup
   name: string;
   price: string;
-  ReferenceToDesigns: string = 'designs';
+  category: string;
+  categories: Observable<Array<string>>
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -25,6 +28,9 @@ export class AddDesignComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._designService.getDesignCategory().subscribe(res => {
+      this.categories = res.map(el => el.category).splice(1);
+    })
     this.designForm = this._formBuilder.group({
       name: [null,
         [
@@ -36,6 +42,11 @@ export class AddDesignComponent implements OnInit {
           Validators.required
         ]
       ],
+      category: [null,
+        [
+          Validators.required
+        ]
+      ]
     })
   }
 
@@ -43,16 +54,18 @@ export class AddDesignComponent implements OnInit {
     this.waitForDelivery = true;
     this.name = this.designForm.value.name;
     this.price = this.designForm.value.price;
+    this.category = this.designForm.value.category;
   }
 
 
   onNotify(url) {
     this._designService.setDesign({
+      category: this.category,
       name: this.name,
       price: this.price,
       url: url
     }).then(resolve => {
-      this._commonService.openSnackBar('The produc has been saved', 'success');
+      this._commonService.openSnackBar('The design has been saved', 'success');
     }).catch(error => {
       this._commonService.openSnackBar(error.name, 'error');
     }).then(() => this.waitForDelivery = false);

@@ -1,11 +1,14 @@
 @import "../../variables.scss";
+* {
+
+}
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Quicksand', sans-serif;
+  font-family:'Quicksand', sans-serif;
 }
 
 form {
@@ -16,11 +19,12 @@ form {
 }
 
 button {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 10vw, 'Quicksand', sans-serif;
   font-weight: 400;
   margin-top: 20px;
   color: #555;
   background-color: $lightGrey;
+  width: 200px;
 }
 button:hover {
   color: #fff;
@@ -29,4 +33,13 @@ button:hover {
 
 p {
   font-size: 12px;
+}
+
+.error-message {
+  padding: 15px;
+  width: 95vw;
+  word-break: break-all;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
 }

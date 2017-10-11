@@ -1,5 +1,5 @@
 <div class="admin-page">
-    <div class="side-menu">
+    <div [@menuState]="menuState" class="side-menu">
         <button routerLink="add-menu" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
             Add content
         </button>
@@ -9,6 +9,7 @@
         <button routerLink="new-orders" [routerLinkActive]="['is-active']" md-button class="side-menu-button" color="warn">
           New orders
       </button>
+      <md-icon  *ngIf="width" class="toogle-menu" md-button (click)="toggleMenu()">{{ icon }}</md-icon>
     </div>
     <div class="content">
         <router-outlet></router-outlet>

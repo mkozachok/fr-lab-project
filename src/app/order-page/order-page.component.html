@@ -1,12 +1,12 @@
-<router-outlet><router-outlet>
-<div class="container">
+<app-loader *ngIf="showSpinner" class="loader"></app-loader>
+<div class="container" *ngIf="!showSpinner">
   <div class="header">
     <h2>Cart page</h2>
   </div>
   <div *ngIf = "totalQuantity !== 0">
     <div class="item-headers">
       <div class="product"></div>
-      <div>Type</div>
+      <div class="type">Type</div>
       <div>Size</div>
       <div>Price</div>
       <div>Quantity</div>
@@ -19,9 +19,9 @@
       <div class="type">
         {{order.product.type}}
       </div>
-      <div>
-        {{order.product.size}}
-      </div>
+        <div>
+          {{order.product.size}}
+        </div>
         <div class="price">
           {{order.product.price | currency:'USD':true}}
         </div>
@@ -35,7 +35,7 @@
           </button> 
         </div>
         <div class="remove">
-            <md-icon svgIcon="delete" (click)="removeOrder(order)" class="delete"></md-icon>
+            <i class="demo-icon icon-icotrash delete" svgIcon="delete" (click)="removeOrder(order)">&#xe809;</i>
         </div>
     </div>
     <div class="info">

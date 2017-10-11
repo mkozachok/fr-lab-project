@@ -18,9 +18,9 @@ import { SafeHtml } from '@angular/platform-browser';
 import { MdMenuModule } from '@angular/material';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdDialog } from '@angular/material';
-import { EditProductComponent } from '../admin-page/remove-menu/remove-product/edit-product/edit-product.component';
 import { AdminService } from '../services/admin.service';
+import { ViewOneProductComponent } from './view-one-product/view-one-product.component'
+import * as firebase from 'firebase';
 
 @Component({
   moduleId: module.id,
@@ -31,6 +31,7 @@ import { AdminService } from '../services/admin.service';
 })
 
 export class HomepageComponent implements OnInit {
+  public showSpinner = true;
   prods: Observable<Array<any>>;
   arrOfProds: Observable<Array<any>>;
   @Input() filtered: Product[];
@@ -44,9 +45,7 @@ export class HomepageComponent implements OnInit {
   deleteButton: boolean;
   startAt = new Subject()
   endAt = new Subject();
-  isAdmin: boolean;
-  subscriptionToUserService: Subscription
-  subscriptionToAdminService: Subscription
+  homePageSubscription: Subscription = new Subscription();
 
   constructor(
     private productListService: ProductsListService,
@@ -56,45 +55,33 @@ export class HomepageComponent implements OnInit {
     public snackBar: MdSnackBar,
     private router: Router,
     private userService: UserService,
-    private iconRegistry: MdIconRegistry,
     private sanitizer: DomSanitizer,
-    public dialog: MdDialog,
     private adminService: AdminService
-  ) {
-    iconRegistry
-      .addSvgIcon('mode_edit', sanitizer.bypassSecurityTrustResourceUrl('./../../assets/icons/ic_mode_edit_black_24px.svg'))
+  ) {    
   };
 
   ngOnInit(): void {
-    this.subscriptionToUserService = this.userService.getUserIdAsync().subscribe(user => {
-      let id = user? user.uid : 'Please login';
-     this.subscriptionToAdminService = this.adminService.getAdmin(id).subscribe(admin => {
-        if(admin.length > 0){
-          this.isAdmin = true;
-        }
-      })
-    })
+    let tempArr;
     this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.productListService.getTemplateTypes().subscribe(res => {
       this.templateTypes = res;
     });
-    this.productListService.getProducts().subscribe(items => {
-      this.prods = items;
+    this.homePageSubscription.add(this.productListService.getProducts().subscribe(items => {
+      this.showSpinner = false;
+      tempArr = items.slice();
+      tempArr.reverse();
+      this.prods = tempArr;
       this.arrOfProds = this.prods;
-    });
-    //this.productListService.getProducts2(this.startAt, this.endAt).subscribe(items => this.prods = items);
+    }));
   };
 
- 
 
   ngOnDestroy(){
-    this.subscriptionToUserService.unsubscribe();
-    this.subscriptionToAdminService.unsubscribe()
   }
 
   sorting(propValue) {
     this.productListService.selectProducts(propValue).subscribe(res => {
-      this.prods = res;
+      this.prods = res.reverse();
     });
   }
 
@@ -123,20 +110,6 @@ export class HomepageComponent implements OnInit {
   }
 
   setSize(size, product): void {
-    console.log(size)
     product.size = size;
-  }
-
-  onEdit({ $key, name, category, owner, price, type }) {
-    let dialogRef = this.dialog.open(EditProductComponent, {
-      data: {
-        $key: $key,
-        name: name,
-        category: category,
-        owner: owner,
-        price: price,
-        type: type
-      }
-    });
   }
 }

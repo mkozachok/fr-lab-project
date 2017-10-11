@@ -17,13 +17,8 @@ export class FileUploadComponent implements OnInit {
   photoUrl: string;
   @Input() saveUrl: string;
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
-  // @Output() uploadEvent = new EventEmitter();
-  constructor(private _uploadService: UploadService) {
-    // this.uploadEvent = () => {
-    //
-    // }
 
-  }
+  constructor(private _uploadService: UploadService) { }
 
   ngOnInit() {
 
@@ -31,10 +26,10 @@ export class FileUploadComponent implements OnInit {
 
   detectFiles(event) {
     this.selectedFiles = event.target.files;
+    console.log(event.target.files)
     if (this.selectedFiles.length) {
       this.downloadedPhoto = true;
     }
-    console.log(this.downloadedPhoto)
   }
 
 
@@ -49,6 +44,7 @@ export class FileUploadComponent implements OnInit {
         this.photoUrl = this._uploadService.getUrl();
         if (this.photoUrl) {
           this.notify.emit(this.photoUrl)
+          this.photoUrl = undefined;
           clearInterval(timer);
           this.downloadedPhoto = false;
         } else if (counter > 30) {

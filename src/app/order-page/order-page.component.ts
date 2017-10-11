@@ -5,6 +5,9 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MdIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProductsListService } from '../services/products-list.service';
+import * as firebase from 'firebase';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 @Component({
@@ -19,26 +22,26 @@ export class OrderPageComponent implements OnInit {
 	totalAmount: number;
 	totalQuantity: number;
 	basketIcon = "shopping_cart";
+	productsKeys: Array<string>;
 
 	constructor(
 		private orderService: OrderService,
 		private router: Router,
 		private iconRegistry: MdIconRegistry,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private productListService: ProductsListService
 	) { 
-		iconRegistry
-			.addSvgIcon('delete', sanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/ic_delete_black_36px.svg'));
-			if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
-				this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
-			}
-			localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
-			this.orders = this.orderService.getAll();
-			this.totalQuantity = this.orderService.getQuantity();
-			this.totalAmount = this.orderService.getTotalAmount();
+		if (JSON.parse(localStorage.getItem("cart-items")) !== null) {				
+			this.orderService.setAll(JSON.parse(localStorage.getItem("cart-items")));
+		}
+		this.checkForUpdates();
+		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+		this.orders = this.orderService.getAll();
+		this.totalQuantity = this.orderService.getQuantity();
+		this.totalAmount = this.orderService.getTotalAmount();
 	}
 
 	ngOnInit() {
-		
 	}
 
 	ngAfterContentChecked() {
@@ -57,11 +60,8 @@ export class OrderPageComponent implements OnInit {
 	}
 
 	navigate() {
+		console.log(this.orderService.getAll());
 		this.router.navigate(['make-order']);
-	}
-
-	getOrders(): void {
-		this.orderService.getAll();
 	}
 
 	empty(): void {
@@ -72,5 +72,24 @@ export class OrderPageComponent implements OnInit {
 	removeOrder(item) {
 		this.orderService.removeItem(item);
 		localStorage.setItem("cart-items", JSON.stringify(this.orderService.getAll()));
+	}
+
+	checkForUpdates() {
+		this.productListService.getProducts().subscribe(res => {
+			this.productsKeys = res.map(i => {return i.$key});
+			this.orderService.getAll().filter(el => {
+				if (!this.productsKeys.includes(el.productKey) && el.productKey !== 'no') {
+					this.orderService.removeItem(el);
+				} else {
+					res.forEach(element => {
+						if (element.$key === el.productKey) {
+							for (var prop in element) {
+								el.product[prop] = element[prop];
+							}
+						}
+					});
+				}				
+			});
+		});
 	}
 }

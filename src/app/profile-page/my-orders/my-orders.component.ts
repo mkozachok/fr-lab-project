@@ -11,6 +11,8 @@ import { OrderedProductComponent } from './ordered-product';
   styleUrls: ['./my-orders.component.scss']
 })
 export class MyOrdersComponent implements OnInit {
+	iconEmpty:string = 'description';
+  messageEmpty:string = `You haven't made any orders yet`;
 	usersOrders: Observable<Array<any>>;
   showLoader = true;
 
@@ -19,7 +21,7 @@ export class MyOrdersComponent implements OnInit {
 	ngOnInit() {
   		this.makeOrderService.getAll().subscribe(res => {
         this.showLoader = false;
-  			this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res);
+				this.usersOrders = this.makeOrderService.getUsersOrder(this.userService.getUserId(), res.reverse());
   		});
 	}
 }

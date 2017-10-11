@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { DesignService } from '../../../../services';
-import { CommonService } from '../../../../services';
+import { DesignService, CommonService } from '../../../../services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-design',
@@ -13,6 +13,8 @@ import { CommonService } from '../../../../services';
 export class EditDesignComponent implements OnInit {
   waitForDelivery: boolean;
   designForm: FormGroup;
+  category: string;
+  categories: Observable<Array<string>>
 
   ReferenceToProducts: string = 'products';
   constructor(
@@ -25,6 +27,10 @@ export class EditDesignComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._designService.getDesignCategory().subscribe(res => {
+      this.categories = res.map(el => el.category).splice(1);
+    })
+
     this.designForm = this._formBuilder.group({
       name: [this.data.name,
       [
@@ -35,6 +41,11 @@ export class EditDesignComponent implements OnInit {
       [
         Validators.required
       ]
+      ],
+      category: [this.data.category,
+        [
+          Validators.required
+        ]
       ]
     });
   }
@@ -44,6 +55,7 @@ export class EditDesignComponent implements OnInit {
     this.waitForDelivery = true;
     this.dialogRef.disableClose;
     this._designService.updateDesign(this.data.$key, {
+      category: product.category,
       name: product.name,
       price: parseFloat(product.price),
     }).then(() => {

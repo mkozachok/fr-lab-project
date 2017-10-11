@@ -3,7 +3,12 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MdSnackBar } from '@angular/material';
 import { Product } from '../../../models/product-model';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
-import { CommonService, ProductsListService } from '../../../services';
+import {
+  CommonService,
+  ProductsListService,
+  DesignService
+} from '../../../services';
+import { Observable, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-add-product',
@@ -11,9 +16,12 @@ import { CommonService, ProductsListService } from '../../../services';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
+  addProductSubscription: Subscription = new Subscription();
   isAddContentPage: boolean;
   waitForDelivery: boolean;
   productForm: FormGroup;
+  category: Observable<Array<string>>;
+  types: Observable<Array<string>>;
 
   ReferenceToProducts: string = 'products';
   product = {
@@ -29,10 +37,18 @@ export class AddProductComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public snackBar: MdSnackBar,
     private _productService: ProductsListService,
-    private _commonService: CommonService
+    private _commonService: CommonService,
+    private _designService: DesignService
   ) { }
 
   ngOnInit(): void {
+    this.addProductSubscription.add(this._designService.getDesignCategory().subscribe(res => {
+      this.category = res.map(el => el.category).splice(1);
+    }))
+
+    this.addProductSubscription.add(this._productService.getTemplateTypes().subscribe(res => {
+        this.types = res.map(el => el.type)
+      }));
     this.productForm = this._formBuilder.group({
       category: [null,
         [
@@ -58,6 +74,10 @@ export class AddProductComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(){
+    this.addProductSubscription.unsubscribe()
+  }
+
   onSubmit(): void {
     this.waitForDelivery = true;
     this.product.name = this.productForm.value.name;
@@ -68,18 +88,18 @@ export class AddProductComponent implements OnInit {
   }
 
   onNotify(url) {
-    this._productService.setProduct({
-      name: this.product.name,
-      type: this.product.type,
-      category: this.product.category,
-      svg: url,
-      layouts: [],
-      owner: this.product.owner,
-      price: this.product.price,
-    }).then(resolve => {
-      this._commonService.openSnackBar('The produc has been saved', 'success');
-    }).catch(error => {
-      this._commonService.openSnackBar(error.name, 'error');
-    }).then(() => this.waitForDelivery = false);
+         this._productService.setProduct({
+          name: this.product.name,
+          type: this.product.type,
+          category: this.product.category,
+          svg: url,
+          layouts: [],
+          owner: this.product.owner,
+          price: this.product.price
+        }).then(resolve => {
+          this._commonService.openSnackBar('The produc has been saved', 'success');
+        }).catch(error => {
+          this._commonService.openSnackBar(error.name, 'error');
+        }).then(() => this.waitForDelivery = false); 
   }
 }

@@ -42,6 +42,7 @@ export class RedactorPageComponent {
   myGoods: Array<any> = [];
   templateSizeQuantites = [];
   showSize: boolean = false;
+  showSelect: boolean = true;
   boundingBox = new fabric.Rect({
     fill: "transparent",
     width: 235,
@@ -76,7 +77,6 @@ export class RedactorPageComponent {
   ) { }
 
   ngOnInit() {
-    //this.tab.isActive=false;
     this.designService.getDesigns().subscribe(res => { this.items = res });
     this.designService.getDesignCategory().subscribe(res => { this.categories = res });
     this.designService.getPrice().subscribe(res => { this.price = res });
@@ -137,22 +137,23 @@ export class RedactorPageComponent {
 
     this.designService.getTemplateTypes().subscribe(res => { this.templateTypes = res });
     this.boundingBox = boundingBox;
+
+
+      this.resizeCanvas();
   }
 
   categoryChoose(cat) {
     this.designService.categoryChoose(cat).subscribe(res => {
       this.items = res;
     });
-    console.log(cat);
   }
 
   typeChoose(myType) {
     this.designService.typeChoose(myType).subscribe(res => {
       this.items = res;
     });
-    console.log(myType);
   }
-  //this.setCordsdependOnTemplate(template);
+
   resizeCanvas() {
     let canvas = this.getCanvas();
     var canvasSizer = document.getElementById("redactor_area");
@@ -200,10 +201,10 @@ export class RedactorPageComponent {
         boundingBox.left = 220;
         break;
       case "cup":
-        boundingBox.width = 330;
-        boundingBox.height = 400;
-        boundingBox.top = 75;
-        boundingBox.left = 100;
+        boundingBox.width = 325;
+        boundingBox.height = 390;
+        boundingBox.top = 100;
+        boundingBox.left = 110;
         break;
       case "body":
         boundingBox.width = 240;
@@ -235,10 +236,10 @@ export class RedactorPageComponent {
 
   selectTemplate(template) {
     this.disableCategory = false;
-    console.log(this.disableCategory);
     if (this.isDisabled) {
       this.tab.selectedIndex = 1;
     }
+    this.showSelect = false;
     this.isDisabled = false;
     this.type = template.type;
     this.templateSizeQuantites.length = 0;
@@ -263,14 +264,16 @@ export class RedactorPageComponent {
       if (isTemplate) {
         canvas.remove(this.templateImg);
         this.templateImg = this.defineTemplateImage(img);
+
+        canvas.add(this.templateImg);
         canvas.sendToBack(this.templateImg);
-        canvas.centerObject(this.templateImg);
+        canvas.renderAll();
       } else {
         let category = this.defineCategoryImage(img);
         canvas.add(category);
       }
     });
-    this.resizeCanvas();
+
   }
   getImage(src) {
     return new Promise((resolve, reject) => {
@@ -291,6 +294,8 @@ export class RedactorPageComponent {
     image.set({
       width: 580,
       height: 580,
+      left: 60,
+      top: 0,
     });
     image.selectable = false;
     image.evented = false;
@@ -321,19 +326,8 @@ export class RedactorPageComponent {
     return this.templateCanvas;
   }
 
-  /*
-  getColors = function () {
-    let type = this.type;
-    console.log(this.templateTypes);
-    var templates = this.templateTypes.filter(function(template){
-      return template.type === type;
-    })
-    return this.templates[0].goods;
-  }
-  */
 
   setColor = function (goods) {
-    // this.selectedCategory.src = category.url;
     this.drawOnCanvas(goods.url, true);
   }
 
@@ -360,7 +354,6 @@ export class RedactorPageComponent {
     }
     newProduct.svg = b64;
     newProduct.owner = redactor.user.firstName + " " + redactor.user.lastName;
-    // newProduct.price = Math.floor(Math.random() * (20 - 5) + 5);
     newProduct.price = this.getProductPrice();
     return newProduct;
   }
@@ -401,7 +394,7 @@ export class RedactorPageComponent {
       config.extraClasses = ['success-snackbar'];
       config.duration = 1500;
       this.snackBar.open(`Please, choose a size`, 'required', config);
-      this.tab.selectedIndex = 0;
+      this.tab.selectedIndex = 1;
     } else {
       this.templateSizeQuantites.forEach(el => {
         if (el.quantity !== 0) {
@@ -469,7 +462,6 @@ export class RedactorPageComponent {
       fill: '#333',
       fontSize: 40,
       id: self.selectedDesignsPrices.length,
-      /*       clipTo: self.clipTShirt */
     }));
   }
   changeColor = function (element) {
@@ -515,96 +507,4 @@ export class RedactorPageComponent {
       return size.quantity--;
     }
   }
-
-  templates = [
-    {
-      type: "tshirtm",
-      url: "assets/images/templates/tshirtm.png",
-      price: 6,
-      goods: [
-        {
-          color: "#ffffff",
-          url: "assets/images/templates/tshirtm.png"
-        },
-        {
-          color: "#fff500",
-          url: "assets/images/templates/tshirtm_yellow.png"
-        },
-        {
-          color: "#000000",
-          url: "assets/images/templates/tshirtm_black.png"
-        },
-        {
-          color: "#2244aa",
-          type: "tshirtm",
-          url: "assets/images/templates/tshirtm_darkblue.png"
-        },
-        {
-          color: "#b91816",
-          url: "assets/images/templates/tshirtm_red.png"
-        },
-        {
-          color: "#cccccc",
-          url: "assets/images/templates/tshirtm_grey.png"
-        },
-        {
-          color: "#664b2f",
-          url: "assets/images/templates/tshirtm_brown.png"
-        },
-        {
-          color: "#008a47",
-          url: "assets/images/templates/tshirtm_green.png"
-        },
-        {
-          color: "#0ac7df",
-          url: "assets/images/templates/tshirtm_blue.png"
-        },
-        {
-          color: "#fb4e81",
-          url: "assets/images/templates/tshirtm_pink.png"
-        }
-      ]
-    },
-    {
-      type: "tankm",
-      url: "assets/images/templates/tankm.png",
-      price: 8
-    },
-    {
-      type: "sleevem",
-      url: "assets/images/templates/sleevem.png",
-      price: 8
-
-    },
-    {
-      type: "cap",
-      url: "assets/images/templates/cap.png",
-      price: 10
-    },
-    {
-      type: "mug",
-      url: "assets/images/templates/mug.png",
-      price: 16
-    },
-    {
-      type: "body",
-      url: "assets/images/templates/body.png",
-      price: 5
-    },
-    {
-      type: "tshirtw",
-      url: "assets/images/templates/tshirtw.png",
-      price: 5
-    },
-    {
-      type: "tankw",
-      url: "assets/images/templates/tankw.png",
-      price: 6
-    },
-    {
-      type: "sleevew",
-      url: "assets/images/templates/sleevew.png",
-      price: 7
-    }
-  ];
 }

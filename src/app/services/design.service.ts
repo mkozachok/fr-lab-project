@@ -73,6 +73,15 @@ export class DesignService {
     return firebase.storage().refFromURL(url).delete();
   }
 
+  deleteArrOfDesigns(arr){
+    arr.forEach(el => {
+			if (el.url.includes('firebasestorage.googleapis.com/v0/b/kolibri')) {
+				this.deleteDesignImg(el.url)
+			}
+			this.deleteDesign(el.id)
+		})
+  }
+
   findDesign(phrase, arrayOfDesigns) {
     let transformedPhrase = phrase.toLowerCase();
     return arrayOfDesigns.filter(x => {

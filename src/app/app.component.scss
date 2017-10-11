@@ -9,6 +9,9 @@
 .header {
     z-index: 100;
     padding-bottom: 64px;
+    @media screen and (max-width: 600px){
+        padding-bottom: 54px;
+    }
 }
 
 .content {
@@ -27,3 +30,11 @@
 /deep/ .ngx-pagination li{
     transition: all ease .3s;
   }
+
+ /deep/ .mat-expansion-indicator::after {
+      color: #ffffff;
+  }
+
+/deep/ .mat-tab-group.mat-primary .mat-tab-label:focus, .mat-tab-group.mat-primary .mat-tab-link:focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:focus, .mat-tab-nav-bar.mat-primary .mat-tab-link:focus {
+    background-color: #eee;
+}

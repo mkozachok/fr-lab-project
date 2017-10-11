@@ -1,10 +1,5 @@
 @import "../../../variables.scss";
-
-/deep/ .mat-tab-label{
-	min-width: 50% !important;
-}
-
- .loader{
+.loader{
      position: absolute;
      top: 50%;
      left: 50%;
@@ -96,3 +91,9 @@
         width: 100px;
     }
 }
+
+::ng-deep snack-bar-container {
+    &.success-snackbar {
+        background: #7b0041;
+    }
+  }

@@ -7,11 +7,16 @@
       </md-error>
     </md-form-field>
     <md-form-field>
-      <input required type="text" placeholder="price" mdInput formControlName="price">
+      <input required type="number" placeholder="price" mdInput formControlName="price">
       <md-error *ngIf="designForm.controls['price'].hasError('required')">
         Price <strong>cannot be blank</strong>
       </md-error>
     </md-form-field>
+    <md-select required placeholder="category" formControlName="category" class="select">
+      <md-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </md-option>
+    </md-select> 
     <app-file-upload #fileUp (notify)="onNotify($event)" [saveUrl]="this.ReferenceToDesigns"></app-file-upload>
     <button [disabled]="!fileUp.downloadedPhoto || !designForm.valid || waitForDelivery" (click)="fileUp.upload()" type="submit" md-raised-button
       color="primary" class="edit-save-button">

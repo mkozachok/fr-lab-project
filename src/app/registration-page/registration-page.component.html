@@ -3,59 +3,61 @@
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
     <md-form-field>
       <input type="email" required #emailRef="ngModel" mdInput placeholder="email" name="email" ngModel/>
+      <md-error *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+        <p [hidden]="!emailRef.errors.required">
+          Please enter email
+        </p>
+      </md-error>
     </md-form-field>
-    <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
-      <p [hidden]="!emailRef.errors.required">
-        Please enter email
-      </p>
-    </div>
     <md-form-field>
-      <input required #passwordRef="ngModel" minlength="6" type="password" mdInput placeholder="password" name="password" novalidate ngModel/>
+      <input required #passwordRef="ngModel" minlength="6" type="password" mdInput placeholder="password" name="password" novalidate
+        ngModel/>
+      <md-error *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
+        <p [hidden]="!passwordRef.errors.required">
+          Please enter password
+        </p>
+      </md-error>
     </md-form-field>
-    <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)">
-      <p [hidden]="!passwordRef.errors.required">
-        Please enter password
-      </p>
-    </div>
     <md-form-field>
       <input required #nameRef="ngModel" mdInput minlength="2" placeholder="name" name="name" ngModel/>
+      <md-error *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)">
+        <p [hidden]="!nameRef.errors.required">
+          Please enter your name
+        </p>
+      </md-error>
     </md-form-field>
-    <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)">
-      <p [hidden]="!nameRef.errors.required">
-        Please enter your name
-      </p>
-    </div>
     <md-form-field>
       <input required #surnameRef="ngModel" minlength="2" mdInput placeholder="surname" name="surname" ngModel/>
-    </md-form-field>
-    <div *ngIf="surnameRef.errors && (surnameRef.dirty || surnameRef.touched)">
+    <md-error *ngIf="surnameRef.errors && (surnameRef.dirty || surnameRef.touched)">
       <p [hidden]="!surnameRef.errors.required">
         Please enter your surname
       </p>
-    </div>
+    </md-error>
+    </md-form-field>
     <md-form-field>
       <input required #addressRef="ngModel" minlength="2" mdInput placeholder="address" name="address" ngModel/>
-    </md-form-field>
-    <div *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
+    <md-error  *ngIf="addressRef.errors && (addressRef.dirty || addressRef.touched)">
       <p [hidden]="!addressRef.errors.required">
         Please enter your address
       </p>
-    </div>
-    <md-form-field>
-      <input  required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
+    </md-error>
     </md-form-field>
-    <div *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)">
+    <md-form-field>
+      <input required #phoneRef="ngModel" minlength="2" mdInput placeholder="phone number" name="phone" ngModel/>
+    <md-error *ngIf="phoneRef.errors && (phoneRef.dirty || phoneRef.touched)">
       <p [hidden]="!phoneRef.errors.required">
         Please enter your phone
       </p>
-    </div>
-    <input #fileInput type="file" (change)="detectFiles($event)" #photoURLRef="ngModel" accept="image/*"  name="photo" [hidden]="true" ngModel/>
+    </md-error>
+    </md-form-field>
+    <input #fileInput type="file" (change)="detectFiles($event)" #photoURLRef="ngModel" accept="image/*" name="photo" [hidden]="true"
+      ngModel/>
     <md-icon (click)="fileInput.click()" class="mdl-badge">{{ addPhoto }}</md-icon>
     <p *ngIf="this.downloadedPhoto">
       Photo has been downloaded
     </p>
-    <re-captcha size="compact" (captchaResponse)="captchaHandler($event)" site_key="6Ldf5TIUAAAAAEiuoULGAMikYpayKwucYwIgIWld"></re-captcha>
-    <button [disabled]="!userForm.form.valid || !this.downloadedPhoto || !this.verified"  md-raised-button type="submit">registrate</button>
+    <re-captcha size="compact" (captchaResponse)="captchaHandler($event)" site_key="6LcsvjMUAAAAADvwucGzYMEBkpaD6nVkKhyD7i9a"></re-captcha>
+    <button [disabled]="!userForm.form.valid || !this.downloadedPhoto || !this.verified" md-raised-button type="submit">registrate</button>
     <p *ngIf="this.error">{{this.error.message}}</p>
   </form>
 </div>
